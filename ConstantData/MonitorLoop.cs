@@ -54,11 +54,11 @@ namespace ConstantData
             // можно загрузить константы обратно и проверить
             // а можно подписаться на ключ и следить, чтобы никто не лез в константы
             EventKeyNames eventKeysSetCheck = await _data.FetchAllConstants();
-            _logger.LogInformation(10360, "2 ConstantCheck EventKeyFromTimeDays = {0}.", eventKeysSetCheck.EventKeyFromTimeDays);
-            _logger.LogInformation(10361, "2 ConstantCheck EventKeyBackReadinessTimeDays = {0}.", eventKeysSetCheck.EventKeyBackReadinessTimeDays);
+            //_logger.LogInformation(10360, "2 ConstantCheck EventKeyFromTimeDays = {0}.", eventKeysSetCheck.EventKeyFromTimeDays);
+            //_logger.LogInformation(10361, "2 ConstantCheck EventKeyBackReadinessTimeDays = {0}.", eventKeysSetCheck.EventKeyBackReadinessTimeDays);
             _logger.LogInformation(10362, "2 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSetCheck.EventKeyFrontGivesTaskTimeDays);
-            _logger.LogInformation(10363, "2 ConstantCheck EventKeyBackServerMainTimeDays = {0}.", eventKeysSetCheck.EventKeyBackServerMainTimeDays);
-            _logger.LogInformation(10364, "2 ConstantCheck EventKeyBackServerAuxiliaryTimeDays = {0}.", eventKeysSetCheck.EventKeyBackServerAuxiliaryTimeDays);
+            //_logger.LogInformation(10363, "2 ConstantCheck EventKeyBackServerMainTimeDays = {0}.", eventKeysSetCheck.EventKeyBackServerMainTimeDays);
+            //_logger.LogInformation(10364, "2 ConstantCheck EventKeyBackServerAuxiliaryTimeDays = {0}.", eventKeysSetCheck.EventKeyBackServerAuxiliaryTimeDays);
 
             //_subscribe.SubscribeOnEventFrom(eventKeysSet);
 
