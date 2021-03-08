@@ -10,12 +10,12 @@ namespace ConstantData.Services
         public int GetBalanceOfTasksAndProcesses { get; }
         public int GetMaxProcessesCountOnServer { get; }
         public int GetMinBackProcessesServersCount { get; }
-        public int GetEventKeyFromTimeDays { get; }
-        public int GetEventKeyBackReadinessTimeDays { get; }
-        public int GetEventKeyFrontGivesTaskTimeDays { get; }
-        public int GetEventKeyBackServerMainTimeDays { get; }
-        public int GetEventKeyBackServerAuxiliaryTimeDays { get; }
-        public int GetPercentsKeysExistingTimeInMinutes { get; }
+        public double GetEventKeyFromTimeDays { get; }
+        public double GetEventKeyBackReadinessTimeDays { get; }
+        public double GetEventKeyFrontGivesTaskTimeDays { get; }
+        public double GetEventKeyBackServerMainTimeDays { get; }
+        public double GetEventKeyBackServerAuxiliaryTimeDays { get; }
+        public double GetPercentsKeysExistingTimeInMinutes { get; }
         public string GetEventKeyFrom { get; }
         public string GetEventFieldFrom { get; }
         public string GetEventKeyBackReadiness { get; }
@@ -39,12 +39,12 @@ namespace ConstantData.Services
         private readonly int _getBalanceOfTasksAndProcesses;
         private readonly int _getMaxProcessesCountOnServer;
         private readonly int _getMinBackProcessesServersCount;
-        private readonly int _getEventKeyFromTimeDays;
-        private readonly int _getEventKeyBackReadinessTimeDays;
-        private readonly int _getEventKeyFrontGivesTaskTimeDays;
-        private readonly int _getEventKeyBackServerMainTimeDays;
-        private readonly int _getEventKeyBackServerAuxiliaryTimeDays;
-        private readonly int _getPercentsKeysExistingTimeInMinutes;
+        private readonly double _getEventKeyFromTimeDays;
+        private readonly double _getEventKeyBackReadinessTimeDays;
+        private readonly double _getEventKeyFrontGivesTaskTimeDays;
+        private readonly double _getEventKeyBackServerMainTimeDays;
+        private readonly double _getEventKeyBackServerAuxiliaryTimeDays;
+        private readonly double _getPercentsKeysExistingTimeInMinutes;
         private readonly string _getEventKeyFrom;
         private readonly string _getEventFieldFrom;
         private readonly string _getEventKeyBackReadiness;
@@ -73,7 +73,7 @@ namespace ConstantData.Services
 
             _getEventKeyFromTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFromTimeDays").Value);
             _getEventKeyBackReadinessTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackReadinessTimeDays").Value);
-            _getEventKeyFrontGivesTaskTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFrontGivesTaskTimeDays").Value);
+            _getEventKeyFrontGivesTaskTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFrontGivesTaskTimeDays").Value);//eventKeyFrontGivesTaskTimeDays
             _getEventKeyBackServerMainTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerMainTimeDays").Value);
             _getEventKeyBackServerAuxiliaryTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerAuxiliaryTimeDays").Value);
             _getPercentsKeysExistingTimeInMinutes = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("PercentsKeysExistingTimeInMinutes").Value);
@@ -106,12 +106,12 @@ namespace ConstantData.Services
         public int GetBalanceOfTasksAndProcesses => _getBalanceOfTasksAndProcesses;
         public int GetMaxProcessesCountOnServer => _getMaxProcessesCountOnServer;
         public int GetMinBackProcessesServersCount => _getMinBackProcessesServersCount;
-        public int GetEventKeyFromTimeDays => _getEventKeyFromTimeDays;
-        public int GetEventKeyBackReadinessTimeDays => _getEventKeyBackReadinessTimeDays;
-        public int GetEventKeyFrontGivesTaskTimeDays => _getEventKeyFrontGivesTaskTimeDays;
-        public int GetEventKeyBackServerMainTimeDays => _getEventKeyBackServerMainTimeDays;
-        public int GetEventKeyBackServerAuxiliaryTimeDays => _getEventKeyBackServerAuxiliaryTimeDays;
-        public int GetPercentsKeysExistingTimeInMinutes => _getPercentsKeysExistingTimeInMinutes;
+        public double GetEventKeyFromTimeDays => _getEventKeyFromTimeDays;
+        public double GetEventKeyBackReadinessTimeDays => _getEventKeyBackReadinessTimeDays;
+        public double GetEventKeyFrontGivesTaskTimeDays => _getEventKeyFrontGivesTaskTimeDays;
+        public double GetEventKeyBackServerMainTimeDays => _getEventKeyBackServerMainTimeDays;
+        public double GetEventKeyBackServerAuxiliaryTimeDays => _getEventKeyBackServerAuxiliaryTimeDays;
+        public double GetPercentsKeysExistingTimeInMinutes => _getPercentsKeysExistingTimeInMinutes;
         public string GetEventKeyFrom => _getEventKeyFrom;
         public string GetEventFieldFrom => _getEventFieldFrom;
         public string GetEventKeyBackReadiness => _getEventKeyBackReadiness;

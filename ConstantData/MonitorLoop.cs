@@ -47,11 +47,18 @@ namespace ConstantData
             EventKeyNames eventKeysSet = InitialiseEventKeyNames();
 
             _logger.LogInformation(10350, "ConstantData send constants {0} to SetStartConstants.", eventKeysSet, "constants");
+            _logger.LogInformation(10351, "1 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSet.EventKeyFrontGivesTaskTimeDays);
 
             await _data.SetStartConstants(eventKeysSet, CheckToken);
 
             // можно загрузить константы обратно и проверить
             // а можно подписаться на ключ и следить, чтобы никто не лез в константы
+            EventKeyNames eventKeysSetCheck = await _data.FetchAllConstants();
+            _logger.LogInformation(10360, "2 ConstantCheck EventKeyFromTimeDays = {0}.", eventKeysSetCheck.EventKeyFromTimeDays);
+            _logger.LogInformation(10361, "2 ConstantCheck EventKeyBackReadinessTimeDays = {0}.", eventKeysSetCheck.EventKeyBackReadinessTimeDays);
+            _logger.LogInformation(10362, "2 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSetCheck.EventKeyFrontGivesTaskTimeDays);
+            _logger.LogInformation(10363, "2 ConstantCheck EventKeyBackServerMainTimeDays = {0}.", eventKeysSetCheck.EventKeyBackServerMainTimeDays);
+            _logger.LogInformation(10364, "2 ConstantCheck EventKeyBackServerAuxiliaryTimeDays = {0}.", eventKeysSetCheck.EventKeyBackServerAuxiliaryTimeDays);
 
             //_subscribe.SubscribeOnEventFrom(eventKeysSet);
 
@@ -95,11 +102,11 @@ namespace ConstantData
                 PrefixProcessCount = _constant.GetPrefixProcessCount, // process:count
                 EventFieldFront = _constant.GetEventFieldFront,
                 EventKeyBacksTasksProceed = _constant.GetEventKeyBacksTasksProceed, //  ключ выполняемых/выполненных задач                
-                EventKeyFromTimeDays = TimeSpan.FromDays(_constant.GetEventKeyFromTimeDays), // срок хранения ключа eventKeyFrom
-                EventKeyBackReadinessTimeDays = TimeSpan.FromDays(_constant.GetEventKeyBackReadinessTimeDays), // срок хранения 
-                EventKeyFrontGivesTaskTimeDays = TimeSpan.FromDays(_constant.GetEventKeyFrontGivesTaskTimeDays), // срок хранения ключа 
-                EventKeyBackServerMainTimeDays = TimeSpan.FromDays(_constant.GetEventKeyBackServerMainTimeDays), // срок хранения ключа 
-                EventKeyBackServerAuxiliaryTimeDays = TimeSpan.FromDays(_constant.GetEventKeyBackServerAuxiliaryTimeDays), // срок хранения ключа 
+                EventKeyFromTimeDays = _constant.GetEventKeyFromTimeDays, // срок хранения ключа eventKeyFrom
+                EventKeyBackReadinessTimeDays = _constant.GetEventKeyBackReadinessTimeDays, // срок хранения 
+                EventKeyFrontGivesTaskTimeDays = _constant.GetEventKeyFrontGivesTaskTimeDays, // срок хранения ключа 
+                EventKeyBackServerMainTimeDays = _constant.GetEventKeyBackServerMainTimeDays, // срок хранения ключа 
+                EventKeyBackServerAuxiliaryTimeDays = _constant.GetEventKeyBackServerAuxiliaryTimeDays, // срок хранения ключа 
             };
         }
     }
