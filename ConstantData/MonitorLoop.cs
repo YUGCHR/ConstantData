@@ -16,40 +16,47 @@ namespace ConstantData
     {
         private readonly ILogger<MonitorLoop> _logger;
         private readonly ISharedDataAccess _data;
-        private readonly ISettingConstants _constant;
-        private readonly CancellationToken _cancellationToken;        
+        private readonly ICacheManageService _cache;
+        private readonly ISettingConstantsService _constantService;
+        private readonly CancellationToken _cancellationToken;
         private readonly string _guid;
 
-        public MonitorLoop(            
+        public MonitorLoop(
             ILogger<MonitorLoop> logger,
             ISharedDataAccess data,
-            ISettingConstants constant,
+            ICacheManageService cache,
+            ISettingConstantsService constantService,
             IHostApplicationLifetime applicationLifetime)
         {
             _logger = logger;
             _data = data;
-            _constant = constant;
-            _cancellationToken = applicationLifetime.ApplicationStopping;            
+            _constantService = constantService;
+            _cache = cache;
+            _cancellationToken = applicationLifetime.ApplicationStopping;
         }
 
         private const string CheckToken = "tt-tt-tt";
 
         public void StartMonitorLoop()
         {
-            _logger.LogInformation("Monitor Loop is starting.");
+            _logger.LogInformation("ConstantsMountingMonitor Loop is starting.");
 
             // Run a console user input loop in a background thread
-            Task.Run(Monitor, _cancellationToken);
+            Task.Run(ConstantsMountingMonitor, _cancellationToken);
         }
 
-        public async Task Monitor()
+        public async Task ConstantsMountingMonitor()
         {
             EventKeyNames eventKeysSet = InitialiseEventKeyNames();
 
-            _logger.LogInformation(10350, "ConstantData send constants {0} to SetStartConstants.", eventKeysSet, "constants");
             _logger.LogInformation(10351, "1 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSet.EventKeyFrontGivesTaskTimeDays);
 
-            await _data.SetStartConstants(eventKeysSet, CheckToken);
+            (string startConstantKey, string startConstantField) = _data.FetchBaseConstants();
+            _logger.LogInformation(10350, "ConstantData send constants {0} to SetStartConstants.", eventKeysSet, "constants");
+
+            await _cache.SetStartConstants(eventKeysSet, startConstantKey, startConstantField);
+
+
 
             // можно загрузить константы обратно и проверить
             // а можно подписаться на ключ и следить, чтобы никто не лез в константы
@@ -82,31 +89,31 @@ namespace ConstantData
         {
             return new EventKeyNames
             {
-                TaskDelayTimeInSeconds = _constant.GetTaskDelayTimeInSeconds, // время задержки в секундах для эмулятора счета задачи
-                BalanceOfTasksAndProcesses = _constant.GetBalanceOfTasksAndProcesses, // соотношение количества задач и процессов для их выполнения на back-processes-servers (количества задач разделить на это число и сделать столько процессов)
-                MaxProcessesCountOnServer = _constant.GetMaxProcessesCountOnServer, // максимальное количество процессов на back-processes-servers (минимальное - 1)
-                EventKeyFrom = _constant.GetEventKeyFrom, // "subscribeOnFrom" - ключ для подписки на команду запуска эмулятора сервера
-                EventFieldFrom = _constant.GetEventFieldFrom, // "count" - поле для подписки на команду запуска эмулятора сервера
+                TaskDelayTimeInSeconds = _constantService.GetTaskDelayTimeInSeconds, // время задержки в секундах для эмулятора счета задачи
+                BalanceOfTasksAndProcesses = _constantService.GetBalanceOfTasksAndProcesses, // соотношение количества задач и процессов для их выполнения на back-processes-servers (количества задач разделить на это число и сделать столько процессов)
+                MaxProcessesCountOnServer = _constantService.GetMaxProcessesCountOnServer, // максимальное количество процессов на back-processes-servers (минимальное - 1)
+                EventKeyFrom = _constantService.GetEventKeyFrom, // "subscribeOnFrom" - ключ для подписки на команду запуска эмулятора сервера
+                EventFieldFrom = _constantService.GetEventFieldFrom, // "count" - поле для подписки на команду запуска эмулятора сервера
                 EventCmd = KeyEvent.HashSet,
-                EventKeyBackReadiness = _constant.GetEventKeyBackReadiness, // ключ регистрации серверов
-                EventFieldBack = _constant.GetEventFieldBack,
-                EventKeyFrontGivesTask = _constant.GetEventKeyFrontGivesTask, // кафе выдачи задач
-                PrefixRequest = _constant.GetPrefixRequest, // request:guid
-                PrefixPackage = _constant.GetPrefixPackage, // package:guid
-                PrefixTask = _constant.GetPrefixTask, // task:guid
-                PrefixBackServer = _constant.GetPrefixBackServer, // backserver:guid
+                EventKeyBackReadiness = _constantService.GetEventKeyBackReadiness, // ключ регистрации серверов
+                EventFieldBack = _constantService.GetEventFieldBack,
+                EventKeyFrontGivesTask = _constantService.GetEventKeyFrontGivesTask, // кафе выдачи задач
+                PrefixRequest = _constantService.GetPrefixRequest, // request:guid
+                PrefixPackage = _constantService.GetPrefixPackage, // package:guid
+                PrefixTask = _constantService.GetPrefixTask, // task:guid
+                PrefixBackServer = _constantService.GetPrefixBackServer, // backserver:guid
                 BackServerGuid = _guid, // !!! this server guid
-                BackServerPrefixGuid = $"{_constant.GetPrefixBackServer}:{_guid}", // !!! backserver:(this server guid)
-                PrefixProcessAdd = _constant.GetPrefixProcessAdd, // process:add
-                PrefixProcessCancel = _constant.GetPrefixProcessCancel, // process:cancel
-                PrefixProcessCount = _constant.GetPrefixProcessCount, // process:count
-                EventFieldFront = _constant.GetEventFieldFront,
-                EventKeyBacksTasksProceed = _constant.GetEventKeyBacksTasksProceed, //  ключ выполняемых/выполненных задач                
-                EventKeyFromTimeDays = _constant.GetEventKeyFromTimeDays, // срок хранения ключа eventKeyFrom
-                EventKeyBackReadinessTimeDays = _constant.GetEventKeyBackReadinessTimeDays, // срок хранения 
-                EventKeyFrontGivesTaskTimeDays = _constant.GetEventKeyFrontGivesTaskTimeDays, // срок хранения ключа 
-                EventKeyBackServerMainTimeDays = _constant.GetEventKeyBackServerMainTimeDays, // срок хранения ключа 
-                EventKeyBackServerAuxiliaryTimeDays = _constant.GetEventKeyBackServerAuxiliaryTimeDays, // срок хранения ключа 
+                BackServerPrefixGuid = $"{_constantService.GetPrefixBackServer}:{_guid}", // !!! backserver:(this server guid)
+                PrefixProcessAdd = _constantService.GetPrefixProcessAdd, // process:add
+                PrefixProcessCancel = _constantService.GetPrefixProcessCancel, // process:cancel
+                PrefixProcessCount = _constantService.GetPrefixProcessCount, // process:count
+                EventFieldFront = _constantService.GetEventFieldFront,
+                EventKeyBacksTasksProceed = _constantService.GetEventKeyBacksTasksProceed, //  ключ выполняемых/выполненных задач                
+                EventKeyFromTimeDays = _constantService.GetEventKeyFromTimeDays, // срок хранения ключа eventKeyFrom
+                EventKeyBackReadinessTimeDays = _constantService.GetEventKeyBackReadinessTimeDays, // срок хранения 
+                EventKeyFrontGivesTaskTimeDays = _constantService.GetEventKeyFrontGivesTaskTimeDays, // срок хранения ключа 
+                EventKeyBackServerMainTimeDays = _constantService.GetEventKeyBackServerMainTimeDays, // срок хранения ключа 
+                EventKeyBackServerAuxiliaryTimeDays = _constantService.GetEventKeyBackServerAuxiliaryTimeDays, // срок хранения ключа 
             };
         }
     }

@@ -53,7 +53,8 @@ namespace ConstantData
 
                     // убрать константы и создание класса констант в отдельный sln/container - со своим appsetting, который и станет общий для всех
                     services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
-                    services.AddSingleton<ISettingConstants, SettingConstants>();
+                    services.AddSingleton<ICacheManageService, CacheManageService>();
+                    services.AddSingleton<ISettingConstantsService, SettingConstantsServiceService>();
                     services.AddSingleton<MonitorLoop>();                    
                 });
 

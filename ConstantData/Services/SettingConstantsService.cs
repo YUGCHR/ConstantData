@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ConstantData.Services
 {
-    public interface ISettingConstants
+    public interface ISettingConstantsService
     {
         public int GetRecordActualityLevel { get; }
         public int GetTaskDelayTimeInSeconds { get; }
@@ -32,9 +32,9 @@ namespace ConstantData.Services
         public string GetEventKeyBacksTasksProceed { get; }
     }
 
-    public class SettingConstants : ISettingConstants
+    public class SettingConstantsServiceService : ISettingConstantsService
     {
-        public SettingConstants(IConfiguration configuration)
+        public SettingConstantsServiceService(IConfiguration configuration)
         {
             Configuration = configuration;
 
