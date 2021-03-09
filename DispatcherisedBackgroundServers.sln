@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConstantData", "ConstantData\ConstantData.csproj", "{57F2D90A-54B6-4FE7-9161-078B3D683FA9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB86F409-1D1E-4000-92E6-AA768D5462D4} = {AB86F409-1D1E-4000-92E6-AA768D5462D4}
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundTasksQueue.Library", "..\SharedLibrary\BackgroundTasksQueue.Library\BackgroundTasksQueue.Library.csproj", "{AB86F409-1D1E-4000-92E6-AA768D5462D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundTasksQueue.Library", "BackgroundTasksQueue.Library\BackgroundTasksQueue.Library.csproj", "{AB86F409-1D1E-4000-92E6-AA768D5462D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
