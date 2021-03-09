@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using BackgroundTasksQueue.Library.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +8,7 @@ using CachingFramework.Redis;
 using CachingFramework.Redis.Contracts.Providers;
 using StackExchange.Redis;
 using ConstantData.Services;
+using Shared.Library.Services;
 
 namespace ConstantData
 {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BackgroundTasksQueue.Library.Models;
-using BackgroundTasksQueue.Library.Services;
+using Shared.Library.Models;
+using Shared.Library.Services;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Logging;
 

@@ -8,9 +8,9 @@ using CachingFramework.Redis.Contracts;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using CachingFramework.Redis.Contracts.Providers;
-using BackgroundTasksQueue.Library.Services;
+using Shared.Library.Services;
 using BackgroundTasksQueue.Models;
-using BackgroundTasksQueue.Library.Models;
+using Shared.Library.Models;
 
 namespace BackgroundTasksQueue.Services
 {

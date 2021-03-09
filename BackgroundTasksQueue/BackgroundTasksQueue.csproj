@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SharedLibrary\BackgroundTasksQueue.Library\BackgroundTasksQueue.Library.csproj" />
+    <ProjectReference Include="..\Shared.Library\Shared.Library.csproj" />
   </ItemGroup>
 </Project>

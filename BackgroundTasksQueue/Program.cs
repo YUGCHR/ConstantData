@@ -8,7 +8,7 @@ using CachingFramework.Redis.Contracts.Providers;
 using StackExchange.Redis;
 using Microsoft.Extensions.Configuration;
 using BackgroundTasksQueue.Services;
-using BackgroundTasksQueue.Library.Services;
+using Shared.Library.Services;
 
 namespace BackgroundTasksQueue
 {

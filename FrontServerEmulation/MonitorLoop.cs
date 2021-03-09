@@ -7,8 +7,8 @@ using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using FrontServerEmulation.Services;
-using BackgroundTasksQueue.Library.Models;
-using BackgroundTasksQueue.Library.Services;
+using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace FrontServerEmulation
 {
