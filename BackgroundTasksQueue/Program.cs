@@ -34,12 +34,12 @@ namespace BackgroundTasksQueue
                 var env = hostContext.HostingEnvironment;
 
                 // find the shared folder in the parent folder
-                string[] paths = { env.ContentRootPath, "..", "..", "SharedSettings" };
-                var sharedFolder = Path.Combine(paths);
+                //string[] paths = { env.ContentRootPath, "..", "SharedSettings" };
+                //var sharedFolder = Path.Combine(paths);
 
                 //load the SharedSettings first, so that appsettings.json overrwrites it
                 config
-                    .AddJsonFile(Path.Combine(sharedFolder, "sharedSettings.json"), optional: true)
+                    //.AddJsonFile(Path.Combine(sharedFolder, "sharedSettings.json"), optional: true)
                     .AddJsonFile("appsettings.json", optional: true)
                     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 

@@ -22,10 +22,11 @@ namespace ConstantData
                 var env = hostContext.HostingEnvironment;
 
                 // find the shared folder in the parent folder
-                string[] paths = { env.ContentRootPath, "..", "..", "SharedSettings" };
+                string[] paths = { env.ContentRootPath, "..", "SharedSettings" };
                 var sharedFolder = Path.Combine(paths);
 
                 //load the SharedSettings first, so that appsettings.json overrwrites it
+                // можно убрать shared setting и хранить все константы в локальном appsetting проекта константы
                 config
                     .AddJsonFile(Path.Combine(sharedFolder, "sharedSettings.json"), optional: true)
                     .AddJsonFile("appsettings.json", optional: true)
