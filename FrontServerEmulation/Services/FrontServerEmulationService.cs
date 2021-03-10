@@ -108,6 +108,8 @@ namespace FrontServerEmulation.Services
             {
                 (string guid, int cycleCount) = t;
                 // записываем пакет задач в ключ пакета задач
+                // потом здесь записывать в значение класс с условием и ходом выполнения задач
+                // или условия и выполнение это разные ключи (префиксы)?
                 await _cache.SetHashedAsync(taskPackageGuid, guid, cycleCount, TimeSpan.FromDays(eventKeysSet.EventKeyFromTimeDays));
                 inPackageTaskCount++;
                 _logger.LogInformation(30050, "TaskPackage No. {0}, with Task No. {1} with {2} cycles was set.", taskPackageGuid, guid, cycleCount);
@@ -118,12 +120,6 @@ namespace FrontServerEmulation.Services
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
 
             await _cache.SetHashedAsync(eventKeysSet.EventKeyFrontGivesTask, taskPackageGuid, taskPackageGuid, TimeSpan.FromDays(eventKeysSet.EventKeyFrontGivesTaskTimeDays));
-            _logger.LogInformation(30070, " --- Key EventKeyFrontGivesTask = {0} with TaskPackage No. {1} was created.", eventKeysSet.EventKeyFrontGivesTask, taskPackageGuid);
-            _logger.LogInformation(30080, " --- Key EventKeyFrontGivesTask with lifetime {0} was created.", eventKeysSet.EventKeyFrontGivesTaskTimeDays);
-            
-            bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(eventKeyFrontGivesTask);
-            _logger.LogInformation(30090, " Check the Key EventKeyFrontGivesTask - isExist = {0}.", isExistEventKeyFrontGivesTask);
-
             // сервера подписаны на ключ eventKeyFrontGivesTask и пойдут забирать задачи, на этом тут всё
             return inPackageTaskCount;
         }
