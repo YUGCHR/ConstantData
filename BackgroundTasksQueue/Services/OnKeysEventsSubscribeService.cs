@@ -35,7 +35,7 @@ namespace BackgroundTasksQueue.Services
             IKeyEventsProvider keyEvents,
             IBackgroundTasksService task2Queue,
             ITasksPackageCaptureService captures,
-            ITasksBatchProcessingService processing, 
+            ITasksBatchProcessingService processing,
             ITasksProcessingControlService control)
         {
             _task2Queue = task2Queue;
@@ -94,7 +94,7 @@ namespace BackgroundTasksQueue.Services
 
             string tasksPackageGuidField = await _captures.AttemptToCaptureTasksPackage(eventKeysSet);
             _logger.LogInformation(901, "AttemptToCaptureTasksPackage finished and TaskPackageKey {0} was captured.", tasksPackageGuidField);
-            
+
             // если flagToBlockEventRun null, сразу возвращаемся с true для возобновления подписки
             if (tasksPackageGuidField != null)
             {
@@ -130,14 +130,20 @@ namespace BackgroundTasksQueue.Services
                     flagToBlockEventCheck = false;
                     _logger.LogInformation(306, "Key {Key} with command {Cmd} was received, flagToBlockEventCheck = {Flag}.", tasksPackageGuidField, cmd, flagToBlockEventCheck);
 
-                    // вернуть изменённое значение flagEvent из AttemptToCaptureTasksPackage для возобновления подписки
+                    // вернуть изменённое значение flagEvent из CheckingAllTasksCompletion для возобновления подписки
                     // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
                     // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
-                                        
-                    flagToBlockEventCheck = await _control.CheckingAllTasksCompletion(eventKeysSet);
+                    // возвращаем состояние выполнения - ещё выполняется или уже окончено
+                    // если выполняется, то true и им же возобновляем эту подписку
+                    flagToBlockEventCheck = await _control.CheckingAllTasksCompletion(eventKeysSet, tasksPackageGuidField);
 
-                    // что будет, если во время ожидания AttemptToCaptureTasksPackage придёт новое сообщение по подписке? проверить экспериментально
-                    _logger.LogInformation(906, "END - AttemptToCaptureTasksPackage finished and This BackServer waits the next event.");
+                    // если вернулось false, то восстанавливаем флаг прописки на ловлю задач
+                    if (!flagToBlockEventCheck)
+                    {
+                        _flagToBlockEventRun = true;
+                    }
+                    
+                    _logger.LogInformation(51909, "CheckingAllTasksCompletion finished with flag = {0}.", flagToBlockEventCheck);
                 }
             });
 

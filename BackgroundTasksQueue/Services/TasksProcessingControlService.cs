@@ -11,7 +11,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksProcessingControlService
     {
-        public Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet);
+        public Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
     }
 
     public class TasksProcessingControlService : ITasksProcessingControlService
@@ -30,10 +30,25 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
-        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet) // Main for Check
+        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Check
         {
-            // ----------------- вы находитесь здесь
+            // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
+            // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
+            // возвращаем состояние выполнения - ещё выполняется или уже окончено
+            // если выполняется, то true
 
+            // достаём из каждого поля ключа значение (проценты) и вычисляем общий процент выполнения
+
+            IDictionary<string, int> taskPackage = await _cache.GetHashedAllAsync<int>(tasksPackageGuidField);
+            int taskPackageCount = taskPackage.Count;
+            _logger.LogInformation(70301, "TasksList fetched - tasks count = {1}.", taskPackageCount);
+
+            foreach (var t in taskPackage)
+            {
+                var (singleTaskGuid, taskState) = t;
+                
+                _logger.LogInformation(501, "Single task No. {1} completed by {2} percents.", singleTaskGuid, taskState);
+            }
 
             // подписку оформить в отдельном методе, а этот вызывать оттуда
             // можно ставить блокировку на подписку и не отвлекаться на события, пока не закончена очередная проверка
