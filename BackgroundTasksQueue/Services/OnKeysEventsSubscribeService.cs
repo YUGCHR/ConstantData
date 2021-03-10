@@ -27,6 +27,7 @@ namespace BackgroundTasksQueue.Services
         private readonly IKeyEventsProvider _keyEvents;
         private readonly ITasksPackageCaptureService _captures;
         private readonly ITasksBatchProcessingService _processing;
+        private readonly ITasksProcessingControlService _control;
 
         public OnKeysEventsSubscribeService(
             ILogger<OnKeysEventsSubscribeService> logger,
@@ -34,7 +35,8 @@ namespace BackgroundTasksQueue.Services
             IKeyEventsProvider keyEvents,
             IBackgroundTasksService task2Queue,
             ITasksPackageCaptureService captures,
-            ITasksBatchProcessingService processing)
+            ITasksBatchProcessingService processing, 
+            ITasksProcessingControlService control)
         {
             _task2Queue = task2Queue;
             _logger = logger;
@@ -42,6 +44,7 @@ namespace BackgroundTasksQueue.Services
             _keyEvents = keyEvents;
             _captures = captures;
             _processing = processing;
+            _control = control;
         }
 
         private bool _flagToBlockEventRun;
@@ -71,17 +74,16 @@ namespace BackgroundTasksQueue.Services
                     _logger.LogInformation(301, "Key {Key} with command {Cmd} was received, flagToBlockEventRun = {Flag}.", eventKeyFrontGivesTask, cmd, _flagToBlockEventRun);
 
                     _flagToBlockEventRun = await FreshTaskPackageAppeared(eventKeysSet);
-
-                    _logger.LogInformation(901, "END - AttemptToCaptureTasksPackage finished and This BackServer waits the next event.");
                 }
-                // временная защёлка, чтобы подписка выполнялась один раз
+                // другая подписка восстановит true в _flagToBlockEventRun, чтобы возобновить подписку 
+                // или можно void Unsubscribe(string key), тогда без глобальной переменной
             });
 
             string eventKeyCommand = $"Key = {eventKeyFrontGivesTask}, Command = {eventKeysSet.EventCmd}";
             _logger.LogInformation(19205, "You subscribed on event - {EventKey}.", eventKeyCommand);
         }
 
-        private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet)
+        private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key
         {
             // вернуть все подписки сюда
             // метод состоит из трёх частей -
@@ -91,7 +93,8 @@ namespace BackgroundTasksQueue.Services
             // если всё удачно, возвращаемся сюда, оставив подписку заблокированной
 
             string tasksPackageGuidField = await _captures.AttemptToCaptureTasksPackage(eventKeysSet);
-
+            _logger.LogInformation(901, "AttemptToCaptureTasksPackage finished and TaskPackageKey {0} was captured.", tasksPackageGuidField);
+            
             // если flagToBlockEventRun null, сразу возвращаемся с true для возобновления подписки
             if (tasksPackageGuidField != null)
             {
@@ -106,15 +109,45 @@ namespace BackgroundTasksQueue.Services
             return true;
         }
 
-
         // вызвать из монитора или откуда-то из сервиса?
         // точно не из монитора - там неизвестен гуид пакета
         // можно из первого места, где получаем гуид пакета
         // в мониторе подписываемся на ключ сервера и когда там появится номер пакета задач, подписываемся на него
+        // нет, все подписки здесь
+
+        public void SubscribeOnEventCheck(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        {
+            _logger.LogInformation(205, "This BackServer subscribed on key {0}.", tasksPackageGuidField);
+
+            // блокировка множественной подписки до специального разрешения повторной подписки
+            bool flagToBlockEventCheck = true;
+
+            _keyEvents.Subscribe(tasksPackageGuidField, async (string key, KeyEvent cmd) =>
+            {
+                if (cmd == eventKeysSet.EventCmd && flagToBlockEventCheck)
+                {
+                    // временная защёлка, чтобы подписка выполнялась один раз
+                    flagToBlockEventCheck = false;
+                    _logger.LogInformation(306, "Key {Key} with command {Cmd} was received, flagToBlockEventCheck = {Flag}.", tasksPackageGuidField, cmd, flagToBlockEventCheck);
+
+                    // вернуть изменённое значение flagEvent из AttemptToCaptureTasksPackage для возобновления подписки
+                    // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
+                    // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
+                                        
+                    flagToBlockEventCheck = await _control.CheckingAllTasksCompletion(eventKeysSet);
+
+                    // что будет, если во время ожидания AttemptToCaptureTasksPackage придёт новое сообщение по подписке? проверить экспериментально
+                    _logger.LogInformation(906, "END - AttemptToCaptureTasksPackage finished and This BackServer waits the next event.");
+                }
+            });
+
+            string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {eventKeysSet.EventCmd}";
+            _logger.LogInformation(19206, "You subscribed on event - {EventKey}.", eventKeyCommand);
+        }
 
         public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet) // NOT USED
         {
-            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;            
+            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             _logger.LogInformation(19701, "This BackServer subscribed on key {0}.", backServerPrefixGuid);
 
             // типовая блокировка множественной подписки до специального разрешения повторной подписки
@@ -151,33 +184,6 @@ namespace BackgroundTasksQueue.Services
 
             string eventKeyCommand = $"Key = {backServerPrefixGuid}, Command = {eventKeysSet.EventCmd}";
             _logger.LogInformation(19707, "You subscribed on event - {EventKey}.", eventKeyCommand);
-        }
-
-        public void SubscribeOnEventCheck(EventKeyNames eventKeysSet, string tasksPackageGuidField)
-        {
-            _logger.LogInformation(205, "This BackServer subscribed on key {0}.", tasksPackageGuidField);
-
-            // типовая блокировка множественной подписки до специального разрешения повторной подписки
-            bool flagToBlockEventCheck = true;
-
-            _keyEvents.Subscribe(tasksPackageGuidField, async (string key, KeyEvent cmd) =>
-            {
-                if (cmd == eventKeysSet.EventCmd && flagToBlockEventCheck)
-                {
-                    // временная защёлка, чтобы подписка выполнялась один раз
-                    flagToBlockEventCheck = false;
-                    _logger.LogInformation(306, "Key {Key} with command {Cmd} was received, flagToBlockEventCheck = {Flag}.", tasksPackageGuidField, cmd, flagToBlockEventCheck);
-
-                    // вернуть изменённое значение flagEvent из AttemptToCaptureTasksPackage для возобновления подписки
-                    flagToBlockEventCheck = await _processing.CheckingAllTasksCompletion(eventKeysSet);
-
-                    // что будет, если во время ожидания AttemptToCaptureTasksPackage придёт новое сообщение по подписке? проверить экспериментально
-                    _logger.LogInformation(906, "END - AttemptToCaptureTasksPackage finished and This BackServer waits the next event.");
-                }
-            });
-
-            string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {eventKeysSet.EventCmd}";
-            _logger.LogInformation(19206, "You subscribed on event - {EventKey}.", eventKeyCommand);
         }
     }
 }

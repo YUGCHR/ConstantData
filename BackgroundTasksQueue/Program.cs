@@ -72,6 +72,7 @@ namespace BackgroundTasksQueue
                 services.AddSingleton<IOnKeysEventsSubscribeService, OnKeysEventsSubscribeService>();
                 services.AddSingleton<ITasksPackageCaptureService, TasksPackageCaptureService>();
                 services.AddSingleton<ITasksBatchProcessingService, TasksBatchProcessingService>();
+                services.AddSingleton<ITasksProcessingControlService, TasksProcessingControlService>();
                 });
     }    
 

@@ -12,7 +12,6 @@ namespace BackgroundTasksQueue.Services
     public interface ITasksBatchProcessingService
     {
         public Task<bool> WhenTasksPackageWasCaptured(EventKeyNames eventKeysSet, string tasksPackageGuidField);
-        public Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet);
     }
 
     public class TasksBatchProcessingService : ITasksBatchProcessingService
@@ -100,17 +99,6 @@ namespace BackgroundTasksQueue.Services
 
             // здесь всё сделали, выходим с блокировкой подписки на следующие пакеты задач
             return false;
-        }
-
-        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet) // Main for Check
-        {
-            // ----------------- вы находитесь здесь
-
-
-            // подписку оформить в отдельном методе, а этот вызывать оттуда
-            // можно ставить блокировку на подписку и не отвлекаться на события, пока не закончена очередная проверка
-
-            return default;
         }
 
         private async Task<int> AddProcessesToPerformingTasks(EventKeyNames eventKeysSet, int taskPackageCount)
