@@ -39,14 +39,15 @@ namespace BackgroundTasksQueue.Services
 
             // достаём из каждого поля ключа значение (проценты) и вычисляем общий процент выполнения
 
-            IDictionary<string, int> taskPackage = await _cache.GetHashedAllAsync<int>(tasksPackageGuidField);
+            IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField);
             int taskPackageCount = taskPackage.Count;
             _logger.LogInformation(70301, "TasksList fetched - tasks count = {1}.", taskPackageCount);
 
             foreach (var t in taskPackage)
             {
-                var (singleTaskGuid, taskState) = t;
-                
+                var (singleTaskGuid, taskProgressState) = t;
+                int taskState = taskProgressState.TaskState.TaskCompletedOnPercent;
+
                 _logger.LogInformation(501, "Single task No. {1} completed by {2} percents.", singleTaskGuid, taskState);
             }
 

@@ -121,16 +121,16 @@ namespace BackgroundTasksQueue.Services
 
         private async Task<int> TasksFromKeysToQueue(string tasksPackageGuidField, string backServerPrefixGuid)
         {
-            IDictionary<string, int> taskPackage = await _cache.GetHashedAllAsync<int>(tasksPackageGuidField); // получили пакет заданий - id задачи и данные (int) для неё
+            IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField); // получили пакет заданий - id задачи и данные (int) для неё
             int taskPackageCount = taskPackage.Count;
             foreach (var t in taskPackage)
             {
-                var (singleTaskGuid, assignmentTerms) = t;
+                var (singleTaskGuid, taskDescription) = t;
                 // складываем задачи во внутреннюю очередь сервера
-                _task2Queue.StartWorkItem(backServerPrefixGuid, tasksPackageGuidField, singleTaskGuid, assignmentTerms);
+                _task2Queue.StartWorkItem(backServerPrefixGuid, tasksPackageGuidField, singleTaskGuid, taskDescription);
                 // создаём ключ для контроля выполнения задания из пакета - нет, создаём не тут и не такой (ключ)
                 //await _cache.SetHashedAsync(backServerPrefixGuid, singleTaskGuid, assignmentTerms); 
-                _logger.LogInformation(501, "This BackServer sent Task with ID {1} and {2} cycles to Queue.", singleTaskGuid, assignmentTerms);
+                _logger.LogInformation(501, "This BackServer sent Task with ID {1} and {2} cycles to Queue.", singleTaskGuid, taskDescription);
             }
 
             _logger.LogInformation(511, "This BackServer sent total {1} tasks to Queue.", taskPackageCount);

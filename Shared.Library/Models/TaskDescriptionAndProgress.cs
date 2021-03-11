@@ -10,8 +10,13 @@ namespace Shared.Library.Models
     public class TaskDescriptionAndProgress
     {
         [JsonProperty(PropertyName = "tasksCount")]
-
         public int TasksCount { get; set; }
+
+        [JsonProperty(PropertyName = "taskDescription")]
+        public TaskComplicatedDescription TaskDescription { get; set; }
+
+        [JsonProperty(PropertyName = "taskState")]
+        public TaskProgressState TaskState { get; set; }
 
         public class TaskComplicatedDescription
         {
@@ -23,6 +28,9 @@ namespace Shared.Library.Models
         {
             [JsonProperty(PropertyName = "isTaskRunning")]
             public bool IsTaskRunning { get; set; }
+            
+            [JsonProperty(PropertyName = "isTaskRunning")]
+            public int TaskCompletedOnPercent  { get; set; }
         }
     }
 }

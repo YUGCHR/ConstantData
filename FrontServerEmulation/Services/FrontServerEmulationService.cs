@@ -51,7 +51,7 @@ namespace FrontServerEmulation.Services
                     tasksCount += 3;
                 }
                 // создаём пакет задач (в реальности, опять же, пакет задач положил отдельный контроллер)
-                Dictionary<string, int> taskPackage = FrontServerCreateTasks(tasksCount, eventKeysSet);
+                Dictionary<string, TaskDescriptionAndProgress> taskPackage = FrontServerCreateTasks(tasksCount, eventKeysSet);
 
                 // при создании пакета сначала создаётся пакет задач в ключе, а потом этот номер создаётся в виде поля в подписном ключе
 
@@ -79,34 +79,53 @@ namespace FrontServerEmulation.Services
             return tasksCount;
         }
 
-        private Dictionary<string, int> FrontServerCreateTasks(int tasksCount, EventKeyNames eventKeysSet)
+        private Dictionary<string, TaskDescriptionAndProgress> FrontServerCreateTasks(int tasksCount, EventKeyNames eventKeysSet)
         {
-            Dictionary<string, int> taskPackage = new Dictionary<string, int>();
+            Dictionary<string, TaskDescriptionAndProgress> taskPackage = new Dictionary<string, TaskDescriptionAndProgress>();
 
             for (int i = 0; i < tasksCount; i++)
             {
                 string guid = Guid.NewGuid().ToString();
-                int cycleCount = Math.Abs(guid.GetHashCode()) % 10;
 
-                if (cycleCount < 3)
+                // инициализовать весь класс отдельным методом
+
+                TaskDescriptionAndProgress.TaskComplicatedDescription cycleCount = new()
                 {
-                    cycleCount += 3;
+                    CycleCount = Math.Abs(guid.GetHashCode()) % 10
+                };
+                
+                TaskDescriptionAndProgress.TaskProgressState init = new()
+                {
+                    IsTaskRunning = false,
+                    TaskCompletedOnPercent = -1
+                };
+
+                if (cycleCount.CycleCount < 3)
+                {
+                    cycleCount.CycleCount += 3;
                 }
+
+                TaskDescriptionAndProgress descriptor = new()
+                {
+                    TaskDescription = cycleCount,
+                    TaskState = init
+                };
 
                 // дополняем taskPackageGuid префиксом PrefixPackage
                 string taskPackagePrefixGuid = $"{eventKeysSet.PrefixTask}:{guid}";
-                taskPackage.Add(taskPackagePrefixGuid, cycleCount);
-                _logger.LogInformation(30030, "Task {I} from {TasksCount} with ID {Guid} and {CycleCount} cycles was added to Dictionary.", i, tasksCount, taskPackagePrefixGuid, cycleCount);
+                taskPackage.Add(taskPackagePrefixGuid, descriptor);
+                _logger.LogInformation(30030, "Task {I} from {TasksCount} with ID {Guid} and {CycleCount} cycles was added to Dictionary.", i, tasksCount, taskPackagePrefixGuid, cycleCount.CycleCount);
+                //_logger.LogInformation(30033, "TaskDescriptionAndProgress descriptor TaskCompletedOnPercent = {0}.", descriptor.TaskState.TaskCompletedOnPercent);
             }
             return taskPackage;
         }
 
-        private async Task<int> FrontServerSetTasks(Dictionary<string, int> taskPackage, EventKeyNames eventKeysSet, string taskPackageGuid)
+        private async Task<int> FrontServerSetTasks(Dictionary<string, TaskDescriptionAndProgress> taskPackage, EventKeyNames eventKeysSet, string taskPackageGuid)
         {
             int inPackageTaskCount = 0;
-            foreach (KeyValuePair<string, int> t in taskPackage)
+            foreach (KeyValuePair<string, TaskDescriptionAndProgress> t in taskPackage)
             {
-                (string guid, int cycleCount) = t;
+                (string guid, TaskDescriptionAndProgress cycleCount) = t;
                 // записываем пакет задач в ключ пакета задач
                 // потом здесь записывать в значение класс с условием и ходом выполнения задач
                 // или условия и выполнение это разные ключи (префиксы)?
