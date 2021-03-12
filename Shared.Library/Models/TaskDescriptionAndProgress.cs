@@ -9,8 +9,11 @@ namespace Shared.Library.Models
 {
     public class TaskDescriptionAndProgress
     {
-        [JsonProperty(PropertyName = "tasksCount")]
-        public int TasksCount { get; set; }
+        [JsonProperty(PropertyName = "tasksCountInPackage")]
+        public int TasksCountInPackage { get; set; }
+
+        [JsonProperty(PropertyName = "tasksPackageGuid")]
+        public string TasksPackageGuid { get; set; }
 
         [JsonProperty(PropertyName = "taskDescription")]
         public TaskComplicatedDescription TaskDescription { get; set; }
@@ -20,6 +23,9 @@ namespace Shared.Library.Models
 
         public class TaskComplicatedDescription
         {
+            [JsonProperty(PropertyName = "taskGuid")]
+            public string TaskGuid { get; set; }
+
             [JsonProperty(PropertyName = "cycleCount")]
             public int CycleCount { get; set; }
         }

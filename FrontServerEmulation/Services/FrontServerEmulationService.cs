@@ -88,36 +88,48 @@ namespace FrontServerEmulation.Services
                 string guid = Guid.NewGuid().ToString();
 
                 // инициализовать весь класс отдельным методом
+                // найти, как передать сюда TasksPackageGuid
+                TaskDescriptionAndProgress descriptor = DescriptorInit(guid);
 
-                TaskDescriptionAndProgress.TaskComplicatedDescription cycleCount = new()
-                {
-                    CycleCount = Math.Abs(guid.GetHashCode()) % 10
-                };
-                
-                TaskDescriptionAndProgress.TaskProgressState init = new()
-                {
-                    IsTaskRunning = false,
-                    TaskCompletedOnPercent = -1
-                };
-
-                if (cycleCount.CycleCount < 3)
-                {
-                    cycleCount.CycleCount += 3;
-                }
-
-                TaskDescriptionAndProgress descriptor = new()
-                {
-                    TaskDescription = cycleCount,
-                    TaskState = init
-                };
+                int currentCycleCount = descriptor.TaskDescription.CycleCount;
 
                 // дополняем taskPackageGuid префиксом PrefixPackage
                 string taskPackagePrefixGuid = $"{eventKeysSet.PrefixTask}:{guid}";
                 taskPackage.Add(taskPackagePrefixGuid, descriptor);
-                _logger.LogInformation(30030, "Task {I} from {TasksCount} with ID {Guid} and {CycleCount} cycles was added to Dictionary.", i, tasksCount, taskPackagePrefixGuid, cycleCount.CycleCount);
+
+                _logger.LogInformation(30030, "Task {I} from {TasksCount} with ID {Guid} and {CycleCount} cycles was added to Dictionary.", i, tasksCount, taskPackagePrefixGuid, currentCycleCount);
                 //_logger.LogInformation(30033, "TaskDescriptionAndProgress descriptor TaskCompletedOnPercent = {0}.", descriptor.TaskState.TaskCompletedOnPercent);
             }
             return taskPackage;
+        }
+
+        private TaskDescriptionAndProgress DescriptorInit(string guid)
+        {
+            TaskDescriptionAndProgress.TaskComplicatedDescription cycleCount = new()
+            {
+                TaskGuid = guid,
+                CycleCount = Math.Abs(guid.GetHashCode()) % 10 // получать 10 из констант
+            };
+
+            TaskDescriptionAndProgress.TaskProgressState init = new()
+            {
+                IsTaskRunning = false,
+                TaskCompletedOnPercent = -1
+            };
+
+            // получать max (3) из констант
+            if (cycleCount.CycleCount < 3)
+            {
+                cycleCount.CycleCount += 3;
+            }
+
+            TaskDescriptionAndProgress descriptor = new()
+            {
+                TaskDescription = cycleCount,
+                TaskState = init
+            };
+
+            return descriptor;
         }
 
         private async Task<int> FrontServerSetTasks(Dictionary<string, TaskDescriptionAndProgress> taskPackage, EventKeyNames eventKeysSet, string taskPackageGuid)
