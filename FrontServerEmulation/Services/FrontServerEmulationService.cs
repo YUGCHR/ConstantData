@@ -89,7 +89,7 @@ namespace FrontServerEmulation.Services
 
                 // инициализовать весь класс отдельным методом
                 // найти, как передать сюда TasksPackageGuid
-                TaskDescriptionAndProgress descriptor = DescriptorInit(guid);
+                TaskDescriptionAndProgress descriptor = DescriptorInit(tasksCount, guid);
 
                 int currentCycleCount = descriptor.TaskDescription.CycleCount;
 
@@ -103,7 +103,7 @@ namespace FrontServerEmulation.Services
             return taskPackage;
         }
 
-        private TaskDescriptionAndProgress DescriptorInit(string guid)
+        private TaskDescriptionAndProgress DescriptorInit(int tasksCount, string guid)
         {
             TaskDescriptionAndProgress.TaskComplicatedDescription cycleCount = new()
             {
@@ -125,6 +125,8 @@ namespace FrontServerEmulation.Services
 
             TaskDescriptionAndProgress descriptor = new()
             {
+                // передать сюда TasksPackageGuid
+                TasksCountInPackage = tasksCount,
                 TaskDescription = cycleCount,
                 TaskState = init
             };
