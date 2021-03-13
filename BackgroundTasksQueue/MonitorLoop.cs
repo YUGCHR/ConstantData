@@ -99,6 +99,7 @@ namespace BackgroundTasksQueue
             // хотелось, чтобы вся подписка происходила из monitorLoop, но тут пока никак не узнать номера пакета
             // а если подписываться там, где становится известен номер, придётся перекрёстно подключать сервисы
 
+            // заменить на while(всегда) и проверять условие в теле - и вынести ожидание в отдельный метод - the same in Constants
             while (IsCancellationNotYet())
             {
                 var keyStroke = Console.ReadKey();

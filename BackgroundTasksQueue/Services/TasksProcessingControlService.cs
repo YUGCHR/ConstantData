@@ -11,7 +11,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksProcessingControlService
     {
-        public Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
+        public Task<int> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
     }
 
     public class TasksProcessingControlService : ITasksProcessingControlService
@@ -30,7 +30,7 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
-        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Check
+        public async Task<int> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Check
         {
             // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
             // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
@@ -38,7 +38,7 @@ namespace BackgroundTasksQueue.Services
             // если выполняется, то true
 
             // достаём из каждого поля ключа значение (проценты) и вычисляем общий процент выполнения
-
+            double taskPackageState = 0;
             IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField);
             int taskPackageCount = taskPackage.Count;
             _logger.LogInformation(70301, "TasksList fetched - tasks count = {1}.", taskPackageCount);
@@ -47,14 +47,24 @@ namespace BackgroundTasksQueue.Services
             {
                 var (singleTaskGuid, taskProgressState) = t;
                 int taskState = taskProgressState.TaskState.TaskCompletedOnPercent;
-
-                _logger.LogInformation(501, "Single task No. {1} completed by {2} percents.", singleTaskGuid, taskState);
+                if (taskState < 0)
+                {
+                    _logger.LogInformation(70311, "One (or more) Tasks do not start yet, taskState = {0}.", taskState);
+                    return 0;
+                }
+                // вычислить суммарный процент - всё сложить и разделить на количество
+                taskPackageState += taskState;
+                _logger.LogInformation(70321, "foreach in taskPackage - Single task No. {1} completed by {2} percents.", singleTaskGuid, taskState);
             }
+
+            double taskPackageStatePercentageDouble = taskPackageState / taskPackageCount;
+            int taskPackageStatePercentage = (int)taskPackageStatePercentageDouble;
+            _logger.LogInformation(70331, " --- RETURN - this TaskPackage is completed on {0} percents.  \n       ", taskPackageStatePercentage);
 
             // подписку оформить в отдельном методе, а этот вызывать оттуда
             // можно ставить блокировку на подписку и не отвлекаться на события, пока не закончена очередная проверка
 
-            return default;
+            return taskPackageStatePercentage;
         }
     }
 }
