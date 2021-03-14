@@ -122,40 +122,69 @@ namespace BackgroundTasksQueue.Services
 
             // блокировка множественной подписки до специального разрешения повторной подписки
             bool flagToBlockEventCheck = true;
+            // флаг блокировки повторного вызова обработчика
+            int knockingOnDoorWhileYouWereNotAtHome = 0;
 
             _keyEvents.Subscribe(tasksPackageGuidField, async (string key, KeyEvent cmd) =>
             {
-                if (cmd == eventKeysSet.EventCmd && flagToBlockEventCheck)
+                if (cmd == eventKeysSet.EventCmd)
                 {
-                    // временная защёлка, чтобы подписка выполнялась один раз
-                    flagToBlockEventCheck = false;
-                    _logger.LogInformation(30516, "\n --- Key {Key} with command {Cmd} was received, flagToBlockEventCheck = {Flag}.", tasksPackageGuidField, cmd, flagToBlockEventCheck);
-
-                    // вернуть изменённое значение flagEvent из CheckingAllTasksCompletion для возобновления подписки
-                    // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
-                    // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
-                    // возвращаем состояние выполнения - ещё выполняется или уже окончено
-                    // если выполняется, то true и им же возобновляем эту подписку
-                    int taskPackageStatePercentage = await _control.CheckingAllTasksCompletion(eventKeysSet, tasksPackageGuidField);
-                    
-                    if (taskPackageStatePercentage < 99)
+                    knockingOnDoorWhileYouWereNotAtHome = 2; // был вызов подписки + запас на дополнительный круг
+                    while (knockingOnDoorWhileYouWereNotAtHome > 0)
                     {
-                        flagToBlockEventCheck = true;
-                    }
+                        if (flagToBlockEventCheck)
+                        {
+                            flagToBlockEventCheck = false; // временная защёлка, чтобы обработчик вызвался один раз
+                            _logger.LogInformation(30516, "\n --- Key {Key} with command {Cmd} was received, flagToBlockEventCheck = {Flag}.", tasksPackageGuidField, cmd, flagToBlockEventCheck);
 
-                    // если вернулось false, то восстанавливаем флаг прописки на ловлю задач
-                    if (!flagToBlockEventCheck)
-                    {
-                        flagToBlockEventCheck = true;
-                        _flagToBlockEventRun = true;
+                            // вернуть изменённое значение flagEvent из CheckingAllTasksCompletion для возобновления подписки
+                            // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
+                            // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
+                            // возвращаем состояние выполнения - ещё выполняется или уже окончено
+                            // если выполняется, то true и им же возобновляем эту подписку
+                            bool allTasksCompleted = await _control.CheckingAllTasksCompletion(eventKeysSet, tasksPackageGuidField);
+                            // 
+                            // изменяет глобальный флаг подписки! точнее, может изменять
+                            (flagToBlockEventCheck, knockingOnDoorWhileYouWereNotAtHome) = SwitchAllTasksCompleted(allTasksCompleted, knockingOnDoorWhileYouWereNotAtHome);
+
+                            _logger.LogInformation(30519, "CheckingAllTasksCompletion finished with flag = {0}.", flagToBlockEventCheck);
+                        }
                     }
-                    
-                    _logger.LogInformation(30519, "CheckingAllTasksCompletion finished with flag = {0}.", flagToBlockEventCheck);
                 }
             });
 
             string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {eventKeysSet.EventCmd}";
             _logger.LogInformation(30526, "You subscribed on event - {EventKey}.", eventKeyCommand);
+        }
+
+        private (bool, int) SwitchAllTasksCompleted(bool allTasksCompleted, int knockingOnDoorWhileYouWereNotAtHome) // изменяет глобальный флаг подписки!
+        {
+            switch (allTasksCompleted)
+            {
+                case false:
+                    // если вернулось false, то восстанавливаем флаг this подписки
+                    bool flagToBlockEventCheck = false;
+
+                    // уменьшаем остаток цикла "стучались, пока вас не было дома"
+                    knockingOnDoorWhileYouWereNotAtHome--;
+                    if (knockingOnDoorWhileYouWereNotAtHome == 0)
+                    {
+                        flagToBlockEventCheck = true;
+                    }
+                    _logger.LogInformation(30517, "CheckingAllTasksCompletion finished with allTasksCompleted false");
+                    //return (flagToBlockEventCheck, knockingOnDoorWhileYouWereNotAtHome);
+                    return (flagToBlockEventCheck, knockingOnDoorWhileYouWereNotAtHome);
+                case true:
+                    // этот флаг восстанавливать, наверное, не надо - всё создастся заново (но надо проверить)
+                    //flagToBlockEventCheck = true;
+                    knockingOnDoorWhileYouWereNotAtHome = 0;
+                    // если вернулось true, то восстанавливаем глобальный флаг подписки на ловлю задач
+                    _flagToBlockEventRun = true;
+
+                    _logger.LogInformation(30518, " --------------------------- CheckingAllTasksCompletion finished with allTasksCompleted TRUE");
+                    //return (flagToBlockEventCheck, knockingOnDoorWhileYouWereNotAtHome);
+                    return (true, knockingOnDoorWhileYouWereNotAtHome);
+            }
         }
 
         public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet) // NOT USED

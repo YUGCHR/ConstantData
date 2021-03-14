@@ -11,7 +11,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksProcessingControlService
     {
-        public Task<int> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
+        public Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
     }
 
     public class TasksProcessingControlService : ITasksProcessingControlService
@@ -30,7 +30,7 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
-        public async Task<int> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Check
+        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Check
         {
             // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
             // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
@@ -39,6 +39,7 @@ namespace BackgroundTasksQueue.Services
 
             // достаём из каждого поля ключа значение (проценты) и вычисляем общий процент выполнения
             double taskPackageState = 0;
+            bool allTasksCompleted = true;
             IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField);
             int taskPackageCount = taskPackage.Count;
             _logger.LogInformation(70301, "TasksList fetched - tasks count = {1}.", taskPackageCount);
@@ -47,10 +48,17 @@ namespace BackgroundTasksQueue.Services
             {
                 var (singleTaskGuid, taskProgressState) = t;
                 int taskState = taskProgressState.TaskState.TaskCompletedOnPercent;
+                bool isTaskRunning = taskProgressState.TaskState.IsTaskRunning;
+                if (isTaskRunning)
+                {
+                    allTasksCompleted = false; // если хоть одна задача выполняется, пакет не закончен
+                }
                 if (taskState < 0)
                 {
+                    // подсчёт всех процентов можно убрать, ориентироваться только на allTasksCompleted
+                    // суммарный процент можно считать в другом методе или из этого возвращать принудительно сотню, если true
                     _logger.LogInformation(70311, "One (or more) Tasks do not start yet, taskState = {0}.", taskState);
-                    return 0;
+                    return false;
                 }
                 // вычислить суммарный процент - всё сложить и разделить на количество
                 taskPackageState += taskState;
@@ -64,7 +72,7 @@ namespace BackgroundTasksQueue.Services
             // подписку оформить в отдельном методе, а этот вызывать оттуда
             // можно ставить блокировку на подписку и не отвлекаться на события, пока не закончена очередная проверка
 
-            return taskPackageStatePercentage;
+            return allTasksCompleted;
         }
     }
 }

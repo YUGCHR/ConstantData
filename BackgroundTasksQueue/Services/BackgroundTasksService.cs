@@ -42,27 +42,14 @@ namespace BackgroundTasksQueue.Services
             _taskQueue.QueueBackgroundWorkItem(async token =>
             {
                 // Simulate loopCount 3-second tasks to complete for each enqueued work item
-
-                int completionTaskPercentage = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, token);
+                bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, token);
+                // если задача завершилась полностью, удалить поле регистрации из ключа сервера
+                bool isTaskFinished = await ActualTaskCompletion(isTaskCompleted, backServerPrefixGuid, taskDescription, tasksPackageGuidField, singleTaskGuid, token);
                 
-                //if (delayLoop == assignmentTerms)
-                //{
-                //    bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid); //HashExistsAsync
-                //    _logger.LogInformation("Queued Background Task {Guid} is complete on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
-                //    //int checkDeletedSuccess = await _cache.GetHashedAsync<int>(serverNum, guid); // проверку и сообщение о нём можно убрать после отладки
-                //    //_logger.LogInformation("Deleted field {Guid} checked on Server No. {ServerNum} / value = {3}.", guid, serverNum, checkDeletedSuccess);
-                //}
-                //else
-                //{
-                //    bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid);
-                //    _logger.LogInformation("Queued Background Task {Guid} was cancelled on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
-                //    // записать какой-то ключ насчёт неудачи и какую-то информацию о процессе?
-                //    int checkDeletedSuccess = await _cache.GetHashedAsync<int>(backServerPrefixGuid, singleTaskGuid);
-                //}
             });
         }
 
-        private async Task<int> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
+        private async Task<bool> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
             int assignmentTerms = taskDescription.TaskDescription.CycleCount;
             int delayLoop = 0;
@@ -70,7 +57,7 @@ namespace BackgroundTasksQueue.Services
             //var guid = Guid.NewGuid().ToString();
 
             _logger.LogInformation(2101, "Queued Background Task {Guid} is starting.", singleTaskGuid);
-
+            taskDescription.TaskState.IsTaskRunning = true;
             while (!cancellationToken.IsCancellationRequested && delayLoop < assignmentTerms)
             {
                 try
@@ -91,7 +78,7 @@ namespace BackgroundTasksQueue.Services
                 int completionTaskPercentage = (int)completionDouble;
                 taskDescription.TaskState.TaskCompletedOnPercent = completionTaskPercentage;
 
-                _logger.LogInformation("completionDouble {0}% = delayLoop {1} / assignmentTerms {2}", completionDouble, delayLoop, assignmentTerms);
+                _logger.LogInformation("completionDouble {0}% = delayLoop {1} / assignmentTerms {2}, IsTaskRunning = {3}", completionDouble, delayLoop, assignmentTerms, taskDescription.TaskState.IsTaskRunning);
 
                 // обновляем отчёт о прогрессе выполнения задания
                 await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - !!!
@@ -99,8 +86,29 @@ namespace BackgroundTasksQueue.Services
                 delayLoop++;
                 _logger.LogInformation("Task {0} is running. Loop = {1} / Remaining = {2} - {3}%", singleTaskGuid, delayLoop, loopRemain, completionTaskPercentage);
             }
+            return delayLoop == assignmentTerms;
+        }
 
-            return taskDescription.TaskState.TaskCompletedOnPercent;
+        private async Task<bool> ActualTaskCompletion(bool isTaskRunning, string backServerPrefixGuid, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
+        {
+            if (isTaskRunning)
+            {
+                bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid); //HashExistsAsync
+                _logger.LogInformation("Queued Background Task {Guid} is complete on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
+                // тут записать в описание, что задача закончилась
+                _logger.LogInformation(" --- BEFORE - Task {0} finished. IsTaskRunning still = {1}", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
+
+                taskDescription.TaskState.IsTaskRunning = false;
+                _logger.LogInformation(" --- AFTER - Task {0} finished. IsTaskRunning = {1} yet", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
+
+                await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - in outside method
+                return true;
+            }
+            else
+            {
+                // тут тоже что-то записать
+                return false;
+            }
         }
     }
 }

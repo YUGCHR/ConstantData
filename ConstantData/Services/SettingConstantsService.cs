@@ -32,6 +32,9 @@ namespace ConstantData.Services
         public string GetEventKeyBacksTasksProceed { get; }
     }
 
+    // сделать константы ключей в виде словаря - строка/время существования ключа
+    // везде использовать имя ключа с типом словаря и только в последнем методе раскрывать и записывать
+
     public class SettingConstantsServiceService : ISettingConstantsService
     {
         public SettingConstantsServiceService(IConfiguration configuration)
