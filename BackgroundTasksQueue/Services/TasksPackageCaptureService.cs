@@ -85,7 +85,6 @@ namespace BackgroundTasksQueue.Services
                 {
                     // тут перейти в TasksBatchProcessingService
                     // не перейти, а вернуться в подписку с номером пакета задач
-
                     return tasksPackageGuidField;
                 }
             }
@@ -96,7 +95,6 @@ namespace BackgroundTasksQueue.Services
             // надо сделать возврат в исходное состояние ожидания вброса ключа
             // побочный эффект - можно смело брать последнюю задачу и не опасаться, что ключ eventKeyFrontGivesTask исчезнет
             _logger.LogInformation(481, "This BackServer cannot catch the task.");
-
             // возвращаемся в состояние подписки на ключ кафе и ожидания события по этой подписке
             _logger.LogInformation(491, "This BackServer goes over to the subscribe event awaiting.");
             // восстанавливаем условие разрешения обработки подписки

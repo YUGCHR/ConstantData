@@ -11,6 +11,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksProcessingControlService
     {
+        public Task<bool> CheckingATaskPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
         public Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
     }
 
@@ -30,7 +31,16 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
-        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Check
+        public async Task<bool> CheckingATaskPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        {
+            // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
+            // если пакет в работе, вернуть true, если пакет закончен - false
+            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
+            int totalUnsolvedTasksLeft = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField); // forsake
+            return totalUnsolvedTasksLeft > 0;
+        }
+
+        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) 
         {
             // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
             // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач

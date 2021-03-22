@@ -33,32 +33,16 @@ namespace BackgroundTasksQueue.Services
         public async Task<bool> WhenTasksPackageWasCaptured(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Processing
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
-            string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
-            string eventKeyBacksTasksProceed = eventKeysSet.EventKeyBacksTasksProceed;
-
             _logger.LogInformation(421, "This BackServer fetched taskPackageKey {1} successfully.", tasksPackageGuidField); // победитель по жизни
-                                                                                                                            
-            // следующие две регистрации пока непонятно, зачем нужны - доступ к состоянию пакета задач всё равно по ключу пакета
 
-            // регистрируем полученную задачу на ключе выполняемых/выполненных задач
-            // поле - исходный ключ пакета (известный контроллеру, по нему он найдёт сервер, выполняющий его задание)
-            // пока что поле задачи в кафе и ключ самой задачи совпадают, поэтому контроллер может напрямую читать состояние пакета задач по известному ему ключу
-            await _cache.SetHashedAsync(eventKeyBacksTasksProceed, tasksPackageGuidField, backServerPrefixGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
-            _logger.LogInformation(431, "Tasks package was registered on key {0} - \n      with source package key {1}.", eventKeyBacksTasksProceed, tasksPackageGuidField);
+            // регистрируем полученный пакет задач на ключе выполняемых/выполненных задач и на ключе сервера
+            // ключ выполняемых задач надо переделать - в значении класть модель, в которой указан номер сервера и состояние задачи
+            // скажем, List of TaskDescriptionAndProgress и в нём дополнительное поле номера сервера и состояния всего пакета
 
-            
-            // регистрируем исходный ключ и ключ пакета задач на ключе сервера - чтобы не разорвать цепочку
-            // цепочка уже не актуальна, можно этот ключ использовать для контроля состояния пакета задач
-            // для этого в дальнейшем в значение можно класть общее состояние всех задач пакета в процентах
-            // или не потом, а сейчас класть 0 - тип значения менять нельзя
-            int packageStateInit = -1; // value in percentages, but have set special value for newly created field now
-            await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, packageStateInit, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
-            _logger.LogInformation(441, "This BackServer registered tasks package - \n      with source package key {1}.", tasksPackageGuidField);
-
+            // перенесли RegisterTasksPackageGuid после TasksFromKeysToQueue, чтобы получить taskPackageCount для регистрации 
 
             // тут подписаться (SubscribeOnEventCheck) на ключ пакета задач для контроля выполнения, но будет много событий
             // каждая задача будет записывать в этот ключ своё состояние каждый цикл - надо ли так делать?
-
 
             // и по завершению выполнения задач хорошо бы удалить процессы
             // нужен внутрисерверный ключ (константа), где каждый из сервисов (каждого) сервера может узнать номер сервера, на котором запущен - чтобы правильно подписаться на событие
@@ -68,7 +52,7 @@ namespace BackgroundTasksQueue.Services
             // складываем задачи во внутреннюю очередь сервера
             // tasksPakageGuidValue больше не нужно передавать, вместо нее tasksPackageGuidField
             int taskPackageCount = await TasksFromKeysToQueue(tasksPackageGuidField, backServerPrefixGuid);
-
+            await RegisterTasksPackageGuid(eventKeysSet, tasksPackageGuidField, taskPackageCount);
             // здесь подходящее место, чтобы определить количество процессов, выполняющих задачи из пакета - в зависимости от количества задач, но не более максимума из константы
             // PrefixProcessAdd - префикс ключа (+ backServerGuid) управления добавлением процессов
             // PrefixProcessCancel - префикс ключа (+ backServerGuid) управления удалением процессов
@@ -79,26 +63,47 @@ namespace BackgroundTasksQueue.Services
             // можно в качестве поля использовать гуид пакета задач, но, наверное, это лишние сложности, всё равно процессы общие
             int addProcessesCount = await AddProcessesToPerformingTasks(eventKeysSet, taskPackageCount);
 
-
-
             // тут ждать, пока не будут посчитаны всё задачи пакета
             // теперь не будем ждать, вернём false и пусть ждут другую подписку, которая поменяет на true
             int completionPercentage = 1; // await CheckingAllTasksCompletion(tasksPackageGuidField);
 
-            // если проценты не сто, то какая-то задача осталась невыполненной, надо сообщить на подписку диспетчеру (потом)
-            // сообщать тоже не здесь будет, отсюда сейчас уходим
-            int hundredPercents = 100; // from constants
-            if (completionPercentage < hundredPercents)
-            {
-                await _cache.SetHashedAsync("dispatcherSubscribe:thisServerGuid", "thisTasksPackageKey", completionPercentage); // TimeSpan.FromDays - !!! как-то так
-            }
             // тут удалить все процессы (потом)
             // процессы тоже не здесь удаляем - перенести их отсюда
-            int cancelExistingProcesses = await CancelExistingProcesses(eventKeysSet, addProcessesCount, completionPercentage);
+            //int cancelExistingProcesses = await CancelExistingProcesses(eventKeysSet, addProcessesCount, completionPercentage);
             // выйти из цикла можем только когда не останется задач в ключе кафе
 
             // здесь всё сделали, выходим с блокировкой подписки на следующие пакеты задач
             return false;
+        }
+
+        private async Task<bool> RegisterTasksPackageGuid(EventKeyNames eventKeysSet, string tasksPackageGuidField, int taskPackageCount)
+        {
+            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
+            string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
+            string eventKeyBacksTasksProceed = eventKeysSet.EventKeyBacksTasksProceed;
+
+            // следующие две регистрации пока непонятно, зачем нужны - доступ к состоянию пакета задач всё равно по ключу пакета
+            // очень нужен - для контроля окончания выполнения задачи и пакета
+
+            // регистрируем полученную задачу на ключе выполняемых/выполненных задач
+            // поле - исходный ключ пакета (известный контроллеру, по нему он найдёт сервер, выполняющий его задание)
+            // пока что поле задачи в кафе и ключ самой задачи совпадают, поэтому контроллер может напрямую читать состояние пакета задач по известному ему ключу
+            // ключ выполняемых задач надо переделать - в значении класть модель, в которой указан номер сервера и состояние задачи
+            // скажем, List of TaskDescriptionAndProgress и в нём дополнительное поле номера сервера и состояния всего пакета
+
+            await _cache.SetHashedAsync(eventKeyBacksTasksProceed, tasksPackageGuidField, backServerPrefixGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
+            _logger.LogInformation(431, "Tasks package was registered on key {0} - \n      with source package key {1}.", eventKeyBacksTasksProceed, tasksPackageGuidField);
+
+            // регистрируем исходный ключ и ключ пакета задач на ключе сервера - чтобы не разорвать цепочку
+            // цепочка уже не актуальна, можно этот ключ использовать для контроля состояния пакета задач
+            // для этого в дальнейшем в значение можно класть общее состояние всех задач пакета в процентах
+            // или не потом, а сейчас класть 0 - тип значения менять нельзя
+            // сейчас в значение кладём количество задач в пакете, а про мере выполнения вычитаем по единичке, чтобы как ноль - пакет выполнен
+            int packageStateInit = taskPackageCount;
+            await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, packageStateInit, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
+            _logger.LogInformation(441, "This BackServer registered tasks package - \n      with source package key {1}.", tasksPackageGuidField);
+
+            return true;
         }
 
         private async Task<int> AddProcessesToPerformingTasks(EventKeyNames eventKeysSet, int taskPackageCount)

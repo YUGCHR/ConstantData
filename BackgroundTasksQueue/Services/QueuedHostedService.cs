@@ -48,7 +48,8 @@ namespace BackgroundTasksQueue.Services
             _logger.LogInformation($"Queued Hosted Service is running.{Environment.NewLine}" +
                                    $"{Environment.NewLine}Tap W to add a work item to the " +
                                    $"background queue.{Environment.NewLine}");
-
+            // добавить проверку на существование констант
+            // или запускать по команде основного монитора
             await BackgroundProcessing(stoppingToken);
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Shared.Library.Models;
 using Shared.Library.Services;
@@ -13,7 +14,7 @@ namespace ConstantData.Services
     public interface ICacheManageService
     {
         public Task SetStartConstants(EventKeyNames eventKeysSet, string startConstantKey, string startConstantField);
-
+        public Task<bool> DeleteKeyIfCancelled(string startConstantKey, string startConstantField);
     }
 
     public class CacheManageService : ICacheManageService
@@ -40,6 +41,11 @@ namespace ConstantData.Services
             await _cache.SetHashedAsync<EventKeyNames>(startConstantKey, startConstantField, eventKeysSet, _startConstantKeyLifeTime);
 
             _logger.LogInformation(55050, "SetStartConstants set constants (EventKeyFrom for example = {0}) in key {1}.", eventKeysSet.EventKeyFrom, "constants");
+        }
+
+        public async Task<bool> DeleteKeyIfCancelled(string startConstantKey, string startConstantField)
+        {
+            return await _cache.RemoveHashedAsync(startConstantKey, startConstantField);
         }
     }
 }

@@ -65,21 +65,24 @@ namespace ConstantData
             
             //_subscribe.SubscribeOnEventFrom(eventKeysSet);
 
-            while (!_cancellationToken.IsCancellationRequested)
+            while (true)
             {
-                //if (_cancellationToken.IsCancellationRequested)
-                //{
-                //    _logger.LogInformation(10390, "ConstantsMountingMonitor was canceled.");
-                //}
-
+                if (_cancellationToken.IsCancellationRequested)
+                {
+                    bool res = await _cache.DeleteKeyIfCancelled(startConstantKey, startConstantField);
+                    _logger.LogInformation(310310, "_cancellationToken was received, key was removed = {KeyStroke}.", res);
+                    return;
+                }
+                
                 var keyStroke = Console.ReadKey();
 
                 if (keyStroke.Key == ConsoleKey.W)
                 {
                     _logger.LogInformation(10370, "ConsoleKey was received {KeyStroke}.", keyStroke.Key);
                 }
+
+                await Task.Delay(10, _cancellationToken);
             }
         }
     }
 }
-

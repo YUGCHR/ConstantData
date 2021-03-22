@@ -49,14 +49,53 @@ namespace BackgroundTasksQueue
 
         public async Task Monitor()
         {
+            // при старте проверить наличие ключа с константами и если его нет, затаиться в ожидании
+
             // концепция хищных бэк-серверов, борющихся за получение задач
             // контроллеров же в лесу (на фронте) много и желудей, то есть задач, у них тоже много
             // а несколько (много) серверов могут неспешно выполнять задачи из очереди в бэкграунде
 
             // собрать все константы в один класс
             //EventKeyNames eventKeysSet = InitialiseEventKeyNames();
-            EventKeyNames eventKeysSet = await _data.FetchAllConstants();
 
+            // разделить на Init, Register и Subscribe
+
+            EventKeyNames eventKeysSet = await _data.FetchAllConstants();
+            if (eventKeysSet == null)
+            {
+                _logger.LogInformation("eventKeysSet was NOT Init.");
+                // и что делать, если нет - подписаться?
+                _data.SubscribeOnAllConstantsEvent();
+                // обратиться туда же и ждать появления констант
+            }
+
+            if (eventKeysSet != null)
+            {
+                await RegisterAndSubscribe(eventKeysSet);
+            }
+
+            // заменить на while(всегда) и проверять условие в теле - и вынести ожидание в отдельный метод - the same in Constants
+            while (IsCancellationNotYet())
+            {
+                var keyStroke = Console.ReadKey();
+
+                if (keyStroke.Key == ConsoleKey.W)
+                {
+                    _logger.LogInformation("ConsoleKey was received {KeyStroke}.", keyStroke.Key);
+                }
+            }
+
+            _logger.LogInformation("MonitorLoop was canceled by Token.");
+        }
+
+        private bool IsCancellationNotYet()
+        {
+            _logger.LogInformation("Is Cancellation Token obtained? - {1}", _cancellationToken.IsCancellationRequested);
+            return !_cancellationToken.IsCancellationRequested; // add special key from Redis?
+        }
+
+        private async Task RegisterAndSubscribe(EventKeyNames eventKeysSet)
+        {
             // множественные контроллеры по каждому запросу (пользователей) создают очередь - каждый создаёт ключ, на который у back-servers подписка, в нём поле со своим номером, а в значении или имя ключа с заданием или само задание            
             // дальше бэк-сервера сами разбирают задания
             // бэк после старта кладёт в ключ ___ поле со своим сгенерированным guid для учета?
@@ -98,25 +137,6 @@ namespace BackgroundTasksQueue
             // а можно подписаться на стандартный ключ появления пакета задач - общего для всех серверов, а потом проверять, что это событие на своём сервере
             // хотелось, чтобы вся подписка происходила из monitorLoop, но тут пока никак не узнать номера пакета
             // а если подписываться там, где становится известен номер, придётся перекрёстно подключать сервисы
-
-            // заменить на while(всегда) и проверять условие в теле - и вынести ожидание в отдельный метод - the same in Constants
-            while (IsCancellationNotYet())
-            {
-                var keyStroke = Console.ReadKey();
-
-                if (keyStroke.Key == ConsoleKey.W)
-                {
-                    _logger.LogInformation("ConsoleKey was received {KeyStroke}.", keyStroke.Key);
-                }
-            }
-
-            _logger.LogInformation("MonitorLoop was canceled by Token.");
-        }
-
-        private bool IsCancellationNotYet()
-        {
-            _logger.LogInformation("Is Cancellation Token obtained? - {1}", _cancellationToken.IsCancellationRequested);
-            return !_cancellationToken.IsCancellationRequested; // add special key from Redis?
         }
     }
 }

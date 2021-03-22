@@ -13,10 +13,10 @@ namespace BackgroundTasksQueue.Services
 {
     public interface IOnKeysEventsSubscribeService
     {
-        public Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun); // NOT USED
+        //public Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun); // NOT USED
         public void SubscribeOnEventRun(EventKeyNames eventKeysSet);
-        public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet); // NOT USED
-        public void SubscribeOnEventCheck(EventKeyNames eventKeysSet, string tasksPackageGuidField);
+        //public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet); // NOT USED
+        //public void SubscribeOnEventCheckPackageProgress(EventKeyNames eventKeysSet, string tasksPackageGuidField);
     }
 
     public class OnKeysEventsSubscribeService : IOnKeysEventsSubscribeService
@@ -74,7 +74,11 @@ namespace BackgroundTasksQueue.Services
                     _logger.LogInformation(30310, "\n                      --- subscription blocked ---");
                     _logger.LogInformation(30311, "Key {Key} with command {Cmd} was received, flagToBlockEventRun = {Flag}.", eventKeyFrontGivesTask, cmd, _flagToBlockEventRun);
 
+                    // _flagToBlockEventRun вернется true, только если задачу добыть не удалось
                     _flagToBlockEventRun = await FreshTaskPackageAppeared(eventKeysSet);
+                    // просто сделать _flagToBlockEventRun true ничего не даёт - оставшиеся в ключе задачи не вызовут подписку
+                    // если задача получена и пошла в работу, то вернётся false и на true ключ поменяют в другом месте (запутанно, но пока так)
+                    // и там сначала ещё раз проверить ключ кафе задач и если ещё остались задачи, вызвать FreshTaskPackageAppeared
                 }
                 // другая подписка восстановит true в _flagToBlockEventRun, чтобы возобновить подписку 
                 // или можно void Unsubscribe(string key), тогда без глобальной переменной
@@ -101,12 +105,15 @@ namespace BackgroundTasksQueue.Services
             {
                 // вызывать подписку на tasksPackageGuidField прямо здесь, а не городить лишние ключи
                 // подписка на ключ пакета задач для контроля выполнения - задачи должны сюда (или в ключ с префиксом) отчитываться о ходе выполнения
-                SubscribeOnEventCheck(eventKeysSet, tasksPackageGuidField);
+                SubscribeOnEventCheckPackageProgress(eventKeysSet, tasksPackageGuidField);
+                SubscribeOnEventPackageCompleted(eventKeysSet, tasksPackageGuidField);
 
                 bool flagToBlockEventRun = await _processing.WhenTasksPackageWasCaptured(eventKeysSet, tasksPackageGuidField);
-                // возвращаем false
-                return flagToBlockEventRun; // всё равно надо вернуть true, но мало ли - а вот
+                // всегда возвращаем false - задачи отправлены в работу и подписку восстановит модуль контроля завершения пакета
+                // и ещё сначала проверит, не остались ли ещё других пакетов в кафе
+                return flagToBlockEventRun; 
             }
+            // возвращаем true, потому что задачу добыть не удалось, пакетов больше нет и надо ждать следующего вброса 
             return true;
         }
 
@@ -116,39 +123,65 @@ namespace BackgroundTasksQueue.Services
         // в мониторе подписываемся на ключ сервера и когда там появится номер пакета задач, подписываемся на него
         // нет, все подписки здесь
 
-        public void SubscribeOnEventCheck(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        private void SubscribeOnEventCheckPackageProgress(EventKeyNames eventKeysSet, string tasksPackageGuidField)
         {
             _logger.LogInformation(30510, "This BackServer subscribed on key {0}.", tasksPackageGuidField);
 
             // блокировка множественной подписки до специального разрешения повторной подписки
-            bool flagToBlockEventCheck = true;
+            bool flagToBlockEventCheckPackageProgress = true;
             // флаг блокировки повторного вызова обработчика
-            int knockingOnDoorWhileYouWereNotAtHome = 0;
+            //int knockingOnDoorWhileYouWereNotAtHome = 0;
 
             _keyEvents.Subscribe(tasksPackageGuidField, async (string key, KeyEvent cmd) =>
             {
-                if (cmd == eventKeysSet.EventCmd)
+                if (cmd == eventKeysSet.EventCmd && flagToBlockEventCheckPackageProgress)
                 {
-                    knockingOnDoorWhileYouWereNotAtHome = 2; // был вызов подписки + запас на дополнительный круг
-                    while (knockingOnDoorWhileYouWereNotAtHome > 0)
+                    flagToBlockEventCheckPackageProgress = false;
+                    _logger.LogInformation(30516, "\n --- Key {Key} with command {Cmd} was received, flagToBlockEventCheck = {Flag}.", tasksPackageGuidField, cmd, flagToBlockEventCheckPackageProgress);
+
+                    // вернуть изменённое значение flagEvent из CheckingAllTasksCompletion для возобновления подписки
+                    // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
+                    // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
+                    // возвращаем состояние выполнения - ещё выполняется или уже окончено
+                    // если выполняется, то true и им же возобновляем эту подписку
+                    bool allTasksCompleted = await _control.CheckingAllTasksCompletion(eventKeysSet, tasksPackageGuidField);
+                    _logger.LogInformation(30519, "CheckingAllTasksCompletion finished with flag = {0}.", flagToBlockEventCheckPackageProgress);
+
+                    // дополнительно проверять ключ окончания пакета и по нему полностью отменить подписку
+                }
+            });
+
+            string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {eventKeysSet.EventCmd}";
+            _logger.LogInformation(30526, "You subscribed on event - {EventKey}.", eventKeyCommand);
+        }
+
+        private void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        {
+            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
+            _logger.LogInformation(30510, "This BackServer subscribed on key {0}.", backServerPrefixGuid);
+
+            // блокировка множественной подписки до специального разрешения повторной подписки
+            bool flagToBlockEventPackageCompleted = true;
+
+            _keyEvents.Subscribe(backServerPrefixGuid, async (string key, KeyEvent cmd) =>
+            {
+                if (cmd == eventKeysSet.EventCmd && flagToBlockEventPackageCompleted)
+                {
+                    flagToBlockEventPackageCompleted = false;
+                    _logger.LogInformation(30516, "\n --- Key {Key} with command {Cmd} was received, flagToBlockEventCheck = {Flag}.", backServerPrefixGuid, cmd, flagToBlockEventPackageCompleted);
+                    // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
+                    flagToBlockEventPackageCompleted = await _control.CheckingATaskPackageCompletion(eventKeysSet, tasksPackageGuidField);
+                    _logger.LogInformation(30519, "CheckingAllTasksCompletion finished with flag = {0}.", flagToBlockEventPackageCompleted);
+                    // если пакет в работе, вернулось true и опять ждём подписку
+                    // если пакет закончен, оставим навсегда false, этот пакет нас больше не интересует, но, перед восстановлением глобального ключа, ещё надо проверить кафе
+                    // или может полностью отменить подписку? вроде бы разницы нет, всё равно сюда теперь попадём только по новой подписке на этот же ключ, поэтому отменять нет смысла
+
+                    if (!flagToBlockEventPackageCompleted)
                     {
-                        if (flagToBlockEventCheck)
-                        {
-                            flagToBlockEventCheck = false; // временная защёлка, чтобы обработчик вызвался один раз
-                            _logger.LogInformation(30516, "\n --- Key {Key} with command {Cmd} was received, flagToBlockEventCheck = {Flag}.", tasksPackageGuidField, cmd, flagToBlockEventCheck);
-
-                            // вернуть изменённое значение flagEvent из CheckingAllTasksCompletion для возобновления подписки
-                            // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
-                            // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
-                            // возвращаем состояние выполнения - ещё выполняется или уже окончено
-                            // если выполняется, то true и им же возобновляем эту подписку
-                            bool allTasksCompleted = await _control.CheckingAllTasksCompletion(eventKeysSet, tasksPackageGuidField);
-                            // 
-                            // изменяет глобальный флаг подписки! точнее, может изменять
-                            (flagToBlockEventCheck, knockingOnDoorWhileYouWereNotAtHome) = SwitchAllTasksCompleted(allTasksCompleted, knockingOnDoorWhileYouWereNotAtHome);
-
-                            _logger.LogInformation(30519, "CheckingAllTasksCompletion finished with flag = {0}.", flagToBlockEventCheck);
-                        }
+                        // перед восстановлением глобального ключа, надо ещё проверить кафе - стандартным способом
+                        _flagToBlockEventRun = await FreshTaskPackageAppeared(eventKeysSet);
+                        // если задач там больше нет, вернётся true, восстановим глобальную подписку и будем ждать 
+                        // а если пакет есть, вернётся false и все пойдет привычным путём, а потом придёт опять сюда по новой подписке
                     }
                 }
             });
@@ -157,36 +190,7 @@ namespace BackgroundTasksQueue.Services
             _logger.LogInformation(30526, "You subscribed on event - {EventKey}.", eventKeyCommand);
         }
 
-        private (bool, int) SwitchAllTasksCompleted(bool allTasksCompleted, int knockingOnDoorWhileYouWereNotAtHome) // изменяет глобальный флаг подписки!
-        {
-            switch (allTasksCompleted)
-            {
-                case false:
-                    // если вернулось false, то восстанавливаем флаг this подписки
-                    bool flagToBlockEventCheck = false;
-
-                    // уменьшаем остаток цикла "стучались, пока вас не было дома"
-                    knockingOnDoorWhileYouWereNotAtHome--;
-                    if (knockingOnDoorWhileYouWereNotAtHome == 0)
-                    {
-                        flagToBlockEventCheck = true;
-                    }
-                    _logger.LogInformation(30517, "CheckingAllTasksCompletion finished with allTasksCompleted false");
-                    //return (flagToBlockEventCheck, knockingOnDoorWhileYouWereNotAtHome);
-                    return (flagToBlockEventCheck, knockingOnDoorWhileYouWereNotAtHome);
-                case true:
-                    // этот флаг восстанавливать, наверное, не надо - всё создастся заново (но надо проверить)
-                    //flagToBlockEventCheck = true;
-                    knockingOnDoorWhileYouWereNotAtHome = 0;
-                    // если вернулось true, то восстанавливаем глобальный флаг подписки на ловлю задач
-                    _flagToBlockEventRun = true;
-
-                    _logger.LogInformation(30518, " --------------------------- CheckingAllTasksCompletion finished with allTasksCompleted TRUE");
-                    //return (flagToBlockEventCheck, knockingOnDoorWhileYouWereNotAtHome);
-                    return (true, knockingOnDoorWhileYouWereNotAtHome);
-            }
-        }
-
+        // по ключу сервера можно дополнительно контролировать окончание пакета, если удалять поле пакета после его окончания (но как?)
         public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet) // NOT USED
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;

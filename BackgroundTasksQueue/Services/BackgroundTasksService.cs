@@ -44,6 +44,7 @@ namespace BackgroundTasksQueue.Services
                 // Simulate loopCount 3-second tasks to complete for each enqueued work item
                 bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, token);
                 // если задача завершилась полностью, удалить поле регистрации из ключа сервера
+                // пока (или совсем) не удаляем, а уменьшаем на единичку значение, пока не станет 0 - тогда выполнение пакета закончено
                 bool isTaskFinished = await ActualTaskCompletion(isTaskCompleted, backServerPrefixGuid, taskDescription, tasksPackageGuidField, singleTaskGuid, token);
                 
             });
@@ -58,6 +59,8 @@ namespace BackgroundTasksQueue.Services
 
             _logger.LogInformation(2101, "Queued Background Task {Guid} is starting.", singleTaskGuid);
             taskDescription.TaskState.IsTaskRunning = true;
+            // заменить while на for в отдельном методе с выходом из цикла по условию и return
+            // потом можно попробовать рекурсию
             while (!cancellationToken.IsCancellationRequested && delayLoop < assignmentTerms)
             {
                 try
@@ -86,15 +89,22 @@ namespace BackgroundTasksQueue.Services
                 delayLoop++;
                 _logger.LogInformation("Task {0} is running. Loop = {1} / Remaining = {2} - {3}%", singleTaskGuid, delayLoop, loopRemain, completionTaskPercentage);
             }
-            return delayLoop == assignmentTerms;
+            // возвращаем true, если задача успешно завершилась
+            // а если безуспешно, то вообще не возвращаемся (скорее всего)
+            bool isTaskCompleted = delayLoop == assignmentTerms;
+            _logger.LogInformation("Task {0} is completed. Loop = {1} / Remaining = {2}, isTaskCompleted = {3}", singleTaskGuid, delayLoop, loopRemain, isTaskCompleted);
+
+            return isTaskCompleted;
         }
 
-        private async Task<bool> ActualTaskCompletion(bool isTaskRunning, string backServerPrefixGuid, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
+        private async Task<bool> ActualTaskCompletion(bool isTaskCompleted, string backServerPrefixGuid, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
-            if (isTaskRunning)
+            // сюда попадаем только если isTaskCompleted true, поэтому if и передачу значения isTaskCompleted можно убрать
+            if (isTaskCompleted)
             {
-                bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid); //HashExistsAsync
-                _logger.LogInformation("Queued Background Task {Guid} is complete on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
+                // отдельные задачи ни в каком ключе, кроме ключа пакета, пока (или совсем) не регистрируем
+                //bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid); //HashExistsAsync
+                //_logger.LogInformation("Queued Background Task {Guid} is complete on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
                 // тут записать в описание, что задача закончилась
                 _logger.LogInformation(" --- BEFORE - Task {0} finished. IsTaskRunning still = {1}", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
 
@@ -102,6 +112,13 @@ namespace BackgroundTasksQueue.Services
                 _logger.LogInformation(" --- AFTER - Task {0} finished. IsTaskRunning = {1} yet", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
 
                 await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - in outside method
+
+                // тут уменьшить на единичку значение ключа сервера и прочее пакета задач
+                int oldValue = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField);
+                int newValue = oldValue - 1;
+                await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, newValue); // TimeSpan.FromDays - in outside method
+                // ещё можно при достижении нуля удалить поле пакета, а уже из этого делать выводы (это на потом)
+
                 return true;
             }
             else
