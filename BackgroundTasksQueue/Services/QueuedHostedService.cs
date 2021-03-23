@@ -52,10 +52,10 @@ namespace BackgroundTasksQueue.Services
             // или запускать по команде основного монитора
             await BackgroundProcessing(stoppingToken);
         }
-
+         
         private async Task BackgroundProcessing(CancellationToken stoppingToken)
         {
-            EventKeyNames eventKeysSet = await _data.FetchAllConstants();
+            EventKeyNames eventKeysSet = await _data.FetchAllConstants(stoppingToken, 770);
             //string backServerGuid = _guid ?? throw new ArgumentNullException(nameof(_guid));
             //eventKeysSet.BackServerGuid = backServerGuid;
             //string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
@@ -183,8 +183,6 @@ namespace BackgroundTasksQueue.Services
         public override async Task StopAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Queued Hosted Service is stopping.");
-
-
             await base.StopAsync(stoppingToken);
         }
     }

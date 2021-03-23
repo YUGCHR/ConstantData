@@ -11,16 +11,12 @@ namespace Shared.Library.Services
     public interface ISharedDataAccess
     {
         public (string, string) FetchBaseConstants([CallerMemberName] string currentMethodNameName = "");
-
-        //public Task SetStartConstants(EventKeyNames eventKeysSet, string checkTokenFetched);
-        public Task<EventKeyNames> FetchAllConstants();
-        public void SubscribeOnAllConstantsEvent();
-        public Task<EventKeyNames> FetchAllConstantsWhenAppeared(CancellationToken cancellationToken);
+        public Task<EventKeyNames> FetchAllConstants(CancellationToken cancellationToken, int loggerIndexBase);
     }
 
     public class SharedDataAccess : ISharedDataAccess
     {
-        
+
         private readonly ILogger<SharedDataAccess> _logger;
         private readonly ICacheProviderAsync _cache;
         private readonly IKeyEventsProvider _keyEvents;
@@ -40,34 +36,15 @@ namespace Shared.Library.Services
         private const KeyEvent SubscribedKeyEvent = KeyEvent.HashSet;
         private bool _allConstantsAppeared = false;
 
-        //private readonly TimeSpan _startConstantKeyLifeTime = TimeSpan.FromDays(1);
-        //private const string CheckToken = "tt-tt-tt";
-
         public (string, string) FetchBaseConstants([CallerMemberName] string currentMethodNameName = "") // May be will cause problem with Docker
         {
             // if problem with Docker can use token
             if (currentMethodNameName == "ConstantsMountingMonitor") return (StartConstantKey, StartConstantField);
-            _logger.LogError(155070, "FetchBaseConstants was called by wrong method - {0}.", currentMethodNameName);
+            _logger.LogError(710070, "FetchBaseConstants was called by wrong method - {0}.", currentMethodNameName);
             return (null, null);
-
         }
 
-        //public async Task SetStartConstants(EventKeyNames eventKeysSet, string checkTokenFetched)
-        //{
-        //    if (checkTokenFetched == CheckToken)
-        //    {
-        //        // установить своё время для ключа, можно вместе с названием ключа
-        //        await _cache.SetHashedAsync<EventKeyNames>(StartConstantKey, StartConstantField, eventKeysSet, _startConstantKeyLifeTime);
-
-        //        _logger.LogInformation(55050, "SetStartConstants set constants (EventKeyFrom for example = {0}) in key {1}.", eventKeysSet.EventKeyFrom, "constants");
-        //    }
-        //    else
-        //    {
-        //        _logger.LogError(55070, "SetStartConstants try to set constants unsuccessfully.");
-        //    }
-        //}
-
-        public async Task<EventKeyNames> FetchAllConstants()
+        public async Task<EventKeyNames> FetchAllConstants(CancellationToken cancellationToken, int loggerIndexBase)
         {
             // проверить, есть ли ключ
             bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(StartConstantKey);
@@ -77,40 +54,62 @@ namespace Shared.Library.Services
                 return await _cache.GetHashedAsync<EventKeyNames>(StartConstantKey, StartConstantField);
             }
 
-            return null;
+            int thisIndex = loggerIndexBase * 1000 + 100;
+            _logger.LogInformation(thisIndex, "eventKeysSet was NOT Init.");
+            // и что делать, если нет - подписаться?
+            SubscribeOnAllConstantsEvent(loggerIndexBase);
+            // обратиться туда же и ждать появления констант
+            thisIndex = loggerIndexBase * 1000 + 300;
+            _logger.LogInformation(thisIndex, "SharedDataAccess cannot find constants and will wait them!");
+
+            return await FetchAllConstantsWhenAppeared(cancellationToken, loggerIndexBase);
         }
 
-        public void SubscribeOnAllConstantsEvent()
+        private void SubscribeOnAllConstantsEvent(int loggerIndexBase)
         {
-            _logger.LogInformation(750100, "SharedDataAccess subscribed on key {0}.", StartConstantKey);
-            
+            // можно предусмотреть повторный вызов подписки
+            int thisIndex = loggerIndexBase * 1000 + 200;
+            _logger.LogInformation(thisIndex, "SharedDataAccess subscribed on key {0}.", StartConstantKey);
+
             _keyEvents.Subscribe(StartConstantKey, (string key, KeyEvent cmd) =>
             {
                 if (cmd == SubscribedKeyEvent)
                 {
                     // при появлении ключа срабатывает подписка и делаем глобальное поле тру
-                    _logger.LogInformation(750110, "\n --- Key {Key} with command {Cmd} was received.", StartConstantKey, cmd);
+                    thisIndex = loggerIndexBase * 1000 + 210;
+                    _logger.LogInformation(thisIndex, "\n --- Key {Key} with command {Cmd} was received.", StartConstantKey, cmd);
                     //((AutoResetEvent)stateInfo).Set();
                     _allConstantsAppeared = true;
-                    _logger.LogInformation(750120, "All Constants appeared = {0}.", _allConstantsAppeared);
+                    thisIndex = loggerIndexBase * 1000 + 220;
+                    _logger.LogInformation(thisIndex, "All Constants appeared = {0}.", _allConstantsAppeared);
                 }
             });
 
             string eventKeyCommand = $"Key = {StartConstantKey}, Command = {SubscribedKeyEvent}";
-            _logger.LogInformation(750130, "You subscribed on event - {EventKey}.", eventKeyCommand);
+            thisIndex = loggerIndexBase * 1000 + 230;
+            _logger.LogInformation(thisIndex, "You subscribed on event - {EventKey}.", eventKeyCommand);
         }
 
-        public async Task<EventKeyNames> FetchAllConstantsWhenAppeared(CancellationToken cancellationToken)
+        private async Task<EventKeyNames> FetchAllConstantsWhenAppeared(CancellationToken cancellationToken, int loggerIndexBase)
         {
             //static AutoResetEvent autoEvent = new AutoResetEvent(false);
             //autoEvent.WaitOne();
             // когда поле станет тру, значит ключ появился и можно идти за константами
+            int count = 0;
             while (!cancellationToken.IsCancellationRequested && !_allConstantsAppeared)
             {
                 // wait when _allConstantsAppeared become true
                 await Task.Delay(10, cancellationToken);
+                count++;
+                if (count > 1000)
+                {
+                    int thisIndex = loggerIndexBase * 1000 + 300;
+                    _logger.LogInformation(thisIndex, "SharedDataAccess still waits the constants! - {0} sec.", count/100);
+                    count = 0;
+                }
             }
-            return await FetchAllConstants();
+            // замыкается кольцо - то ли это, что ожидалось?
+            return await FetchAllConstants(cancellationToken, loggerIndexBase);
         }
     }
 }

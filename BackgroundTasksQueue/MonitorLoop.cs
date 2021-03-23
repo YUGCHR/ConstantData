@@ -60,18 +60,15 @@ namespace BackgroundTasksQueue
 
             // разделить на Init, Register и Subscribe
 
-            EventKeyNames eventKeysSet = await _data.FetchAllConstants();
-            if (eventKeysSet == null)
-            {
-                _logger.LogInformation("eventKeysSet was NOT Init.");
-                // и что делать, если нет - подписаться?
-                _data.SubscribeOnAllConstantsEvent();
-                // обратиться туда же и ждать появления констант
-            }
+            EventKeyNames eventKeysSet = await _data.FetchAllConstants(_cancellationToken, 750);
 
             if (eventKeysSet != null)
             {
                 await RegisterAndSubscribe(eventKeysSet);
+            }
+            else
+            {
+                _logger.LogInformation("eventKeysSet was NOT Init.");
             }
 
             // заменить на while(всегда) и проверять условие в теле - и вынести ожидание в отдельный метод - the same in Constants

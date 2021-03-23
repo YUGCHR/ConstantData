@@ -60,8 +60,8 @@ namespace ConstantData
 
             // можно загрузить константы обратно и проверить
             // а можно подписаться на ключ и следить, чтобы никто не лез в константы
-            EventKeyNames eventKeysSetCheck = await _data.FetchAllConstants();
-            _logger.LogInformation(10362, "2 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSetCheck.EventKeyFrontGivesTaskTimeDays);
+            //EventKeyNames eventKeysSetCheck = await _data.FetchAllConstants();
+            //_logger.LogInformation(10362, "2 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSetCheck.EventKeyFrontGivesTaskTimeDays);
             
             //_subscribe.SubscribeOnEventFrom(eventKeysSet);
 
