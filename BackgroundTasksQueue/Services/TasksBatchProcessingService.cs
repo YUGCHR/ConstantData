@@ -135,7 +135,7 @@ namespace BackgroundTasksQueue.Services
                 _task2Queue.StartWorkItem(backServerPrefixGuid, tasksPackageGuidField, singleTaskGuid, taskDescription);
                 // создаём ключ для контроля выполнения задания из пакета - нет, создаём не тут и не такой (ключ)
                 //await _cache.SetHashedAsync(backServerPrefixGuid, singleTaskGuid, assignmentTerms); 
-                _logger.LogInformation(501, "This BackServer sent Task with ID {1} and {2} cycles to Queue.", singleTaskGuid, taskDescription);
+                _logger.LogInformation(501, "This BackServer sent Task with ID {1} and {2} cycles to Queue.", singleTaskGuid, taskDescription.TaskDescription.CycleCount);
             }
 
             _logger.LogInformation(511, "This BackServer sent total {1} tasks to Queue.", taskPackageCount);

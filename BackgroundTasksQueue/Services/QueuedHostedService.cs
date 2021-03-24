@@ -52,7 +52,7 @@ namespace BackgroundTasksQueue.Services
             // или запускать по команде основного монитора
             await BackgroundProcessing(stoppingToken);
         }
-         
+
         private async Task BackgroundProcessing(CancellationToken stoppingToken)
         {
             EventKeyNames eventKeysSet = await _data.FetchAllConstants(stoppingToken, 770);
@@ -86,17 +86,15 @@ namespace BackgroundTasksQueue.Services
                     // ещё лучше - достать нужное значение заранее и передать только его, тогда метод будет синхронный (наверное)
                     // не лучше
                     // лучше
-                    int requiredProcessesCount = await _cache.GetHashedAsync<int>(eventKeyProcessAdd, eventFieldBack);
-                    if (requiredProcessesCount > 0)
-                    {
-                        createdProcessesCount = await AddProcessesToPerformingTasks(stoppingToken, requiredProcessesCount);
-                        _logger.LogInformation(1131, "AddProcessesToPerformingTasks created processes count {0}", createdProcessesCount);
 
-                        if (createdProcessesCount > 0)
-                        {
-                            flagToBlockEventAdd = true;
-                        }
+                    createdProcessesCount = await AddProcessesToPerformingTasks(eventKeysSet, stoppingToken);
+                    _logger.LogInformation(1131, "AddProcessesToPerformingTasks created processes count {0}", createdProcessesCount);
+
+                    if (createdProcessesCount > 0)
+                    {
+                        flagToBlockEventAdd = true;
                     }
+
                     // если вызвали с неправильным значением в ключе, подписка навсегда останется заблокированной, где-то тут ее надо разблокировать
                 }
             });
@@ -133,34 +131,47 @@ namespace BackgroundTasksQueue.Services
             _logger.LogInformation("All Background Processes were finished, total count was {Count}", processingTask.Count);
         }
 
-        private async Task<int> AddProcessesToPerformingTasks(CancellationToken stoppingToken, int requiredProcessesCount)
+        private async Task<int> AddProcessesToPerformingTasks(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
         {
-            // requiredProcessesCount - требуемое количество процессов, начать цикл их создания
-            int tasksCount = 0;
-            // тут можно предусмотреть максимальное количество процессов - не из константы, а по месту
-            while (tasksCount < requiredProcessesCount && tasksCount < 100)
+            string backServerGuid = $"{eventKeysSet.PrefixBackServer}:{_guid}"; // backserver:(this server guid)
+            _logger.LogInformation(1101, "INIT No: {0} - guid of This Server was fetched in QueuedHostedService.", backServerGuid);
+            // создать ключ для подписки из констант
+            string prefixProcessAdd = eventKeysSet.PrefixProcessAdd; // process:add
+            string eventKeyProcessAdd = $"{prefixProcessAdd}:{_guid}"; // process:add:(this server guid)
+            // поле-пустышка, но одинаковое с тем, что создаётся в основном методе - чтобы достать значение
+            string eventFieldBack = eventKeysSet.EventFieldBack;
+            int requiredProcessesCount = await _cache.GetHashedAsync<int>(eventKeyProcessAdd, eventFieldBack);
+            if (requiredProcessesCount > 0)
             {
-                string guid = Guid.NewGuid().ToString();
-                CancellationTokenSource newCts = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken);
-                CancellationToken newToken = newCts.Token;
-                _logger.LogInformation(1231, "AddProcessesToPerformingTasks creates process No {0}", tasksCount);
-
-                // глобальный List, доступный во всем классе
-                completingTasksProcesses.Add(new BackgroundProcessingTask()
+                // requiredProcessesCount - требуемое количество процессов, начать цикл их создания
+                int tasksCount = 0;
+                // тут можно предусмотреть максимальное количество процессов - не из константы, а по месту
+                while (tasksCount < requiredProcessesCount && tasksCount < 100)
                 {
-                    TaskId = tasksCount + 1,
-                    ProcessingTaskId = guid,
-                    // запускаем новый процесс
-                    ProcessingTask = Task.Run(() => ProcessingTaskMethod(newToken), newToken),
-                    CancellationTaskToken = newCts
-                });
-                tasksCount++;
-                // что-то куда-то записать - количество созданных процессов?
+                    string guid = Guid.NewGuid().ToString();
+                    CancellationTokenSource newCts = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken);
+                    CancellationToken newToken = newCts.Token;
+                    _logger.LogInformation(1231, "AddProcessesToPerformingTasks creates process No {0}", tasksCount);
 
+                    // глобальный List, доступный во всем классе
+                    completingTasksProcesses.Add(new BackgroundProcessingTask()
+                    {
+                        TaskId = tasksCount + 1,
+                        ProcessingTaskId = guid,
+                        // запускаем новый процесс
+                        ProcessingTask = Task.Run(() => ProcessingTaskMethod(newToken), newToken),
+                        CancellationTaskToken = newCts
+                    });
+                    tasksCount++;
+                    // что-то куда-то записать - количество созданных процессов?
+                }
+
+                _logger.LogInformation(1231, "New Task for Background Processes was added, total count became {Count}", tasksCount);
+                // кроме true, надо вернуть tasksCount - можно возвращать int, а если он больше нуля, то ставить flagToBlockEventAdd в true
+                return tasksCount;
             }
-            _logger.LogInformation(1231, "New Task for Background Processes was added, total count became {Count}", tasksCount);
-            // кроме true, надо вернуть tasksCount - можно возвращать int, а если он больше нуля, то ставить flagToBlockEventAdd в true
-            return tasksCount;
+
+            return requiredProcessesCount;
         }
 
         private async Task ProcessingTaskMethod(CancellationToken token)
