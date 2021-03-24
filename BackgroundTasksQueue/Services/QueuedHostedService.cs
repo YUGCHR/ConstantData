@@ -41,13 +41,15 @@ namespace BackgroundTasksQueue.Services
             _guid = thisGuid.ThisBackServerGuid();
         }
 
+        private const int IndexBaseValue = 700 * 1000;
+
         public IBackgroundTaskQueue TaskQueue { get; }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation($"Queued Hosted Service is running.{Environment.NewLine}" +
-                                   $"{Environment.NewLine}Tap W to add a work item to the " +
-                                   $"background queue.{Environment.NewLine}");
+            _logger.LogInformation(IndexBaseValue + 100, $"Queued Hosted Service is running.{Environment.NewLine}" +
+                                                 $"{Environment.NewLine}Tap W to add a work item to the " +
+                                                 $"background queue.{Environment.NewLine}");
             // добавить проверку на существование констант
             // или запускать по команде основного монитора
             await BackgroundProcessing(stoppingToken);
@@ -65,13 +67,13 @@ namespace BackgroundTasksQueue.Services
             string cancelKey = "task:del";
             int createdProcessesCount = 0;
             string backServerGuid = $"{eventKeysSet.PrefixBackServer}:{_guid}"; // backserver:(this server guid)
-            _logger.LogInformation(1101, "INIT No: {0} - guid of This Server was fetched in QueuedHostedService.", backServerGuid);
+            _logger.LogInformation(IndexBaseValue + 110, "INIT No: {0} - guid of This Server was fetched in QueuedHostedService.", backServerGuid);
             // создать ключ для подписки из констант
             string prefixProcessAdd = eventKeysSet.PrefixProcessAdd; // process:add
             string eventKeyProcessAdd = $"{prefixProcessAdd}:{_guid}"; // process:add:(this server guid)
             // поле-пустышка, но одинаковое с тем, что создаётся в основном методе - чтобы достать значение
             string eventFieldBack = eventKeysSet.EventFieldBack;
-            _logger.LogInformation(1103, "Processes creation on This Server was subscribed on key {0} / field {1}.", eventKeyProcessAdd, eventFieldBack);
+            _logger.LogInformation(IndexBaseValue + 130, "Processes creation on This Server was subscribed on key {0} / field {1}.", eventKeyProcessAdd, eventFieldBack);
             // подписка на ключ добавления бэкграунд процессов(поле без разницы), в значении можно было бы ставить количество необходимых процессов
             // типовая блокировка множественной подписки до специального разрешения повторной подписки
             bool flagToBlockEventAdd = true;
@@ -81,7 +83,7 @@ namespace BackgroundTasksQueue.Services
                 {
                     // временная защёлка, чтобы подписка выполнялась один раз
                     flagToBlockEventAdd = false;
-                    _logger.LogInformation(1111, "Received key {0} with command {1}", eventKeyProcessAdd, cmd);
+                    _logger.LogInformation(IndexBaseValue + 111, "Received key {0} with command {1}", eventKeyProcessAdd, cmd);
                     // название поля тоже можно создать здесь и передать в метод
                     // ещё лучше - достать нужное значение заранее и передать только его, тогда метод будет синхронный (наверное)
                     // не лучше
@@ -90,7 +92,7 @@ namespace BackgroundTasksQueue.Services
                     if (requiredProcessesCount > 0)
                     {
                         createdProcessesCount = await AddProcessesToPerformingTasks(stoppingToken, requiredProcessesCount);
-                        _logger.LogInformation(1131, "AddProcessesToPerformingTasks created processes count {0}", createdProcessesCount);
+                        _logger.LogInformation(IndexBaseValue + 131, "AddProcessesToPerformingTasks created processes count {0}", createdProcessesCount);
 
                         if (createdProcessesCount > 0)
                         {
@@ -102,13 +104,13 @@ namespace BackgroundTasksQueue.Services
             });
 
             string eventKeyCommand = $"Key {eventKeyProcessAdd}, HashSet command";
-            _logger.LogInformation(1311, "You subscribed on event - {EventKey}.", eventKeyCommand);
+            _logger.LogInformation(IndexBaseValue + 140, "You subscribed on event - {EventKey}.", eventKeyCommand);
 
             _keyEvents.Subscribe(cancelKey, (string key, KeyEvent cmd) =>
             {
                 if (cmd == KeyEvent.HashSet)
                 {
-                    _logger.LogInformation("key {0} - command {1}", key, cmd);
+                    _logger.LogInformation(IndexBaseValue + 145, "key {0} - command {1}", key, cmd);
                     if (createdProcessesCount > 0)
                     {
                         // останавливаем процесс
@@ -117,11 +119,11 @@ namespace BackgroundTasksQueue.Services
 
                         completingTasksProcesses.RemoveAt(createdProcessesCount - 1);
                         createdProcessesCount--;
-                        _logger.LogInformation("One Task for Background Processes was removed, total count left {Count}", createdProcessesCount);
+                        _logger.LogInformation(IndexBaseValue + 151, "One Task for Background Processes was removed, total count left {Count}", createdProcessesCount);
                     }
                     else
                     {
-                        _logger.LogInformation("Task for Background Processes cannot be removed for some reason, total count is {Count}", createdProcessesCount);
+                        _logger.LogInformation(IndexBaseValue + 161, "Task for Background Processes cannot be removed for some reason, total count is {Count}", createdProcessesCount);
                     }
                 }
             });
@@ -130,7 +132,7 @@ namespace BackgroundTasksQueue.Services
 
             await Task.WhenAll(processingTask);
 
-            _logger.LogInformation("All Background Processes were finished, total count was {Count}", processingTask.Count);
+            _logger.LogInformation(IndexBaseValue + 171, "All Background Processes were finished, total count was {Count}", processingTask.Count);
         }
 
         private async Task<int> AddProcessesToPerformingTasks(CancellationToken stoppingToken, int requiredProcessesCount)
@@ -143,7 +145,7 @@ namespace BackgroundTasksQueue.Services
                 string guid = Guid.NewGuid().ToString();
                 CancellationTokenSource newCts = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken);
                 CancellationToken newToken = newCts.Token;
-                _logger.LogInformation(1231, "AddProcessesToPerformingTasks creates process No {0}", tasksCount);
+                _logger.LogInformation(IndexBaseValue + 181, "AddProcessesToPerformingTasks creates process No {0}", tasksCount);
 
                 // глобальный List, доступный во всем классе
                 completingTasksProcesses.Add(new BackgroundProcessingTask()
@@ -158,7 +160,7 @@ namespace BackgroundTasksQueue.Services
                 // что-то куда-то записать - количество созданных процессов?
 
             }
-            _logger.LogInformation(1231, "New Task for Background Processes was added, total count became {Count}", tasksCount);
+            _logger.LogInformation(IndexBaseValue + 185, "New Task for Background Processes was added, total count became {Count}", tasksCount);
             // кроме true, надо вернуть tasksCount - можно возвращать int, а если он больше нуля, то ставить flagToBlockEventAdd в true
             return tasksCount;
         }
@@ -182,7 +184,7 @@ namespace BackgroundTasksQueue.Services
 
         public override async Task StopAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Queued Hosted Service is stopping.");
+            _logger.LogInformation(IndexBaseValue + 300, "Queued Hosted Service is stopping.");
 
 
             await base.StopAsync(stoppingToken);

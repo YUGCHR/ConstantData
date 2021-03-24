@@ -35,6 +35,8 @@ namespace Shared.Library.Services
             _keyEvents = keyEvents;
         }
 
+        private const int IndexBaseValue = 400 * 1000;
+
         private const string StartConstantKey = "constants";
         private const string StartConstantField = "all";
         private const KeyEvent SubscribedKeyEvent = KeyEvent.HashSet;
@@ -47,7 +49,7 @@ namespace Shared.Library.Services
         {
             // if problem with Docker can use token
             if (currentMethodNameName == "ConstantsMountingMonitor") return (StartConstantKey, StartConstantField);
-            _logger.LogError(155070, "FetchBaseConstants was called by wrong method - {0}.", currentMethodNameName);
+            _logger.LogError(IndexBaseValue + 070, "FetchBaseConstants was called by wrong method - {0}.", currentMethodNameName);
             return (null, null);
 
         }
@@ -82,22 +84,22 @@ namespace Shared.Library.Services
 
         public void SubscribeOnAllConstantsEvent()
         {
-            _logger.LogInformation(750100, "SharedDataAccess subscribed on key {0}.", StartConstantKey);
+            _logger.LogInformation(IndexBaseValue + 100, "SharedDataAccess subscribed on key {0}.", StartConstantKey);
             
             _keyEvents.Subscribe(StartConstantKey, (string key, KeyEvent cmd) =>
             {
                 if (cmd == SubscribedKeyEvent)
                 {
                     // при появлении ключа срабатывает подписка и делаем глобальное поле тру
-                    _logger.LogInformation(750110, "\n --- Key {Key} with command {Cmd} was received.", StartConstantKey, cmd);
+                    _logger.LogInformation(IndexBaseValue + 110, "\n --- Key {Key} with command {Cmd} was received.", StartConstantKey, cmd);
                     //((AutoResetEvent)stateInfo).Set();
                     _allConstantsAppeared = true;
-                    _logger.LogInformation(750120, "All Constants appeared = {0}.", _allConstantsAppeared);
+                    _logger.LogInformation(IndexBaseValue + 120, "All Constants appeared = {0}.", _allConstantsAppeared);
                 }
             });
 
             string eventKeyCommand = $"Key = {StartConstantKey}, Command = {SubscribedKeyEvent}";
-            _logger.LogInformation(750130, "You subscribed on event - {EventKey}.", eventKeyCommand);
+            _logger.LogInformation(IndexBaseValue + 130, "You subscribed on event - {EventKey}.", eventKeyCommand);
         }
 
         public async Task<EventKeyNames> FetchAllConstantsWhenAppeared(CancellationToken cancellationToken)

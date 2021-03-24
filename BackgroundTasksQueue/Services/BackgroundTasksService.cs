@@ -34,9 +34,11 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
+        private const int IndexBaseValue = 600 * 1000;
+
         public void StartWorkItem(string backServerPrefixGuid, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription)
         {
-            _logger.LogInformation(2100, "TaskDescriptionAndProgress taskDescription TaskCompletedOnPercent = {0}.", taskDescription.TaskState.TaskCompletedOnPercent);
+            _logger.LogInformation(IndexBaseValue + 100, "TaskDescriptionAndProgress taskDescription TaskCompletedOnPercent = {0}.", taskDescription.TaskState.TaskCompletedOnPercent);
 
             // Enqueue a background work item
             _taskQueue.QueueBackgroundWorkItem(async token =>
@@ -49,7 +51,7 @@ namespace BackgroundTasksQueue.Services
                 
             });
         }
-
+        
         private async Task<bool> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
             int assignmentTerms = taskDescription.TaskDescription.CycleCount;
@@ -57,7 +59,7 @@ namespace BackgroundTasksQueue.Services
             int loopRemain = assignmentTerms;
             //var guid = Guid.NewGuid().ToString();
 
-            _logger.LogInformation(2101, "Queued Background Task {Guid} is starting.", singleTaskGuid);
+            _logger.LogInformation(IndexBaseValue + 101, "Queued Background Task {Guid} is starting.", singleTaskGuid);
             taskDescription.TaskState.IsTaskRunning = true;
             // заменить while на for в отдельном методе с выходом из цикла по условию и return
             // потом можно попробовать рекурсию
@@ -81,18 +83,18 @@ namespace BackgroundTasksQueue.Services
                 int completionTaskPercentage = (int)completionDouble;
                 taskDescription.TaskState.TaskCompletedOnPercent = completionTaskPercentage;
 
-                _logger.LogInformation("completionDouble {0}% = delayLoop {1} / assignmentTerms {2}, IsTaskRunning = {3}", completionDouble, delayLoop, assignmentTerms, taskDescription.TaskState.IsTaskRunning);
+                _logger.LogInformation(IndexBaseValue + 150, "completionDouble {0}% = delayLoop {1} / assignmentTerms {2}, IsTaskRunning = {3}", completionDouble, delayLoop, assignmentTerms, taskDescription.TaskState.IsTaskRunning);
 
                 // обновляем отчёт о прогрессе выполнения задания
                 await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - !!!
 
                 delayLoop++;
-                _logger.LogInformation("Task {0} is running. Loop = {1} / Remaining = {2} - {3}%", singleTaskGuid, delayLoop, loopRemain, completionTaskPercentage);
+                _logger.LogInformation(IndexBaseValue + 160, "Task {0} is running. Loop = {1} / Remaining = {2} - {3}%", singleTaskGuid, delayLoop, loopRemain, completionTaskPercentage);
             }
             // возвращаем true, если задача успешно завершилась
             // а если безуспешно, то вообще не возвращаемся (скорее всего)
             bool isTaskCompleted = delayLoop == assignmentTerms;
-            _logger.LogInformation("Task {0} is completed. Loop = {1} / Remaining = {2}, isTaskCompleted = {3}", singleTaskGuid, delayLoop, loopRemain, isTaskCompleted);
+            _logger.LogInformation(IndexBaseValue + 170, "Task {0} is completed. Loop = {1} / Remaining = {2}, isTaskCompleted = {3}", singleTaskGuid, delayLoop, loopRemain, isTaskCompleted);
 
             return isTaskCompleted;
         }
@@ -106,10 +108,10 @@ namespace BackgroundTasksQueue.Services
                 //bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid); //HashExistsAsync
                 //_logger.LogInformation("Queued Background Task {Guid} is complete on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
                 // тут записать в описание, что задача закончилась
-                _logger.LogInformation(" --- BEFORE - Task {0} finished. IsTaskRunning still = {1}", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
+                _logger.LogInformation(IndexBaseValue + 210, " --- BEFORE - Task {0} finished. IsTaskRunning still = {1}", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
 
                 taskDescription.TaskState.IsTaskRunning = false;
-                _logger.LogInformation(" --- AFTER - Task {0} finished. IsTaskRunning = {1} yet", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
+                _logger.LogInformation(IndexBaseValue + 220, " --- AFTER - Task {0} finished. IsTaskRunning = {1} yet", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
 
                 await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - in outside method
 
