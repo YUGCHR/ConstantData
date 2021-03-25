@@ -50,8 +50,11 @@ namespace FrontServerEmulation.Services
                 {
                     tasksCount += 3;
                 }
+                // задаём время выполнения цикла - как если бы получили его от контроллера
+                // на самом деле для эмуляции пока берём из константы
+                int taskDelayTimeSpanFromSeconds = eventKeysSet.TaskEmulatorDelayTimeInMilliSeconds;
                 // создаём пакет задач (в реальности, опять же, пакет задач положил отдельный контроллер)
-                Dictionary<string, TaskDescriptionAndProgress> taskPackage = FrontServerCreateTasks(tasksCount, eventKeysSet);
+                Dictionary<string, TaskDescriptionAndProgress> taskPackage = FrontServerCreateTasks(tasksCount, taskDelayTimeSpanFromSeconds, eventKeysSet);
 
                 // при создании пакета сначала создаётся пакет задач в ключе, а потом этот номер создаётся в виде поля в подписном ключе
 
@@ -79,7 +82,7 @@ namespace FrontServerEmulation.Services
             return tasksCount;
         }
 
-        private Dictionary<string, TaskDescriptionAndProgress> FrontServerCreateTasks(int tasksCount, EventKeyNames eventKeysSet)
+        private Dictionary<string, TaskDescriptionAndProgress> FrontServerCreateTasks(int tasksCount, int taskDelayTimeSpanFromSeconds, EventKeyNames eventKeysSet)
         {
             Dictionary<string, TaskDescriptionAndProgress> taskPackage = new Dictionary<string, TaskDescriptionAndProgress>();
 
@@ -89,7 +92,7 @@ namespace FrontServerEmulation.Services
 
                 // инициализовать весь класс отдельным методом
                 // найти, как передать сюда TasksPackageGuid
-                TaskDescriptionAndProgress descriptor = DescriptorInit(tasksCount, guid);
+                TaskDescriptionAndProgress descriptor = DescriptorInit(tasksCount, taskDelayTimeSpanFromSeconds, guid);
 
                 int currentCycleCount = descriptor.TaskDescription.CycleCount;
 
@@ -103,12 +106,13 @@ namespace FrontServerEmulation.Services
             return taskPackage;
         }
 
-        private TaskDescriptionAndProgress DescriptorInit(int tasksCount, string guid)
+        private TaskDescriptionAndProgress DescriptorInit(int tasksCount, int taskDelayTimeSpanFromSeconds, string guid)
         {
             TaskDescriptionAndProgress.TaskComplicatedDescription cycleCount = new()
             {
                 TaskGuid = guid,
-                CycleCount = Math.Abs(guid.GetHashCode()) % 10 // получать 10 из констант
+                CycleCount = Math.Abs(guid.GetHashCode()) % 10, // получать 10 из констант
+                TaskDelayTimeFromMilliSeconds = taskDelayTimeSpanFromSeconds
             };
 
             TaskDescriptionAndProgress.TaskProgressState init = new()

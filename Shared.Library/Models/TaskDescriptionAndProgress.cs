@@ -31,6 +31,9 @@ namespace Shared.Library.Models
 
             [JsonProperty(PropertyName = "cycleCount")]
             public int CycleCount { get; set; }
+            
+            [JsonProperty(PropertyName = "taskDelayTimeFromSeconds")]
+            public int TaskDelayTimeFromMilliSeconds { get; set; }
         }
 
         public class TaskProgressState

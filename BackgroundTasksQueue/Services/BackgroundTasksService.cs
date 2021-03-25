@@ -53,6 +53,7 @@ namespace BackgroundTasksQueue.Services
         private async Task<bool> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
             int assignmentTerms = taskDescription.TaskDescription.CycleCount;
+            double taskDelayTimeSpanFromMilliSeconds = taskDescription.TaskDescription.TaskDelayTimeFromMilliSeconds/1000D;
             int delayLoop = 0;
             int loopRemain = assignmentTerms;
             //var guid = Guid.NewGuid().ToString();
@@ -65,7 +66,7 @@ namespace BackgroundTasksQueue.Services
             {
                 try
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+                    await Task.Delay(TimeSpan.FromSeconds(taskDelayTimeSpanFromMilliSeconds), cancellationToken);
                 }
                 catch (OperationCanceledException)
                 {
