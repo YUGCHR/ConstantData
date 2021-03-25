@@ -6,7 +6,7 @@ namespace ConstantData.Services
     public interface ISettingConstantsService
     {
         public int GetRecordActualityLevel { get; }
-        public int GetTaskDelayTimeInSeconds { get; }
+        public int GetTaskEmulatorDelayTimeInMilliSeconds { get; }
         public int GetBalanceOfTasksAndProcesses { get; }
         public int GetMaxProcessesCountOnServer { get; }
         public int GetMinBackProcessesServersCount { get; }
@@ -43,7 +43,7 @@ namespace ConstantData.Services
 
             string recordActualityLevel = Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("RecordActualityLevel").Value;
             GetRecordActualityLevel = Convert.ToInt32(recordActualityLevel);
-            GetTaskDelayTimeInSeconds = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("TaskDelayTimeInSeconds").Value);
+            GetTaskEmulatorDelayTimeInMilliSeconds = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("TaskEmulatorDelayTimeInMilliSeconds").Value);
             GetBalanceOfTasksAndProcesses = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("BalanceOfTasksAndProcesses").Value);
             GetMaxProcessesCountOnServer = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MaxProcessesCountOnServer").Value);
             GetMinBackProcessesServersCount = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MinBackProcessesServersCount").Value);
@@ -80,7 +80,7 @@ namespace ConstantData.Services
 
         public int GetRecordActualityLevel { get; }
 
-        public int GetTaskDelayTimeInSeconds { get; }
+        public int GetTaskEmulatorDelayTimeInMilliSeconds { get; }
 
         public int GetBalanceOfTasksAndProcesses { get; }
 

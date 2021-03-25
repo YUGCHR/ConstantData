@@ -27,7 +27,7 @@ namespace ConstantData.Services
         {
             return new EventKeyNames
             {
-                TaskDelayTimeInSeconds = _constantService.GetTaskDelayTimeInSeconds, // время задержки в секундах для эмулятора счета задачи
+                TaskDelayTimeInSeconds = (int) (_constantService.GetTaskEmulatorDelayTimeInMilliSeconds/1000D), // время задержки в секундах для эмулятора счета задачи
                 BalanceOfTasksAndProcesses = _constantService.GetBalanceOfTasksAndProcesses, // соотношение количества задач и процессов для их выполнения на back-processes-servers (количества задач разделить на это число и сделать столько процессов)
                 MaxProcessesCountOnServer = _constantService.GetMaxProcessesCountOnServer, // максимальное количество процессов на back-processes-servers (минимальное - 1)
                 EventKeyFrom = _constantService.GetEventKeyFrom, // "subscribeOnFrom" - ключ для подписки на команду запуска эмулятора сервера
