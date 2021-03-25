@@ -184,13 +184,9 @@ namespace BackgroundTasksQueue.Services
 
         public override async Task StopAsync(CancellationToken stoppingToken)
         {
-<<<<<<< HEAD
-            _logger.LogInformation("Queued Hosted Service is stopping.");
-=======
             _logger.LogInformation(IndexBaseValue + 300, "Queued Hosted Service is stopping.");
 
 
->>>>>>> checking-task-package-completion-was-added
             await base.StopAsync(stoppingToken);
         }
     }
