@@ -30,10 +30,12 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
+        private const int IndexBaseValue = 500 * 1000;
+
         public async Task<bool> WhenTasksPackageWasCaptured(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Processing
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
-            _logger.LogInformation(421, "This BackServer fetched taskPackageKey {1} successfully.", tasksPackageGuidField); // победитель по жизни
+            _logger.LogInformation(IndexBaseValue + 421, "This BackServer fetched taskPackageKey {1} successfully.", tasksPackageGuidField); // победитель по жизни
 
             // регистрируем полученный пакет задач на ключе выполняемых/выполненных задач и на ключе сервера
             // ключ выполняемых задач надо переделать - в значении класть модель, в которой указан номер сервера и состояние задачи
@@ -92,7 +94,7 @@ namespace BackgroundTasksQueue.Services
             // скажем, List of TaskDescriptionAndProgress и в нём дополнительное поле номера сервера и состояния всего пакета
 
             await _cache.SetHashedAsync(eventKeyBacksTasksProceed, tasksPackageGuidField, backServerPrefixGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
-            _logger.LogInformation(431, "Tasks package was registered on key {0} - \n      with source package key {1}.", eventKeyBacksTasksProceed, tasksPackageGuidField);
+            _logger.LogInformation(IndexBaseValue + 431, "Tasks package was registered on key {0} - \n      with source package key {1}.", eventKeyBacksTasksProceed, tasksPackageGuidField);
 
             // регистрируем исходный ключ и ключ пакета задач на ключе сервера - чтобы не разорвать цепочку
             // цепочка уже не актуальна, можно этот ключ использовать для контроля состояния пакета задач
@@ -101,7 +103,7 @@ namespace BackgroundTasksQueue.Services
             // сейчас в значение кладём количество задач в пакете, а про мере выполнения вычитаем по единичке, чтобы как ноль - пакет выполнен
             int packageStateInit = taskPackageCount;
             await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, packageStateInit, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
-            _logger.LogInformation(441, "This BackServer registered tasks package - \n      with source package key {1}.", tasksPackageGuidField);
+            _logger.LogInformation(IndexBaseValue + 441, "This BackServer registered tasks package - \n      with source package key {1}.", tasksPackageGuidField);
 
             return true;
         }
@@ -120,7 +122,7 @@ namespace BackgroundTasksQueue.Services
             // создаём ключ добавления процессов и в значении нужное количество процессов
             await _cache.SetHashedAsync(eventKeyProcessAdd, eventFieldBack, toAddProcessesCount); // TimeSpan.FromDays - !!!
 
-            _logger.LogInformation(518, "This BackServer ask to start {0} processes, key = {1}, field = {2}.", toAddProcessesCount, eventKeyProcessAdd, eventFieldBack);
+            _logger.LogInformation(IndexBaseValue + 518, "This BackServer ask to start {0} processes, key = {1}, field = {2}.", toAddProcessesCount, eventKeyProcessAdd, eventFieldBack);
             return toAddProcessesCount;
         }
 
@@ -135,10 +137,10 @@ namespace BackgroundTasksQueue.Services
                 _task2Queue.StartWorkItem(backServerPrefixGuid, tasksPackageGuidField, singleTaskGuid, taskDescription);
                 // создаём ключ для контроля выполнения задания из пакета - нет, создаём не тут и не такой (ключ)
                 //await _cache.SetHashedAsync(backServerPrefixGuid, singleTaskGuid, assignmentTerms); 
-                _logger.LogInformation(501, "This BackServer sent Task with ID {1} and {2} cycles to Queue.", singleTaskGuid, taskDescription);
+                _logger.LogInformation(IndexBaseValue + 501, "This BackServer sent Task with ID {1} and {2} cycles to Queue.", singleTaskGuid, taskDescription);
             }
 
-            _logger.LogInformation(511, "This BackServer sent total {1} tasks to Queue.", taskPackageCount);
+            _logger.LogInformation(IndexBaseValue + 511, "This BackServer sent total {1} tasks to Queue.", taskPackageCount);
             return taskPackageCount;
         }
 
@@ -169,7 +171,7 @@ namespace BackgroundTasksQueue.Services
                 // меньше нуля - тайный вариант для настройки - количество процессов равно константе (с обратным знаком, естественно)
                 case < 0:
                     toAddProcessesCount = balanceOfTasksAndProcesses * -1;
-                    _logger.LogInformation(517, "CalcAddProcessesCount calculated total {1} processes are necessary.", toAddProcessesCount);
+                    _logger.LogInformation(IndexBaseValue + 517, "CalcAddProcessesCount calculated total {1} processes are necessary.", toAddProcessesCount);
                     return toAddProcessesCount;
             }
         }
@@ -186,7 +188,7 @@ namespace BackgroundTasksQueue.Services
 
             // создаём ключ удаления процессов и в значении нужное количество процессов
             await _cache.SetHashedAsync(eventKeyProcessCancel, eventFieldBack, toCancelProcessesCount); // TimeSpan.FromDays - !!!
-            _logger.LogInformation(519, "This BackServer ask to CANCEL {0} processes, key = {1}, field = {2}.", toCancelProcessesCount, eventKeyProcessCancel, eventFieldBack);
+            _logger.LogInformation(IndexBaseValue + 519, "This BackServer ask to CANCEL {0} processes, key = {1}, field = {2}.", toCancelProcessesCount, eventKeyProcessCancel, eventFieldBack);
 
             return cancelExistingProcesses;
         }

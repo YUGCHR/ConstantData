@@ -30,12 +30,14 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
+        private const int IndexBaseValue = 300 * 1000;
+
         public async Task<string> AttemptToCaptureTasksPackage(EventKeyNames eventKeysSet) // Main for Capture
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             string eventKeyBacksTasksProceed = eventKeysSet.EventKeyBacksTasksProceed;
-            _logger.LogInformation(401, "This BackServer {0} started AttemptToCaptureTasksPackage.", backServerPrefixGuid);
+            _logger.LogInformation(IndexBaseValue + 401, "This BackServer {0} started AttemptToCaptureTasksPackage.", backServerPrefixGuid);
             
             // начало главного цикла сразу после срабатывания подписки, условие - пока существует ключ распределения задач
             // считать пакет полей из ключа, если задач больше одной, бросить кубик
@@ -54,7 +56,7 @@ namespace BackgroundTasksQueue.Services
             {
                 // проверить существование ключа, может, все задачи давно разобрали и ключ исчез
                 isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(eventKeyFrontGivesTask);
-                _logger.LogInformation(402, "isExistEventKeyFrontGivesTask = {1}.", isExistEventKeyFrontGivesTask);
+                _logger.LogInformation(IndexBaseValue + 402, "isExistEventKeyFrontGivesTask = {1}.", isExistEventKeyFrontGivesTask);
                 
                 if (!isExistEventKeyFrontGivesTask)
                 // если ключа нет, тогда возвращаемся в состояние подписки на ключ кафе и ожидания события по этой подписке                
@@ -64,7 +66,7 @@ namespace BackgroundTasksQueue.Services
                 // список получается неполный! - оказывается, потому, что фронт не успеваем залить остальные поля, когда бэк с первым полем уже здесь
                 IDictionary<string, string> tasksList = await _cache.GetHashedAllAsync<string>(eventKeyFrontGivesTask);
                 int tasksListCount = tasksList.Count;
-                _logger.LogInformation(403, "TasksList fetched - tasks count = {1}.", tasksListCount);
+                _logger.LogInformation(IndexBaseValue + 403, "TasksList fetched - tasks count = {1}.", tasksListCount);
 
                 // временный костыль - 0 - это задач в ключе не осталось - возможно, только что (перед носом) забрали последнюю
                 if (tasksListCount == 0)
@@ -79,7 +81,7 @@ namespace BackgroundTasksQueue.Services
                 // в дальнейшем можно вместо Remove использовать RedLock
                 bool isDeleteSuccess = await _cache.RemoveHashedAsync(eventKeyFrontGivesTask, tasksPackageGuidField);
                 // здесь может разорваться цепочка между ключом, который известен контроллеру и ключом пакета задач
-                _logger.LogInformation(411, "This BackServer reported - isDeleteSuccess = {1}.", isDeleteSuccess);
+                _logger.LogInformation(IndexBaseValue + 411, "This BackServer reported - isDeleteSuccess = {1}.", isDeleteSuccess);
 
                 if (isDeleteSuccess)
                 {
@@ -94,9 +96,9 @@ namespace BackgroundTasksQueue.Services
             // теперь сюда попадём, если ключ eventKeyFrontGivesTask исчез и задачу не захватить
             // надо сделать возврат в исходное состояние ожидания вброса ключа
             // побочный эффект - можно смело брать последнюю задачу и не опасаться, что ключ eventKeyFrontGivesTask исчезнет
-            _logger.LogInformation(481, "This BackServer cannot catch the task.");
+            _logger.LogInformation(IndexBaseValue + 481, "This BackServer cannot catch the task.");
             // возвращаемся в состояние подписки на ключ кафе и ожидания события по этой подписке
-            _logger.LogInformation(491, "This BackServer goes over to the subscribe event awaiting.");
+            _logger.LogInformation(IndexBaseValue + 491, "This BackServer goes over to the subscribe event awaiting.");
             // восстанавливаем условие разрешения обработки подписки
             return  null; // задача не досталась
         }
@@ -112,7 +114,7 @@ namespace BackgroundTasksQueue.Services
             {
                 diceRoll = rand.Next(0, tasksListCount - 1);
             }
-            _logger.LogInformation(407, "DiceRoll rolled {1}.", diceRoll);
+            _logger.LogInformation(IndexBaseValue + 407, "DiceRoll rolled {1}.", diceRoll);
             return diceRoll;
         }
     }

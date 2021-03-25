@@ -39,6 +39,9 @@ namespace BackgroundTasksQueue
             _guid = thisGuid.ThisBackServerGuid();
         }
 
+        private const int IndexBaseValue = 100 * 1000;
+
+
         public void StartMonitorLoop()
         {
             _logger.LogInformation(100, "BackServer's MonitorLoop is starting.");
@@ -108,7 +111,7 @@ namespace BackgroundTasksQueue
             string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
             eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
 
-            _logger.LogInformation(101, "INIT No: {0} - guid of This Server was fetched in MonitorLoop.", backServerPrefixGuid);
+            _logger.LogInformation(IndexBaseValue + 310, "INIT No: {0} - guid of This Server was fetched in MonitorLoop.", backServerPrefixGuid);
 
             // в значение можно положить время создания сервера
             // проверить, что там за время на ключах, подумать, нужно ли разное время для разных ключей - скажем, кафе и регистрация серверов - день, пакет задач - час
