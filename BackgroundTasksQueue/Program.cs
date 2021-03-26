@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,9 @@ using CachingFramework.Redis.Contracts.Providers;
 using StackExchange.Redis;
 using Microsoft.Extensions.Configuration;
 using BackgroundTasksQueue.Services;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 using Shared.Library.Services;
 
 namespace BackgroundTasksQueue
@@ -18,12 +22,15 @@ namespace BackgroundTasksQueue
         {
             //CreateHostBuilder(args).Build().Run();
 
+
             var host = CreateHostBuilder(args).Build();
 
             var monitorLoop = host.Services.GetRequiredService<MonitorLoop>();
             monitorLoop.StartMonitorLoop();
 
             host.Run();
+            Log.Information("The global logger has been closed and flushed");
+            Log.CloseAndFlush();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -45,7 +52,24 @@ namespace BackgroundTasksQueue
 
                 config.AddEnvironmentVariables();
             })
-            .ConfigureLogging((ctx, log) => { /* elided for brevity */ })
+            .ConfigureLogging((ctx, sLog) =>
+            {
+                var seriLog = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .CreateLogger();
+
+                seriLog.Information("Hello, Serilog!");
+
+                Log.Logger = seriLog;
+
+                Log.Information("The global logger has been configured");
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.With(new ThreadIdEnricher())
+                    .MinimumLevel.Verbose()
+                    .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Debug) //.Verbose .Debug .Information .Warning .Error .Fatal
+                    .WriteTo.File("logs/BackgroundTasksQueue.txt", rollingInterval: RollingInterval.Day, outputTemplate: "{Timestamp:HH:mm} [{Level:u3}] ({ThreadId}) {Message}{NewLine}{Exception}")
+                    .CreateLogger();
+            })
             .UseDefaultServiceProvider((ctx, opts) => { /* elided for brevity */ })
             .ConfigureServices((hostContext, services) =>
             {
@@ -64,6 +88,7 @@ namespace BackgroundTasksQueue
                 }
 
                 services.AddSingleton<GenerateThisInstanceGuidService>();
+                services.AddSingleton<ILogger>(Log.Logger);
                 services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                 services.AddHostedService<QueuedHostedService>();
                 services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
@@ -73,9 +98,17 @@ namespace BackgroundTasksQueue
                 services.AddSingleton<ITasksPackageCaptureService, TasksPackageCaptureService>();
                 services.AddSingleton<ITasksBatchProcessingService, TasksBatchProcessingService>();
                 services.AddSingleton<ITasksProcessingControlService, TasksProcessingControlService>();
-                });
-    }    
+            });
+    }
 
+    class ThreadIdEnricher : ILogEventEnricher
+    {
+        public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
+        {
+            logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(
+                "ThreadId", Thread.CurrentThread.ManagedThreadId));
+        }
+    }
     //public static class ThisBackServerGuid
     //{
     //    static ThisBackServerGuid()

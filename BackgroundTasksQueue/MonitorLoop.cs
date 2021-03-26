@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using CachingFramework.Redis.Contracts;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+//using Microsoft.Extensions.Logging;
+using Serilog;
 using BackgroundTasksQueue.Services;
 using Shared.Library.Services;
 using Shared.Library.Models;
@@ -16,7 +17,7 @@ namespace BackgroundTasksQueue
 {
     public class MonitorLoop
     {
-        private readonly ILogger<MonitorLoop> _logger;
+        private readonly ILogger _logger;
         private readonly ISharedDataAccess _data;
         private readonly CancellationToken _cancellationToken;
         private readonly ICacheProviderAsync _cache;
@@ -25,7 +26,7 @@ namespace BackgroundTasksQueue
 
         public MonitorLoop(
             GenerateThisInstanceGuidService thisGuid,
-            ILogger<MonitorLoop> logger,
+            ILogger logger,
             ISharedDataAccess data,
             ICacheProviderAsync cache,
             IHostApplicationLifetime applicationLifetime,
@@ -41,7 +42,8 @@ namespace BackgroundTasksQueue
 
         public void StartMonitorLoop()
         {
-            _logger.LogInformation(100, "BackServer's MonitorLoop is starting.");
+            _logger.Information("BackServer's MonitorLoop is starting.");
+            Log.Debug("BackServer's MonitorLoop is starting.");
 
             // Run a console user input loop in a background thread
             Task.Run(Monitor, _cancellationToken);
@@ -68,7 +70,7 @@ namespace BackgroundTasksQueue
             }
             else
             {
-                _logger.LogInformation("eventKeysSet was NOT Init.");
+                _logger.Error("eventKeysSet CANNOT be Init.");
             }
 
             // заменить на while(всегда) и проверять условие в теле - и вынести ожидание в отдельный метод - the same in Constants
@@ -78,16 +80,16 @@ namespace BackgroundTasksQueue
 
                 if (keyStroke.Key == ConsoleKey.W)
                 {
-                    _logger.LogInformation("ConsoleKey was received {KeyStroke}.", keyStroke.Key);
+                    _logger.Information("ConsoleKey was received {KeyStroke}.", keyStroke.Key);
                 }
             }
-
-            _logger.LogInformation("MonitorLoop was canceled by Token.");
+            Log.CloseAndFlush();
+            _logger.Warning("MonitorLoop was canceled by the Token.");
         }
 
         private bool IsCancellationNotYet()
         {
-            _logger.LogInformation("Is Cancellation Token obtained? - {1}", _cancellationToken.IsCancellationRequested);
+            _logger.Information("Is Cancellation Token obtained? - {@CancelStatus}", new { IsCancelled= _cancellationToken.IsCancellationRequested});
             return !_cancellationToken.IsCancellationRequested; // add special key from Redis?
         }
 
@@ -108,7 +110,8 @@ namespace BackgroundTasksQueue
             string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
             eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
 
-            _logger.LogInformation(101, "INIT No: {0} - guid of This Server was fetched in MonitorLoop.", backServerPrefixGuid);
+            Log.Information("INIT No: {0} - guid of This Server was fetched in MonitorLoop.", backServerPrefixGuid);
+            _logger.Information("INIT No: {0} - guid of This Server was fetched in MonitorLoop.", backServerPrefixGuid);
 
             // в значение можно положить время создания сервера
             // проверить, что там за время на ключах, подумать, нужно ли разное время для разных ключей - скажем, кафе и регистрация серверов - день, пакет задач - час
