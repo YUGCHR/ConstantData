@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
@@ -12,12 +13,15 @@ using BackgroundTasksQueue.Services;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 using Shared.Library.Services;
 
 namespace BackgroundTasksQueue
 {
     public class Program
     {
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<Program>();
+
         public static void Main(string[] args)
         {
             //CreateHostBuilder(args).Build().Run();
@@ -54,21 +58,27 @@ namespace BackgroundTasksQueue
             })
             .ConfigureLogging((ctx, sLog) =>
             {
-                var seriLog = new LoggerConfiguration()
-                    .WriteTo.Console()
-                    .CreateLogger();
+                //var seriLog = new LoggerConfiguration()
+                //    .WriteTo.Console()
+                //    .CreateLogger();
 
-                seriLog.Information("Hello, Serilog!");
+                //var outputTemplate = "{Timestamp:HH:mm} [{Level:u3}] ({ThreadId}) {Message}{NewLine}{Exception}";
+                //var outputTemplate = "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message}{NewLine}in method {MemberName} at {FilePath}:{LineNumber}{NewLine}{Exception}{NewLine}";
+                var outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3} ({ThreadId}) {SourceContext}] {Message} {NewLine} {Exception}";
 
-                Log.Logger = seriLog;
+                //seriLog.Information("Hello, Serilog!");
 
-                Log.Information("The global logger has been configured");
+                //Log.Logger = seriLog;
+
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.With(new ThreadIdEnricher())
+                    .Enrich.FromLogContext()
                     .MinimumLevel.Verbose()
-                    .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Debug) //.Verbose .Debug .Information .Warning .Error .Fatal
-                    .WriteTo.File("logs/BackgroundTasksQueue.txt", rollingInterval: RollingInterval.Day, outputTemplate: "{Timestamp:HH:mm} [{Level:u3}] ({ThreadId}) {Message}{NewLine}{Exception}")
+                    .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Debug, outputTemplate: outputTemplate, theme: AnsiConsoleTheme.Literate) //.Verbose .Debug .Information .Warning .Error .Fatal
+                    .WriteTo.File("logs/BackgroundTasksQueue{Date}.txt", rollingInterval: RollingInterval.Day, outputTemplate: outputTemplate)
                     .CreateLogger();
+
+                Logs.Information("The global logger Serilog has been configured.\n");
             })
             .UseDefaultServiceProvider((ctx, opts) => { /* elided for brevity */ })
             .ConfigureServices((hostContext, services) =>
@@ -101,7 +111,7 @@ namespace BackgroundTasksQueue
             });
     }
 
-    class ThreadIdEnricher : ILogEventEnricher
+    internal class ThreadIdEnricher : ILogEventEnricher
     {
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
@@ -109,6 +119,24 @@ namespace BackgroundTasksQueue
                 "ThreadId", Thread.CurrentThread.ManagedThreadId));
         }
     }
+
+    public static class LoggerExtensions
+    {
+        public static ILogger Here(this ILogger logger)//,
+            //[CallerMemberName] string memberName = "",
+            //[CallerFilePath] string sourceFilePath = "",
+            //[CallerLineNumber] int sourceLineNumber = 0)
+
+        {
+            return logger;
+            //.ForContext("MemberName", memberName)
+            //.ForContext("FilePath", sourceFilePath)
+            //.ForContext("LineNumber", sourceLineNumber);
+        }
+    }
+
+    
+
     //public static class ThisBackServerGuid
     //{
     //    static ThisBackServerGuid()

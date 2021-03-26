@@ -21,3 +21,7 @@
 17:44 [INF] (17) INIT No: "backserver:15d78d49-1c31-4cd5-9582-4d0d0bf5da4f" - guid of This Server was fetched in MonitorLoop.
 17:44 [INF] (17) INIT No: "backserver:15d78d49-1c31-4cd5-9582-4d0d0bf5da4f" - guid of This Server was fetched in MonitorLoop.
 17:44 [INF] (19) Is Cancellation Token obtained? - { IsCancelled: False }
+18:39 [INF] (1) BackServer's MonitorLoop is starting.
+18:39 [DBG] (1) BackServer's MonitorLoop is starting.
+18:39 [INF] (22) INIT No: { ServerId: "backserver:13c3b96c-a0f6-4e34-be6f-388c70b39861" } - guid of This Server was fetched in MonitorLoop.
+18:39 [INF] (22) Is Cancellation Token obtained? - { IsCancelled: False }

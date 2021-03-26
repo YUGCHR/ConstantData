@@ -40,10 +40,12 @@ namespace BackgroundTasksQueue
             _guid = thisGuid.ThisBackServerGuid();
         }
 
+        //private const string UnknownMethod = "UnknownMethod";
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<MonitorLoop>();
+
         public void StartMonitorLoop()
         {
-            _logger.Information("BackServer's MonitorLoop is starting.");
-            Log.Debug("BackServer's MonitorLoop is starting.");
+            _logger.Debug("BackServer's MonitorLoop is starting.");
 
             // Run a console user input loop in a background thread
             Task.Run(Monitor, _cancellationToken);
@@ -61,6 +63,10 @@ namespace BackgroundTasksQueue
             //EventKeyNames eventKeysSet = InitialiseEventKeyNames();
 
             // разделить на Init, Register и Subscribe
+
+            Logs.Here().Information("Hello, world!");
+
+            string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
 
             EventKeyNames eventKeysSet = await _data.FetchAllConstants(_cancellationToken, 750);
 
@@ -83,18 +89,19 @@ namespace BackgroundTasksQueue
                     _logger.Information("ConsoleKey was received {KeyStroke}.", keyStroke.Key);
                 }
             }
-            Log.CloseAndFlush();
+            //Log.CloseAndFlush();
             _logger.Warning("MonitorLoop was canceled by the Token.");
         }
 
         private bool IsCancellationNotYet()
         {
-            _logger.Information("Is Cancellation Token obtained? - {@CancelStatus}", new { IsCancelled= _cancellationToken.IsCancellationRequested});
+            _logger.Debug("Is Cancellation Token obtained? - {@C}", new { IsCancelled = _cancellationToken.IsCancellationRequested });
             return !_cancellationToken.IsCancellationRequested; // add special key from Redis?
         }
 
         private async Task RegisterAndSubscribe(EventKeyNames eventKeysSet)
         {
+            string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
             // множественные контроллеры по каждому запросу (пользователей) создают очередь - каждый создаёт ключ, на который у back-servers подписка, в нём поле со своим номером, а в значении или имя ключа с заданием или само задание            
             // дальше бэк-сервера сами разбирают задания
             // бэк после старта кладёт в ключ ___ поле со своим сгенерированным guid для учета?
@@ -110,8 +117,7 @@ namespace BackgroundTasksQueue
             string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
             eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
 
-            Log.Information("INIT No: {0} - guid of This Server was fetched in MonitorLoop.", backServerPrefixGuid);
-            _logger.Information("INIT No: {0} - guid of This Server was fetched in MonitorLoop.", backServerPrefixGuid);
+            _logger.Information("INIT {@S} was fetched in MonitorLoop.", new { ServerId = backServerPrefixGuid });
 
             // в значение можно положить время создания сервера
             // проверить, что там за время на ключах, подумать, нужно ли разное время для разных ключей - скажем, кафе и регистрация серверов - день, пакет задач - час
