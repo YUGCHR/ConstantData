@@ -31,6 +31,8 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksProcessingControlService>();
+
         public async Task<bool> CheckingATaskPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField)
         {
             // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено

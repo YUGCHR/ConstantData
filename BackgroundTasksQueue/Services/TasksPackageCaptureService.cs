@@ -30,12 +30,14 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksPackageCaptureService>();
+
         public async Task<string> AttemptToCaptureTasksPackage(EventKeyNames eventKeysSet) // Main for Capture
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             string eventKeyBacksTasksProceed = eventKeysSet.EventKeyBacksTasksProceed;
-            _logger.LogInformation(401, "This BackServer {0} started AttemptToCaptureTasksPackage.", backServerPrefixGuid);
+            Logs.Here().Debug("BackServer started AttemptToCaptureTasksPackage.");
             
             // начало главного цикла сразу после срабатывания подписки, условие - пока существует ключ распределения задач
             // считать пакет полей из ключа, если задач больше одной, бросить кубик

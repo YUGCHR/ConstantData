@@ -41,6 +41,8 @@ namespace BackgroundTasksQueue.Services
             _guid = thisGuid.ThisBackServerGuid();
         }
 
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<QueuedHostedService>();
+
         public IBackgroundTaskQueue TaskQueue { get; }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

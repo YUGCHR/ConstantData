@@ -34,6 +34,8 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<BackgroundTasksService>();
+
         public void StartWorkItem(string backServerPrefixGuid, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription)
         {
             _logger.LogInformation(2100, "TaskDescriptionAndProgress taskDescription TaskCompletedOnPercent = {0}.", taskDescription.TaskState.TaskCompletedOnPercent);

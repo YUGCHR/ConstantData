@@ -30,6 +30,8 @@ namespace BackgroundTasksQueue.Services
             _cache = cache;
         }
 
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksBatchProcessingService>();
+
         public async Task<bool> WhenTasksPackageWasCaptured(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Processing
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;

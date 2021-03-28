@@ -39,13 +39,13 @@ namespace BackgroundTasksQueue
             _cancellationToken = applicationLifetime.ApplicationStopping;
             _guid = thisGuid.ThisBackServerGuid();
         }
-
-        //private const string UnknownMethod = "UnknownMethod";
+        
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<MonitorLoop>();
 
         public void StartMonitorLoop()
         {
-            _logger.Debug("BackServer's MonitorLoop is starting.");
+            string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
+            Logs.Here().Debug("BackServer's MonitorLoop is starting.");
 
             // Run a console user input loop in a background thread
             Task.Run(Monitor, _cancellationToken);
@@ -64,14 +64,15 @@ namespace BackgroundTasksQueue
 
             // разделить на Init, Register и Subscribe
 
-            Logs.Here().Information("Hello, world!");
-
-            string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
+            // можно получить имя текущего метода
+            //string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
+            // но используем другой способ - спросить (в extension), какой метод вызвал
 
             EventKeyNames eventKeysSet = await _data.FetchAllConstants(_cancellationToken, 750);
-
+            
             if (eventKeysSet != null)
             {
+                Logs.Here().Debug("EventKeyNames fetched constants in EventKeyNames - {@D}.", new { CycleDelay = eventKeysSet.TaskEmulatorDelayTimeInMilliSeconds });
                 await RegisterAndSubscribe(eventKeysSet);
             }
             else
@@ -86,22 +87,22 @@ namespace BackgroundTasksQueue
 
                 if (keyStroke.Key == ConsoleKey.W)
                 {
-                    _logger.Information("ConsoleKey was received {KeyStroke}.", keyStroke.Key);
+                    Logs.Here().Information("ConsoleKey was received {@K}.", new {Key = keyStroke.Key});
                 }
             }
             //Log.CloseAndFlush();
-            _logger.Warning("MonitorLoop was canceled by the Token.");
+            Logs.Here().Warning("MonitorLoop was canceled by the Token.");
         }
 
         private bool IsCancellationNotYet()
         {
-            _logger.Debug("Is Cancellation Token obtained? - {@C}", new { IsCancelled = _cancellationToken.IsCancellationRequested });
+            Logs.Here().Debug("Is Cancellation Token obtained? - {@C}", new { IsCancelled = _cancellationToken.IsCancellationRequested });
             return !_cancellationToken.IsCancellationRequested; // add special key from Redis?
         }
 
         private async Task RegisterAndSubscribe(EventKeyNames eventKeysSet)
         {
-            string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
+            //string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
             // множественные контроллеры по каждому запросу (пользователей) создают очередь - каждый создаёт ключ, на который у back-servers подписка, в нём поле со своим номером, а в значении или имя ключа с заданием или само задание            
             // дальше бэк-сервера сами разбирают задания
             // бэк после старта кладёт в ключ ___ поле со своим сгенерированным guid для учета?
@@ -112,12 +113,13 @@ namespace BackgroundTasksQueue
             //string backServerGuid = $"{eventKeysSet.PrefixBackServer}:{_guid}"; // Guid.NewGuid()
             //EventId aaa = new EventId(222, "INIT");
 
+            // наверное, нехорошо сохранять новые значения в константы, а как ещё?
             string backServerGuid = _guid ?? throw new ArgumentNullException(nameof(_guid));
             eventKeysSet.BackServerGuid = backServerGuid;
             string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
             eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
 
-            _logger.Information("INIT {@S} was fetched in MonitorLoop.", new { ServerId = backServerPrefixGuid });
+            Logs.Here().Information("INIT {@S} was fetched and stored into EventKeyNames.", new { ServerId = backServerPrefixGuid });
 
             // в значение можно положить время создания сервера
             // проверить, что там за время на ключах, подумать, нужно ли разное время для разных ключей - скажем, кафе и регистрация серверов - день, пакет задач - час

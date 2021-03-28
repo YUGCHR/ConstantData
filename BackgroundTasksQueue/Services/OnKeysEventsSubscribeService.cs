@@ -47,6 +47,8 @@ namespace BackgroundTasksQueue.Services
             _control = control;
         }
 
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<OnKeysEventsSubscribeService>();
+
         private bool _flagToBlockEventRun;
 
         public async Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun) // NOT USED
@@ -60,20 +62,19 @@ namespace BackgroundTasksQueue.Services
         public void SubscribeOnEventRun(EventKeyNames eventKeysSet)
         {
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
-            _logger.LogInformation(30201, "This BackServer subscribed on key {0}.", eventKeyFrontGivesTask);
+            Logs.Here().Information("BackServer subscribed on {@E}.", new { EventKey = eventKeyFrontGivesTask });
 
             // блокировка множественной подписки до специального разрешения повторной подписки
             _flagToBlockEventRun = true;
-
+            // 
             _keyEvents.Subscribe(eventKeyFrontGivesTask, async (string key, KeyEvent cmd) =>
             {
                 if (cmd == eventKeysSet.EventCmd && _flagToBlockEventRun)
                 {
                     // подписка заблокирована
                     _flagToBlockEventRun = false;
-                    _logger.LogInformation(30310, "\n                      --- subscription blocked ---");
-                    _logger.LogInformation(30311, "Key {Key} with command {Cmd} was received, flagToBlockEventRun = {Flag}.", eventKeyFrontGivesTask, cmd, _flagToBlockEventRun);
-
+                    Logs.Here().Debug("Key {Key} with command {Cmd} was received, Event permit = {Flag}.", eventKeyFrontGivesTask, cmd, _flagToBlockEventRun);
+                    // можно добавить счётчик событий для дебага
                     // _flagToBlockEventRun вернется true, только если задачу добыть не удалось
                     _flagToBlockEventRun = await FreshTaskPackageAppeared(eventKeysSet);
                     // просто сделать _flagToBlockEventRun true ничего не даёт - оставшиеся в ключе задачи не вызовут подписку
@@ -85,7 +86,7 @@ namespace BackgroundTasksQueue.Services
             });
 
             string eventKeyCommand = $"Key = {eventKeyFrontGivesTask}, Command = {eventKeysSet.EventCmd}";
-            _logger.LogInformation(30320, "You subscribed on event - {EventKey}.", eventKeyCommand);
+            Logs.Here().Debug("You subscribed on {@EK}.", new{EventSet = eventKeyCommand});
         }
 
         private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key
@@ -152,7 +153,7 @@ namespace BackgroundTasksQueue.Services
             });
 
             string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {eventKeysSet.EventCmd}";
-            _logger.LogInformation(30526, "You subscribed on event - {EventKey}.", eventKeyCommand);
+            Logs.Here().Debug("You subscribed on {@EK}.", new { EventSet = eventKeyCommand });
         }
 
         private void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet, string tasksPackageGuidField)
@@ -187,7 +188,7 @@ namespace BackgroundTasksQueue.Services
             });
 
             string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {eventKeysSet.EventCmd}";
-            _logger.LogInformation(30526, "You subscribed on event - {EventKey}.", eventKeyCommand);
+            Logs.Here().Debug("You subscribed on {@EK}.", new { EventSet = eventKeyCommand });
         }
 
         // по ключу сервера можно дополнительно контролировать окончание пакета, если удалять поле пакета после его окончания (но как?)
@@ -229,7 +230,7 @@ namespace BackgroundTasksQueue.Services
             });
 
             string eventKeyCommand = $"Key = {backServerPrefixGuid}, Command = {eventKeysSet.EventCmd}";
-            _logger.LogInformation(19707, "You subscribed on event - {EventKey}.", eventKeyCommand);
+            Logs.Here().Debug("You subscribed on {@EK}.", new { EventSet = eventKeyCommand });
         }
     }
 }
