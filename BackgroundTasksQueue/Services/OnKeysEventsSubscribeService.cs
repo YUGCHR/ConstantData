@@ -73,10 +73,12 @@ namespace BackgroundTasksQueue.Services
                 {
                     // подписка заблокирована
                     _flagToBlockEventRun = false;
-                    Logs.Here().Debug("Key {Key} with command {Cmd} was received, Event permit = {Flag}.", eventKeyFrontGivesTask, cmd, _flagToBlockEventRun);
+                    Logs.Here().Debug("FreshTaskPackageAppeared called - Key {Key} with command {Cmd} was received, Event permit = {Flag}.", eventKeyFrontGivesTask, cmd, _flagToBlockEventRun);
                     // можно добавить счётчик событий для дебага
                     // _flagToBlockEventRun вернется true, только если задачу добыть не удалось
                     _flagToBlockEventRun = await FreshTaskPackageAppeared(eventKeysSet);
+                    Logs.Here().Debug("FreshTaskPackageAppeared returned Event permit = {Flag}.", _flagToBlockEventRun);
+
                     // просто сделать _flagToBlockEventRun true ничего не даёт - оставшиеся в ключе задачи не вызовут подписку
                     // если задача получена и пошла в работу, то вернётся false и на true ключ поменяют в другом месте (запутанно, но пока так)
                     // и там сначала ещё раз проверить ключ кафе задач и если ещё остались задачи, вызвать FreshTaskPackageAppeared
@@ -86,7 +88,7 @@ namespace BackgroundTasksQueue.Services
             });
 
             string eventKeyCommand = $"Key = {eventKeyFrontGivesTask}, Command = {eventKeysSet.EventCmd}";
-            Logs.Here().Debug("You subscribed on {@EK}.", new{EventSet = eventKeyCommand});
+            Logs.Here().Debug("You subscribed on {@EK}.", new { EventSet = eventKeyCommand });
         }
 
         private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key
@@ -99,7 +101,7 @@ namespace BackgroundTasksQueue.Services
             // если всё удачно, возвращаемся сюда, оставив подписку заблокированной
 
             string tasksPackageGuidField = await _captures.AttemptToCaptureTasksPackage(eventKeysSet);
-            _logger.LogInformation(30410, "\n --- AttemptToCaptureTasksPackage finished and TaskPackageKey {0} was captured.", tasksPackageGuidField);
+            Logs.Here().Information("AttemptToCaptureTasksPackage captured {@T}.", new { TaskPackage = tasksPackageGuidField });
 
             // если flagToBlockEventRun null, сразу возвращаемся с true для возобновления подписки
             if (tasksPackageGuidField != null)
@@ -112,9 +114,10 @@ namespace BackgroundTasksQueue.Services
                 bool flagToBlockEventRun = await _processing.WhenTasksPackageWasCaptured(eventKeysSet, tasksPackageGuidField);
                 // всегда возвращаем false - задачи отправлены в работу и подписку восстановит модуль контроля завершения пакета
                 // и ещё сначала проверит, не остались ли ещё других пакетов в кафе
-                return flagToBlockEventRun; 
+                return flagToBlockEventRun;
             }
-            // возвращаем true, потому что задачу добыть не удалось, пакетов больше нет и надо ждать следующего вброса 
+            // возвращаем true, потому что задачу добыть не удалось, пакетов больше нет и надо ждать следующего вброса
+            Logs.Here().Warning("Next package could not be obtained - there are no more packages in cafe.");
             return true;
         }
 

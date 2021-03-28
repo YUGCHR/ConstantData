@@ -113,4 +113,122 @@
  [21:32:34 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 156] You subscribed on { EventSet: "Key = package:8caa7ce3-18dd-4545-9971-c95c06626f96, Command = HashSet" }. 
  [21:32:34 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 191] You subscribed on { EventSet: "Key = package:8caa7ce3-18dd-4545-9971-c95c06626f96, Command = HashSet" }. 
  [21:32:39 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:45:46 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [21:45:46 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [21:45:46 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [21:45:46 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:36c48a47-d7e5-4b44-936d-886589be3cb3" } was fetched and stored into EventKeyNames. 
+ [21:45:46 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [21:45:46 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [21:45:46 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:46:16 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [21:46:16 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:46:16 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:15eb267e-586c-4344-b4b6-6cf6c0e8e39f" }. 
+ [21:46:16 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 158] You subscribed on { EventSet: "Key = package:15eb267e-586c-4344-b4b6-6cf6c0e8e39f, Command = HashSet" }. 
+ [21:46:16 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] You subscribed on { EventSet: "Key = package:15eb267e-586c-4344-b4b6-6cf6c0e8e39f, Command = HashSet" }. 
+ [21:46:16 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [21:46:32 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:46:32 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:5db04368-7bec-4bd5-9f1e-b37c9bcfea38" }. 
+ [21:46:32 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 158] You subscribed on { EventSet: "Key = package:5db04368-7bec-4bd5-9f1e-b37c9bcfea38, Command = HashSet" }. 
+ [21:46:32 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] You subscribed on { EventSet: "Key = package:5db04368-7bec-4bd5-9f1e-b37c9bcfea38, Command = HashSet" }. 
+ [21:46:36 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:46:36 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:04ff1e4c-58ef-4b81-a585-4ef7a99df4bb" }. 
+ [21:46:36 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 158] You subscribed on { EventSet: "Key = package:04ff1e4c-58ef-4b81-a585-4ef7a99df4bb, Command = HashSet" }. 
+ [21:46:36 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] You subscribed on { EventSet: "Key = package:04ff1e4c-58ef-4b81-a585-4ef7a99df4bb, Command = HashSet" }. 
+ [21:46:38 DBG (29) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:46:38 INF (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [21:47:14 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [21:47:14 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [21:47:14 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [21:47:14 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:16f4a2f9-121c-493b-bad4-ca46f9fbb04c" } was fetched and stored into EventKeyNames. 
+ [21:47:14 INF (11) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [21:47:14 DBG (11) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [21:47:14 DBG (11) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:47:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [21:47:35 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:47:35 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:990b6e6b-168c-48e9-9fd1-54de065c26e8" }. 
+ [21:47:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 158] You subscribed on { EventSet: "Key = package:990b6e6b-168c-48e9-9fd1-54de065c26e8, Command = HashSet" }. 
+ [21:47:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] You subscribed on { EventSet: "Key = package:990b6e6b-168c-48e9-9fd1-54de065c26e8, Command = HashSet" }. 
+ [21:47:35 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [21:47:40 DBG (25) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:47:40 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:228c138e-27e2-446f-9cf8-f821cd5cc864" }. 
+ [21:47:40 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 158] You subscribed on { EventSet: "Key = package:228c138e-27e2-446f-9cf8-f821cd5cc864, Command = HashSet" }. 
+ [21:47:40 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] You subscribed on { EventSet: "Key = package:228c138e-27e2-446f-9cf8-f821cd5cc864, Command = HashSet" }. 
+ [21:47:44 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:47:44 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:15c1c34f-e62d-4e90-93f4-86fbfb8c117f" }. 
+ [21:47:45 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 158] You subscribed on { EventSet: "Key = package:15c1c34f-e62d-4e90-93f4-86fbfb8c117f, Command = HashSet" }. 
+ [21:47:45 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] You subscribed on { EventSet: "Key = package:15c1c34f-e62d-4e90-93f4-86fbfb8c117f, Command = HashSet" }. 
+ [21:47:48 DBG (25) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:47:48 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [21:52:04 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [21:52:05 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [21:52:05 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [21:52:05 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:3be079a0-5e28-4769-b9ae-90c4d485cf31" } was fetched and stored into EventKeyNames. 
+ [21:52:05 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [21:52:05 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [21:52:05 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:52:17 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [21:52:17 DBG (29) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:52:17 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:c2a79e34-27e7-451c-a5cb-0c8d4ac9d5b9" }. 
+ [21:52:17 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:c2a79e34-27e7-451c-a5cb-0c8d4ac9d5b9, Command = HashSet" }. 
+ [21:52:17 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:c2a79e34-27e7-451c-a5cb-0c8d4ac9d5b9, Command = HashSet" }. 
+ [21:52:17 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [21:52:31 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:52:31 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:5aaabc7f-9d9f-4cbf-b8af-8d866e8f1f31" }. 
+ [21:52:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:5aaabc7f-9d9f-4cbf-b8af-8d866e8f1f31, Command = HashSet" }. 
+ [21:52:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:5aaabc7f-9d9f-4cbf-b8af-8d866e8f1f31, Command = HashSet" }. 
+ [21:52:35 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:52:35 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:3db5cfb3-b9c5-4a4a-9fec-32aaeef3e758" }. 
+ [21:52:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:3db5cfb3-b9c5-4a4a-9fec-32aaeef3e758, Command = HashSet" }. 
+ [21:52:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:3db5cfb3-b9c5-4a4a-9fec-32aaeef3e758, Command = HashSet" }. 
+ [21:52:38 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:52:38 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [21:52:38 WRN (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 120] New package could not be obtained - there are no more packages and we must wait for the next injection. 
+ [21:56:42 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [21:56:43 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [21:56:43 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [21:56:43 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:6ecfe681-509f-472b-9965-3d4357a6e19e" } was fetched and stored into EventKeyNames. 
+ [21:56:43 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [21:56:43 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [21:56:43 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:57:06 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [21:57:06 DBG (28) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:06 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:c63d62f0-1232-40f8-9298-09a1a8a6f1f1" }. 
+ [21:57:06 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:c63d62f0-1232-40f8-9298-09a1a8a6f1f1, Command = HashSet" }. 
+ [21:57:06 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:c63d62f0-1232-40f8-9298-09a1a8a6f1f1, Command = HashSet" }. 
+ [21:57:06 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [21:57:16 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:17 INF (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:a3450377-89cd-4358-a569-d5f6767a24e7" }. 
+ [21:57:17 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:a3450377-89cd-4358-a569-d5f6767a24e7, Command = HashSet" }. 
+ [21:57:17 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:a3450377-89cd-4358-a569-d5f6767a24e7, Command = HashSet" }. 
+ [21:57:22 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:22 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:43e96446-b82a-43c2-89b1-40e46c5761d4" }. 
+ [21:57:22 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:43e96446-b82a-43c2-89b1-40e46c5761d4, Command = HashSet" }. 
+ [21:57:22 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:43e96446-b82a-43c2-89b1-40e46c5761d4, Command = HashSet" }. 
+ [21:57:25 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:25 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [21:57:25 WRN (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 120] Next package could not be obtained - there are no more packages in cafe. 
+ [21:57:36 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [21:57:36 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:36 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:39d4301a-1631-4ed5-80e5-af38744db27e" }. 
+ [21:57:36 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:39d4301a-1631-4ed5-80e5-af38744db27e, Command = HashSet" }. 
+ [21:57:36 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:39d4301a-1631-4ed5-80e5-af38744db27e, Command = HashSet" }. 
+ [21:57:36 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [21:57:38 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:38 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:6d56882f-902d-40f3-b6e8-05fd7682c32e" }. 
+ [21:57:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:6d56882f-902d-40f3-b6e8-05fd7682c32e, Command = HashSet" }. 
+ [21:57:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:6d56882f-902d-40f3-b6e8-05fd7682c32e, Command = HashSet" }. 
+ [21:57:40 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:40 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:eb5401c6-68fe-496d-8505-c89125bb55b0" }. 
+ [21:57:40 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 159] You subscribed on { EventSet: "Key = package:eb5401c6-68fe-496d-8505-c89125bb55b0, Command = HashSet" }. 
+ [21:57:40 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 194] You subscribed on { EventSet: "Key = package:eb5401c6-68fe-496d-8505-c89125bb55b0, Command = HashSet" }. 
+ [21:57:42 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:42 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [21:57:42 WRN (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 120] Next package could not be obtained - there are no more packages in cafe. 
+ [21:57:43 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [21:57:43 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [21:57:43 WRN (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 120] Next package could not be obtained - there are no more packages in cafe. 
  
