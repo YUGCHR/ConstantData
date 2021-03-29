@@ -1,0 +1,483 @@
+[16:05:23 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [16:05:23 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [16:05:24 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [16:05:24 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" } was fetched and stored into EventKeyNames. 
+ [16:05:24 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [16:05:24 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [16:05:24 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [16:07:48 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:07:48 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:07:48 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:bdb25be7-a37b-4eb4-affc-4c1eab6cbf41" }. 
+ [16:07:48 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:bdb25be7-a37b-4eb4-affc-4c1eab6cbf41" }. 
+ [16:07:48 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:bdb25be7-a37b-4eb4-affc-4c1eab6cbf41, Command = HashSet" }. 
+ [16:07:48 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" }. 
+ [16:07:48 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 207] You subscribed on { EventSet: "Key = package:bdb25be7-a37b-4eb4-affc-4c1eab6cbf41, Command = HashSet" }. 
+ [16:07:48 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:bdb25be7-a37b-4eb4-affc-4c1eab6cbf41", WhenTasksPackageWasCaptured called. 
+ [16:07:48 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:48 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:07:48 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:07:48 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:48 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:bdb25be7-a37b-4eb4-affc-4c1eab6cbf41" with command HashSet was received, Event permit = False. 
+ [16:07:48 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:07:49 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:49 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:51 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:51 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:53 DBG (33) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:53 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = False. 
+ [16:07:53 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:07:53 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:4ede2001-682f-411c-8170-01d2b10227b1" }. 
+ [16:07:53 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:4ede2001-682f-411c-8170-01d2b10227b1" }. 
+ [16:07:53 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:4ede2001-682f-411c-8170-01d2b10227b1, Command = HashSet" }. 
+ [16:07:53 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" }. 
+ [16:07:53 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 207] You subscribed on { EventSet: "Key = package:4ede2001-682f-411c-8170-01d2b10227b1, Command = HashSet" }. 
+ [16:07:53 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:4ede2001-682f-411c-8170-01d2b10227b1", WhenTasksPackageWasCaptured called. 
+ [16:07:53 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:53 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:07:53 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:53 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:4ede2001-682f-411c-8170-01d2b10227b1" with command HashSet was received, Event permit = False. 
+ [16:07:53 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:07:54 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:54 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:55 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:55 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:55 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:55 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:57 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:57 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:57 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:57 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:58 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:58 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:07:59 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:07:59 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:08:00 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:08:00 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = False. 
+ [16:08:00 DBG (21) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:08:00 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:56c0bc23-a4d4-4f44-b262-cbf613022f44" }. 
+ [16:08:00 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:56c0bc23-a4d4-4f44-b262-cbf613022f44" }. 
+ [16:08:00 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:56c0bc23-a4d4-4f44-b262-cbf613022f44, Command = HashSet" }. 
+ [16:08:00 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" }. 
+ [16:08:00 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 207] You subscribed on { EventSet: "Key = package:56c0bc23-a4d4-4f44-b262-cbf613022f44, Command = HashSet" }. 
+ [16:08:00 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:56c0bc23-a4d4-4f44-b262-cbf613022f44", WhenTasksPackageWasCaptured called. 
+ [16:08:00 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:08:00 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:08:00 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:08:00 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:56c0bc23-a4d4-4f44-b262-cbf613022f44" with command HashSet was received, Event permit = False. 
+ [16:08:00 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:08:01 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:08:01 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:08:01 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:08:01 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:08:02 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:08:02 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:08:03 DBG (35) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:08:03 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:08:03 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:08:03 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = True. 
+ [16:08:04 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called - Key "backserver:ce186aed-e3b2-4b21-8f9a-00b74195b6b1" with command HashSet was received, Event permit = False. 
+ [16:08:04 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned Event permit = False. 
+ [16:08:04 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:08:04 INF (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [16:08:04 WRN (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 123] Next package could not be obtained - there are no more packages in cafe. 
+ [16:20:07 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [16:20:07 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [16:20:07 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [16:20:07 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:14b742ac-8335-4425-8d7c-b65efc30c3a8" } was fetched and stored into EventKeyNames. 
+ [16:20:07 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [16:20:07 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [16:20:07 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [16:20:16 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:20:16 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:20:16 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:7edc72bf-6454-4991-9465-74906bc89041" }. 
+ [16:20:16 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:7edc72bf-6454-4991-9465-74906bc89041" }. 
+ [16:20:16 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:7edc72bf-6454-4991-9465-74906bc89041, Command = HashSet" }. 
+ [16:20:16 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:14b742ac-8335-4425-8d7c-b65efc30c3a8" }. 
+ [16:20:16 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:7edc72bf-6454-4991-9465-74906bc89041, Command = HashSet" }. 
+ [16:20:16 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:7edc72bf-6454-4991-9465-74906bc89041", WhenTasksPackageWasCaptured called. 
+ [16:20:16 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:16 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:20:16 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:20:16 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:17 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:7edc72bf-6454-4991-9465-74906bc89041" with command HashSet was received, Event permit = False. 
+ [16:20:17 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:20:18 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:18 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:20 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:20 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:23 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:23 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:24 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:24 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:25 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:25 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:26 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:26 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:28 DBG (23) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:28 DBG (23) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:29 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:29 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:20:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:20:30 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:20:30 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:7d2b78b3-6b9c-4fb7-bf6e-51136c7039fd" }. 
+ [16:20:30 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:7d2b78b3-6b9c-4fb7-bf6e-51136c7039fd" }. 
+ [16:20:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:7d2b78b3-6b9c-4fb7-bf6e-51136c7039fd, Command = HashSet" }. 
+ [16:20:30 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:14b742ac-8335-4425-8d7c-b65efc30c3a8" }. 
+ [16:20:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:7d2b78b3-6b9c-4fb7-bf6e-51136c7039fd, Command = HashSet" }. 
+ [16:20:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:7d2b78b3-6b9c-4fb7-bf6e-51136c7039fd", WhenTasksPackageWasCaptured called. 
+ [16:20:31 DBG (23) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:20:31 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:20:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:7d2b78b3-6b9c-4fb7-bf6e-51136c7039fd" with command HashSet was received, Event permit = False. 
+ [16:20:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:20:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:31 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:33 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:33 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:34 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:34 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:35 DBG (23) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:35 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:36 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:36 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:37 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:37 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:20:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:20:38 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:20:38 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:7259326f-20b5-4825-947d-172c5ee1e829" }. 
+ [16:20:38 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:7259326f-20b5-4825-947d-172c5ee1e829" }. 
+ [16:20:38 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:7259326f-20b5-4825-947d-172c5ee1e829, Command = HashSet" }. 
+ [16:20:38 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:14b742ac-8335-4425-8d7c-b65efc30c3a8" }. 
+ [16:20:38 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:7259326f-20b5-4825-947d-172c5ee1e829, Command = HashSet" }. 
+ [16:20:38 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:7259326f-20b5-4825-947d-172c5ee1e829", WhenTasksPackageWasCaptured called. 
+ [16:20:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:38 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:20:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:38 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:20:38 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:7259326f-20b5-4825-947d-172c5ee1e829" with command HashSet was received, Event permit = False. 
+ [16:20:38 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:20:39 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:39 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:39 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:40 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:40 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:40 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:40 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:40 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:41 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:41 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:43 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:43 DBG (23) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:20:43 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:20:43 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:24 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [16:22:25 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [16:22:25 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [16:22:25 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" } was fetched and stored into EventKeyNames. 
+ [16:22:25 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [16:22:25 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [16:22:25 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [16:22:35 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:22:35 DBG (27) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:22:35 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:eb611e8c-04c9-48a3-be2c-42e9665805d7" }. 
+ [16:22:35 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:eb611e8c-04c9-48a3-be2c-42e9665805d7" }. 
+ [16:22:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:eb611e8c-04c9-48a3-be2c-42e9665805d7, Command = HashSet" }. 
+ [16:22:35 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:22:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:eb611e8c-04c9-48a3-be2c-42e9665805d7, Command = HashSet" }. 
+ [16:22:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:eb611e8c-04c9-48a3-be2c-42e9665805d7", WhenTasksPackageWasCaptured called. 
+ [16:22:35 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:22:35 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:22:35 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:eb611e8c-04c9-48a3-be2c-42e9665805d7" with command HashSet was received, Event permit = False. 
+ [16:22:35 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:22:37 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:37 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:39 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:39 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:40 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:40 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:42 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:42 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:45 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:45 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:46 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:46 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:48 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:48 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:49 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:22:49 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:22:49 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:22:49 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:4674d829-be46-4cb9-867f-acdedcb9598c" }. 
+ [16:22:49 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:4674d829-be46-4cb9-867f-acdedcb9598c" }. 
+ [16:22:49 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:4674d829-be46-4cb9-867f-acdedcb9598c, Command = HashSet" }. 
+ [16:22:49 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:22:49 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:4674d829-be46-4cb9-867f-acdedcb9598c, Command = HashSet" }. 
+ [16:22:49 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:4674d829-be46-4cb9-867f-acdedcb9598c", WhenTasksPackageWasCaptured called. 
+ [16:22:49 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:22:49 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:49 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:22:49 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:50 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:4674d829-be46-4cb9-867f-acdedcb9598c" with command HashSet was received, Event permit = False. 
+ [16:22:50 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:22:51 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:51 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:52 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:52 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:52 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:52 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:53 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:53 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:54 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:54 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:22:54 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:22:54 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:22:54 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:9376eee9-ff33-4378-9fba-38fd78bb0af5" }. 
+ [16:22:54 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:9376eee9-ff33-4378-9fba-38fd78bb0af5" }. 
+ [16:22:54 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:9376eee9-ff33-4378-9fba-38fd78bb0af5, Command = HashSet" }. 
+ [16:22:54 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:22:54 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:9376eee9-ff33-4378-9fba-38fd78bb0af5, Command = HashSet" }. 
+ [16:22:54 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:9376eee9-ff33-4378-9fba-38fd78bb0af5", WhenTasksPackageWasCaptured called. 
+ [16:22:54 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:54 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:22:54 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:22:54 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:54 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:9376eee9-ff33-4378-9fba-38fd78bb0af5" with command HashSet was received, Event permit = False. 
+ [16:22:54 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:22:55 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:55 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:55 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:55 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:56 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:56 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:56 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:56 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:22:57 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:22:57 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:22:57 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:22:57 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:22:57 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [16:22:57 WRN (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 123] Next package could not be obtained - there are no more packages in cafe. 
+ [16:22:57 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [16:24:08 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:24:08 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:24:08 INF (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:3b6815ec-0317-4120-a13c-c6ddc00c5a0e" }. 
+ [16:24:08 INF (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:3b6815ec-0317-4120-a13c-c6ddc00c5a0e" }. 
+ [16:24:08 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:3b6815ec-0317-4120-a13c-c6ddc00c5a0e, Command = HashSet" }. 
+ [16:24:08 INF (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:24:08 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:3b6815ec-0317-4120-a13c-c6ddc00c5a0e, Command = HashSet" }. 
+ [16:24:08 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:3b6815ec-0317-4120-a13c-c6ddc00c5a0e", WhenTasksPackageWasCaptured called. 
+ [16:24:08 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:08 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:24:08 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:08 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:24:08 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:3b6815ec-0317-4120-a13c-c6ddc00c5a0e" with command HashSet was received, Event permit = False. 
+ [16:24:08 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:24:09 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:09 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:10 DBG (44) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:10 DBG (44) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:10 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:24:11 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:f844b109-78e5-4249-80f7-229ec75a17a9" }. 
+ [16:24:11 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:f844b109-78e5-4249-80f7-229ec75a17a9" }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:f844b109-78e5-4249-80f7-229ec75a17a9, Command = HashSet" }. 
+ [16:24:11 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:f844b109-78e5-4249-80f7-229ec75a17a9, Command = HashSet" }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:f844b109-78e5-4249-80f7-229ec75a17a9", WhenTasksPackageWasCaptured called. 
+ [16:24:11 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:24:11 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:24:11 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:f844b109-78e5-4249-80f7-229ec75a17a9" with command HashSet was received, Event permit = False. 
+ [16:24:11 DBG (37) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:24:11 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:24:11 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:11 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:24:11 DBG (39) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:11 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:b7cfc1ec-faab-443a-a952-031b5c5d3e43" }. 
+ [16:24:12 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:b7cfc1ec-faab-443a-a952-031b5c5d3e43" }. 
+ [16:24:12 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:b7cfc1ec-faab-443a-a952-031b5c5d3e43, Command = HashSet" }. 
+ [16:24:12 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:24:12 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:b7cfc1ec-faab-443a-a952-031b5c5d3e43, Command = HashSet" }. 
+ [16:24:12 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:b7cfc1ec-faab-443a-a952-031b5c5d3e43", WhenTasksPackageWasCaptured called. 
+ [16:24:12 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:12 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:24:12 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:12 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:12 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:24:12 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:12 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:12 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:13 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:13 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:13 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:13 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:13 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:13 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:13 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:13 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:13 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:24:13 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:13 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:13 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:24:13 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:13 DBG (34) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:24:13 INF (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [16:24:13 WRN (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 123] Next package could not be obtained - there are no more packages in cafe. 
+ [16:24:13 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [16:24:13 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:b7cfc1ec-faab-443a-a952-031b5c5d3e43" with command HashSet was received, Event permit = False. 
+ [16:24:13 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:24:13 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:13 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:13 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:13 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (37) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (37) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (38) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (38) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (39) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (39) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:24:14 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: True }. 
+ [16:24:14 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:24:14 INF (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [16:24:14 WRN (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 123] Next package could not be obtained - there are no more packages in cafe. 
+ [16:24:14 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [16:24:15 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:15 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:15 DBG (37) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:15 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:24:16 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:24:16 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:24:16 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: True }. 
+ [16:24:16 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:24:16 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [16:24:16 WRN (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 123] Next package could not be obtained - there are no more packages in cafe. 
+ [16:24:16 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [16:25:41 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:25:41 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:25:41 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:4a9a111a-a0d8-4295-aca6-d069ac587c8f" }. 
+ [16:25:41 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:4a9a111a-a0d8-4295-aca6-d069ac587c8f" }. 
+ [16:25:41 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:4a9a111a-a0d8-4295-aca6-d069ac587c8f, Command = HashSet" }. 
+ [16:25:41 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:25:41 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:4a9a111a-a0d8-4295-aca6-d069ac587c8f, Command = HashSet" }. 
+ [16:25:41 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:4a9a111a-a0d8-4295-aca6-d069ac587c8f", WhenTasksPackageWasCaptured called. 
+ [16:25:41 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:41 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:25:41 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:41 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:25:41 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:4a9a111a-a0d8-4295-aca6-d069ac587c8f" with command HashSet was received, Event permit = False. 
+ [16:25:41 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:25:42 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:42 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:42 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:42 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:43 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:43 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:43 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:43 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:43 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:43 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:43 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:43 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:44 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:44 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:25:44 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:25:44 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:25:44 INF (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:7b61189d-3fcc-4220-9cdf-3865b3a9cd73" }. 
+ [16:25:44 INF (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:7b61189d-3fcc-4220-9cdf-3865b3a9cd73" }. 
+ [16:25:44 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:7b61189d-3fcc-4220-9cdf-3865b3a9cd73, Command = HashSet" }. 
+ [16:25:44 INF (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:25:44 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:7b61189d-3fcc-4220-9cdf-3865b3a9cd73, Command = HashSet" }. 
+ [16:25:44 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:7b61189d-3fcc-4220-9cdf-3865b3a9cd73", WhenTasksPackageWasCaptured called. 
+ [16:25:44 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:44 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:25:44 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:44 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:25:44 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:7b61189d-3fcc-4220-9cdf-3865b3a9cd73" with command HashSet was received, Event permit = False. 
+ [16:25:44 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:25:45 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:45 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:45 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:45 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:45 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:45 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:45 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:45 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:46 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:46 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:25:46 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:25:46 DBG (27) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:25:46 INF (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:42020edd-396d-4b4d-8c61-c293e18bde96" }. 
+ [16:25:46 INF (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 135] BackServer subscribed on { EventKey: "package:42020edd-396d-4b4d-8c61-c293e18bde96" }. 
+ [16:25:46 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 170] You subscribed on { EventSet: "Key = package:42020edd-396d-4b4d-8c61-c293e18bde96, Command = HashSet" }. 
+ [16:25:46 INF (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 176] BackServer subscribed on { EventKey: "backserver:0192c760-8b2c-46aa-a57b-bd95377902ed" }. 
+ [16:25:46 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 211] You subscribed on { EventSet: "Key = package:42020edd-396d-4b4d-8c61-c293e18bde96, Command = HashSet" }. 
+ [16:25:46 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 113] SubscribeOnEventPackageCompleted subscribed, Package Key "package:42020edd-396d-4b4d-8c61-c293e18bde96", WhenTasksPackageWasCaptured called. 
+ [16:25:46 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:46 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:25:46 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:46 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:25:46 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 147] CheckingAllTasksCompletion called - Key "package:42020edd-396d-4b4d-8c61-c293e18bde96" with command HashSet was received, Event permit = False. 
+ [16:25:46 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventCheckPackageProgress - 155] CheckingAllTasksCompletion returned Event permit = False. 
+ [16:25:47 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:47 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:47 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:47 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:47 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:47 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:48 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:48 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:48 DBG (34) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:48 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: True }. 
+ [16:25:49 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 186] CheckingATaskPackageCompletion called, { Permit: False }. 
+ [16:25:49 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 190] CheckingATaskPackageCompletion returned { Permit: False }. 
+ [16:25:49 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 199] FreshTaskPackageAppeared called, Global { Permit: False }. 
+ [16:25:49 DBG (36) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:25:49 INF (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [16:25:49 WRN (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 123] Next package could not be obtained - there are no more packages in cafe. 
+ [16:25:49 DBG (36) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ 
