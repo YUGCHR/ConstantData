@@ -83,7 +83,7 @@ namespace BackgroundTasksQueue.Services
                     // если задача получена и пошла в работу, то вернётся false и на true ключ поменяют в другом месте (запутанно, но пока так)
                     // и там сначала ещё раз проверить ключ кафе задач и если ещё остались задачи, вызвать FreshTaskPackageAppeared
                 }
-                // другая подписка восстановит true в _flagToBlockEventRun, чтобы возобновить подписку 
+                // другая подписка (SubscribeOnEventPackageCompleted) восстановит true в _flagToBlockEventRun, чтобы возобновить подписку 
                 // или можно void Unsubscribe(string key), тогда без глобальной переменной
             });
 
@@ -120,6 +120,7 @@ namespace BackgroundTasksQueue.Services
                 return flagToBlockEventRun;
             }
             // возвращаем true, потому что задачу добыть не удалось, пакетов больше нет и надо ждать следующего вброса
+            Logs.Here().Information("This {@S} finished work,\n Global {@PR}.", new { Server = eventKeysSet.BackServerPrefixGuid }, new { Permit = _flagToBlockEventRun });
             Logs.Here().Warning("Next package could not be obtained - there are no more packages in cafe.");
             return true;
         }
@@ -174,7 +175,7 @@ namespace BackgroundTasksQueue.Services
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             Logs.Here().Information("BackServer subscribed on {@E}.", new { EventKey = backServerPrefixGuid });
-
+            int totalUnsolvedTasksLeft;
             // блокировка множественной подписки до специального разрешения повторной подписки
             bool flagToBlockEventPackageCompleted = true;
 
@@ -183,11 +184,12 @@ namespace BackgroundTasksQueue.Services
                 if (cmd == eventKeysSet.EventCmd && flagToBlockEventPackageCompleted)
                 {
                     flagToBlockEventPackageCompleted = false;
-                    Logs.Here().Debug("CheckingATaskPackageCompletion called, {@P}.", new { Permit = flagToBlockEventPackageCompleted });
+                    Logs.Here().Debug("CheckingPackageCompletion called, {@P}.", new { Permit = flagToBlockEventPackageCompleted });
 
                     // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
-                    flagToBlockEventPackageCompleted = await _control.CheckingATaskPackageCompletion(eventKeysSet, tasksPackageGuidField);
-                    Logs.Here().Debug("CheckingATaskPackageCompletion returned {@P}.", new { Permit = flagToBlockEventPackageCompleted });
+                    (flagToBlockEventPackageCompleted, totalUnsolvedTasksLeft) = await _control.CheckingPackageCompletion(eventKeysSet, tasksPackageGuidField);
+                    // totalUnsolvedTasksLeft получаем только для отладки
+                    Logs.Here().Debug("CheckingPackageCompletion returned {@P}, {@L}.", new { Permit = flagToBlockEventPackageCompleted }, new{ TasksLeft = totalUnsolvedTasksLeft });
 
                     // если пакет в работе, вернулось true и опять ждём подписку
                     // если пакет закончен, оставим навсегда false, этот пакет нас больше не интересует, но, перед восстановлением глобального ключа, ещё надо проверить кафе
@@ -196,11 +198,14 @@ namespace BackgroundTasksQueue.Services
                     if (!flagToBlockEventPackageCompleted)
                     {
                         // перед восстановлением глобального ключа, надо ещё проверить кафе - стандартным способом
-                        Logs.Here().Debug("FreshTaskPackageAppeared called, Global {@P}.", new { Permit = _flagToBlockEventRun });
-
+                        Logs.Here().Debug("FreshTaskPackageAppeared called, Global {@P}, {@L}.", new { Permit = _flagToBlockEventRun }, new { TasksLeft = totalUnsolvedTasksLeft });
+                        // для отладки тут можно вывести количество оставшихся задач в пакете из всего количества
                         _flagToBlockEventRun = await FreshTaskPackageAppeared(eventKeysSet);
                         Logs.Here().Debug("FreshTaskPackageAppeared returned Global {@P}.", new { Permit = _flagToBlockEventRun });
-
+                        if (_flagToBlockEventRun)
+                        {
+                            Logs.Here().Warning("This {@S} waits new Task Package}.", new {Server = eventKeysSet.BackServerPrefixGuid});
+                        }
                         // если задач там больше нет, вернётся true, восстановим глобальную подписку и будем ждать 
                         // а если пакет есть, вернётся false и все пойдет привычным путём, а потом придёт опять сюда по новой подписке
                     }

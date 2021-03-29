@@ -11,7 +11,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksProcessingControlService
     {
-        public Task<bool> CheckingATaskPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
+        public Task<(bool, int)> CheckingPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
         public Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
     }
 
@@ -32,14 +32,15 @@ namespace BackgroundTasksQueue.Services
         }
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksProcessingControlService>();
-
-        public async Task<bool> CheckingATaskPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        // Verbose
+        public async Task<(bool, int)> CheckingPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField)
         {
             // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
             // если пакет в работе, вернуть true, если пакет закончен - false
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             int totalUnsolvedTasksLeft = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField); // forsake
-            return totalUnsolvedTasksLeft > 0;
+            
+            return (totalUnsolvedTasksLeft > 0, totalUnsolvedTasksLeft);
         }
 
         public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) 
@@ -54,7 +55,7 @@ namespace BackgroundTasksQueue.Services
             bool allTasksCompleted = true;
             IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField);
             int taskPackageCount = taskPackage.Count;
-            _logger.LogInformation(70301, "TasksList fetched - tasks count = {1}.", taskPackageCount);
+            Logs.Here().Debug("TasksList fetched - {@C}.", new { Count = taskPackageCount });
 
             foreach (var t in taskPackage)
             {
@@ -69,17 +70,18 @@ namespace BackgroundTasksQueue.Services
                 {
                     // подсчёт всех процентов можно убрать, ориентироваться только на allTasksCompleted
                     // суммарный процент можно считать в другом методе или из этого возвращать принудительно сотню, если true
-                    _logger.LogInformation(70311, "One (or more) Tasks do not start yet, taskState = {0}.", taskState);
+                    Logs.Here().Debug("One (or more) Tasks do not start yet - {@S}.", new { State = taskState });
+
                     return false;
                 }
                 // вычислить суммарный процент - всё сложить и разделить на количество
                 taskPackageState += taskState;
-                _logger.LogInformation(70321, "foreach in taskPackage - Single task No. {1} completed by {2} percents.", singleTaskGuid, taskState);
+                Logs.Here().Debug("foreach in taskPackage - Single {@T} completed by {1} percents.", new { Task = singleTaskGuid }, taskState);
             }
 
             double taskPackageStatePercentageDouble = taskPackageState / taskPackageCount;
             int taskPackageStatePercentage = (int)taskPackageStatePercentageDouble;
-            _logger.LogInformation(70331, " --- RETURN - this TaskPackage is completed on {0} percents.  \n       ", taskPackageStatePercentage);
+            Logs.Here().Debug("RETURN - this TaskPackage is completed on {0} percents.", taskPackageStatePercentage);
 
             // подписку оформить в отдельном методе, а этот вызывать оттуда
             // можно ставить блокировку на подписку и не отвлекаться на события, пока не закончена очередная проверка
