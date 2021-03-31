@@ -52,7 +52,7 @@ namespace FrontServerEmulation.Services
                 }
                 // задаём время выполнения цикла - как если бы получили его от контроллера
                 // на самом деле для эмуляции пока берём из константы
-                int taskDelayTimeSpanFromSeconds = eventKeysSet.TaskEmulatorDelayTimeInMilliSeconds;
+                int taskDelayTimeSpanFromSeconds = eventKeysSet.TaskEmulatorDelayTimeInMilliseconds;
                 // создаём пакет задач (в реальности, опять же, пакет задач положил отдельный контроллер)
                 Dictionary<string, TaskDescriptionAndProgress> taskPackage = FrontServerCreateTasks(tasksCount, taskDelayTimeSpanFromSeconds, eventKeysSet);
 

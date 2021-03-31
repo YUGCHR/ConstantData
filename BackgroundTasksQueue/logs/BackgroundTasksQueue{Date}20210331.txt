@@ -1486,4 +1486,2161 @@
  { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
  
  [17:15:00 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [17:16:07 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ [17:16:08 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+ BackServer's MonitorLoop is starting. 
+ [17:16:08 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:16:08 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+ Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:8eea4b69-d262-4c0b-b87a-12734743dd7a" } 
+ 
+ [17:16:08 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+ BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:16:08 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:16:08 DBG (25) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [17:16:51 DBG (33) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] 
+ FreshTaskPackageAppeared called, Event permit = False 
+ { Key: "key-event-front-server-gives-task-package" } with { Command: HashSet } was received. 
+ 
+ [17:16:51 DBG (33) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 5 }. 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 3 }. 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb" } 
+ 
+ [17:16:51 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb" } 
+. 
+ [17:16:51 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:8eea4b69-d262-4c0b-b87a-12734743dd7a" } 
+ 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb, Command = HashSet" } 
+ 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb" } 
+ 
+ [17:16:51 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb" } 
+ { Task: "task:96b3fc63-d891-4fa9-86b2-f0ed63fdbd46" } 
+ 
+ [17:16:51 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb" } 
+ { Task: "task:5eedd1b1-7bdd-4eb3-bed5-483c6c9f0943" } 
+ 
+ [17:16:51 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb" } 
+ { Task: "task:70593712-952c-4a30-a974-c0c1565cab8c" } 
+ 
+ [17:16:51 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb" } 
+ { Task: "task:e8df3444-3df4-49d7-9060-cc4c1799b910" } 
+ 
+ [17:16:51 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a1e7e037-630d-4622-9f7e-d27c14e6f0bb" } 
+ { Task: "task:3f7a0821-1c11-460e-ab42-10bfabf0e6b5" } 
+ 
+ [17:16:51 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] 
+ FreshTaskPackageAppeared returned Event permit = False. 
+ [17:16:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [17:16:53 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:16:53 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [17:16:55 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:16:55 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:16:56 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:16:56 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:16:59 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:16:59 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:17:01 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:01 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:17:01 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+ FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:17:01 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 4 }. 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 2 }. 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:c6ef3b5b-d74f-4334-aed2-8e07063d61ce" } 
+ 
+ [17:17:01 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:c6ef3b5b-d74f-4334-aed2-8e07063d61ce" } 
+. 
+ [17:17:01 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:8eea4b69-d262-4c0b-b87a-12734743dd7a" } 
+ 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:c6ef3b5b-d74f-4334-aed2-8e07063d61ce, Command = HashSet" } 
+ 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:c6ef3b5b-d74f-4334-aed2-8e07063d61ce" } 
+ 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:c6ef3b5b-d74f-4334-aed2-8e07063d61ce" } 
+ { Task: "task:46307262-b753-40e7-8c9a-c704939aa2b2" } 
+ 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:c6ef3b5b-d74f-4334-aed2-8e07063d61ce" } 
+ { Task: "task:19d7d36f-f4e4-42d4-981f-864ea1d0baab" } 
+ 
+ [17:17:01 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:c6ef3b5b-d74f-4334-aed2-8e07063d61ce" } 
+ { Task: "task:83e00e12-766d-4716-bc72-78dd7dd9a851" } 
+ 
+ [17:17:01 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:01 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:17:01 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+ FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [17:17:01 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:17:03 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:03 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:17:03 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:03 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:17:05 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:05 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:17:05 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+ FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:17:05 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 3 }. 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 1 }. 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:fb0fe03e-e897-49a3-9540-bb77a90be623" } 
+ 
+ [17:17:05 INF (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:fb0fe03e-e897-49a3-9540-bb77a90be623" } 
+. 
+ [17:17:05 INF (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:8eea4b69-d262-4c0b-b87a-12734743dd7a" } 
+ 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:fb0fe03e-e897-49a3-9540-bb77a90be623, Command = HashSet" } 
+ 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:fb0fe03e-e897-49a3-9540-bb77a90be623" } 
+ 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:fb0fe03e-e897-49a3-9540-bb77a90be623" } 
+ { Task: "task:85eb6dba-94ee-4c0e-8162-4202804c2ad2" } 
+ 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:fb0fe03e-e897-49a3-9540-bb77a90be623" } 
+ { Task: "task:99ef688d-4242-4cb8-b7f4-f3cc3e35f525" } 
+ 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:fb0fe03e-e897-49a3-9540-bb77a90be623" } 
+ { Task: "task:053d77e3-0769-4378-b698-84512f7caf2b" } 
+ 
+ [17:17:05 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:17:05 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:17:05 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+ FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [17:17:06 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:06 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:17:06 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:06 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:17:06 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+ FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 2 }. 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 0 }. 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:d8de53e0-b4af-44df-b6f9-d4f7328a9b04" } 
+ 
+ [17:17:06 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:d8de53e0-b4af-44df-b6f9-d4f7328a9b04" } 
+. 
+ [17:17:06 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:8eea4b69-d262-4c0b-b87a-12734743dd7a" } 
+ 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:d8de53e0-b4af-44df-b6f9-d4f7328a9b04, Command = HashSet" } 
+ 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:d8de53e0-b4af-44df-b6f9-d4f7328a9b04" } 
+ 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:d8de53e0-b4af-44df-b6f9-d4f7328a9b04" } 
+ { Task: "task:1730b6b1-475b-4c79-9cb7-f98b88570074" } 
+ 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:d8de53e0-b4af-44df-b6f9-d4f7328a9b04" } 
+ { Task: "task:35185456-38fc-4b58-aab1-87d4fd884fe1" } 
+ 
+ [17:17:06 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:d8de53e0-b4af-44df-b6f9-d4f7328a9b04" } 
+ { Task: "task:9feace52-6e27-45f6-bd21-adca9b975001" } 
+ 
+ [17:17:06 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:06 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:17:06 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:17:06 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+ FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [17:17:08 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:08 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:17:09 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [17:17:09 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:20:34 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [17:20:35 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [17:20:35 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:20:35 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ 
+ [17:20:35 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:20:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:20:35 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [17:21:14 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] 
+               FreshTaskPackageAppeared called, Event permit = False 
+ { Key: "key-event-front-server-gives-task-package" } with { Command: HashSet } was received. 
+ 
+ [17:21:14 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+               BackServer started AttemptToCaptureTasksPackage. 
+ [17:21:14 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+               KeyFrontGivesTask { isExisted: True }. 
+ [17:21:14 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+               TasksList fetched - { TaskCount: 6 }. 
+ [17:21:14 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+               DiceRoll rolled { Facet: 0 }. 
+ [17:21:14 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+               BackServer reported - { DeleteSuccess: True }. 
+ [17:21:14 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+               Task Package fetched. 
+ { Package: "package:9474df58-db8f-4eb8-97a4-e60c8fa3b8f0" } 
+ 
+ [17:21:14 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+               AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:9474df58-db8f-4eb8-97a4-e60c8fa3b8f0" } 
+. 
+ [17:21:14 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+               BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ 
+ [17:21:14 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = package:9474df58-db8f-4eb8-97a4-e60c8fa3b8f0, Command = HashSet" } 
+ 
+ [17:21:14 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+               SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:9474df58-db8f-4eb8-97a4-e60c8fa3b8f0" } 
+ 
+ [17:21:14 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:9474df58-db8f-4eb8-97a4-e60c8fa3b8f0" } 
+ { Task: "task:6f966fdf-0ab7-49a0-a9bd-721bb36430da" } 
+ 
+ [17:21:14 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:9474df58-db8f-4eb8-97a4-e60c8fa3b8f0" } 
+ { Task: "task:29ae8c59-7be7-459e-b77f-b926a1016fe4" } 
+ 
+ [17:21:14 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:9474df58-db8f-4eb8-97a4-e60c8fa3b8f0" } 
+ { Task: "task:28bc7daa-c36c-4599-b4e0-ebf373c8b258" } 
+ 
+ [17:21:14 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:14 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+               WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:21:14 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] 
+               FreshTaskPackageAppeared returned Event permit = False. 
+ [17:21:14 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:21:16 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:16 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:21:19 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:19 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:21:20 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:20 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:20 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+               FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:20 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+               BackServer started AttemptToCaptureTasksPackage. 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+               KeyFrontGivesTask { isExisted: True }. 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+               TasksList fetched - { TaskCount: 5 }. 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+               DiceRoll rolled { Facet: 0 }. 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+               BackServer reported - { DeleteSuccess: True }. 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+               Task Package fetched. 
+ { Package: "package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c" } 
+ 
+ [17:21:20 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+               AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c" } 
+. 
+ [17:21:20 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+               BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c, Command = HashSet" } 
+ 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+               SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c" } 
+ 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c" } 
+ { Task: "task:62af0fc6-9267-4220-8fcc-ce0d897c97b5" } 
+ 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c" } 
+ { Task: "task:851bb875-3cfa-4e3e-9338-920deb8b6fcc" } 
+ 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c" } 
+ { Task: "task:530d2bcb-e1bc-4dd6-a646-e575b0a661c9" } 
+ 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c" } 
+ { Task: "task:d9ea3c18-20f2-47f2-81bb-6daba6c44737" } 
+ 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:3d7ca75c-59c1-4fef-aaeb-89eaac81e38c" } 
+ { Task: "task:4b2fe87b-fefd-4b3a-9821-9cb0fa624a89" } 
+ 
+ [17:21:20 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:20 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+               WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:21:20 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [17:21:20 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+               FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [17:21:21 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:21 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [17:21:21 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:21 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:21:22 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:22 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:21:22 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:22 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:21:23 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:23 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:23 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+               FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:23 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+               BackServer started AttemptToCaptureTasksPackage. 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+               KeyFrontGivesTask { isExisted: True }. 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+               TasksList fetched - { TaskCount: 4 }. 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+               DiceRoll rolled { Facet: 1 }. 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+               BackServer reported - { DeleteSuccess: True }. 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+               Task Package fetched. 
+ { Package: "package:b7ea4bb1-72b3-4f9b-aa30-b591ffac24eb" } 
+ 
+ [17:21:23 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+               AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:b7ea4bb1-72b3-4f9b-aa30-b591ffac24eb" } 
+. 
+ [17:21:23 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+               BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = package:b7ea4bb1-72b3-4f9b-aa30-b591ffac24eb, Command = HashSet" } 
+ 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+               SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:b7ea4bb1-72b3-4f9b-aa30-b591ffac24eb" } 
+ 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:b7ea4bb1-72b3-4f9b-aa30-b591ffac24eb" } 
+ { Task: "task:4af25495-9a57-4201-b2bd-e92478382bb0" } 
+ 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:b7ea4bb1-72b3-4f9b-aa30-b591ffac24eb" } 
+ { Task: "task:fd47687e-1284-45ac-8174-e0273c899494" } 
+ 
+ [17:21:23 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:b7ea4bb1-72b3-4f9b-aa30-b591ffac24eb" } 
+ { Task: "task:49c28412-3e76-48d8-8c4f-d4362e62801d" } 
+ 
+ [17:21:23 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:23 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+               WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:21:23 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:21:23 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+               FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [17:21:25 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:25 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:21:26 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:26 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+               FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+               BackServer started AttemptToCaptureTasksPackage. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+               KeyFrontGivesTask { isExisted: True }. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+               TasksList fetched - { TaskCount: 3 }. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+               DiceRoll rolled { Facet: 0 }. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+               BackServer reported - { DeleteSuccess: True }. 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+               Task Package fetched. 
+ { Package: "package:4af20413-a516-405f-ab7b-97693b4254df" } 
+ 
+ [17:21:26 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+               AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:4af20413-a516-405f-ab7b-97693b4254df" } 
+. 
+ [17:21:26 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+               BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = package:4af20413-a516-405f-ab7b-97693b4254df, Command = HashSet" } 
+ 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+               SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:4af20413-a516-405f-ab7b-97693b4254df" } 
+ 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:4af20413-a516-405f-ab7b-97693b4254df" } 
+ { Task: "task:27d7ac02-face-4743-aab1-ea16f72dd184" } 
+ 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:4af20413-a516-405f-ab7b-97693b4254df" } 
+ { Task: "task:c4144f49-9d33-480b-b8c7-18df72493717" } 
+ 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:4af20413-a516-405f-ab7b-97693b4254df" } 
+ { Task: "task:0f8e645b-ee4d-48f6-b83d-5175ee07ef41" } 
+ 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:4af20413-a516-405f-ab7b-97693b4254df" } 
+ { Task: "task:b3ddfc88-7d79-4ddb-b6a0-667b2a4af519" } 
+ 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:4af20413-a516-405f-ab7b-97693b4254df" } 
+ { Task: "task:ce064651-d51f-49df-8530-79597a280e31" } 
+ 
+ [17:21:26 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:26 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+               WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:21:26 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [17:21:26 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+               FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [17:21:27 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:27 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [17:21:27 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:27 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:21:28 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:28 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:21:28 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:28 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+               FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+               BackServer started AttemptToCaptureTasksPackage. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+               KeyFrontGivesTask { isExisted: True }. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+               TasksList fetched - { TaskCount: 2 }. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+               DiceRoll rolled { Facet: 0 }. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+               BackServer reported - { DeleteSuccess: True }. 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+               Task Package fetched. 
+ { Package: "package:2937dd9c-750e-4ccc-80e0-b44959e665e3" } 
+ 
+ [17:21:30 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+               AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:2937dd9c-750e-4ccc-80e0-b44959e665e3" } 
+. 
+ [17:21:30 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+               BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = package:2937dd9c-750e-4ccc-80e0-b44959e665e3, Command = HashSet" } 
+ 
+ [17:21:30 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+               SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:2937dd9c-750e-4ccc-80e0-b44959e665e3" } 
+ 
+ [17:21:30 DBG (29) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:2937dd9c-750e-4ccc-80e0-b44959e665e3" } 
+ { Task: "task:a5e99f31-e08d-4e16-9eb9-bbbff3a2ee9d" } 
+ 
+ [17:21:30 DBG (29) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:2937dd9c-750e-4ccc-80e0-b44959e665e3" } 
+ { Task: "task:4cd1d7d4-d072-45d1-ba74-861fdf7c9447" } 
+ 
+ [17:21:30 DBG (29) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:2937dd9c-750e-4ccc-80e0-b44959e665e3" } 
+ { Task: "task:12f8a957-1cc5-49ea-8e30-1cbc6ca650ef" } 
+ 
+ [17:21:30 DBG (29) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:2937dd9c-750e-4ccc-80e0-b44959e665e3" } 
+ { Task: "task:8cdaebf6-6007-4082-a6de-b58c96cd5c57" } 
+ 
+ [17:21:30 DBG (29) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:2937dd9c-750e-4ccc-80e0-b44959e665e3" } 
+ { Task: "task:666cc43d-24df-4a20-b264-9df18260d2bf" } 
+ 
+ [17:21:30 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:30 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+               WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:21:30 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+               FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [17:21:30 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [17:21:31 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:31 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [17:21:31 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:31 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:21:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:21:32 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:32 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:21:32 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:32 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:32 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+               FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:32 DBG (27) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+               BackServer started AttemptToCaptureTasksPackage. 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+               KeyFrontGivesTask { isExisted: True }. 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+               TasksList fetched - { TaskCount: 1 }. 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+               DiceRoll rolled { Facet: 0 }. 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+               BackServer reported - { DeleteSuccess: True }. 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+               Task Package fetched. 
+ { Package: "package:5ba35b37-6451-4659-9da3-88f8445f916c" } 
+ 
+ [17:21:32 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+               AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:5ba35b37-6451-4659-9da3-88f8445f916c" } 
+. 
+ [17:21:32 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+               BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = package:5ba35b37-6451-4659-9da3-88f8445f916c, Command = HashSet" } 
+ 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+               SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:5ba35b37-6451-4659-9da3-88f8445f916c" } 
+ 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:5ba35b37-6451-4659-9da3-88f8445f916c" } 
+ { Task: "task:4b615bb7-7901-421f-bb2b-c7cac4af49e7" } 
+ 
+ [17:21:32 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:5ba35b37-6451-4659-9da3-88f8445f916c" } 
+ { Task: "task:b91d24eb-64ff-40e5-8f22-e1bd4d0ccf9a" } 
+ 
+ [17:21:33 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:5ba35b37-6451-4659-9da3-88f8445f916c" } 
+ { Task: "task:b70fa00f-2ba2-4f04-8977-c966708d7ac8" } 
+ 
+ [17:21:33 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:5ba35b37-6451-4659-9da3-88f8445f916c" } 
+ { Task: "task:4f8857b5-c8ba-4267-b1fd-0c904af9a5be" } 
+ 
+ [17:21:33 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+               Single Task processing was started. 
+ { Package: "package:5ba35b37-6451-4659-9da3-88f8445f916c" } 
+ { Task: "task:771e1e4b-7f72-4eba-8183-7584dd6e07a0" } 
+ 
+ [17:21:33 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:33 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+               WhenTasksPackageWasCaptured returned Event permit = False. 
+ [17:21:33 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [17:21:33 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+               FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [17:21:34 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:34 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [17:21:35 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:35 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [17:21:35 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:35 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [17:21:35 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:35 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [17:21:35 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+               CheckingPackageCompletion called, { Permit: False }. 
+ [17:21:35 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+               CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:35 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+               FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [17:21:35 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+               BackServer started AttemptToCaptureTasksPackage. 
+ [17:21:35 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+               KeyFrontGivesTask { isExisted: False }. 
+ [17:21:35 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 64] 
+               Main way - return to the subscription on the cafe key. 
+ [17:21:35 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+               AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: null } 
+. 
+ [17:21:35 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 124] 
+               This Server finished current work.
+ { Server: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ Global { Permit: False } 
+ 
+ [17:21:35 WRN (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 125] 
+               Next package could not be obtained - there are no more packages in cafe. 
+ [17:21:35 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+               FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [17:21:35 WRN (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 208] 
+               This Server waits new Task Package. 
+ { Server: "backserver:f6216442-8e86-4da3-a27c-21524542fdb7" } 
+ 
+ [17:24:55 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [17:24:56 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [17:24:56 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:24:56 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ ""{ ServerId = backserver:c1d5967d-fe41-41e9-9e56-8f704d07efe8 }"" {@S} 
+ 
+ [17:24:56 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:24:56 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:24:56 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [17:25:28 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [17:25:29 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [17:25:29 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:25:29 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "{ ServerId = backserver:2cc5c447-eca5-4904-96ac-0ec7ad824f41 }" {@S} 
+ 
+ [17:25:29 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:25:29 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:25:29 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [17:26:23 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [17:26:23 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [17:26:23 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:26:23 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ {15, @S} 
+ 
+ [17:26:23 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:26:23 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:26:23 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [17:26:42 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [17:26:42 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [17:26:42 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:26:42 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:cfdab0bd-9255-4fd8-ae57-d8a789bb9a71" } 
+ 
+ [17:26:42 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:26:42 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:26:42 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [17:38:50 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [17:38:51 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [17:38:51 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:38:51 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+null { ServerId: "backserver:720adc7c-6d58-47e2-b2a4-2f6c738c95ae" } 
+ 
+ [17:38:51 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:38:51 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:38:51 DBG (25) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [17:41:10 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [17:41:10 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [17:41:10 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:41:10 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Blank15 = null 
+ [17:41:10 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+null { ServerId: "backserver:902582ea-e348-46da-80c2-8c3cba0cc887" } 
+ 
+ [17:41:10 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:41:10 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:41:10 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:11:43 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:11:43 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:11:43 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:11:43 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Blank15 = null 
+ [18:11:43 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+null { ServerId: "backserver:5a4a0826-d70c-4c89-bf7d-1d18e9795b79" } 
+ 
+ [18:11:43 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:11:43 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:11:43 DBG (25) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:14:45 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:14:45 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:14:45 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:14:45 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Blank15 = null 
+ [18:14:45 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+null { ServerId: "backserver:0fb66ee0-ef44-4f44-b652-5eebc3ad2a92" } 
+ 
+ [18:14:45 INF (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:14:46 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:14:46 DBG (21) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:16:51 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:16:54 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:16:54 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:16:54 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Blank15 = null 
+ [18:16:54 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+null { ServerId: "backserver:3ddbd338-b520-4453-a36c-bb05b99b6b3b" } 
+ 
+ [18:16:54 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:16:54 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:16:54 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:17:44 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:17:44 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:17:45 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: null }. 
+ [18:17:45 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Blank15 = null 
+ [18:17:45 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+null { ServerId: "backserver:77e80fcd-ea83-45d1-8442-58685784c2eb" } 
+ 
+ [18:17:45 INF (6) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:17:45 DBG (6) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:17:45 DBG (6) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:20:34 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:20:34 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:20:34 DBG (5) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:20:34 INF (5) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Blank15 = null 
+ [18:20:34 INF (5) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+null { ServerId: "backserver:6e45d627-0e2e-44b3-92df-8bdc75fc163f" } 
+ 
+ [18:20:34 INF (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:20:34 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:20:34 DBG (5) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:29:51 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:29:52 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:29:52 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:29:52 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Blank15 = "               " 
+ [18:29:52 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+"               " { ServerId: "backserver:55237a40-2122-4a59-8902-b992eec0c891" } 
+ 
+ [18:29:52 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:29:52 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:29:52 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:33:49 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:33:49 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:33:49 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:33:49 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+"---------------" { ServerId: "backserver:d3dbf636-1aad-4942-9b38-0bb32fc792be" } 
+ 
+ [18:33:49 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:33:49 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:33:49 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:37:19 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:37:20 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:37:20 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:37:20 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid backserver:3853a582-3d3a-47de-89e2-b61ea0ab3b58 
+ [18:37:20 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 124] 
+               Server Guid was fetched and stored into EventKeyNames. 
+"---------------" { ServerId: "backserver:3853a582-3d3a-47de-89e2-b61ea0ab3b58" } 
+ 
+ [18:37:20 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:37:20 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:37:20 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:44:04 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:44:05 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:44:05 DBG (11) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:44:05 INF (11) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:5fbd718c-8c25-450d-b161-395934f0bb7f" } 
+ 
+ [18:44:05 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:44:05 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:44:05 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:47:14 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:47:14 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:47:14 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:47:14 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ {@S, 15} 
+ 
+ [18:47:14 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:47:14 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:47:14 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:48:22 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:48:23 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:48:23 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:48:23 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "               " { ServerId: "backserver:e56bdb85-62c4-420b-9921-3f4820fcdb66" } 
+ 
+ [18:48:23 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:48:23 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:48:23 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:49:48 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [18:49:48 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [18:49:48 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:49:48 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:45f4964e-ea61-4c18-991c-6090540c73b8 } 
+ 
+ [18:49:48 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "               " { ServerId: "backserver:45f4964e-ea61-4c18-991c-6090540c73b8" } 
+ 
+ [18:49:48 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [18:49:48 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [18:49:48 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:31:14 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:31:19 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:31:19 DBG (5) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:31:19 INF (5) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:9af368c1-671c-46ee-95d8-6a9278167096 } 
+ 
+ [19:31:19 INF (5) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "               " { ServerId: "backserver:9af368c1-671c-46ee-95d8-6a9278167096" } 
+ 
+ [19:31:19 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:31:19 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:31:19 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:32:18 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:32:19 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:32:19 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:32:19 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:cbaba74a-8c06-4036-a59f-2baf5be9dc3a } 
+ 
+ [19:32:19 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "               " { ServerId: "backserver:cbaba74a-8c06-4036-a59f-2baf5be9dc3a" } 
+ 
+ [19:32:19 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:32:19 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:32:19 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:34:04 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:34:04 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:34:04 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:34:04 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:20831db3-a41e-4554-b1c3-a218ed98b5af } 
+ 
+ [19:34:04 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+              "-" { ServerId: "backserver:20831db3-a41e-4554-b1c3-a218ed98b5af" } 
+ 
+ [19:34:05 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:34:05 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:34:05 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:35:04 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:35:04 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:35:04 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:35:04 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:2723fd67-f3fc-4c48-9313-6220f2a71fc5 } 
+ 
+ [19:35:04 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ {@,16} 
+ 
+ [19:35:04 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:35:04 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:35:04 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:36:24 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:36:25 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:36:25 DBG (18) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:36:25 INF (18) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:0e7772e9-3e06-4d7f-903b-8c607c239a28 } 
+ 
+ [19:36:25 INF (18) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+              " " { ServerId: "backserver:0e7772e9-3e06-4d7f-903b-8c607c239a28" } 
+ 
+ [19:36:25 INF (6) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:36:25 DBG (6) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:36:25 DBG (6) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:37:47 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:37:48 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:37:48 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:37:48 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:c1a520c0-ba95-4f16-826e-68d59384b16b } 
+ 
+ [19:37:48 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ ServerId - "backserver:c1a520c0-ba95-4f16-826e-68d59384b16b" 
+ 
+ [19:37:48 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:37:48 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:37:48 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:38:45 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:38:46 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:38:46 DBG (18) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:38:46 INF (18) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:0476bfd7-39c8-4f4b-ab53-f0ebc84885f3 } 
+ 
+ [19:38:46 INF (18) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+    "ServerId - " "backserver:0476bfd7-39c8-4f4b-ab53-f0ebc84885f3" 
+ 
+ [19:38:46 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:38:46 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:38:46 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:40:05 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:40:06 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:40:06 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:40:06 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:c2445b26-f7f7-4216-978a-6d35978d90be } 
+ 
+ [19:40:06 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "Server guid - " "backserver:c2445b26-f7f7-4216-978a-6d35978d90be" 
+ 
+ [19:40:06 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:40:06 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:40:06 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:40:46 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:40:46 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:40:46 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:40:46 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:649e3bbe-029e-453e-9d89-084f36be0f99 } 
+ 
+ [19:40:46 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "Server guid - " { ServerId: "backserver:649e3bbe-029e-453e-9d89-084f36be0f99" } 
+ 
+ [19:40:46 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:40:46 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:40:46 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:41:28 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:41:28 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:41:28 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:41:28 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:78bb231f-75bb-407a-9494-71c410dd6794 } 
+ 
+ [19:41:28 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+              "-" { ServerId: "backserver:78bb231f-75bb-407a-9494-71c410dd6794" } 
+ 
+ [19:41:28 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:41:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:41:28 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:41:45 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:41:45 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:41:45 DBG (22) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:41:45 INF (22) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:a06b2d97-e113-4a62-8fdb-793582300339 } 
+ 
+ [19:41:45 INF (22) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+              "-" { ServerId: "backserver:a06b2d97-e113-4a62-8fdb-793582300339" } 
+ 
+ [19:41:45 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:41:45 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:41:45 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:42:03 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:42:03 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:42:03 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:42:03 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:a1cf04b8-da9b-4505-8fe8-98f2f720ae2d } 
+ 
+ [19:42:03 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+  "Server Guid -" { ServerId: "backserver:a1cf04b8-da9b-4505-8fe8-98f2f720ae2d" } 
+ 
+ [19:42:03 INF (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:42:03 DBG (21) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:42:03 DBG (21) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:42:20 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:42:20 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:42:20 DBG (21) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:42:20 INF (21) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:c1fcde22-57cd-448b-99c5-d943a30ec59f } 
+ 
+ [19:42:20 INF (21) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                      "Server Guid -" { ServerId: "backserver:c1fcde22-57cd-448b-99c5-d943a30ec59f" } 
+ 
+ [19:42:20 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:42:20 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:42:20 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:43:12 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:43:12 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:43:13 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:43:13 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:4f7c44db-1fbe-44ff-b816-fce406eb6858 } 
+ 
+ [19:43:13 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+        "backserver:4f7c44db-1fbe-44ff-b816-fce406eb6858" 
+ 
+ [19:43:13 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:43:13 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:43:13 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:43:27 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:43:28 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:43:28 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:43:28 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:84554e2a-8bc4-493e-9b3c-a734990bfc35 } 
+ 
+ [19:43:28 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                      "backserver:84554e2a-8bc4-493e-9b3c-a734990bfc35" 
+ 
+ [19:43:28 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:43:28 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:43:28 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:43:57 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:43:57 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:43:57 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:43:57 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:2596c45a-8e16-4657-9c9b-5a889bdbb852 } 
+ 
+ [19:43:57 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+        { ServerId: "backserver:2596c45a-8e16-4657-9c9b-5a889bdbb852" } 
+ 
+ [19:43:57 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:43:57 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:43:57 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:44:22 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:44:22 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:44:22 DBG (22) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:44:22 INF (22) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                 { ServerId = backserver:f70a1745-667f-42ab-99d8-d593faf0a229 } 
+ 
+ [19:44:22 INF (22) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:f70a1745-667f-42ab-99d8-d593faf0a229" } 
+ 
+ [19:44:22 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:44:22 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:44:22 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:44:51 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:44:51 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:44:51 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:44:51 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] 
+               Server Guid was fetched and stored into EventKeyNames. 
+              { ServerId = backserver:ca171014-0531-401e-b8f0-1fa0870520fc } 
+ 
+ [19:44:51 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:ca171014-0531-401e-b8f0-1fa0870520fc" } 
+ 
+ [19:44:51 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:44:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:44:51 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:46:32 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:46:32 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:46:32 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:46:32 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:f3c5694c-b42e-4ad8-a4d5-259883ff73cc" } 
+ 
+ [19:46:32 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:46:32 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:46:32 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:55:31 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:55:31 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:55:31 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:55:31 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:8e9a0fc7-35a8-4430-9746-9e24047964b3" }           
+ 
+ [19:55:31 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:55:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:55:31 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:55:48 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:55:48 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:55:48 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:55:48 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:481b443d-8cef-4fdb-8a9e-200a8ccbd58c" } 
+ 
+ [19:55:48 INF (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:55:48 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:55:48 DBG (18) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:56:38 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:56:39 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:56:39 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:56:39 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:45ca76a8-0356-4f60-a206-73200e103427" }                                                   
+ 
+ [19:56:39 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:56:39 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:56:39 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:56:53 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:56:53 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:56:53 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:56:53 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ {@S, 113} 
+ 
+ [19:56:53 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:56:53 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:56:53 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:57:06 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:57:07 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:57:07 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:57:07 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:fc7964de-0912-4e8f-a64e-3a64a75de984" } 
+ 
+ [19:57:07 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:57:07 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:57:07 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:59:35 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:59:35 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:59:35 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:59:35 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:76bd8ca0-7760-477e-ac3d-58091c09b69a" }           
+ 
+ [19:59:35 INF (20) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:59:35 DBG (20) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:59:35 DBG (20) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [19:59:56 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [19:59:56 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [19:59:56 DBG (20) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [19:59:56 INF (20) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ {@S,(-73)} 
+ 
+ [19:59:56 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [19:59:56 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [19:59:56 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:00:54 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:00:54 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:00:54 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:00:54 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+                         "backserver:cd407d58-c195-4245-b787-86eeb520287f" 
+ 
+ [20:00:54 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:00:54 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:00:54 DBG (25) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:01:13 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:01:14 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:01:14 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:01:14 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "backserver:7af1ce24-61e2-4655-ac30-54d4d0a15f1f"                         
+ 
+ [20:01:14 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:01:14 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:01:14 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:01:25 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:01:25 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:01:26 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:01:26 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "backserver:27a13e14-55f3-4c22-ae04-1217f536ee05"                                                                 
+ 
+ [20:01:26 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:01:26 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:01:26 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:01:58 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:01:58 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:01:58 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:01:58 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ {0, -113} 
+ 
+ [20:01:58 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:01:58 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:01:58 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:02:35 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:02:36 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:02:36 DBG (22) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:02:36 INF (22) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+ "backserver:5c738d50-5aeb-474f-9f82-17ecf00a173e" 
+ 
+ [20:02:36 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:02:36 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:02:36 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:02:58 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:02:58 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:02:58 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:02:58 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. "backserver:e1a5e26b-fc1d-4973-8073-e2812edd7100" 
+ 
+ [20:02:58 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:02:58 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:02:58 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:03:15 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:03:15 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:03:15 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:03:15 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. "backserver:1b4754dd-f175-4e55-9ac7-489dfa8866f1"                                             
+ 
+ [20:03:15 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:03:15 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:03:15 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:03:31 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:03:31 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:03:31 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:03:31 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames.                                             "backserver:f3cf3fc1-1a16-47e4-aecc-3314cbc4adb9" 
+ 
+ [20:03:31 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:03:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:03:31 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:03:43 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:03:52 INF (1) . - ] 
+               The global logger has been closed and flushed 
+ [20:04:02 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:04:03 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:04:03 DBG (18) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:04:03 INF (18) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. "backserver:6b6fc975-9c74-4165-b6a9-66eb71d57f6e" 
+ 
+ [20:04:03 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:04:03 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:04:03 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:04:22 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:04:22 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:04:22 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:04:22 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. "backserver:746dc6ac-0caf-4510-915b-5aead1f11825" 
+ 
+ [20:04:22 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:04:22 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:04:22 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:04:48 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:04:49 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:04:49 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:04:49 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:96712720-030a-447d-87a7-80ddb0e7b409" } 
+ 
+ [20:04:49 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:04:49 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:04:49 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:06:21 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:06:21 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:06:21 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:06:21 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:6a599a07-5b5f-4980-a4cf-c094b84f687f" } 
+ 
+ [20:06:21 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+                 { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:06:21 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:06:21 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:06:54 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:06:54 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:06:54 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:06:54 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:51dc81b0-95bb-4cb6-9617-f684193ea608" } 
+ 
+ [20:06:55 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+            { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:06:55 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:06:55 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:07:29 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:07:29 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:07:29 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:07:29 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:da517639-5b9d-4363-99f7-4a47a86fbe45" } 
+ 
+ [20:07:29 INF (24) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+            { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:07:29 DBG (24) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+       { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:07:29 DBG (24) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:07:49 INF (1) BackgroundTasksQueue.Program. - ] 
+               The global logger Serilog has been configured.
+ 
+ [20:07:50 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+               BackServer's MonitorLoop is starting. 
+ [20:07:50 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+               EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:07:50 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+               Server Guid was fetched and stored into EventKeyNames. 
+           { ServerId: "backserver:bc10f214-d699-42da-876d-7dab5b02f87d" } 
+ 
+ [20:07:50 INF (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+               BackServer subscribed on EventKey. 
+            { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:07:50 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+               You subscribed on EventSet. 
+            { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:07:50 DBG (18) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+               Is Cancellation Token obtained? - { IsCancelled: False } 
  

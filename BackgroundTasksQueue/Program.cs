@@ -42,7 +42,7 @@ namespace BackgroundTasksQueue
             .UseContentRoot(Directory.GetCurrentDirectory())
             .ConfigureAppConfiguration((hostContext, config) =>
             {
-                var env = hostContext.HostingEnvironment;
+                IHostEnvironment env = hostContext.HostingEnvironment;
 
                 // find the shared folder in the parent folder
                 //string[] paths = { env.ContentRootPath, "..", "SharedSettings" };
@@ -64,7 +64,7 @@ namespace BackgroundTasksQueue
 
                 //var outputTemplate = "{Timestamp:HH:mm} [{Level:u3}] ({ThreadId}) {Message}{NewLine}{Exception}";
                 //var outputTemplate = "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message}{NewLine}in method {MemberName} at {FilePath}:{LineNumber}{NewLine}{Exception}{NewLine}";
-                var outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3} ({ThreadId}) {SourceContext}.{MemberName} - {LineNumber}] {Message} {NewLine} {Exception}";
+                string outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3} ({ThreadId}) {SourceContext}.{MemberName} - {LineNumber}] {NewLine}               {Message} {NewLine} {Exception}";
 
                 //seriLog.Information("Hello, Serilog!");
 
@@ -132,7 +132,6 @@ namespace BackgroundTasksQueue
         }
     }
 
-    
 
     //public static class ThisBackServerGuid
     //{

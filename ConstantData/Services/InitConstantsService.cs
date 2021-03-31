@@ -25,9 +25,12 @@ namespace ConstantData.Services
 
         public EventKeyNames InitialiseEventKeyNames()
         {
+            //string blank15 = _constantService.Blank15; // for testing
+
             return new EventKeyNames
             {
-                TaskEmulatorDelayTimeInMilliSeconds = _constantService.GetTaskEmulatorDelayTimeInMilliSeconds, // время задержки в секундах для эмулятора счета задачи
+                TaskEmulatorDelayTimeInMilliseconds = _constantService.GetTaskEmulatorDelayTimeInMilliseconds, // время задержки в секундах для эмулятора счета задачи
+                Blank15 = _constantService.Blank15, // 
                 BalanceOfTasksAndProcesses = _constantService.GetBalanceOfTasksAndProcesses, // соотношение количества задач и процессов для их выполнения на back-processes-servers (количества задач разделить на это число и сделать столько процессов)
                 MaxProcessesCountOnServer = _constantService.GetMaxProcessesCountOnServer, // максимальное количество процессов на back-processes-servers (минимальное - 1)
                 EventKeyFrom = _constantService.GetEventKeyFrom, // "subscribeOnFrom" - ключ для подписки на команду запуска эмулятора сервера
@@ -51,7 +54,8 @@ namespace ConstantData.Services
                 EventKeyBackReadinessTimeDays = _constantService.GetEventKeyBackReadinessTimeDays, // срок хранения 
                 EventKeyFrontGivesTaskTimeDays = _constantService.GetEventKeyFrontGivesTaskTimeDays, // срок хранения ключа 
                 EventKeyBackServerMainTimeDays = _constantService.GetEventKeyBackServerMainTimeDays, // срок хранения ключа 
-                EventKeyBackServerAuxiliaryTimeDays = _constantService.GetEventKeyBackServerAuxiliaryTimeDays, // срок хранения ключа 
+                EventKeyBackServerAuxiliaryTimeDays = _constantService.GetEventKeyBackServerAuxiliaryTimeDays // срок хранения ключа 
+                
             };
         }
     }

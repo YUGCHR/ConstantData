@@ -6,7 +6,7 @@ namespace ConstantData.Services
     public interface ISettingConstantsService
     {
         public int GetRecordActualityLevel { get; }
-        public int GetTaskEmulatorDelayTimeInMilliSeconds { get; }
+        public int GetTaskEmulatorDelayTimeInMilliseconds { get; }
         public int GetBalanceOfTasksAndProcesses { get; }
         public int GetMaxProcessesCountOnServer { get; }
         public int GetMinBackProcessesServersCount { get; }
@@ -30,6 +30,7 @@ namespace ConstantData.Services
         public string GetEventFieldBack { get; }
         public string GetEventFieldFront { get; }
         public string GetEventKeyBacksTasksProceed { get; }
+        public string Blank15 { get; }
     }
 
     // сделать константы ключей в виде словаря - строка/время существования ключа
@@ -43,7 +44,8 @@ namespace ConstantData.Services
 
             string recordActualityLevel = Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("RecordActualityLevel").Value;
             GetRecordActualityLevel = Convert.ToInt32(recordActualityLevel);
-            GetTaskEmulatorDelayTimeInMilliSeconds = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("TaskEmulatorDelayTimeInMilliSeconds").Value);
+            GetTaskEmulatorDelayTimeInMilliseconds = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("TaskEmulatorDelayTimeInMilliseconds").Value);
+            Blank15 = Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("PaddingForLogsThirdLine").Value;
             GetBalanceOfTasksAndProcesses = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("BalanceOfTasksAndProcesses").Value);
             GetMaxProcessesCountOnServer = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MaxProcessesCountOnServer").Value);
             GetMinBackProcessesServersCount = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MinBackProcessesServersCount").Value);
@@ -73,14 +75,16 @@ namespace ConstantData.Services
             GetEventFieldBack = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldBack").Value;
             GetEventFieldFront = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldFront").Value;
             GetEventKeyBacksTasksProceed = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyBacksTasksProceed").Value;
-
+            
         }
 
         private IConfiguration Configuration { get; }
 
         public int GetRecordActualityLevel { get; }
 
-        public int GetTaskEmulatorDelayTimeInMilliSeconds { get; }
+        public int GetTaskEmulatorDelayTimeInMilliseconds { get; }
+
+        public string Blank15 { get; }
 
         public int GetBalanceOfTasksAndProcesses { get; }
 
@@ -127,5 +131,6 @@ namespace ConstantData.Services
         public string GetEventFieldFront { get; }
 
         public string GetEventKeyBacksTasksProceed { get; }
+
     }
 }

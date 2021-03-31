@@ -3,6 +3,7 @@
     "Constants": {
       "RecordActualityLevel": 6, // current model version of Db data structure
       "TaskEmulatorDelayTimeInMilliSeconds": 300, // delay time to emulate upload of a real book - in seconds
+      "PaddingForLogsThirdLine": "---------------", // 
       "BalanceOfTasksAndProcesses": 5, // соотношение количества задач и процессов для их выполнения на back-processes-servers (количества задач разделить на это число и сделать столько процессов)
       "MaxProcessesCountOnServer": 3, // максимальное количество процессов на back-processes-servers (минимальное - 1)
       "MinBackProcessesServersCount": 2 // минимальное количество бэк-серверов при проверке на старте фронта

@@ -62,7 +62,7 @@ namespace BackgroundTasksQueue.Services
         public void SubscribeOnEventRun(EventKeyNames eventKeysSet)
         {
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
-            Logs.Here().Information("BackServer subscribed on EventKey. \n {@E} \n", new { EventKey = eventKeyFrontGivesTask });
+            Logs.Here().Information("BackServer subscribed on EventKey. \n {@E,68} \n", new { EventKey = eventKeyFrontGivesTask });
 
             // блокировка множественной подписки до специального разрешения повторной подписки
             _flagToBlockEventRun = true;
@@ -88,7 +88,7 @@ namespace BackgroundTasksQueue.Services
             });
 
             string eventKeyCommand = $"Key = {eventKeyFrontGivesTask}, Command = {eventKeysSet.EventCmd}";
-            Logs.Here().Debug("You subscribed on EventSet. \n {@EK} \n", new { EventSet = eventKeyCommand });
+            Logs.Here().Debug("You subscribed on EventSet. \n {@EK,93} \n", new { EventSet = eventKeyCommand });
         }
 
         private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key

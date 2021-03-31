@@ -5,7 +5,8 @@ namespace Shared.Library.Models
     // common constants model for 3 solutions
     public class EventKeyNames
     {
-        public int TaskEmulatorDelayTimeInMilliSeconds { get; set; }
+        public int TaskEmulatorDelayTimeInMilliseconds { get; set; }
+        public string Blank15 { get; set; }
         public int BalanceOfTasksAndProcesses { get; set; }
         public int MaxProcessesCountOnServer { get; set; }
         public int MinBackProcessesServersCount { get; set; } // for FrontEmulator only
@@ -32,6 +33,5 @@ namespace Shared.Library.Models
         public double EventKeyBackServerMainTimeDays { get; set; }
         public double EventKeyBackServerAuxiliaryTimeDays { get; set; }
         public double PercentsKeysExistingTimeInMinutes { get; set; } // for Controller only
-
     }
 }
