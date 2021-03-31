@@ -38,8 +38,7 @@ namespace BackgroundTasksQueue.Services
 
         public void StartWorkItem(string backServerPrefixGuid, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription)
         {
-            _logger.LogInformation(2100, "TaskDescriptionAndProgress taskDescription TaskCompletedOnPercent = {0}.", taskDescription.TaskState.TaskCompletedOnPercent);
-
+            Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@T} \n", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
             // Enqueue a background work item
             _taskQueue.QueueBackgroundWorkItem(async token =>
             {
@@ -48,14 +47,14 @@ namespace BackgroundTasksQueue.Services
                 // если задача завершилась полностью, удалить поле регистрации из ключа сервера
                 // пока (или совсем) не удаляем, а уменьшаем на единичку значение, пока не станет 0 - тогда выполнение пакета закончено
                 bool isTaskFinished = await ActualTaskCompletion(isTaskCompleted, backServerPrefixGuid, taskDescription, tasksPackageGuidField, singleTaskGuid, token);
-                
+
             });
         }
 
         private async Task<bool> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
             int assignmentTerms = taskDescription.TaskDescription.CycleCount;
-            double taskDelayTimeSpanFromMilliSeconds = taskDescription.TaskDescription.TaskDelayTimeFromMilliSeconds/1000D;
+            double taskDelayTimeSpanFromMilliSeconds = taskDescription.TaskDescription.TaskDelayTimeFromMilliSeconds / 1000D;
             int delayLoop = 0;
             int loopRemain = assignmentTerms;
             //var guid = Guid.NewGuid().ToString();

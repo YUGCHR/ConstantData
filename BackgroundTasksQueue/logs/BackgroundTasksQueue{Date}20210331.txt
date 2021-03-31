@@ -141,4 +141,1349 @@
  [15:56:53 WRN (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 125] Next package could not be obtained - there are no more packages in cafe. 
  [15:56:53 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: True }. 
  [15:56:53 WRN (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 208] This { Server: "backserver:6f08d44a-4fdb-4b8d-a27b-2cc46b6415a8" } waits new Task Package}. 
+ [16:06:19 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [16:06:20 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [16:06:20 DBG (6) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [16:06:20 INF (6) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:0f886a00-cd72-4bb8-9bd7-e1c50a12a04f" } was fetched and stored into EventKeyNames. 
+ [16:06:20 INF (6) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [16:06:20 DBG (6) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [16:06:20 DBG (6) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [16:06:30 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:06:30 DBG (25) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:06:30 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:06:30 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 5 }. 
+ [16:06:30 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 2 }. 
+ [16:06:30 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:06:30 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:48d718c4-4d6b-496f-9784-8c66326452a2" }. 
+ [16:06:30 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:48d718c4-4d6b-496f-9784-8c66326452a2" }. 
+ [16:06:30 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:0f886a00-cd72-4bb8-9bd7-e1c50a12a04f" }. 
+ [16:06:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:48d718c4-4d6b-496f-9784-8c66326452a2, Command = HashSet" }. 
+ [16:06:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:48d718c4-4d6b-496f-9784-8c66326452a2", WhenTasksPackageWasCaptured called. 
+ [16:06:30 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:48d718c4-4d6b-496f-9784-8c66326452a2" } single { Task: "task:b24acee4-e3d2-4721-8cbd-4cbd2ce61176" } processing was started. 
+ [16:06:30 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:48d718c4-4d6b-496f-9784-8c66326452a2" } single { Task: "task:ddd915c9-6b86-4cf9-95a0-5417ff2a73d2" } processing was started. 
+ [16:06:30 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:48d718c4-4d6b-496f-9784-8c66326452a2" } single { Task: "task:293a3cfb-ab4b-4109-a6d7-77e6219d7de1" } processing was started. 
+ [16:06:30 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:48d718c4-4d6b-496f-9784-8c66326452a2" } single { Task: "task:c46c3142-416d-45bf-8448-1aeca74c287b" } processing was started. 
+ [16:06:30 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:48d718c4-4d6b-496f-9784-8c66326452a2" } single { Task: "task:f1aeda16-f134-4ca5-b82b-deb245953e52" } processing was started. 
+ [16:06:30 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:48d718c4-4d6b-496f-9784-8c66326452a2" } single { Task: "task:291c913c-e23d-452c-9f28-77181d271486" } processing was started. 
+ [16:06:30 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:48d718c4-4d6b-496f-9784-8c66326452a2" } single { Task: "task:f4740fb4-1d5c-4b25-b837-b3429d970bce" } processing was started. 
+ [16:06:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:30 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:06:30 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:06:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [16:06:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:31 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:06:33 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:33 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:06:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:06:36 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:36 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:06:37 DBG (32) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:37 DBG (32) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:06:38 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:38 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:06:40 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:40 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:06:40 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:06:40 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 4 }. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 1 }. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:7a9434cf-40df-47b3-b048-4441ed359724" }. 
+ [16:06:40 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:7a9434cf-40df-47b3-b048-4441ed359724" }. 
+ [16:06:40 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:0f886a00-cd72-4bb8-9bd7-e1c50a12a04f" }. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:7a9434cf-40df-47b3-b048-4441ed359724, Command = HashSet" }. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:7a9434cf-40df-47b3-b048-4441ed359724", WhenTasksPackageWasCaptured called. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:7a9434cf-40df-47b3-b048-4441ed359724" } single { Task: "task:43f6e247-5539-48db-9bd4-19aec70a88c5" } processing was started. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:7a9434cf-40df-47b3-b048-4441ed359724" } single { Task: "task:4f82ff93-083f-47f5-9763-f585fc07113e" } processing was started. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:7a9434cf-40df-47b3-b048-4441ed359724" } single { Task: "task:f500fb54-9070-474a-92bc-29109bb30de2" } processing was started. 
+ [16:06:40 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:06:40 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:06:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:06:41 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:41 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:06:41 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:41 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 3 }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 1 }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" }. 
+ [16:06:43 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:d1a039cf-3356-4e77-8d62-27045e725521" }. 
+ [16:06:43 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:0f886a00-cd72-4bb8-9bd7-e1c50a12a04f" }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:d1a039cf-3356-4e77-8d62-27045e725521, Command = HashSet" }. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:d1a039cf-3356-4e77-8d62-27045e725521", WhenTasksPackageWasCaptured called. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:69f8d09c-4d4f-401b-a8cf-e0614097a6be" } processing was started. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:7f5644c3-6c13-49a0-9f0a-1f67df68de88" } processing was started. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:244ef998-59d2-4d67-8d20-b85e3b0895d8" } processing was started. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:505fe6d1-2b21-4026-ae3d-1e0301640f24" } processing was started. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:b072dadb-d590-4a7b-9385-5864cb2e85db" } processing was started. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:d9c62731-5900-4a4d-ac7e-7397428cef9f" } processing was started. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:c8d6281f-afd4-40e6-a939-0731f70e95dc" } processing was started. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:562fbc29-ef2c-4a5a-902a-8e2fb14ae3ac" } processing was started. 
+ [16:06:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d1a039cf-3356-4e77-8d62-27045e725521" } single { Task: "task:9f5b4cf5-6e48-47cf-b8fa-83b3a96f2fb9" } processing was started. 
+ [16:06:43 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:43 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:06:43 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 9 }. 
+ [16:06:43 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:06:45 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:45 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 8 }. 
+ [16:06:45 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:45 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [16:06:46 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:46 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:06:46 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:46 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:06:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:06:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:06:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:06:48 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:06:48 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:07:19 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [16:07:19 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [16:07:19 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [16:07:19 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:4f3bc33a-3cc1-476f-8cbe-c57c1e846c1f" } was fetched and stored into EventKeyNames. 
+ [16:07:19 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [16:07:19 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [16:07:19 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [16:07:25 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:07:25 DBG (27) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:07:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:07:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 7 }. 
+ [16:07:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 5 }. 
+ [16:07:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:07:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d" }. 
+ [16:07:25 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d" }. 
+ [16:07:25 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:4f3bc33a-3cc1-476f-8cbe-c57c1e846c1f" }. 
+ [16:07:25 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:e748d2d5-ed29-41c7-9c12-fcca18cf918d, Command = HashSet" }. 
+ [16:07:25 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d", WhenTasksPackageWasCaptured called. 
+ [16:07:25 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d" } single { Task: "task:93688115-2bf7-426d-a5cf-c2806d49ba42" } processing was started. 
+ [16:07:25 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d" } single { Task: "task:b52b6ec1-8d37-46a8-8f4b-1642dde52efb" } processing was started. 
+ [16:07:25 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d" } single { Task: "task:ade2c2eb-ec36-46df-8e4f-85b92dc73f87" } processing was started. 
+ [16:07:25 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d" } single { Task: "task:9136c8eb-6e0f-4a60-8d5f-d1670acfa95e" } processing was started. 
+ [16:07:26 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d" } single { Task: "task:1ae04127-e9c4-432d-b5e4-117e99973093" } processing was started. 
+ [16:07:26 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e748d2d5-ed29-41c7-9c12-fcca18cf918d" } single { Task: "task:0833bd88-c593-45ac-ad38-b6e9b1541a43" } processing was started. 
+ [16:07:26 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:26 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:07:26 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:07:26 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:07:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:07:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:07:31 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:31 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:07:32 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:32 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:07:34 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:34 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:07:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:07:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:07:35 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 6 }. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 4 }. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:0a28abc8-1a78-4a5e-8740-8045e3d50635" }. 
+ [16:07:35 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:0a28abc8-1a78-4a5e-8740-8045e3d50635" }. 
+ [16:07:35 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:4f3bc33a-3cc1-476f-8cbe-c57c1e846c1f" }. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:0a28abc8-1a78-4a5e-8740-8045e3d50635, Command = HashSet" }. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:0a28abc8-1a78-4a5e-8740-8045e3d50635", WhenTasksPackageWasCaptured called. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:0a28abc8-1a78-4a5e-8740-8045e3d50635" } single { Task: "task:c1016615-0850-4db3-a489-9474f573e91d" } processing was started. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:0a28abc8-1a78-4a5e-8740-8045e3d50635" } single { Task: "task:4e64c71e-6ab4-42d7-bd0f-85eab3f3faed" } processing was started. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:0a28abc8-1a78-4a5e-8740-8045e3d50635" } single { Task: "task:11525f4e-190b-48b6-9201-a938ec33d028" } processing was started. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:0a28abc8-1a78-4a5e-8740-8045e3d50635" } single { Task: "task:dddf843d-d622-4a0b-b04d-1f68d9d3f68b" } processing was started. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:0a28abc8-1a78-4a5e-8740-8045e3d50635" } single { Task: "task:b1198d4b-ddf7-4f4a-8dcc-b9d42df03618" } processing was started. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:0a28abc8-1a78-4a5e-8740-8045e3d50635" } single { Task: "task:8c1cf027-bae5-4ddb-8316-2482d5c7d190" } processing was started. 
+ [16:07:35 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:07:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:35 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:07:35 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:07:37 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:37 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:07:38 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:38 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:07:39 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:39 DBG (33) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:07:40 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:40 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:07:40 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:40 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:07:42 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:42 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:07:42 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:07:42 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 5 }. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 2 }. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d" }. 
+ [16:07:42 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d" }. 
+ [16:07:42 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:4f3bc33a-3cc1-476f-8cbe-c57c1e846c1f" }. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d, Command = HashSet" }. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d", WhenTasksPackageWasCaptured called. 
+ [16:07:42 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d" } single { Task: "task:edd49465-320a-4755-bd64-8f94ec38d21c" } processing was started. 
+ [16:07:42 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d" } single { Task: "task:339aa872-21d7-4b28-a77d-452716589db2" } processing was started. 
+ [16:07:42 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d" } single { Task: "task:3c0022d1-5f9a-4f8e-97f5-e9f927120040" } processing was started. 
+ [16:07:42 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d" } single { Task: "task:f33dc5d0-9acc-4a68-885e-0629805935fc" } processing was started. 
+ [16:07:42 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d" } single { Task: "task:d3d1a811-76b7-4c16-a49c-de4dd270a251" } processing was started. 
+ [16:07:42 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:e2af949a-acb3-4bb1-a8e8-ee08a78c136d" } single { Task: "task:7ecce85f-ac59-42b1-b8a5-f5308f73572b" } processing was started. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:42 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:07:42 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:07:42 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:07:43 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:43 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:07:44 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:44 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:07:44 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:44 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:07:45 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:45 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:07:46 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:46 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:07:46 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:46 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:07:46 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:07:46 DBG (29) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:07:46 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:07:46 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 4 }. 
+ [16:07:46 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:07:46 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:07:46 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" }. 
+ [16:07:46 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" }. 
+ [16:07:46 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:4f3bc33a-3cc1-476f-8cbe-c57c1e846c1f" }. 
+ [16:07:46 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:d104e7c5-7271-40f9-9c41-217b5cefa46b, Command = HashSet" }. 
+ [16:07:46 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:d104e7c5-7271-40f9-9c41-217b5cefa46b", WhenTasksPackageWasCaptured called. 
+ [16:07:46 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:1af94a05-c85d-45eb-b8c7-d888481a0f70" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:f3f21ede-1343-447c-bc22-516e928ea270" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:9832e665-793d-42af-8118-4dcfe17823bd" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:4def4f22-8e3b-4b87-9adc-7e2c4fa9550b" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:641e0ac7-dd92-4126-a5d2-84a066fe1f94" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:9ccdde5d-4d7e-47b3-bbbe-8f30cd830448" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:53df6568-017f-4145-a774-c13b7902298e" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:c1a4b4ea-9ee0-426b-b644-ce319480fffa" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] { Package: "package:d104e7c5-7271-40f9-9c41-217b5cefa46b" } single { Task: "task:e85ae1aa-9d3d-4508-8e90-de34a08b8646" } processing was started. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:47 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:07:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 9 }. 
+ [16:07:47 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:07:48 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:48 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 8 }. 
+ [16:07:48 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:48 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [16:07:49 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:49 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:07:49 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:49 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:07:49 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:49 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:07:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:07:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:07:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:07:51 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:11:52 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [16:11:52 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [16:11:52 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [16:11:52 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" } was fetched and stored into EventKeyNames. 
+ [16:11:52 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [16:11:52 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" }. 
+ [16:11:52 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [16:12:06 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:12:06 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:12:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 8 }. 
+ [16:12:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:12:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:12:06 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371" }. 
+ [16:12:06 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371" }. 
+ [16:12:06 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" }. 
+ [16:12:06 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371, Command = HashSet" }. 
+ [16:12:06 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371", WhenTasksPackageWasCaptured called. 
+ [16:12:06 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371" } 
+ { Task: "task:4b685db6-be71-42ab-9de7-65b5cebea0e0" } 
+ 
+ [16:12:06 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371" } 
+ { Task: "task:b3945b07-57d1-44d2-b2f6-b8239c990213" } 
+ 
+ [16:12:06 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371" } 
+ { Task: "task:e7b18d75-3369-40c2-b807-2a45dff89aa4" } 
+ 
+ [16:12:06 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371" } 
+ { Task: "task:7c45e40c-fca0-47b5-bc0b-2563b5ee2c90" } 
+ 
+ [16:12:06 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ce0a60da-16f1-4417-bc3e-f34a4ef4a371" } 
+ { Task: "task:94544eea-730e-4c83-8274-4b077579a155" } 
+ 
+ [16:12:06 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:06 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:12:06 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:12:06 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:12:08 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:08 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:12:10 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:10 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:12:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:11 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:13 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:13 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:16 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:16 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:16 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:16 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 7 }. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 1 }. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" }. 
+ [16:12:16 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" }. 
+ [16:12:16 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" }. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3, Command = HashSet" }. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3", WhenTasksPackageWasCaptured called. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:e8d881bc-c207-4723-9605-dbb8d0dcc51e" } 
+ 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:0840c19a-3e34-4a67-be53-97de2ae63cf2" } 
+ 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:1022ec64-145f-48c9-a211-b1312612f104" } 
+ 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:de2ba32a-c9ae-405a-a84d-00a7a120edbe" } 
+ 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:267eb9db-2bc8-4a29-a188-1aacb7aab354" } 
+ 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:a1cfa43b-3d41-4d37-9b3a-7e22455a0f59" } 
+ 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:3f535683-cb78-4915-a9b3-8beb80e3da82" } 
+ 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:47d3abc2-1554-4c56-9d9d-23d64998faa6" } 
+ 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:ae5ffc20-351d-411a-ac7f-fdc15a6fd8e3" } 
+ { Task: "task:26586cc0-66b4-41b6-8a97-d64f4a734456" } 
+ 
+ [16:12:16 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:16 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:12:16 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 9 }. 
+ [16:12:17 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:17 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 8 }. 
+ [16:12:18 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:18 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [16:12:18 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:18 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:20 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:20 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:12:20 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:20 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:12:21 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:21 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:12:22 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:22 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 6 }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 4 }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" }. 
+ [16:12:23 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" }. 
+ [16:12:23 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:624d158c-6c3a-4263-8343-35ad8a0dc22b, Command = HashSet" }. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:624d158c-6c3a-4263-8343-35ad8a0dc22b", WhenTasksPackageWasCaptured called. 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" } 
+ { Task: "task:a97264bf-b905-4ca9-8495-7c431304ffa8" } 
+ 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" } 
+ { Task: "task:fd807e43-4141-42bb-b050-59d89f3d834c" } 
+ 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" } 
+ { Task: "task:990fbb71-7c74-40cc-929e-fa8b5cf8ab49" } 
+ 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" } 
+ { Task: "task:710b651d-933f-428c-a216-c8aa47b0bb62" } 
+ 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" } 
+ { Task: "task:ce2913d6-8afd-4087-ad92-424ce64727c7" } 
+ 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" } 
+ { Task: "task:d148d0e4-21a0-46ba-8fc4-58ef7df43b9c" } 
+ 
+ [16:12:23 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:624d158c-6c3a-4263-8343-35ad8a0dc22b" } 
+ { Task: "task:5f047f72-a455-4979-bca5-0d5645a94e72" } 
+ 
+ [16:12:23 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:23 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:12:23 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [16:12:23 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:12:25 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:25 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:26 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:26 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:26 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 5 }. 
+ [16:12:26 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:12:26 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 5 }. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:e574b363-ab72-4ec0-bbdc-c39d5b2a9c50" }. 
+ [16:12:26 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:e574b363-ab72-4ec0-bbdc-c39d5b2a9c50" }. 
+ [16:12:26 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" }. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:e574b363-ab72-4ec0-bbdc-c39d5b2a9c50, Command = HashSet" }. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:e574b363-ab72-4ec0-bbdc-c39d5b2a9c50", WhenTasksPackageWasCaptured called. 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:e574b363-ab72-4ec0-bbdc-c39d5b2a9c50" } 
+ { Task: "task:f1385a88-59f4-466b-b839-2a743e010321" } 
+ 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:e574b363-ab72-4ec0-bbdc-c39d5b2a9c50" } 
+ { Task: "task:f16fbfc6-f155-4b58-912c-bcf3a241b80c" } 
+ 
+ [16:12:26 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:e574b363-ab72-4ec0-bbdc-c39d5b2a9c50" } 
+ { Task: "task:213a7d26-33bd-4765-84ad-d429700a9312" } 
+ 
+ [16:12:26 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:26 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:12:26 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:12:26 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:26 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:12:26 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:12:27 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:27 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:27 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:27 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:28 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:28 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:28 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:28 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:28 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:28 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 4 }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 2 }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" }. 
+ [16:12:28 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:41fb709a-3a05-4538-badf-23eecdd03db0" }. 
+ [16:12:28 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:41fb709a-3a05-4538-badf-23eecdd03db0, Command = HashSet" }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:41fb709a-3a05-4538-badf-23eecdd03db0", WhenTasksPackageWasCaptured called. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:e7cf9de0-7bb6-4885-9950-de30174b1693" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:e0350886-7043-4d90-b10f-d03f6dd6448e" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:35e74a6d-985e-416f-997a-99fdcce0ec20" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:a8665d97-72e1-48a9-b0a6-04050ebd54ec" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:6be6461d-ece5-4a2d-97c5-01ad7bf79a44" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:03bc32cf-a884-4cee-8a9c-2619bf84f65b" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:de72d90e-a3d9-4d23-8c16-dec1aaf58f7a" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:7aa6a9a6-1e66-4418-b28c-81ea69194770" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:41fb709a-3a05-4538-badf-23eecdd03db0" } 
+ { Task: "task:cf77ff85-577b-483e-87f9-02d1b19e1f9a" } 
+ 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:28 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:12:28 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:12:28 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 9 }. 
+ [16:12:29 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:29 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:29 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:29 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 9 }. 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 9 }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 3 }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 1 }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" }. 
+ [16:12:30 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" }. 
+ [16:12:30 INF (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:590203d7-719b-4c5d-b5a4-42da581dfc11, Command = HashSet" }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:590203d7-719b-4c5d-b5a4-42da581dfc11", WhenTasksPackageWasCaptured called. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:5772d731-4bcf-40a3-b704-bc52c5a98cd9" } 
+ 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:b92889da-dbfa-4865-9e00-13d4a3265c6d" } 
+ 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:7bd58931-c602-4f48-b3f8-308f14b4c40c" } 
+ 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:3f72f0c9-3fb7-4737-a04c-cbd744fdcff7" } 
+ 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:3e5f9340-34a6-479f-83b7-602800d21320" } 
+ 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:db633201-e590-42a9-9cff-0bce652690e3" } 
+ 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:840635bb-fe03-46c0-ac80-c0f0fe960a45" } 
+ 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:fa92b758-3a07-4f9b-a4b1-f5a118361fee" } 
+ 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 8 }. 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:590203d7-719b-4c5d-b5a4-42da581dfc11" } 
+ { Task: "task:66ab5ebf-2b61-4040-b663-2a0ddaeb7e02" } 
+ 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:12:30 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 2 }. 
+ [16:12:30 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:12:30 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:12:30 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 8 }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13" }. 
+ [16:12:30 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13" }. 
+ [16:12:30 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:4b818000-1fb1-4e8a-a946-eb783d4f0b13, Command = HashSet" }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13", WhenTasksPackageWasCaptured called. 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13" } 
+ { Task: "task:6dad89e2-01a1-4100-9c96-b0f4eb44e105" } 
+ 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13" } 
+ { Task: "task:cf5019c3-0379-4b5c-8a66-95962a3ae562" } 
+ 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13" } 
+ { Task: "task:6be8a4a8-e1bd-4179-98b3-a3c02e978889" } 
+ 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13" } 
+ { Task: "task:e8b6be47-9e1c-4528-8e21-4719301f7e5e" } 
+ 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13" } 
+ { Task: "task:b81d86b3-44e0-4868-86ee-d6e1f034e5bc" } 
+ 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:4b818000-1fb1-4e8a-a946-eb783d4f0b13" } 
+ { Task: "task:d0b6071b-18b4-4b07-88da-046d9c430931" } 
+ 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 8 }. 
+ [16:12:30 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:30 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [16:12:30 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:12:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:31 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:32 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:32 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 1 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258" }. 
+ [16:12:32 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258" }. 
+ [16:12:32 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258, Command = HashSet" }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, Package Key "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258", WhenTasksPackageWasCaptured called. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258" } 
+ { Task: "task:eecb5dad-f0df-44e0-98d8-bd6aa978578f" } 
+ 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258" } 
+ { Task: "task:7e1094e0-2119-4446-ba88-6385324cbf7e" } 
+ 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258" } 
+ { Task: "task:d9f572d3-e647-4631-928e-9abfe2f8af2e" } 
+ 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258" } 
+ { Task: "task:3639db2f-e144-42f2-99c9-d5fd0557928f" } 
+ 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258" } 
+ { Task: "task:efc4d0e9-af02-4301-a44f-f588a6dd2a96" } 
+ 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:3bdb91dd-b6ab-4048-8ccc-e82bbc2fc258" } 
+ { Task: "task:403e85d7-dfcf-4706-845c-fa54582014c6" } 
+ 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:33 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:33 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:33 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:33 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:33 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:33 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:33 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:33 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:33 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:33 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:33 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:33 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:33 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:33 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:33 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:12:33 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:34 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:12:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:34 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:34 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:34 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:12:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:34 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:34 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:34 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:34 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:34 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:12:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:12:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:12:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:35 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: False }. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 64] Main way - return to the subscription on the cafe key. 
+ [16:12:35 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [16:12:35 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 124] This { Server: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" } finished work,
+ Global { Permit: False }. 
+ [16:12:35 WRN (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 125] Next package could not be obtained - there are no more packages in cafe. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [16:12:35 WRN (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 208] This { Server: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" } waits new Task Package}. 
+ [16:12:35 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:35 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:12:36 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:36 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:12:36 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:36 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:12:36 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:36 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:12:37 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:12:37 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:12:37 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: True }, { TasksLeft: 0 }. 
+ [16:12:37 DBG (25) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:12:37 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: False }. 
+ [16:12:37 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 64] Main way - return to the subscription on the cafe key. 
+ [16:12:37 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured { TaskPackage: null }. 
+ [16:12:37 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 124] This { Server: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" } finished work,
+ Global { Permit: True }. 
+ [16:12:37 WRN (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 125] Next package could not be obtained - there are no more packages in cafe. 
+ [16:12:37 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [16:12:37 WRN (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 208] This { Server: "backserver:59282ee9-a5e6-4304-b787-9778599fe28b" } waits new Task Package}. 
+ [16:18:16 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [16:18:16 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [16:18:16 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [16:18:16 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:294efae5-0d7c-48d6-8890-355a0fc287a1" } was fetched and stored into EventKeyNames. 
+ [16:18:16 INF (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [16:18:16 DBG (25) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [16:18:16 DBG (25) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [16:18:27 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:18:27 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:18:27 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:18:27 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 5 }. 
+ [16:18:27 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 3 }. 
+ [16:18:27 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:18:27 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0" }. 
+ [16:18:27 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0" } 
+. 
+ [16:18:27 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:294efae5-0d7c-48d6-8890-355a0fc287a1" }. 
+ [16:18:27 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0, Command = HashSet" }. 
+ [16:18:27 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0" } 
+ 
+ [16:18:27 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0" } 
+ { Task: "task:ba40fc91-7ed9-47dc-9220-39623277ec7e" } 
+ 
+ [16:18:27 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0" } 
+ { Task: "task:92d3569d-6c7c-4866-97ae-c0fa3873752f" } 
+ 
+ [16:18:27 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0" } 
+ { Task: "task:bc566c96-f60b-4b77-9e41-af040f6a8aab" } 
+ 
+ [16:18:27 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0" } 
+ { Task: "task:6363f424-9552-4715-bee9-347b2a3bb56f" } 
+ 
+ [16:18:27 DBG (17) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:d9bcd791-7c8e-4ad5-9513-69fe9a5a0bc0" } 
+ { Task: "task:570a0388-aa69-464e-bb1f-670fd5d88c0d" } 
+ 
+ [16:18:27 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:27 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:18:27 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:18:27 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:18:29 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:29 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:18:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:31 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:18:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:32 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:18:35 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:35 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:18:37 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:37 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:18:37 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:18:37 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 4 }. 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 2 }. 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:6ff22646-2adb-403c-bb2b-bd94713b82b8" }. 
+ [16:18:37 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:6ff22646-2adb-403c-bb2b-bd94713b82b8" } 
+. 
+ [16:18:37 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:294efae5-0d7c-48d6-8890-355a0fc287a1" }. 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:6ff22646-2adb-403c-bb2b-bd94713b82b8, Command = HashSet" }. 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:6ff22646-2adb-403c-bb2b-bd94713b82b8" } 
+ 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:6ff22646-2adb-403c-bb2b-bd94713b82b8" } 
+ { Task: "task:64af14a1-885d-420a-a2f0-2311f3b63a20" } 
+ 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:6ff22646-2adb-403c-bb2b-bd94713b82b8" } 
+ { Task: "task:1183e07f-2c95-43b8-bb18-5aea2bf02cba" } 
+ 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:6ff22646-2adb-403c-bb2b-bd94713b82b8" } 
+ { Task: "task:e472a200-a782-4f5d-a504-3da0ab0eca88" } 
+ 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:6ff22646-2adb-403c-bb2b-bd94713b82b8" } 
+ { Task: "task:6607a5f9-af55-4355-a473-c9229740fe34" } 
+ 
+ [16:18:37 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:6ff22646-2adb-403c-bb2b-bd94713b82b8" } 
+ { Task: "task:8b421868-eb7a-460f-b67a-051c68c310e3" } 
+ 
+ [16:18:37 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:37 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:18:37 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:18:37 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:18:38 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:38 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:18:39 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:39 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:18:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:18:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:40 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:18:43 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:43 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:18:43 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:18:43 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 3 }. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 1 }. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:8df0d526-d0ec-434b-b9ad-e5b8fb36e66c" }. 
+ [16:18:43 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:8df0d526-d0ec-434b-b9ad-e5b8fb36e66c" } 
+. 
+ [16:18:43 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:294efae5-0d7c-48d6-8890-355a0fc287a1" }. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:8df0d526-d0ec-434b-b9ad-e5b8fb36e66c, Command = HashSet" }. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:8df0d526-d0ec-434b-b9ad-e5b8fb36e66c" } 
+ 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:8df0d526-d0ec-434b-b9ad-e5b8fb36e66c" } 
+ { Task: "task:a4151926-469b-4a65-974d-082c48df7c24" } 
+ 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:8df0d526-d0ec-434b-b9ad-e5b8fb36e66c" } 
+ { Task: "task:e3b2d880-5606-461f-b5c8-7711eb8fd085" } 
+ 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:8df0d526-d0ec-434b-b9ad-e5b8fb36e66c" } 
+ { Task: "task:c3ff7fde-a4c8-4d75-9a71-2723247e1957" } 
+ 
+ [16:18:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:18:43 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:18:43 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:18:44 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:44 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:18:44 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:44 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:18:44 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:18:44 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:18:44 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:18:44 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 2 }. 
+ [16:18:44 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:18:44 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:18:44 DBG (17) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54" }. 
+ [16:18:44 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54" } 
+. 
+ [16:18:44 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:294efae5-0d7c-48d6-8890-355a0fc287a1" }. 
+ [16:18:44 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54, Command = HashSet" }. 
+ [16:18:44 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54" } 
+ 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54" } 
+ { Task: "task:c782bae7-7956-4fd0-852f-31fdb3576f10" } 
+ 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54" } 
+ { Task: "task:b4c2aa78-dfef-4ec9-97ae-c733edb89831" } 
+ 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54" } 
+ { Task: "task:e06911cf-62da-46b1-ba1a-91fdb0c09970" } 
+ 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54" } 
+ { Task: "task:d36a859d-c2c6-4b15-9131-9c033024d4b3" } 
+ 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:21e57e58-4506-4ea8-94d1-5ec0f5c98f54" } 
+ { Task: "task:b4dc857c-b462-477e-9810-84cc3ae85202" } 
+ 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:44 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:18:44 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:18:44 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:18:46 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:46 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:18:46 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:46 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:18:46 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:46 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:18:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 1 }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:e86131ca-33e2-4478-93ec-cc6c59755634" }. 
+ [16:18:47 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:e86131ca-33e2-4478-93ec-cc6c59755634" } 
+. 
+ [16:18:47 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on { EventKey: "backserver:294efae5-0d7c-48d6-8890-355a0fc287a1" }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on { EventSet: "Key = package:e86131ca-33e2-4478-93ec-cc6c59755634, Command = HashSet" }. 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:e86131ca-33e2-4478-93ec-cc6c59755634" } 
+ 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:e86131ca-33e2-4478-93ec-cc6c59755634" } 
+ { Task: "task:bfdb22be-0128-494b-ab0b-e6060d2af6fd" } 
+ 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:e86131ca-33e2-4478-93ec-cc6c59755634" } 
+ { Task: "task:4fc89014-bb2b-4f18-81b6-43494e0601d3" } 
+ 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:e86131ca-33e2-4478-93ec-cc6c59755634" } 
+ { Task: "task:1cbb9117-adca-42b6-aa91-ebab2d695fa0" } 
+ 
+ [16:18:47 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:e86131ca-33e2-4478-93ec-cc6c59755634" } 
+ { Task: "task:0600e93c-10ca-4cc4-85c2-5054fda55063" } 
+ 
+ [16:18:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:18:47 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:18:47 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:18:48 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:48 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:18:49 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:49 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:18:49 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:18:49 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:23:25 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [16:23:26 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [16:23:26 DBG (5) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [16:23:26 INF (5) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] INIT { ServerId: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } was fetched and stored into EventKeyNames. 
+ [16:23:26 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on { EventKey: "key-event-front-server-gives-task-package" }. 
+ [16:23:26 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [16:23:26 DBG (4) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
+ [16:23:37 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] FreshTaskPackageAppeared called - Key "key-event-front-server-gives-task-package" with command HashSet was received, Event permit = False. 
+ [16:23:37 DBG (28) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 5 }. 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 1 }. 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:2c19f107-2ee4-4753-a1d4-9798c010f2e1" }. 
+ [16:23:37 INF (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:2c19f107-2ee4-4753-a1d4-9798c010f2e1" } 
+. 
+ [16:23:37 INF (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on EventSet. 
+ { EventSet: "Key = package:2c19f107-2ee4-4753-a1d4-9798c010f2e1, Command = HashSet" } 
+ 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:2c19f107-2ee4-4753-a1d4-9798c010f2e1" } 
+ 
+ [16:23:37 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:2c19f107-2ee4-4753-a1d4-9798c010f2e1" } 
+ { Task: "task:11b99688-8fec-45fd-be8e-41150ea37e28" } 
+ 
+ [16:23:37 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:2c19f107-2ee4-4753-a1d4-9798c010f2e1" } 
+ { Task: "task:622816a7-03fe-491f-ae32-b022b632a0ab" } 
+ 
+ [16:23:37 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:2c19f107-2ee4-4753-a1d4-9798c010f2e1" } 
+ { Task: "task:1d997f29-927a-483c-b374-dd29cb157342" } 
+ 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:37 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:23:37 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] FreshTaskPackageAppeared returned Event permit = False. 
+ [16:23:37 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:23:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:23:39 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:39 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:23:41 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:41 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:41 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:41 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:23:41 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:23:41 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 4 }. 
+ [16:23:41 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:23:41 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:23:41 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:0e89dc43-c456-4b97-877b-01615309c4c3" }. 
+ [16:23:41 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:0e89dc43-c456-4b97-877b-01615309c4c3" } 
+. 
+ [16:23:41 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ 
+ [16:23:41 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on EventSet. 
+ { EventSet: "Key = package:0e89dc43-c456-4b97-877b-01615309c4c3, Command = HashSet" } 
+ 
+ [16:23:41 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:0e89dc43-c456-4b97-877b-01615309c4c3" } 
+ 
+ [16:23:41 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:0e89dc43-c456-4b97-877b-01615309c4c3" } 
+ { Task: "task:1ab8cfb2-c801-4789-8b99-ca068b609f37" } 
+ 
+ [16:23:41 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:0e89dc43-c456-4b97-877b-01615309c4c3" } 
+ { Task: "task:04a7ee45-c3df-48c6-b21e-827e1bc2f3cc" } 
+ 
+ [16:23:41 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:0e89dc43-c456-4b97-877b-01615309c4c3" } 
+ { Task: "task:bc58b598-6c68-4ef8-acf6-4fd3e63125e1" } 
+ 
+ [16:23:41 DBG (33) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:41 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:23:41 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:23:41 DBG (33) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:23:42 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:42 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:23:42 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:42 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:23:45 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:45 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:45 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:45 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:23:45 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 3 }. 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 1 }. 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:5951982f-741c-4f47-9a9a-49ea02c615c2" }. 
+ [16:23:45 INF (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:5951982f-741c-4f47-9a9a-49ea02c615c2" } 
+. 
+ [16:23:45 INF (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on EventSet. 
+ { EventSet: "Key = package:5951982f-741c-4f47-9a9a-49ea02c615c2, Command = HashSet" } 
+ 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:5951982f-741c-4f47-9a9a-49ea02c615c2" } 
+ 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:5951982f-741c-4f47-9a9a-49ea02c615c2" } 
+ { Task: "task:792189dd-e465-495f-bbb6-1dae5173bdd2" } 
+ 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:5951982f-741c-4f47-9a9a-49ea02c615c2" } 
+ { Task: "task:56414979-e0dc-459c-9d40-d04388d65165" } 
+ 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:5951982f-741c-4f47-9a9a-49ea02c615c2" } 
+ { Task: "task:57e996a6-459f-42a8-be05-3b02017f62f5" } 
+ 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:5951982f-741c-4f47-9a9a-49ea02c615c2" } 
+ { Task: "task:8c5e4560-64c0-4026-b1c1-a54a9bd032e5" } 
+ 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:5951982f-741c-4f47-9a9a-49ea02c615c2" } 
+ { Task: "task:b0962c4c-f7d9-419f-a7cc-4fab35508161" } 
+ 
+ [16:23:45 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:23:45 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:23:45 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:23:46 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:46 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:23:46 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:46 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:23:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:47 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:23:48 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:48 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:49 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:49 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:49 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 2 }. 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:a6d2b1a3-7d63-41f6-8700-a7158b236613" }. 
+ [16:23:49 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:a6d2b1a3-7d63-41f6-8700-a7158b236613" } 
+. 
+ [16:23:49 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on EventSet. 
+ { EventSet: "Key = package:a6d2b1a3-7d63-41f6-8700-a7158b236613, Command = HashSet" } 
+ 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:a6d2b1a3-7d63-41f6-8700-a7158b236613" } 
+ 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:a6d2b1a3-7d63-41f6-8700-a7158b236613" } 
+ { Task: "task:507b7dc5-709a-483a-bfe8-47febc856af9" } 
+ 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:a6d2b1a3-7d63-41f6-8700-a7158b236613" } 
+ { Task: "task:14509819-fa1a-47d5-a84e-3cd5913111cc" } 
+ 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:a6d2b1a3-7d63-41f6-8700-a7158b236613" } 
+ { Task: "task:47e96774-ea82-431c-b5a8-2b329a575332" } 
+ 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:a6d2b1a3-7d63-41f6-8700-a7158b236613" } 
+ { Task: "task:6cbbeb1a-8a7a-4930-a2ff-01cbe6d51068" } 
+ 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:a6d2b1a3-7d63-41f6-8700-a7158b236613" } 
+ { Task: "task:b7646692-34e0-4d63-ad4e-72cae60b903b" } 
+ 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:23:49 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:23:49 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:23:50 DBG (32) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:50 DBG (32) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:23:50 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:50 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:23:50 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:50 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:23:51 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:51 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:23:51 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:51 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:51 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:51 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: True }. 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] TasksList fetched - { TaskCount: 1 }. 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] DiceRoll rolled { Facet: 0 }. 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] BackServer reported - { DeleteSuccess: True }. 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] Task Package fetched - { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" }. 
+ [16:23:52 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+. 
+ [16:23:52 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] You subscribed on EventSet. 
+ { EventSet: "Key = package:bc96f728-806c-485c-9971-60a4646cc61c, Command = HashSet" } 
+ 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ 
+ [16:23:52 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ { Task: "task:6e388aa3-746a-43eb-93df-50f023229366" } 
+ 
+ [16:23:52 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ { Task: "task:6d03bcba-98c7-499c-b060-03d81b880636" } 
+ 
+ [16:23:52 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ { Task: "task:8c77ebc1-806e-4268-9c9c-db5a0cb46772" } 
+ 
+ [16:23:52 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ { Task: "task:b851e5d9-238a-44d5-81a4-d75829d8cfcc" } 
+ 
+ [16:23:52 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ { Task: "task:f6e2dd6d-0be0-4f40-8ef0-8ce20da919f1" } 
+ 
+ [16:23:52 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ { Task: "task:83137354-031e-4941-9bab-29e2760ef1e2" } 
+ 
+ [16:23:52 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ { Task: "task:84f6008f-ef29-427e-a942-3cc4ab511dd6" } 
+ 
+ [16:23:52 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] Single Task processing was started. 
+ { Package: "package:bc96f728-806c-485c-9971-60a4646cc61c" } 
+ { Task: "task:aa8bb6e2-299f-4f74-8074-e6c7dbb86481" } 
+ 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:52 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] WhenTasksPackageWasCaptured returned Event permit = False. 
+ [16:23:52 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 8 }. 
+ [16:23:52 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [16:23:53 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:53 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [16:23:53 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:53 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [16:23:53 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:53 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [16:23:53 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:53 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 5 }. 
+ [16:23:53 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [16:23:53 DBG (30) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:23:53 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: False }. 
+ [16:23:53 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 64] Main way - return to the subscription on the cafe key. 
+ [16:23:53 INF (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: null } 
+. 
+ [16:23:53 INF (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 124] This Server finished current work.
+ { Server: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ Global { Permit: False } 
+ 
+ [16:23:53 WRN (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 125] Next package could not be obtained - there are no more packages in cafe. 
+ [16:23:53 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [16:23:53 WRN (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 208] This Server waits new Task Package. 
+ { Server: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ 
+ [16:23:54 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:54 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [16:23:54 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:54 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [16:23:55 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:55 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [16:23:55 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] CheckingPackageCompletion called, { Permit: False }. 
+ [16:23:55 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [16:23:55 DBG (5) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] FreshTaskPackageAppeared called, Global { Permit: True }, { TasksLeft: 0 }. 
+ [16:23:55 DBG (5) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] BackServer started AttemptToCaptureTasksPackage. 
+ [16:23:55 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] KeyFrontGivesTask { isExisted: False }. 
+ [16:23:55 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 64] Main way - return to the subscription on the cafe key. 
+ [16:23:55 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: null } 
+. 
+ [16:23:55 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 124] This Server finished current work.
+ { Server: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ Global { Permit: True } 
+ 
+ [16:23:55 WRN (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 125] Next package could not be obtained - there are no more packages in cafe. 
+ [16:23:55 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [16:23:55 WRN (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 208] This Server waits new Task Package. 
+ { Server: "backserver:1cd8409b-03b2-47da-b91b-cd98972197fb" } 
+ 
+ [17:14:59 INF (1) BackgroundTasksQueue.Program. - ] The global logger Serilog has been configured.
+ 
+ [17:15:00 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] BackServer's MonitorLoop is starting. 
+ [17:15:00 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [17:15:00 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 122] Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:f8962419-5b74-4691-bc91-abe06e2b0dfa" } 
+ 
+ [17:15:00 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [17:15:00 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [17:15:00 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] Is Cancellation Token obtained? - { IsCancelled: False } 
  

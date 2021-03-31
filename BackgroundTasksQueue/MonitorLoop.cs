@@ -119,7 +119,7 @@ namespace BackgroundTasksQueue
             string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
             eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
 
-            Logs.Here().Information("INIT {@S} was fetched and stored into EventKeyNames.", new { ServerId = backServerPrefixGuid });
+            Logs.Here().Information("Server Guid was fetched and stored into EventKeyNames. \n {@S} \n", new { ServerId = backServerPrefixGuid });
 
             // в значение можно положить время создания сервера
             // проверить, что там за время на ключах, подумать, нужно ли разное время для разных ключей - скажем, кафе и регистрация серверов - день, пакет задач - час

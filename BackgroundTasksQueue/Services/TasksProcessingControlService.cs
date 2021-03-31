@@ -39,11 +39,11 @@ namespace BackgroundTasksQueue.Services
             // если пакет в работе, вернуть true, если пакет закончен - false
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             int totalUnsolvedTasksLeft = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField); // forsake
-            
+
             return (totalUnsolvedTasksLeft > 0, totalUnsolvedTasksLeft);
         }
 
-        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField) 
+        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField)
         {
             // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
             // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
@@ -76,7 +76,7 @@ namespace BackgroundTasksQueue.Services
                 }
                 // вычислить суммарный процент - всё сложить и разделить на количество
                 taskPackageState += taskState;
-                Logs.Here().Debug("foreach in taskPackage - Single {@T} completed by {1} percents.", new { Task = singleTaskGuid }, taskState);
+                Logs.Here().Debug("foreach in taskPackage - Single Task completed on {1} percents. \n {@T} \n", taskState, new { Task = singleTaskGuid });
             }
 
             double taskPackageStatePercentageDouble = taskPackageState / taskPackageCount;
