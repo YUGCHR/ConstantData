@@ -108,7 +108,8 @@ namespace BackgroundTasksQueue.Services
             {
                 // вызывать подписку на tasksPackageGuidField прямо здесь, а не городить лишние ключи
                 // подписка на ключ пакета задач для контроля выполнения - задачи должны сюда (или в ключ с префиксом) отчитываться о ходе выполнения
-                SubscribeOnEventCheckPackageProgress(eventKeysSet, tasksPackageGuidField);
+                // убрать подписку на tasksPackageGuidField, запрашивать состояние выполнения из внешнего запроса
+                //SubscribeOnEventCheckPackageProgress(eventKeysSet, tasksPackageGuidField);
                 SubscribeOnEventPackageCompleted(eventKeysSet, tasksPackageGuidField);
                 Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed, Package Key {Key}, WhenTasksPackageWasCaptured called.", tasksPackageGuidField);
 
@@ -131,7 +132,7 @@ namespace BackgroundTasksQueue.Services
         // в мониторе подписываемся на ключ сервера и когда там появится номер пакета задач, подписываемся на него
         // нет, все подписки здесь
 
-        private void SubscribeOnEventCheckPackageProgress(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        private void SubscribeOnEventCheckPackageProgress(EventKeyNames eventKeysSet, string tasksPackageGuidField) // NOT USED
         {
             Logs.Here().Information("BackServer subscribed on {@E}.", new { EventKey = tasksPackageGuidField });
 
