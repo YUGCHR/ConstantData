@@ -38,7 +38,7 @@ namespace BackgroundTasksQueue.Services
 
         public void StartWorkItem(string backServerPrefixGuid, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription)
         {
-            Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@T} \n", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
+            Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@T}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
             // Enqueue a background work item
             _taskQueue.QueueBackgroundWorkItem(async token =>
             {

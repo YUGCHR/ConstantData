@@ -77,7 +77,7 @@ namespace BackgroundTasksQueue
             }
             else
             {
-                _logger.Error("eventKeysSet CANNOT be Init.");
+                Logs.Here().Error("eventKeysSet CANNOT be Init.");
             }
 
             // заменить на while(всегда) и проверять условие в теле - и вынести ожидание в отдельный метод - the same in Constants
@@ -120,7 +120,7 @@ namespace BackgroundTasksQueue
             eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
             
             //Logs.Here().Information($"Server Guid was fetched and stored into EventKeyNames. \n {new String(' ', 12)} {new { ServerId = backServerPrefixGuid }} \n");
-            Logs.Here().Information("Server Guid was fetched and stored into EventKeyNames. \n {@S,73} \n", new { ServerId = backServerPrefixGuid });
+            Logs.Here().Information("Server Guid was fetched and stored into EventKeyNames. \n {@S}", new { ServerId = backServerPrefixGuid });
 
             // в значение можно положить время создания сервера
             // проверить, что там за время на ключах, подумать, нужно ли разное время для разных ключей - скажем, кафе и регистрация серверов - день, пакет задач - час

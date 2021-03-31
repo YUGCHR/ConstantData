@@ -93,7 +93,7 @@ namespace BackgroundTasksQueue.Services
                 {
                     // тут перейти в TasksBatchProcessingService
                     // не перейти, а вернуться в подписку с номером пакета задач
-                    Logs.Here().Debug("Task Package fetched. \n {@G} \n", new { Package = tasksPackageGuidField });
+                    Logs.Here().Debug("Task Package fetched. \n {@G}", new { Package = tasksPackageGuidField });
                     return tasksPackageGuidField;
                 }
             }

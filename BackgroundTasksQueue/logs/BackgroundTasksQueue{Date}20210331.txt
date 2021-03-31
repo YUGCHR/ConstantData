@@ -3643,4 +3643,43 @@ null { ServerId: "backserver:6e45d627-0e2e-44b3-92df-8bdc75fc163f" }
  
  [20:07:50 DBG (18) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
                Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:56:10 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ [20:56:11 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+ BackServer's MonitorLoop is starting. 
+ [20:56:11 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:56:11 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+ Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:87e899a7-70a8-4621-96fe-336d26ab656d" } 
+ 
+ [20:56:11 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+ BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+ [20:56:11 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+ [20:56:11 DBG (19) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:59:28 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ [20:59:29 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+ BackServer's MonitorLoop is starting. 
+ [20:59:29 DBG (19) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:59:29 INF (19) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+ Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:cd656987-89fa-4465-9e53-8d69702b6b9f" } 
+ [20:59:29 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+ BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ [20:59:29 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ [20:59:29 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
  
