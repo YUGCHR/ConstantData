@@ -83,6 +83,7 @@ namespace BackgroundTasksQueue
             .UseDefaultServiceProvider((ctx, opts) => { /* elided for brevity */ })
             .ConfigureServices((hostContext, services) =>
             {
+                services.AddSingleton<ILogger>(Log.Logger);
                 try
                 {
                     ConnectionMultiplexer muxer = ConnectionMultiplexer.Connect("localhost");
@@ -93,12 +94,12 @@ namespace BackgroundTasksQueue
                 catch (Exception ex)
                 {
                     string message = ex.Message;
-                    Console.WriteLine($"\n\n Redis server did not start: \n + {message} \n");
+                    //Console.WriteLine($"\n\n Redis server did not start: \n + {message} \n");
+                    Logs.Fatal("Redis server did not find: \n {@EM} \n\n", new{ ExceptionMessage = message});
                     throw;
                 }
 
                 services.AddSingleton<GenerateThisInstanceGuidService>();
-                services.AddSingleton<ILogger>(Log.Logger);
                 services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                 services.AddHostedService<QueuedHostedService>();
                 services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
@@ -132,6 +133,25 @@ namespace BackgroundTasksQueue
         }
     }
 
+    // BackServers
+    // 
+    // 
+    // при завершении сервера успеть удалить своё поле из ключа регистрации серверов - обработать cancellationToken
+    // 
+
+    // Constants
+    // можно убрать shared setting и хранить все константы в локальном appsetting проекта константы
+    // установить своё время для каждого ключа, можно вместе с названием ключа - словарь
+    // сделать константы ключей в виде словаря - строка/время существования ключа
+    // везде использовать имя ключа с типом словаря и только в последнем методе раскрывать и записывать
+    // добавить веб-интерфейс с возможностью устанавливать константы - страница setting
+    // при сохранении новых значений генерировать событие, чтобы все взяли новые константы
+
+    // FrontEmulator
+    // 
+    // 
+    // 
+    // 
 
     //public static class ThisBackServerGuid
     //{

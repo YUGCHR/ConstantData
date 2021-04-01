@@ -127,8 +127,7 @@ namespace BackgroundTasksQueue
             // регистрируем поле guid сервера на ключе регистрации серверов, а в значение кладём чистый гуид, без префикса
             await _cache.SetHashedAsync<string>(eventKeysSet.EventKeyBackReadiness, backServerPrefixGuid, backServerGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
             // восстановить время жизни ключа регистрации сервера перед новой охотой - где и как?
-            // при завершении сервера успеть удалить своё поле из ключа регистрации серверов - обработать cancellationToken
-
+            
             // подписываемся на ключ сообщения о появлении свободных задач
             _subscribe.SubscribeOnEventRun(eventKeysSet);
 
