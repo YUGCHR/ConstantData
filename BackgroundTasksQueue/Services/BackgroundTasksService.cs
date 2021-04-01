@@ -121,7 +121,7 @@ namespace BackgroundTasksQueue.Services
                 await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, newValue); // TimeSpan.FromDays - in outside method
                 
                 // ещё можно при достижении нуля удалить поле пакета, а уже из этого делать выводы (это на потом)
-                Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T \n", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
+                Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T} \n", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
                 
                 return true;
             }
