@@ -27,29 +27,29 @@ namespace BackgroundTasksQueue
             _logger = logger;
         }
 
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<BackgroundTaskQueue>();
+
+
         public void QueueBackgroundWorkItem(Func<CancellationToken, Task> workItem)
         {
             if (workItem == null)
             {
                 throw new ArgumentNullException(nameof(workItem));
             }
-
-            _logger.LogInformation("Task {Name} received in the Queue.", nameof(workItem));
             // Adds an object to the end of the System.Collections.Concurrent.ConcurrentQueue`1
             _workItems.Enqueue(workItem);
+            Logs.Here().Verbose("Single Task placed in Concurrent Queue.");
+
             _signal.Release();
-            _logger.LogInformation("QueueBackgroundWorkItem finished");
+            Logs.Here().Verbose("Concurrent Queue is ready for new task.");
+
         }
 
         public async Task<Func<CancellationToken, Task>> DequeueAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("BEFORE await _signal.WaitAsync");
             await _signal.WaitAsync(cancellationToken);
-            _logger.LogInformation("AFTER await _signal.WaitAsync");
             _workItems.TryDequeue(out var workItem);
-            _logger.LogInformation("AFTER _workItems.TryDequeue");
-
-
+            Logs.Here().Verbose("Single Task was dequeued from Concurrent Queue.");
             return workItem;
         }
     }
