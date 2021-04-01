@@ -862,4 +862,1339 @@
  [17:22:04 WRN (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 208] 
  This Server waits new Task Package. 
  { Server: "backserver:fe16f4ac-3c5e-4a21-8050-c2ba1846cefa" } 
+ [18:13:15 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ [18:13:16 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+ BackServer's MonitorLoop is starting. 
+ [18:13:16 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [18:13:16 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+ Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:40404a61-b947-49fc-8117-1294e2f06668" } 
+ [18:13:16 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 65] 
+ BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ [18:13:16 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 91] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ [18:13:16 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [18:13:25 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 76] 
+ FreshTaskPackageAppeared called, Event permit = False 
+ { Key: "key-event-front-server-gives-task-package" } with { Command: HashSet } was received. 
+ 
+ [18:13:25 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 5 }. 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 1 }. 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ [18:13:25 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" }. 
+ [18:13:25 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:40404a61-b947-49fc-8117-1294e2f06668" } 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:a0403126-6de4-4a39-8ad3-97004611e8d5, Command = HashSet" } 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ [18:13:25 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ { Task: "task:72e8b9fb-cf5a-4faa-861d-a606a8c13d40" } 
+ [18:13:25 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ { Task: "task:22967f43-d609-4df9-8c2d-4694a8762637" } 
+ [18:13:25 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ { Task: "task:eb09db98-df55-467f-ab5b-807bdc439457" } 
+ [18:13:25 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ { Task: "task:a8ffbafc-176d-4dd0-a25c-5fa60104c1ae" } 
+ [18:13:25 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ { Task: "task:e60be696-8463-4da6-97b6-820d11c68850" } 
+ [18:13:25 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ { Task: "task:eb061525-4836-4137-be45-c76d0bf36c03" } 
+ [18:13:25 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ { Task: "task:6dcc5227-67ad-4669-b62e-f47b3c82daf8" } 
+ [18:13:25 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ { Task: "task:cf7894f3-d41d-4548-b111-1d01563ede6d" } 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:25 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [18:13:25 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] 
+ FreshTaskPackageAppeared returned Event permit = False. 
+ [18:13:25 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 8 }. 
+ [18:13:25 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:72e8b9fb-cf5a-4faa-861d-a606a8c13d40" } 
+ { StartConditions: 4 } 
+ [18:13:26 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:26 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:72e8b9fb-cf5a-4faa-861d-a606a8c13d40" is running. Loop = 1 / Remaining = 3 - 0% 
+ [18:13:26 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:26 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:72e8b9fb-cf5a-4faa-861d-a606a8c13d40" is running. Loop = 2 / Remaining = 2 - 25% 
+ [18:13:26 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:26 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:72e8b9fb-cf5a-4faa-861d-a606a8c13d40" is running. Loop = 3 / Remaining = 1 - 50% 
+ [18:13:27 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:27 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:72e8b9fb-cf5a-4faa-861d-a606a8c13d40" is running. Loop = 4 / Remaining = 0 - 75% 
+ [18:13:27 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:72e8b9fb-cf5a-4faa-861d-a606a8c13d40" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:27 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:27 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 8, is = 7. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ {@T 
+ 
+ [18:13:27 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [18:13:27 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:22967f43-d609-4df9-8c2d-4694a8762637" } 
+ { StartConditions: 6 } 
+ [18:13:27 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:27 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:22967f43-d609-4df9-8c2d-4694a8762637" is running. Loop = 1 / Remaining = 5 - 0% 
+ [18:13:27 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 16.666666666666668% = delayLoop 1 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:27 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:22967f43-d609-4df9-8c2d-4694a8762637" is running. Loop = 2 / Remaining = 4 - 16% 
+ [18:13:28 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 2 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:28 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:22967f43-d609-4df9-8c2d-4694a8762637" is running. Loop = 3 / Remaining = 3 - 33% 
+ [18:13:28 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 3 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:28 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:22967f43-d609-4df9-8c2d-4694a8762637" is running. Loop = 4 / Remaining = 2 - 50% 
+ [18:13:28 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 4 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:28 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:22967f43-d609-4df9-8c2d-4694a8762637" is running. Loop = 5 / Remaining = 1 - 66% 
+ [18:13:28 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 83.33333333333333% = delayLoop 5 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:28 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:22967f43-d609-4df9-8c2d-4694a8762637" is running. Loop = 6 / Remaining = 0 - 83% 
+ [18:13:28 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:22967f43-d609-4df9-8c2d-4694a8762637" } 
+ { CurrentState: 6 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:28 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 7, is = 6. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ {@T 
+ 
+ [18:13:28 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [18:13:28 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:eb09db98-df55-467f-ab5b-807bdc439457" } 
+ { StartConditions: 7 } 
+ [18:13:29 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:29 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb09db98-df55-467f-ab5b-807bdc439457" is running. Loop = 1 / Remaining = 6 - 0% 
+ [18:13:29 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 14.285714285714286% = delayLoop 1 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:29 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb09db98-df55-467f-ab5b-807bdc439457" is running. Loop = 2 / Remaining = 5 - 14% 
+ [18:13:29 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 28.571428571428573% = delayLoop 2 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:29 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb09db98-df55-467f-ab5b-807bdc439457" is running. Loop = 3 / Remaining = 4 - 28% 
+ [18:13:30 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 42.857142857142854% = delayLoop 3 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:30 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb09db98-df55-467f-ab5b-807bdc439457" is running. Loop = 4 / Remaining = 3 - 42% 
+ [18:13:30 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 57.142857142857146% = delayLoop 4 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:30 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb09db98-df55-467f-ab5b-807bdc439457" is running. Loop = 5 / Remaining = 2 - 57% 
+ [18:13:30 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 71.42857142857143% = delayLoop 5 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:30 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb09db98-df55-467f-ab5b-807bdc439457" is running. Loop = 6 / Remaining = 1 - 71% 
+ [18:13:31 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 85.71428571428571% = delayLoop 6 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:31 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb09db98-df55-467f-ab5b-807bdc439457" is running. Loop = 7 / Remaining = 0 - 85% 
+ [18:13:31 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:eb09db98-df55-467f-ab5b-807bdc439457" } 
+ { CurrentState: 7 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:31 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 6, is = 5. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ {@T 
+ 
+ [18:13:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:31 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:a8ffbafc-176d-4dd0-a25c-5fa60104c1ae" } 
+ { StartConditions: 3 } 
+ [18:13:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [18:13:31 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:31 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:a8ffbafc-176d-4dd0-a25c-5fa60104c1ae" is running. Loop = 1 / Remaining = 2 - 0% 
+ [18:13:31 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 1 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:31 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:a8ffbafc-176d-4dd0-a25c-5fa60104c1ae" is running. Loop = 2 / Remaining = 1 - 33% 
+ [18:13:32 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 2 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:32 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:a8ffbafc-176d-4dd0-a25c-5fa60104c1ae" is running. Loop = 3 / Remaining = 0 - 66% 
+ [18:13:32 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:a8ffbafc-176d-4dd0-a25c-5fa60104c1ae" } 
+ { CurrentState: 3 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:32 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:32 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 5, is = 4. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ {@T 
+ 
+ [18:13:32 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [18:13:32 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:e60be696-8463-4da6-97b6-820d11c68850" } 
+ { StartConditions: 8 } 
+ [18:13:32 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:32 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e60be696-8463-4da6-97b6-820d11c68850" is running. Loop = 1 / Remaining = 7 - 0% 
+ [18:13:32 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 12.5% = delayLoop 1 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:32 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e60be696-8463-4da6-97b6-820d11c68850" is running. Loop = 2 / Remaining = 6 - 12% 
+ [18:13:33 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 2 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:33 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e60be696-8463-4da6-97b6-820d11c68850" is running. Loop = 3 / Remaining = 5 - 25% 
+ [18:13:33 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 37.5% = delayLoop 3 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:33 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e60be696-8463-4da6-97b6-820d11c68850" is running. Loop = 4 / Remaining = 4 - 37% 
+ [18:13:33 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 4 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:33 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e60be696-8463-4da6-97b6-820d11c68850" is running. Loop = 5 / Remaining = 3 - 50% 
+ [18:13:34 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 62.5% = delayLoop 5 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:34 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e60be696-8463-4da6-97b6-820d11c68850" is running. Loop = 6 / Remaining = 2 - 62% 
+ [18:13:34 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 6 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:34 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e60be696-8463-4da6-97b6-820d11c68850" is running. Loop = 7 / Remaining = 1 - 75% 
+ [18:13:34 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 87.5% = delayLoop 7 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:34 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e60be696-8463-4da6-97b6-820d11c68850" is running. Loop = 8 / Remaining = 0 - 87% 
+ [18:13:34 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:e60be696-8463-4da6-97b6-820d11c68850" } 
+ { CurrentState: 8 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:34 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:34 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 4, is = 3. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ {@T 
+ 
+ [18:13:34 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [18:13:34 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:eb061525-4836-4137-be45-c76d0bf36c03" } 
+ { StartConditions: 3 } 
+ [18:13:35 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:35 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb061525-4836-4137-be45-c76d0bf36c03" is running. Loop = 1 / Remaining = 2 - 0% 
+ [18:13:35 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 1 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:35 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb061525-4836-4137-be45-c76d0bf36c03" is running. Loop = 2 / Remaining = 1 - 33% 
+ [18:13:35 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 2 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:35 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:eb061525-4836-4137-be45-c76d0bf36c03" is running. Loop = 3 / Remaining = 0 - 66% 
+ [18:13:35 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:eb061525-4836-4137-be45-c76d0bf36c03" } 
+ { CurrentState: 3 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:35 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 3, is = 2. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ {@T 
+ 
+ [18:13:35 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:35 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:6dcc5227-67ad-4669-b62e-f47b3c82daf8" } 
+ { StartConditions: 4 } 
+ [18:13:35 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [18:13:35 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:35 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:6dcc5227-67ad-4669-b62e-f47b3c82daf8" is running. Loop = 1 / Remaining = 3 - 0% 
+ [18:13:36 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:36 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:6dcc5227-67ad-4669-b62e-f47b3c82daf8" is running. Loop = 2 / Remaining = 2 - 25% 
+ [18:13:36 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:36 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:6dcc5227-67ad-4669-b62e-f47b3c82daf8" is running. Loop = 3 / Remaining = 1 - 50% 
+ [18:13:36 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:36 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:6dcc5227-67ad-4669-b62e-f47b3c82daf8" is running. Loop = 4 / Remaining = 0 - 75% 
+ [18:13:36 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:6dcc5227-67ad-4669-b62e-f47b3c82daf8" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:36 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:36 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 2, is = 1. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ {@T 
+ 
+ [18:13:36 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [18:13:36 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:cf7894f3-d41d-4548-b111-1d01563ede6d" } 
+ { StartConditions: 5 } 
+ [18:13:37 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:37 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:cf7894f3-d41d-4548-b111-1d01563ede6d" is running. Loop = 1 / Remaining = 4 - 0% 
+ [18:13:37 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 20% = delayLoop 1 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:37 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:cf7894f3-d41d-4548-b111-1d01563ede6d" is running. Loop = 2 / Remaining = 3 - 20% 
+ [18:13:37 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 40% = delayLoop 2 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:37 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:cf7894f3-d41d-4548-b111-1d01563ede6d" is running. Loop = 3 / Remaining = 2 - 40% 
+ [18:13:38 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 60% = delayLoop 3 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:38 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:cf7894f3-d41d-4548-b111-1d01563ede6d" is running. Loop = 4 / Remaining = 1 - 60% 
+ [18:13:38 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 80% = delayLoop 4 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:38 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:cf7894f3-d41d-4548-b111-1d01563ede6d" is running. Loop = 5 / Remaining = 0 - 80% 
+ [18:13:38 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:cf7894f3-d41d-4548-b111-1d01563ede6d" } 
+ { CurrentState: 5 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 1, is = 0. 
+ { Package: "package:a0403126-6de4-4a39-8ad3-97004611e8d5" } 
+ {@T 
+ 
+ [18:13:38 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:38 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:38 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+ FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:38 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 4 }. 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 2 }. 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:6faafd19-5583-43c9-84c0-5f520150df15" } 
+ [18:13:38 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:6faafd19-5583-43c9-84c0-5f520150df15" }. 
+ [18:13:38 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:40404a61-b947-49fc-8117-1294e2f06668" } 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:6faafd19-5583-43c9-84c0-5f520150df15, Command = HashSet" } 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:6faafd19-5583-43c9-84c0-5f520150df15" } 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:6faafd19-5583-43c9-84c0-5f520150df15" } 
+ { Task: "task:6e0629bb-79d6-4205-ab03-22435bd1befc" } 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:6faafd19-5583-43c9-84c0-5f520150df15" } 
+ { Task: "task:e64c7a1e-0a59-4e75-9fd3-1ed80d098827" } 
+ [18:13:38 DBG (27) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:6e0629bb-79d6-4205-ab03-22435bd1befc" } 
+ { StartConditions: 4 } 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:6faafd19-5583-43c9-84c0-5f520150df15" } 
+ { Task: "task:42b54641-0b72-48af-8ced-7e0b82501b9c" } 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:38 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [18:13:38 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:e64c7a1e-0a59-4e75-9fd3-1ed80d098827" } 
+ { StartConditions: 4 } 
+ [18:13:38 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [18:13:38 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+ FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [18:13:38 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:38 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:6e0629bb-79d6-4205-ab03-22435bd1befc" is running. Loop = 1 / Remaining = 3 - 0% 
+ [18:13:38 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:38 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e64c7a1e-0a59-4e75-9fd3-1ed80d098827" is running. Loop = 1 / Remaining = 3 - 0% 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:6e0629bb-79d6-4205-ab03-22435bd1befc" is running. Loop = 2 / Remaining = 2 - 25% 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e64c7a1e-0a59-4e75-9fd3-1ed80d098827" is running. Loop = 2 / Remaining = 2 - 25% 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:6e0629bb-79d6-4205-ab03-22435bd1befc" is running. Loop = 3 / Remaining = 1 - 50% 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e64c7a1e-0a59-4e75-9fd3-1ed80d098827" is running. Loop = 3 / Remaining = 1 - 50% 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:39 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:6e0629bb-79d6-4205-ab03-22435bd1befc" is running. Loop = 4 / Remaining = 0 - 75% 
+ [18:13:39 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:6e0629bb-79d6-4205-ab03-22435bd1befc" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:39 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:39 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 3, is = 2. 
+ { Package: "package:6faafd19-5583-43c9-84c0-5f520150df15" } 
+ {@T 
+ 
+ [18:13:39 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [18:13:39 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:42b54641-0b72-48af-8ced-7e0b82501b9c" } 
+ { StartConditions: 3 } 
+ [18:13:39 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:39 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:e64c7a1e-0a59-4e75-9fd3-1ed80d098827" is running. Loop = 4 / Remaining = 0 - 75% 
+ [18:13:39 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:e64c7a1e-0a59-4e75-9fd3-1ed80d098827" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:39 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:39 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 2, is = 1. 
+ { Package: "package:6faafd19-5583-43c9-84c0-5f520150df15" } 
+ {@T 
+ 
+ [18:13:39 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [18:13:40 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:40 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:42b54641-0b72-48af-8ced-7e0b82501b9c" is running. Loop = 1 / Remaining = 2 - 0% 
+ [18:13:40 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 1 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:40 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:42b54641-0b72-48af-8ced-7e0b82501b9c" is running. Loop = 2 / Remaining = 1 - 33% 
+ [18:13:40 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 2 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:40 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:42b54641-0b72-48af-8ced-7e0b82501b9c" is running. Loop = 3 / Remaining = 0 - 66% 
+ [18:13:40 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:42b54641-0b72-48af-8ced-7e0b82501b9c" } 
+ { CurrentState: 3 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 1, is = 0. 
+ { Package: "package:6faafd19-5583-43c9-84c0-5f520150df15" } 
+ {@T 
+ 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+ FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 3 }. 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 0 }. 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ [18:13:40 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:4465684e-7536-478b-8128-4f9207f5afdc" }. 
+ [18:13:40 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:40404a61-b947-49fc-8117-1294e2f06668" } 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:4465684e-7536-478b-8128-4f9207f5afdc, Command = HashSet" } 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ [18:13:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ { Task: "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" } 
+ [18:13:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ { Task: "task:8420f71f-2727-4d1a-9f2c-982280c7134f" } 
+ [18:13:40 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" } 
+ { StartConditions: 6 } 
+ [18:13:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ { Task: "task:ea22b9ab-46a5-45c2-82e4-d487ca4f6bf2" } 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:8420f71f-2727-4d1a-9f2c-982280c7134f" } 
+ { StartConditions: 5 } 
+ [18:13:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ { Task: "task:c0c3950c-f4be-454c-a3b4-fa37c38085ee" } 
+ [18:13:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ { Task: "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" } 
+ [18:13:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ { Task: "task:5bfe2380-e68c-45d4-b966-0579e849e564" } 
+ [18:13:40 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ { Task: "task:03453e33-aa67-4379-9743-1bf78fad99c7" } 
+ [18:13:40 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:40 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [18:13:40 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 7 }. 
+ [18:13:40 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:ea22b9ab-46a5-45c2-82e4-d487ca4f6bf2" } 
+ { StartConditions: 3 } 
+ [18:13:40 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+ FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" is running. Loop = 1 / Remaining = 5 - 0% 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:8420f71f-2727-4d1a-9f2c-982280c7134f" is running. Loop = 1 / Remaining = 4 - 0% 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ea22b9ab-46a5-45c2-82e4-d487ca4f6bf2" is running. Loop = 1 / Remaining = 2 - 0% 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 16.666666666666668% = delayLoop 1 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" is running. Loop = 2 / Remaining = 4 - 16% 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 20% = delayLoop 1 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:8420f71f-2727-4d1a-9f2c-982280c7134f" is running. Loop = 2 / Remaining = 3 - 20% 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 1 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ea22b9ab-46a5-45c2-82e4-d487ca4f6bf2" is running. Loop = 2 / Remaining = 1 - 33% 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 2 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" is running. Loop = 3 / Remaining = 3 - 33% 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 40% = delayLoop 2 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:8420f71f-2727-4d1a-9f2c-982280c7134f" is running. Loop = 3 / Remaining = 2 - 40% 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 2 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:41 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ea22b9ab-46a5-45c2-82e4-d487ca4f6bf2" is running. Loop = 3 / Remaining = 0 - 66% 
+ [18:13:41 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:ea22b9ab-46a5-45c2-82e4-d487ca4f6bf2" } 
+ { CurrentState: 3 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:41 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 7, is = 6. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ {@T 
+ 
+ [18:13:41 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:41 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:c0c3950c-f4be-454c-a3b4-fa37c38085ee" } 
+ { StartConditions: 4 } 
+ [18:13:41 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 3 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" is running. Loop = 4 / Remaining = 2 - 50% 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 60% = delayLoop 3 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:8420f71f-2727-4d1a-9f2c-982280c7134f" is running. Loop = 4 / Remaining = 1 - 60% 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:c0c3950c-f4be-454c-a3b4-fa37c38085ee" is running. Loop = 1 / Remaining = 3 - 0% 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 4 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" is running. Loop = 5 / Remaining = 1 - 66% 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 80% = delayLoop 4 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:42 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:8420f71f-2727-4d1a-9f2c-982280c7134f" is running. Loop = 5 / Remaining = 0 - 80% 
+ [18:13:42 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:8420f71f-2727-4d1a-9f2c-982280c7134f" } 
+ { CurrentState: 5 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:42 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 6, is = 5. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ {@T 
+ 
+ [18:13:42 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:42 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" } 
+ { StartConditions: 8 } 
+ [18:13:42 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [18:13:42 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:42 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:c0c3950c-f4be-454c-a3b4-fa37c38085ee" is running. Loop = 2 / Remaining = 2 - 25% 
+ [18:13:42 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 83.33333333333333% = delayLoop 5 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:42 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" is running. Loop = 6 / Remaining = 0 - 83% 
+ [18:13:42 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:ee86fa52-105e-4229-a97e-bdf43c21f84b" } 
+ { CurrentState: 6 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:42 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 5, is = 4. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ {@T 
+ 
+ [18:13:42 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:42 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:5bfe2380-e68c-45d4-b966-0579e849e564" } 
+ { StartConditions: 4 } 
+ [18:13:42 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [18:13:42 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:42 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" is running. Loop = 1 / Remaining = 7 - 0% 
+ [18:13:42 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:42 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:c0c3950c-f4be-454c-a3b4-fa37c38085ee" is running. Loop = 3 / Remaining = 1 - 50% 
+ [18:13:43 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:43 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5bfe2380-e68c-45d4-b966-0579e849e564" is running. Loop = 1 / Remaining = 3 - 0% 
+ [18:13:43 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 12.5% = delayLoop 1 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:43 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" is running. Loop = 2 / Remaining = 6 - 12% 
+ [18:13:43 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:43 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:c0c3950c-f4be-454c-a3b4-fa37c38085ee" is running. Loop = 4 / Remaining = 0 - 75% 
+ [18:13:43 DBG (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:c0c3950c-f4be-454c-a3b4-fa37c38085ee" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:43 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 4, is = 3. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ {@T 
+ 
+ [18:13:43 DBG (31) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [18:13:43 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:03453e33-aa67-4379-9743-1bf78fad99c7" } 
+ { StartConditions: 5 } 
+ [18:13:43 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:43 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5bfe2380-e68c-45d4-b966-0579e849e564" is running. Loop = 2 / Remaining = 2 - 25% 
+ [18:13:43 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 2 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:43 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" is running. Loop = 3 / Remaining = 5 - 25% 
+ [18:13:43 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:43 VRB (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:03453e33-aa67-4379-9743-1bf78fad99c7" is running. Loop = 1 / Remaining = 4 - 0% 
+ [18:13:43 VRB (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:43 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5bfe2380-e68c-45d4-b966-0579e849e564" is running. Loop = 3 / Remaining = 1 - 50% 
+ [18:13:43 VRB (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 37.5% = delayLoop 3 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:43 VRB (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" is running. Loop = 4 / Remaining = 4 - 37% 
+ [18:13:43 VRB (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 20% = delayLoop 1 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:43 VRB (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:03453e33-aa67-4379-9743-1bf78fad99c7" is running. Loop = 2 / Remaining = 3 - 20% 
+ [18:13:43 VRB (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:43 VRB (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5bfe2380-e68c-45d4-b966-0579e849e564" is running. Loop = 4 / Remaining = 0 - 75% 
+ [18:13:43 DBG (30) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:5bfe2380-e68c-45d4-b966-0579e849e564" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:44 DBG (30) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 3, is = 2. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ {@T 
+ 
+ [18:13:44 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 4 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:44 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" is running. Loop = 5 / Remaining = 3 - 50% 
+ [18:13:44 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 40% = delayLoop 2 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:03453e33-aa67-4379-9743-1bf78fad99c7" is running. Loop = 3 / Remaining = 2 - 40% 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 62.5% = delayLoop 5 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" is running. Loop = 6 / Remaining = 2 - 62% 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 60% = delayLoop 3 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:03453e33-aa67-4379-9743-1bf78fad99c7" is running. Loop = 4 / Remaining = 1 - 60% 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 6 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" is running. Loop = 7 / Remaining = 1 - 75% 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 80% = delayLoop 4 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:44 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:03453e33-aa67-4379-9743-1bf78fad99c7" is running. Loop = 5 / Remaining = 0 - 80% 
+ [18:13:44 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:03453e33-aa67-4379-9743-1bf78fad99c7" } 
+ { CurrentState: 5 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:44 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 2, is = 1. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ {@T 
+ 
+ [18:13:44 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [18:13:44 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 87.5% = delayLoop 7 / assignmentTerms 8, IsTaskRunning = True 
+ [18:13:44 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" is running. Loop = 8 / Remaining = 0 - 87% 
+ [18:13:44 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:5efb3be1-3d69-46b9-9eda-c96f4c966ea4" } 
+ { CurrentState: 8 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:44 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 1, is = 0. 
+ { Package: "package:4465684e-7536-478b-8128-4f9207f5afdc" } 
+ {@T 
+ 
+ [18:13:44 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:44 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+ FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:44 DBG (26) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 2 }. 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 0 }. 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ [18:13:44 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" }. 
+ [18:13:44 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:40404a61-b947-49fc-8117-1294e2f06668" } 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:55c5bd20-60ee-4318-91bf-c824bff37c3c, Command = HashSet" } 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ [18:13:44 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ { Task: "task:99cde0c8-7693-4ba4-9f54-64c61b9e2127" } 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ { Task: "task:3e92c619-c39f-4e25-a221-787b56521aca" } 
+ [18:13:45 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:99cde0c8-7693-4ba4-9f54-64c61b9e2127" } 
+ { StartConditions: 3 } 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ { Task: "task:312cc921-2146-4016-adfe-ca987819b07f" } 
+ [18:13:45 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:3e92c619-c39f-4e25-a221-787b56521aca" } 
+ { StartConditions: 3 } 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ { Task: "task:7babdce8-b2c9-41cc-aad1-6a350db74a51" } 
+ [18:13:45 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:312cc921-2146-4016-adfe-ca987819b07f" } 
+ { StartConditions: 7 } 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ { Task: "task:b53be47e-2638-4ddb-8ef9-98fd34315348" } 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ { Task: "task:b5e1a975-bffd-4e27-aa31-bf8348f45083" } 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:45 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [18:13:45 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:7babdce8-b2c9-41cc-aad1-6a350db74a51" } 
+ { StartConditions: 4 } 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 6 }. 
+ [18:13:45 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+ FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:99cde0c8-7693-4ba4-9f54-64c61b9e2127" is running. Loop = 1 / Remaining = 2 - 0% 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:3e92c619-c39f-4e25-a221-787b56521aca" is running. Loop = 1 / Remaining = 2 - 0% 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:312cc921-2146-4016-adfe-ca987819b07f" is running. Loop = 1 / Remaining = 6 - 0% 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7babdce8-b2c9-41cc-aad1-6a350db74a51" is running. Loop = 1 / Remaining = 3 - 0% 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 1 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:99cde0c8-7693-4ba4-9f54-64c61b9e2127" is running. Loop = 2 / Remaining = 1 - 33% 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 1 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:3e92c619-c39f-4e25-a221-787b56521aca" is running. Loop = 2 / Remaining = 1 - 33% 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 14.285714285714286% = delayLoop 1 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:312cc921-2146-4016-adfe-ca987819b07f" is running. Loop = 2 / Remaining = 5 - 14% 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7babdce8-b2c9-41cc-aad1-6a350db74a51" is running. Loop = 2 / Remaining = 2 - 25% 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 2 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:45 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:99cde0c8-7693-4ba4-9f54-64c61b9e2127" is running. Loop = 3 / Remaining = 0 - 66% 
+ [18:13:45 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:99cde0c8-7693-4ba4-9f54-64c61b9e2127" } 
+ { CurrentState: 3 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:45 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 6, is = 5. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ {@T 
+ 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:45 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 2 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:45 VRB (27) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:3e92c619-c39f-4e25-a221-787b56521aca" is running. Loop = 3 / Remaining = 0 - 66% 
+ [18:13:45 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 28.571428571428573% = delayLoop 2 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:45 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:312cc921-2146-4016-adfe-ca987819b07f" is running. Loop = 3 / Remaining = 4 - 28% 
+ [18:13:45 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:b53be47e-2638-4ddb-8ef9-98fd34315348" } 
+ { StartConditions: 3 } 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 5 }. 
+ [18:13:45 DBG (27) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:3e92c619-c39f-4e25-a221-787b56521aca" } 
+ { CurrentState: 3 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:45 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 5, is = 4. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ {@T 
+ 
+ [18:13:45 DBG (27) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 4 }. 
+ [18:13:45 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:b5e1a975-bffd-4e27-aa31-bf8348f45083" } 
+ { StartConditions: 5 } 
+ [18:13:46 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:46 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7babdce8-b2c9-41cc-aad1-6a350db74a51" is running. Loop = 3 / Remaining = 1 - 50% 
+ [18:13:46 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 42.857142857142854% = delayLoop 3 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:46 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:46 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:312cc921-2146-4016-adfe-ca987819b07f" is running. Loop = 4 / Remaining = 3 - 42% 
+ [18:13:46 VRB (33) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b53be47e-2638-4ddb-8ef9-98fd34315348" is running. Loop = 1 / Remaining = 2 - 0% 
+ [18:13:46 VRB (33) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:46 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b5e1a975-bffd-4e27-aa31-bf8348f45083" is running. Loop = 1 / Remaining = 4 - 0% 
+ [18:13:46 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:46 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7babdce8-b2c9-41cc-aad1-6a350db74a51" is running. Loop = 4 / Remaining = 0 - 75% 
+ [18:13:46 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:7babdce8-b2c9-41cc-aad1-6a350db74a51" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:46 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:46 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 4, is = 3. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ {@T 
+ 
+ [18:13:46 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [18:13:46 VRB (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 57.142857142857146% = delayLoop 4 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:46 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 1 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:46 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:312cc921-2146-4016-adfe-ca987819b07f" is running. Loop = 5 / Remaining = 2 - 57% 
+ [18:13:46 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b53be47e-2638-4ddb-8ef9-98fd34315348" is running. Loop = 2 / Remaining = 1 - 33% 
+ [18:13:46 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 20% = delayLoop 1 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:46 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b5e1a975-bffd-4e27-aa31-bf8348f45083" is running. Loop = 2 / Remaining = 3 - 20% 
+ [18:13:46 VRB (33) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 71.42857142857143% = delayLoop 5 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:46 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 2 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:46 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:312cc921-2146-4016-adfe-ca987819b07f" is running. Loop = 6 / Remaining = 1 - 71% 
+ [18:13:46 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b53be47e-2638-4ddb-8ef9-98fd34315348" is running. Loop = 3 / Remaining = 0 - 66% 
+ [18:13:46 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:b53be47e-2638-4ddb-8ef9-98fd34315348" } 
+ { CurrentState: 3 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:46 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 3, is = 2. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ {@T 
+ 
+ [18:13:46 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:46 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [18:13:46 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 40% = delayLoop 2 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:46 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b5e1a975-bffd-4e27-aa31-bf8348f45083" is running. Loop = 3 / Remaining = 2 - 40% 
+ [18:13:47 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 85.71428571428571% = delayLoop 6 / assignmentTerms 7, IsTaskRunning = True 
+ [18:13:47 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:312cc921-2146-4016-adfe-ca987819b07f" is running. Loop = 7 / Remaining = 0 - 85% 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:312cc921-2146-4016-adfe-ca987819b07f" } 
+ { CurrentState: 7 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:47 DBG (22) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 2, is = 1. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ {@T 
+ 
+ [18:13:47 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [18:13:47 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 60% = delayLoop 3 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:47 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b5e1a975-bffd-4e27-aa31-bf8348f45083" is running. Loop = 4 / Remaining = 1 - 60% 
+ [18:13:47 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 80% = delayLoop 4 / assignmentTerms 5, IsTaskRunning = True 
+ [18:13:47 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b5e1a975-bffd-4e27-aa31-bf8348f45083" is running. Loop = 5 / Remaining = 0 - 80% 
+ [18:13:47 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:b5e1a975-bffd-4e27-aa31-bf8348f45083" } 
+ { CurrentState: 5 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:47 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 1, is = 0. 
+ { Package: "package:55c5bd20-60ee-4318-91bf-c824bff37c3c" } 
+ {@T 
+ 
+ [18:13:47 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:47 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:47 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+ FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:47 DBG (22) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 1 }. 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 124] 
+ DiceRoll rolled { Facet: 0 }. 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" } 
+ [18:13:47 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" }. 
+ [18:13:47 INF (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 178] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:40404a61-b947-49fc-8117-1294e2f06668" } 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 217] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879, Command = HashSet" } 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 114] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" } 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" } 
+ { Task: "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" } 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" } 
+ { Task: "task:b791620a-4ab7-4ce8-8744-9b69289a082c" } 
+ [18:13:47 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" } 
+ { StartConditions: 6 } 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" } 
+ { Task: "task:841b8162-04a2-4757-a4a6-9ccf8d7d0ad0" } 
+ [18:13:47 DBG (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:b791620a-4ab7-4ce8-8744-9b69289a082c" } 
+ { StartConditions: 3 } 
+ [18:13:47 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:841b8162-04a2-4757-a4a6-9ccf8d7d0ad0" } 
+ { StartConditions: 4 } 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 117] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [18:13:47 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:47 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+ FreshTaskPackageAppeared returned Global { Permit: False }. 
+ [18:13:47 DBG (26) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [18:13:47 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:47 VRB (26) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" is running. Loop = 1 / Remaining = 5 - 0% 
+ [18:13:48 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:48 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b791620a-4ab7-4ce8-8744-9b69289a082c" is running. Loop = 1 / Remaining = 2 - 0% 
+ [18:13:48 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:48 VRB (31) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:841b8162-04a2-4757-a4a6-9ccf8d7d0ad0" is running. Loop = 1 / Remaining = 3 - 0% 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 16.666666666666668% = delayLoop 1 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" is running. Loop = 2 / Remaining = 4 - 16% 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 1 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b791620a-4ab7-4ce8-8744-9b69289a082c" is running. Loop = 2 / Remaining = 1 - 33% 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:841b8162-04a2-4757-a4a6-9ccf8d7d0ad0" is running. Loop = 2 / Remaining = 2 - 25% 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 2 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" is running. Loop = 3 / Remaining = 3 - 33% 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 2 / assignmentTerms 3, IsTaskRunning = True 
+ [18:13:48 VRB (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:b791620a-4ab7-4ce8-8744-9b69289a082c" is running. Loop = 3 / Remaining = 0 - 66% 
+ [18:13:48 VRB (28) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:48 VRB (28) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:841b8162-04a2-4757-a4a6-9ccf8d7d0ad0" is running. Loop = 3 / Remaining = 1 - 50% 
+ [18:13:48 DBG (32) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:b791620a-4ab7-4ce8-8744-9b69289a082c" } 
+ { CurrentState: 3 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:48 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 3, is = 2. 
+ { Package: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" } 
+ {@T 
+ 
+ [18:13:48 DBG (32) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:48 DBG (28) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [18:13:48 VRB (28) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 3 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:48 VRB (28) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" is running. Loop = 4 / Remaining = 2 - 50% 
+ [18:13:48 VRB (28) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [18:13:48 VRB (28) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:841b8162-04a2-4757-a4a6-9ccf8d7d0ad0" is running. Loop = 4 / Remaining = 0 - 75% 
+ [18:13:48 DBG (28) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:841b8162-04a2-4757-a4a6-9ccf8d7d0ad0" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:48 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:48 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 2, is = 1. 
+ { Package: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" } 
+ {@T 
+ 
+ [18:13:48 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [18:13:49 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 4 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:49 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" is running. Loop = 5 / Remaining = 1 - 66% 
+ [18:13:49 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 83.33333333333333% = delayLoop 5 / assignmentTerms 6, IsTaskRunning = True 
+ [18:13:49 VRB (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" is running. Loop = 6 / Remaining = 0 - 83% 
+ [18:13:49 DBG (19) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:1424358c-e0fa-48f2-a0c6-7340d26e47b3" } 
+ { CurrentState: 6 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [18:13:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 188] 
+ CheckingPackageCompletion called, { Permit: False }. 
+ [18:13:49 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 1, is = 0. 
+ { Package: "package:1dd2cc07-4e1f-44c4-8eda-a12d69a35879" } 
+ {@T 
+ 
+ [18:13:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 193] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 202] 
+ FreshTaskPackageAppeared called, Global { Permit: False }, { TasksLeft: 0 }. 
+ [18:13:49 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [18:13:49 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: False }. 
+ [18:13:49 DBG (19) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 64] 
+ Main way - return to the subscription on the cafe key. 
+ [18:13:49 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 104] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: null }. 
+ [18:13:49 INF (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 124] 
+ This Server finished current work.
+ { Server: "backserver:40404a61-b947-49fc-8117-1294e2f06668" } 
+ Global { Permit: False } 
+ 
+ [18:13:49 WRN (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 125] 
+ Next package could not be obtained - there are no more packages in cafe. 
+ [18:13:49 DBG (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 205] 
+ FreshTaskPackageAppeared returned Global { Permit: True }. 
+ [18:13:49 WRN (19) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 208] 
+ This Server waits new Task Package. 
+ { Server: "backserver:40404a61-b947-49fc-8117-1294e2f06668" } 
  

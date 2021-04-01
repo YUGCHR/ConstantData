@@ -24,9 +24,6 @@ namespace BackgroundTasksQueue
 
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
-
-
             var host = CreateHostBuilder(args).Build();
 
             var monitorLoop = host.Services.GetRequiredService<MonitorLoop>();
@@ -98,7 +95,6 @@ namespace BackgroundTasksQueue
                     Logs.Fatal("Redis server did not find: \n {@EM} \n\n", new{ ExceptionMessage = message});
                     throw;
                 }
-
                 services.AddSingleton<GenerateThisInstanceGuidService>();
                 services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                 services.AddHostedService<QueuedHostedService>();
@@ -153,6 +149,7 @@ namespace BackgroundTasksQueue
     // 
     // 
 
+    // вариант генерации уникального номера сервера (сохранить)
     //public static class ThisBackServerGuid
     //{
     //    static ThisBackServerGuid()

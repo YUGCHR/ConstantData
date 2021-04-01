@@ -59,7 +59,8 @@ namespace BackgroundTasksQueue.Services
             int loopRemain = assignmentTerms;
             //var guid = Guid.NewGuid().ToString();
 
-            _logger.LogInformation(2101, "Queued Background Task {Guid} is starting.", singleTaskGuid);
+            Logs.Here().Debug("Queued Background Task is starting. \n {@T} \n {@C}", new { Task = singleTaskGuid }, new { StartConditions = assignmentTerms });
+
             taskDescription.TaskState.IsTaskRunning = true;
             // заменить while на for в отдельном методе с выходом из цикла по условию и return
             // потом можно попробовать рекурсию
@@ -83,18 +84,19 @@ namespace BackgroundTasksQueue.Services
                 int completionTaskPercentage = (int)completionDouble;
                 taskDescription.TaskState.TaskCompletedOnPercent = completionTaskPercentage;
 
-                _logger.LogInformation("completionDouble {0}% = delayLoop {1} / assignmentTerms {2}, IsTaskRunning = {3}", completionDouble, delayLoop, assignmentTerms, taskDescription.TaskState.IsTaskRunning);
+                Logs.Here().Verbose("completionDouble {0}% = delayLoop {1} / assignmentTerms {2}, IsTaskRunning = {3}", completionDouble, delayLoop, assignmentTerms, taskDescription.TaskState.IsTaskRunning);
 
                 // обновляем отчёт о прогрессе выполнения задания
                 await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - !!!
 
                 delayLoop++;
-                _logger.LogInformation("Task {0} is running. Loop = {1} / Remaining = {2} - {3}%", singleTaskGuid, delayLoop, loopRemain, completionTaskPercentage);
+                Logs.Here().Verbose("Task {0} is running. Loop = {1} / Remaining = {2} - {3}%", singleTaskGuid, delayLoop, loopRemain, completionTaskPercentage);
             }
             // возвращаем true, если задача успешно завершилась
             // а если безуспешно, то вообще не возвращаемся (скорее всего)
             bool isTaskCompleted = delayLoop == assignmentTerms;
             _logger.LogInformation("Task {0} is completed. Loop = {1} / Remaining = {2}, isTaskCompleted = {3}", singleTaskGuid, delayLoop, loopRemain, isTaskCompleted);
+            Logs.Here().Debug("Queued Background Task is completed. \n {@T} \n {@C} \n {@R} \n {@I}", new { Task = singleTaskGuid }, new { CurrentState = delayLoop }, new { Remain = loopRemain }, new { TaskIsCompleted = isTaskCompleted });
 
             return isTaskCompleted;
         }
@@ -108,10 +110,8 @@ namespace BackgroundTasksQueue.Services
                 //bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid); //HashExistsAsync
                 //_logger.LogInformation("Queued Background Task {Guid} is complete on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
                 // тут записать в описание, что задача закончилась
-                _logger.LogInformation(" --- BEFORE - Task {0} finished. IsTaskRunning still = {1}", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
 
                 taskDescription.TaskState.IsTaskRunning = false;
-                _logger.LogInformation(" --- AFTER - Task {0} finished. IsTaskRunning = {1} yet", singleTaskGuid, taskDescription.TaskState.IsTaskRunning);
 
                 await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - in outside method
 
@@ -119,12 +119,16 @@ namespace BackgroundTasksQueue.Services
                 int oldValue = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField);
                 int newValue = oldValue - 1;
                 await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, newValue); // TimeSpan.FromDays - in outside method
+                
                 // ещё можно при достижении нуля удалить поле пакета, а уже из этого делать выводы (это на потом)
-
+                Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T \n", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
+                
                 return true;
             }
             else
             {
+                Logs.Here().Verbose("Task {0} is not completed", singleTaskGuid);
+
                 // тут тоже что-то записать
                 return false;
             }
