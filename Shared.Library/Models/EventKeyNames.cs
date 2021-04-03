@@ -6,7 +6,7 @@ namespace Shared.Library.Models
     public class EventKeyNames
     {
         public int TaskEmulatorDelayTimeInMilliseconds { get; set; }
-        public string Blank15 { get; set; }
+        public int RandomRangeExtended { get; set; }
         public int BalanceOfTasksAndProcesses { get; set; }
         public int MaxProcessesCountOnServer { get; set; }
         public int MinBackProcessesServersCount { get; set; } // for FrontEmulator only
@@ -22,6 +22,7 @@ namespace Shared.Library.Models
         public string PrefixBackServer { get; set; }
         public string BackServerGuid { get; set; }
         public string BackServerPrefixGuid { get; set; }
+        public int RandomSeedFromGuid { get; set; } // NOT USED
         public string PrefixProcessAdd { get; set; }
         public string PrefixProcessCancel { get; set; }
         public string PrefixProcessCount { get; set; }

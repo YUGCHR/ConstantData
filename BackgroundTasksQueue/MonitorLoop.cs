@@ -39,7 +39,7 @@ namespace BackgroundTasksQueue
             _cancellationToken = applicationLifetime.ApplicationStopping;
             _guid = thisGuid.ThisBackServerGuid();
         }
-        
+
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<MonitorLoop>();
 
         public void StartMonitorLoop()

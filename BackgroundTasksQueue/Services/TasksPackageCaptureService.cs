@@ -81,7 +81,7 @@ namespace BackgroundTasksQueue.Services
                 } 
 
                 // выбираем случайное поле пакета задач - скорее всего, первая попытка будет только с одним полем, остальные не успеют положить и будет драка, но на второй попытке уже разойдутся по разным полям
-                (string tasksPackageGuidField, string tasksPackageGuidValue) = tasksList.ElementAt(DiceRoll(tasksListCount));
+                (string tasksPackageGuidField, string tasksPackageGuidValue) = tasksList.ElementAt(DiceRoll(eventKeysSet, tasksListCount));
 
                 // проверяем захват задачи - пробуем удалить выбранное поле ключа                
                 // в дальнейшем можно вместо Remove использовать RedLock
@@ -110,18 +110,21 @@ namespace BackgroundTasksQueue.Services
             return null; // задача не досталась
         }
 
-        private int DiceRoll(int tasksListCount)
+        private static int DiceRoll(EventKeyNames eventKeysSet, int tasksListCount)
         {
-            // generate random integers from 0 to guids count
-            Random rand = new();
-            // индекс словаря по умолчанию
-            int diceRoll = tasksListCount - 1;
+            // базовое значение кубика - если вдруг одна задача
+            int diceRoll = (tasksListCount - 1);
+            Logs.Here().Debug("DiceRoll is prepared to roll {@F}.", new { BaseValue = diceRoll });
+
             // если осталась одна задача, кубик бросать не надо
             if (tasksListCount > 1)
             {
-                diceRoll = rand.Next(0, tasksListCount - 1);
+                int diceRollRow = RandomProvider.Next(0, eventKeysSet.RandomRangeExtended);
+                Logs.Here().Debug("DiceRollRow rolled {@F}.", new { RowValue = diceRollRow });
+                diceRoll = diceRollRow % (tasksListCount - 1);
             }
             Logs.Here().Debug("DiceRoll rolled {@F}.", new { Facet = diceRoll });
+            
             return diceRoll;
         }
     }

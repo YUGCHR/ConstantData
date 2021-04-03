@@ -129,9 +129,23 @@ namespace BackgroundTasksQueue
         }
     }
 
+    public static class RandomProvider
+    {
+        private static readonly Random Rnd = new(Guid.NewGuid().ToString().GetHashCode());
+        private static readonly object Sync = new();
+
+        public static int Next(int min, int max)
+        {
+            lock (Sync)
+            {
+                return Rnd.Next(min, max);
+            }
+        }
+    }
+
     // BackServers
+    // кубик всё время выбрасывает ноль - TasksPackageCaptureService.DiceRoll corrected
     // ----- вы сейчас находитесь здесь -----
-    // кубик всё время выбрасывает ноль
     // процесс всё время создаётся один
     // процесс при каждом вбросе создаётся новый или старые учитываются?
     // при завершении сервера успеть удалить своё поле из ключа регистрации серверов - обработать cancellationToken

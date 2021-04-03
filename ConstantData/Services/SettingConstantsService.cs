@@ -30,7 +30,7 @@ namespace ConstantData.Services
         public string GetEventFieldBack { get; }
         public string GetEventFieldFront { get; }
         public string GetEventKeyBacksTasksProceed { get; }
-        public string Blank15 { get; }
+        public int GetRandomRangeExtended { get; }
     }
 
     // сделать константы ключей в виде словаря - строка/время существования ключа
@@ -45,7 +45,7 @@ namespace ConstantData.Services
             string recordActualityLevel = Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("RecordActualityLevel").Value;
             GetRecordActualityLevel = Convert.ToInt32(recordActualityLevel);
             GetTaskEmulatorDelayTimeInMilliseconds = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("TaskEmulatorDelayTimeInMilliseconds").Value);
-            Blank15 = Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("PaddingForLogsThirdLine").Value;
+            GetRandomRangeExtended = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("RandomRangeExtended").Value);
             GetBalanceOfTasksAndProcesses = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("BalanceOfTasksAndProcesses").Value);
             GetMaxProcessesCountOnServer = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MaxProcessesCountOnServer").Value);
             GetMinBackProcessesServersCount = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MinBackProcessesServersCount").Value);
@@ -84,7 +84,7 @@ namespace ConstantData.Services
 
         public int GetTaskEmulatorDelayTimeInMilliseconds { get; }
 
-        public string Blank15 { get; }
+        public int GetRandomRangeExtended { get; }
 
         public int GetBalanceOfTasksAndProcesses { get; }
 
