@@ -1,0 +1,660 @@
+[20:00:38 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ [20:00:39 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+ BackServer's MonitorLoop is starting. 
+ [20:00:39 INF (1) BackgroundTasksQueue.Services.QueuedHostedService.ExecuteAsync - 53] 
+ Queued Hosted Service is running.
+
+Tap W to add a work item to the background queue.
+ 
+ [20:00:39 DBG (4) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:00:39 INF (22) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 71] 
+ Server Guid was fetched in QueuedHostedService. 
+ { ServerId: "backserver:e6f043ff-6a69-4b91-b435-1ffaa87a3702" } 
+ [20:00:39 DBG (22) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 78] 
+ Creation of the processes was subscribed on necessary count. 
+ { Key: "process:add:e6f043ff-6a69-4b91-b435-1ffaa87a3702" } / { Field: "ttt" } 
+ [20:00:39 INF (4) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+ Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:e6f043ff-6a69-4b91-b435-1ffaa87a3702" } 
+ [20:00:39 DBG (22) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 111] 
+ You subscribed on EventSet. 
+ { EventSet: "Key process:add:e6f043ff-6a69-4b91-b435-1ffaa87a3702, HashSet command" } 
+ [20:00:39 DBG (22) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 141] 
+ All Background Processes were finished, total count was 0 
+ [20:00:39 INF (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 67] 
+ BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ [20:00:39 DBG (22) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 93] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ [20:00:39 DBG (22) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:10:20 INF (4) BackgroundTasksQueue.Services.QueuedHostedService.StopAsync - 194] 
+ Queued Hosted Service is stopping. 
+ [20:57:59 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ [20:57:59 DBG (1) BackgroundTasksQueue.MonitorLoop.StartMonitorLoop - 48] 
+ BackServer's MonitorLoop is starting. 
+ [20:57:59 INF (1) BackgroundTasksQueue.Services.QueuedHostedService.ExecuteAsync - 53] 
+ Queued Hosted Service is running.
+
+Tap W to add a work item to the background queue.
+ 
+ [20:57:59 INF (21) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 71] 
+ Server Guid was fetched in QueuedHostedService. 
+ { ServerId: "backserver:3b6659d6-8295-4818-be08-7f80aff87f04" } 
+ [20:57:59 DBG (21) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 78] 
+ Creation of the processes was subscribed on necessary count. 
+ { Key: "process:add:3b6659d6-8295-4818-be08-7f80aff87f04" } / { Field: "ttt" } 
+ [20:57:59 DBG (17) BackgroundTasksQueue.MonitorLoop.Monitor - 75] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: 300 }. 
+ [20:57:59 INF (17) BackgroundTasksQueue.MonitorLoop.RegisterAndSubscribe - 123] 
+ Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:3b6659d6-8295-4818-be08-7f80aff87f04" } 
+ [20:57:59 DBG (21) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 111] 
+ You subscribed on EventSet. 
+ { EventSet: "Key process:add:3b6659d6-8295-4818-be08-7f80aff87f04, HashSet command" } 
+ [20:57:59 DBG (21) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 141] 
+ All Background Processes were finished, total count was 0 
+ [20:57:59 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 67] 
+ BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ [20:57:59 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 93] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ [20:57:59 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [20:58:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 78] 
+ FreshTaskPackageAppeared called, Event permit = False 
+ { Key: "key-event-front-server-gives-task-package" } with { Command: HashSet } was received. 
+ 
+ [20:58:31 DBG (4) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 40] 
+ BackServer started AttemptToCaptureTasksPackage. 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 59] 
+ KeyFrontGivesTask { isExisted: True }. 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 72] 
+ TasksList fetched - { TaskCount: 5 }. 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 117] 
+ DiceRoll is prepared to roll { BaseValue: 4 }. 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 123] 
+ DiceRollRow rolled { RowValue: 15337 }. 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.TasksPackageCaptureService.DiceRoll - 126] 
+ DiceRoll rolled { Facet: 1 }. 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 90] 
+ BackServer reported - { DeleteSuccess: True }. 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.TasksPackageCaptureService.AttemptToCaptureTasksPackage - 96] 
+ Task Package fetched. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ [20:58:31 INF (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 106] 
+ AttemptToCaptureTasksPackage captured the TaskPackage. 
+ { TaskPackage: "package:47382ce1-d80a-4e10-a358-68380e25f1df" }. 
+ [20:58:31 INF (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 181] 
+ BackServer subscribed on EventKey Server Guid. 
+ { EventKey: "backserver:3b6659d6-8295-4818-be08-7f80aff87f04" } 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventPackageCompleted - 201] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = package:47382ce1-d80a-4e10-a358-68380e25f1df, Command = HashSet" } 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 116] 
+ SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. 
+ { PackageKey: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ [20:58:31 DBG (18) BackgroundTasksQueue.Services.TasksBatchProcessingService.WhenTasksPackageWasCaptured - 38] 
+ This BackServer fetched Task Package successfully. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ [20:58:31 VRB (18) BackgroundTasksQueue.Services.TasksBatchProcessingService.WhenTasksPackageWasCaptured - 57] 
+ TasksFromKeysToQueue called. 
+ [20:58:31 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ { Task: "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" } 
+ [20:58:31 VRB (33) BackgroundTasksQueue.BackgroundTaskQueue.QueueBackgroundWorkItem - 41] 
+ Single Task placed in Concurrent Queue. 
+ [20:58:31 VRB (33) BackgroundTasksQueue.BackgroundTaskQueue.QueueBackgroundWorkItem - 44] 
+ Concurrent Queue is ready for new task. 
+ [20:58:31 VRB (33) BackgroundTasksQueue.Services.TasksBatchProcessingService.TasksFromKeysToQueue - 149] 
+ This BackServer sent Task to Queue. 
+ { Task: "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" } 
+ [20:58:31 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ { Task: "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" } 
+ [20:58:31 VRB (33) BackgroundTasksQueue.BackgroundTaskQueue.QueueBackgroundWorkItem - 41] 
+ Single Task placed in Concurrent Queue. 
+ [20:58:31 VRB (33) BackgroundTasksQueue.BackgroundTaskQueue.QueueBackgroundWorkItem - 44] 
+ Concurrent Queue is ready for new task. 
+ [20:58:31 VRB (33) BackgroundTasksQueue.Services.TasksBatchProcessingService.TasksFromKeysToQueue - 149] 
+ This BackServer sent Task to Queue. 
+ { Task: "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" } 
+ [20:58:31 DBG (33) BackgroundTasksQueue.Services.BackgroundTasksService.StartWorkItem - 41] 
+ Single Task processing was started. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ { Task: "task:7578796c-3854-463f-b229-da39452335f8" } 
+ [20:58:31 VRB (33) BackgroundTasksQueue.BackgroundTaskQueue.QueueBackgroundWorkItem - 41] 
+ Single Task placed in Concurrent Queue. 
+ [20:58:31 VRB (33) BackgroundTasksQueue.BackgroundTaskQueue.QueueBackgroundWorkItem - 44] 
+ Concurrent Queue is ready for new task. 
+ [20:58:31 VRB (33) BackgroundTasksQueue.Services.TasksBatchProcessingService.TasksFromKeysToQueue - 149] 
+ This BackServer sent Task to Queue. 
+ { Task: "task:7578796c-3854-463f-b229-da39452335f8" } 
+ [20:58:31 VRB (33) BackgroundTasksQueue.Services.TasksBatchProcessingService.TasksFromKeysToQueue - 151] 
+ This BackServer sent total 3 tasks to Queue. 
+ [20:58:31 VRB (33) BackgroundTasksQueue.Services.TasksBatchProcessingService.WhenTasksPackageWasCaptured - 59] 
+ TasksFromKeysToQueue finished with Task Count = 3. 
+ [20:58:31 VRB (33) BackgroundTasksQueue.Services.TasksBatchProcessingService.WhenTasksPackageWasCaptured - 61] 
+ RegisterTasksPackageGuid called. 
+ [20:58:31 DBG (33) BackgroundTasksQueue.Services.TasksBatchProcessingService.RegisterTasksPackageGuid - 107] 
+ Tasks package was registered. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ { EventKey: "key-event-backs-servers-tasks-packages-proceed" } 
+ [20:58:31 VRB (4) BackgroundTasksQueue.Services.TasksBatchProcessingService.RegisterTasksPackageGuid - 116] 
+ This BackServer registered task package and RegisterTasksPackageGuid returned true. 
+ [20:58:31 VRB (4) BackgroundTasksQueue.Services.TasksBatchProcessingService.WhenTasksPackageWasCaptured - 63] 
+ RegisterTasksPackageGuid finished. 
+ [20:58:31 VRB (4) BackgroundTasksQueue.Services.TasksBatchProcessingService.WhenTasksPackageWasCaptured - 74] 
+ AddProcessesToPerformingTasks called. 
+ [20:58:31 DBG (33) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 209] 
+ Processing Event_Completed_Task is launched. 
+ [20:58:31 DBG (33) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 215] 
+ Flag Event_Completed_Task was happening was reset. 
+ [20:58:31 INF (29) BackgroundTasksQueue.Services.TasksBatchProcessingService.AddProcessesToPerformingTasks - 134] 
+ This BackServer ask to start 1 processes. 
+ { Key: "process:add:3b6659d6-8295-4818-be08-7f80aff87f04" } / { Field: "ttt" } 
+ [20:58:31 VRB (29) BackgroundTasksQueue.Services.TasksBatchProcessingService.WhenTasksPackageWasCaptured - 76] 
+ AddProcessesToPerformingTasks finished, return false from WhenTasksPackageWasCaptured. 
+ [20:58:31 DBG (25) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 94] 
+ requiredProcessesCount 1 was fetched, Subscribe permit = False 
+ { Key: "process:add:3b6659d6-8295-4818-be08-7f80aff87f04" } with { Command: HashSet } was received. 
+ [20:58:31 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.FreshTaskPackageAppeared - 119] 
+ WhenTasksPackageWasCaptured returned Event permit = False. 
+ [20:58:31 DBG (29) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 82] 
+ FreshTaskPackageAppeared returned Event permit = False. 
+ [20:58:31 DBG (25) BackgroundTasksQueue.Services.QueuedHostedService.AddProcessesToPerformingTasks - 154] 
+ AddProcessesToPerformingTasks creates process No 0. 
+ [20:58:31 DBG (25) BackgroundTasksQueue.Services.QueuedHostedService.AddProcessesToPerformingTasks - 169] 
+ New Task for Background Processes was added, total count became 1. 
+ [20:58:31 VRB (29) BackgroundTasksQueue.BackgroundTaskQueue.DequeueAsync - 52] 
+ Single Task was dequeued from Concurrent Queue. 
+ [20:58:31 DBG (25) BackgroundTasksQueue.Services.QueuedHostedService.BackgroundProcessing - 99] 
+ AddProcessesToPerformingTasks created processes count 1. 
+ [20:58:31 DBG (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" } 
+ { StartConditions: 9 } 
+ [20:58:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 221] 
+ Flag Event_Completed_Task was happening now - { Flag: False }. 
+ [20:58:31 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 224] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 3 }. 
+ [20:58:31 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:31 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 1 / Remaining = 8 - 0% 
+ [20:58:32 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 11.11111111111111% = delayLoop 1 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:32 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 2 / Remaining = 7 - 11% 
+ [20:58:32 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 22.22222222222222% = delayLoop 2 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:32 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 3 / Remaining = 6 - 22% 
+ [20:58:32 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 33.333333333333336% = delayLoop 3 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:32 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 4 / Remaining = 5 - 33% 
+ [20:58:32 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 44.44444444444444% = delayLoop 4 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:32 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 5 / Remaining = 4 - 44% 
+ [20:58:33 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 55.55555555555556% = delayLoop 5 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:33 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 6 / Remaining = 3 - 55% 
+ [20:58:33 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 66.66666666666667% = delayLoop 6 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:33 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 7 / Remaining = 2 - 66% 
+ [20:58:33 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 77.77777777777777% = delayLoop 7 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:33 VRB (29) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 8 / Remaining = 1 - 77% 
+ [20:58:34 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 88.88888888888889% = delayLoop 8 / assignmentTerms 9, IsTaskRunning = True 
+ [20:58:34 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" is running. Loop = 9 / Remaining = 0 - 88% 
+ [20:58:34 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" } 
+ { CurrentState: 9 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [20:58:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 209] 
+ Processing Event_Completed_Task is launched. 
+ [20:58:34 DBG (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 3, is = 2. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ { Task: "task:87ebcb91-e5f9-4d35-9ad5-5a0b160d5152" } 
+ 
+ [20:58:34 VRB (18) BackgroundTasksQueue.BackgroundTaskQueue.DequeueAsync - 52] 
+ Single Task was dequeued from Concurrent Queue. 
+ [20:58:34 DBG (4) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 215] 
+ Flag Event_Completed_Task was happening was reset. 
+ [20:58:34 DBG (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" } 
+ { StartConditions: 4 } 
+ [20:58:34 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 221] 
+ Flag Event_Completed_Task was happening now - { Flag: False }. 
+ [20:58:34 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 224] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 2 }. 
+ [20:58:34 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 4, IsTaskRunning = True 
+ [20:58:34 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" is running. Loop = 1 / Remaining = 3 - 0% 
+ [20:58:34 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 1 / assignmentTerms 4, IsTaskRunning = True 
+ [20:58:34 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" is running. Loop = 2 / Remaining = 2 - 25% 
+ [20:58:35 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 2 / assignmentTerms 4, IsTaskRunning = True 
+ [20:58:35 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" is running. Loop = 3 / Remaining = 1 - 50% 
+ [20:58:35 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 3 / assignmentTerms 4, IsTaskRunning = True 
+ [20:58:35 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" is running. Loop = 4 / Remaining = 0 - 75% 
+ [20:58:35 DBG (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" } 
+ { CurrentState: 4 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [20:58:35 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 209] 
+ Processing Event_Completed_Task is launched. 
+ [20:58:35 DBG (21) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 2, is = 1. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ { Task: "task:9e3a07b2-ca3c-4ec3-957b-a80650f5a235" } 
+ 
+ [20:58:35 VRB (21) BackgroundTasksQueue.BackgroundTaskQueue.DequeueAsync - 52] 
+ Single Task was dequeued from Concurrent Queue. 
+ [20:58:35 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 215] 
+ Flag Event_Completed_Task was happening was reset. 
+ [20:58:35 DBG (21) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 62] 
+ Queued Background Task is starting. 
+ { Task: "task:7578796c-3854-463f-b229-da39452335f8" } 
+ { StartConditions: 8 } 
+ [20:58:35 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 221] 
+ Flag Event_Completed_Task was happening now - { Flag: False }. 
+ [20:58:35 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 224] 
+ CheckingPackageCompletion returned { Permit: True }, { TasksLeft: 1 }. 
+ [20:58:35 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 0% = delayLoop 0 / assignmentTerms 8, IsTaskRunning = True 
+ [20:58:35 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7578796c-3854-463f-b229-da39452335f8" is running. Loop = 1 / Remaining = 7 - 0% 
+ [20:58:36 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 12.5% = delayLoop 1 / assignmentTerms 8, IsTaskRunning = True 
+ [20:58:36 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7578796c-3854-463f-b229-da39452335f8" is running. Loop = 2 / Remaining = 6 - 12% 
+ [20:58:36 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 25% = delayLoop 2 / assignmentTerms 8, IsTaskRunning = True 
+ [20:58:36 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7578796c-3854-463f-b229-da39452335f8" is running. Loop = 3 / Remaining = 5 - 25% 
+ [20:58:36 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 37.5% = delayLoop 3 / assignmentTerms 8, IsTaskRunning = True 
+ [20:58:36 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7578796c-3854-463f-b229-da39452335f8" is running. Loop = 4 / Remaining = 4 - 37% 
+ [20:58:37 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 50% = delayLoop 4 / assignmentTerms 8, IsTaskRunning = True 
+ [20:58:37 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7578796c-3854-463f-b229-da39452335f8" is running. Loop = 5 / Remaining = 3 - 50% 
+ [20:58:37 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 62.5% = delayLoop 5 / assignmentTerms 8, IsTaskRunning = True 
+ [20:58:37 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7578796c-3854-463f-b229-da39452335f8" is running. Loop = 6 / Remaining = 2 - 62% 
+ [20:58:37 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 75% = delayLoop 6 / assignmentTerms 8, IsTaskRunning = True 
+ [20:58:37 VRB (18) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7578796c-3854-463f-b229-da39452335f8" is running. Loop = 7 / Remaining = 1 - 75% 
+ [20:58:38 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 87] 
+ completionDouble 87.5% = delayLoop 7 / assignmentTerms 8, IsTaskRunning = True 
+ [20:58:38 VRB (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 93] 
+ Task "task:7578796c-3854-463f-b229-da39452335f8" is running. Loop = 8 / Remaining = 0 - 87% 
+ [20:58:38 DBG (4) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskSolution - 99] 
+ Queued Background Task is completed. 
+ { Task: "task:7578796c-3854-463f-b229-da39452335f8" } 
+ { CurrentState: 8 } 
+ { Remain: 0 } 
+ { TaskIsCompleted: True } 
+ [20:58:38 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 209] 
+ Processing Event_Completed_Task is launched. 
+ [20:58:38 DBG (21) BackgroundTasksQueue.Services.BackgroundTasksService.ActualTaskCompletion - 124] 
+ One Task in the Package is completed, was = 1, is = 0. 
+ { Package: "package:47382ce1-d80a-4e10-a358-68380e25f1df" } 
+ { Task: "task:7578796c-3854-463f-b229-da39452335f8" } 
+ 
+ [20:58:38 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 215] 
+ Flag Event_Completed_Task was happening was reset. 
+ [20:58:38 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 221] 
+ Flag Event_Completed_Task was happening now - { Flag: False }. 
+ [20:58:38 DBG (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 224] 
+ CheckingPackageCompletion returned { Permit: False }, { TasksLeft: 0 }. 
+ [20:58:38 WRN (18) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.ProcessingEventCompletedTask - 236] 
+ This Server waits new Task Package. 
+ { Server: "backserver:3b6659d6-8295-4818-be08-7f80aff87f04" } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ [21:11:24 DBG (17) BackgroundTasksQueue.MonitorLoop.IsCancellationNotYet - 99] 
+ Is Cancellation Token obtained? - { IsCancelled: False } 
+ 

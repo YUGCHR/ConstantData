@@ -87,7 +87,7 @@ namespace BackgroundTasksQueue.Services
                 // в дальнейшем можно вместо Remove использовать RedLock
                 bool isDeleteSuccess = await _cache.RemoveHashedAsync(eventKeyFrontGivesTask, tasksPackageGuidField);
                 // здесь может разорваться цепочка между ключом, который известен контроллеру и ключом пакета задач
-                Logs.Here().Debug("BackServer reported - {@D}.", new { DeleteSuccess = isDeleteSuccess });
+                Logs.Here().Debug("BackServer reported - {@D}.", new { DeletedSuccessfully = isDeleteSuccess });
 
                 if (isDeleteSuccess)
                 {

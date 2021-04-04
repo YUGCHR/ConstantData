@@ -50,6 +50,8 @@ namespace BackgroundTasksQueue.Services
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<OnKeysEventsSubscribeService>();
 
         private bool _flagToBlockEventRun;
+        private bool _eventCompletedTaskWasHappening;
+        private bool _processingEventCompletedTaskIsLaunched;
 
         public async Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun) // NOT USED
         {
@@ -174,47 +176,65 @@ namespace BackgroundTasksQueue.Services
 
         private void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet, string tasksPackageGuidField)
         {
+            // подписка на окончание единичной задачи (для проверки, все ли задачи закончились)
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             Logs.Here().Information("BackServer subscribed on EventKey Server Guid. \n {@E}", new { EventKey = backServerPrefixGuid });
-            int totalUnsolvedTasksLeft;
-            // блокировка множественной подписки до специального разрешения повторной подписки
-            bool flagToBlockEventPackageCompleted = true;
-
-            _keyEvents.Subscribe(backServerPrefixGuid, async (string key, KeyEvent cmd) =>
+            
+            _keyEvents.Subscribe(backServerPrefixGuid, (string key, KeyEvent cmd) => // async before action
             {
-                if (cmd == eventKeysSet.EventCmd && flagToBlockEventPackageCompleted)
+                if (cmd == eventKeysSet.EventCmd)// && flagToBlockEventPackageCompleted)
                 {
-                    flagToBlockEventPackageCompleted = false;
-                    Logs.Here().Debug("CheckingPackageCompletion called, {@P}.", new { Permit = flagToBlockEventPackageCompleted });
-
-                    // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
-                    (flagToBlockEventPackageCompleted, totalUnsolvedTasksLeft) = await _control.CheckingPackageCompletion(eventKeysSet, tasksPackageGuidField);
-                    // totalUnsolvedTasksLeft получаем только для отладки
-                    Logs.Here().Debug("CheckingPackageCompletion returned {@P}, {@L}.", new { Permit = flagToBlockEventPackageCompleted }, new{ TasksLeft = totalUnsolvedTasksLeft });
-
-                    // если пакет в работе, вернулось true и опять ждём подписку
-                    // если пакет закончен, оставим навсегда false, этот пакет нас больше не интересует, но, перед восстановлением глобального ключа, ещё надо проверить кафе
-                    // или может полностью отменить подписку? вроде бы разницы нет, всё равно сюда теперь попадём только по новой подписке на этот же ключ, поэтому отменять нет смысла
-
-                    if (!flagToBlockEventPackageCompleted)
+                    // защёлка _eventCompletedTaskWasHappening - если true, то событие было, пока были заняты
+                    _eventCompletedTaskWasHappening = true;
+                    // проверка, запущен ли обработчик, если _processingEventCompletedTaskIsLaunched = true, то запущен
+                    if (!_processingEventCompletedTaskIsLaunched)
                     {
-                        // перед восстановлением глобального ключа, надо ещё проверить кафе - стандартным способом
-                        Logs.Here().Debug("FreshTaskPackageAppeared called, Global {@P}, {@L}.", new { Permit = _flagToBlockEventRun }, new { TasksLeft = totalUnsolvedTasksLeft });
-                        // для отладки тут можно вывести количество оставшихся задач в пакете из всего количества
-                        _flagToBlockEventRun = await FreshTaskPackageAppeared(eventKeysSet);
-                        Logs.Here().Debug("FreshTaskPackageAppeared returned Global {@P}.", new { Permit = _flagToBlockEventRun });
-                        if (_flagToBlockEventRun)
-                        {
-                            Logs.Here().Warning("This Server waits new Task Package. \n {@S}", new {Server = eventKeysSet.BackServerPrefixGuid});
-                        }
-                        // если задач там больше нет, вернётся true, восстановим глобальную подписку и будем ждать 
-                        // а если пакет есть, вернётся false и все пойдет привычным путём, а потом придёт опять сюда по новой подписке
+                        // ставим обработчик_запущен true и перезапускаем обработчик, без ожидания
+                        _processingEventCompletedTaskIsLaunched = true;
+                        _ = ProcessingEventCompletedTask(eventKeysSet, tasksPackageGuidField);
+                        // когда обработчик завершит работу, он сбросит этот флаг внутри себя
                     }
                 }
             });
 
             string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {eventKeysSet.EventCmd}";
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
+        }
+
+        public async Task ProcessingEventCompletedTask(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        {
+            // пока активно событие подписки на окончание задачи, проверяем общее состояние пакета
+            while (_eventCompletedTaskWasHappening)
+            {
+                Logs.Here().Debug("Processing Event_Completed_Task is launched.");
+                // признак, что ещё есть нерешённые задачи
+                bool unsolvedTasksStillLeft;
+                int totalUnsolvedTasksLeft;
+                // перед проверкой готовности задач сбрасываем защёлку подписки
+                _eventCompletedTaskWasHappening = false;
+                Logs.Here().Debug("Flag Event_Completed_Task was happening was reset.");
+                // задержку попробовать поставить здесь
+                await Task.Delay(TimeSpan.FromSeconds(0.001)); //add cancellationToken
+                // если до/во время проверки произойдёт новое событие, то сделаем ещё круг с повторной проверкой
+                // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
+                (unsolvedTasksStillLeft, totalUnsolvedTasksLeft) = await _control.CheckingPackageCompletion(eventKeysSet, tasksPackageGuidField);
+                Logs.Here().Debug("Flag Event_Completed_Task was happening now - {@F}.", new{Flag = _eventCompletedTaskWasHappening });
+
+                // totalUnsolvedTasksLeft получаем только для отладки
+                Logs.Here().Debug("CheckingPackageCompletion returned {@P}, {@L}.", new {Permit = unsolvedTasksStillLeft }, new {TasksLeft = totalUnsolvedTasksLeft});
+                
+                if (unsolvedTasksStillLeft)
+                {
+                    // если задачи ещё есть, завершить обработчик
+                    // обработчик завершает работу, сбросить флаг
+                    _processingEventCompletedTaskIsLaunched = false;
+                    return;
+                }
+
+                // если все задачи кончились, восстановить глобальный флаг подписки на кафе
+                _flagToBlockEventRun = true;
+                Logs.Here().Warning("This Server waits new Task Package. \n {@S}", new { Server = eventKeysSet.BackServerPrefixGuid });
+            }
         }
 
         // по ключу сервера можно дополнительно контролировать окончание пакета, если удалять поле пакета после его окончания (но как?)
