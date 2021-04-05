@@ -20,17 +20,17 @@ namespace BackgroundTasksQueue.Services
     public class BackgroundTasksService : IBackgroundTasksService
     {
         private readonly IBackgroundTaskQueue _taskQueue;
-        private readonly ILogger<BackgroundTasksService> _logger;
+        //private readonly ILogger<BackgroundTasksService> _logger;
         private readonly ICacheProviderAsync _cache;
 
         public BackgroundTasksService(
             IBackgroundTaskQueue taskQueue,
-            ILogger<BackgroundTasksService> logger,
+            //ILogger<BackgroundTasksService> logger,
             ICacheProviderAsync cache
         )
         {
             _taskQueue = taskQueue;
-            _logger = logger;
+            //_logger = logger;
             _cache = cache;
         }
 
@@ -95,8 +95,7 @@ namespace BackgroundTasksQueue.Services
             // возвращаем true, если задача успешно завершилась
             // а если безуспешно, то вообще не возвращаемся (скорее всего)
             bool isTaskCompleted = delayLoop == assignmentTerms;
-            _logger.LogInformation("Task {0} is completed. Loop = {1} / Remaining = {2}, isTaskCompleted = {3}", singleTaskGuid, delayLoop, loopRemain, isTaskCompleted);
-            Logs.Here().Debug("Queued Background Task is completed. \n {@T} \n {@C} \n {@R} \n {@I}", new { Task = singleTaskGuid }, new { CurrentState = delayLoop }, new { Remain = loopRemain }, new { TaskIsCompleted = isTaskCompleted });
+            Logs.Here().Debug("Background Task is completed. \n {@T} \n {@C}, {@R}, {@I}", new { Task = singleTaskGuid }, new { CurrentState = delayLoop }, new { Remain = loopRemain }, new { TaskIsCompleted = isTaskCompleted });
 
             return isTaskCompleted;
         }

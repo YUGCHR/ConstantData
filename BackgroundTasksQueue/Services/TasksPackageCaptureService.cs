@@ -55,6 +55,7 @@ namespace BackgroundTasksQueue.Services
             while (isExistEventKeyFrontGivesTask) // может и надо поставить while всегда - все условия выхода внутри и по ним будет р
             {
                 // проверить существование ключа, может, все задачи давно разобрали и ключ исчез
+                Logs.Here().Debug("KeyExistsAsync will call now.");
                 isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(eventKeyFrontGivesTask);
                 Logs.Here().Debug("KeyFrontGivesTask {@E}.", new { isExisted = isExistEventKeyFrontGivesTask });
 
@@ -86,14 +87,17 @@ namespace BackgroundTasksQueue.Services
                 // проверяем захват задачи - пробуем удалить выбранное поле ключа                
                 // в дальнейшем можно вместо Remove использовать RedLock
                 bool isDeleteSuccess = await _cache.RemoveHashedAsync(eventKeyFrontGivesTask, tasksPackageGuidField);
-                // здесь может разорваться цепочка между ключом, который известен контроллеру и ключом пакета задач
-                Logs.Here().Debug("BackServer reported - {@D}.", new { DeletedSuccessfully = isDeleteSuccess });
+                Logs.Here().Debug("BackServer reported - {@D}.", new { TasksPackageFieldWasDeletedSuccessfully = isDeleteSuccess });
 
                 if (isDeleteSuccess)
                 {
                     // тут перейти в TasksBatchProcessingService
                     // не перейти, а вернуться в подписку с номером пакета задач
                     Logs.Here().Debug("Task Package fetched. \n {@G}", new { Package = tasksPackageGuidField });
+                    // проверяли, что и вправду удалили поле, а то были сомнения
+                    //IDictionary<string, string> tasksList1 = await _cache.GetHashedAllAsync<string>(eventKeyFrontGivesTask);
+                    //int tasksListCount1 = tasksList1.Count;
+                    //Logs.Here().Debug("TasksList after removing fetched - {@T}.", new { TaskCountNew = tasksListCount1 });
                     return tasksPackageGuidField;
                 }
             }

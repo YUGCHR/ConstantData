@@ -96,7 +96,8 @@ namespace BackgroundTasksQueue
 
         private bool IsCancellationNotYet()
         {
-            Logs.Here().Debug("Is Cancellation Token obtained? - {@C}", new { IsCancelled = _cancellationToken.IsCancellationRequested });
+            string packageSeparator = new('*', 80);
+            Logs.Here().Debug("Is Cancellation Token obtained? - {@C} \n {1} \n", new { IsCancelled = _cancellationToken.IsCancellationRequested }, packageSeparator);
             return !_cancellationToken.IsCancellationRequested; // add special key from Redis?
         }
 
@@ -127,7 +128,11 @@ namespace BackgroundTasksQueue
             // регистрируем поле guid сервера на ключе регистрации серверов, а в значение кладём чистый гуид, без префикса
             await _cache.SetHashedAsync<string>(eventKeysSet.EventKeyBackReadiness, backServerPrefixGuid, backServerGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
             // восстановить время жизни ключа регистрации сервера перед новой охотой - где и как?
-            
+
+            _subscribe.SubscribeOnEventPackageCompleted(eventKeysSet);//, tasksPackageGuidField);
+            Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed on backServerPrefixGuid. \n {@K}", new { ServerKey = backServerPrefixGuid });
+
+
             // подписываемся на ключ сообщения о появлении свободных задач
             _subscribe.SubscribeOnEventRun(eventKeysSet);
 

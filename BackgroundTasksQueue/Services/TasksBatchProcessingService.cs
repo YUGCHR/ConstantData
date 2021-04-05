@@ -11,7 +11,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksBatchProcessingService
     {
-        public Task<bool> WhenTasksPackageWasCaptured(EventKeyNames eventKeysSet, string tasksPackageGuidField);
+        public Task WhenTasksPackageWasCaptured(EventKeyNames eventKeysSet, string tasksPackageGuidField);
     }
 
     public class TasksBatchProcessingService : ITasksBatchProcessingService
@@ -32,7 +32,7 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksBatchProcessingService>();
 
-        public async Task<bool> WhenTasksPackageWasCaptured(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Processing
+        public async Task WhenTasksPackageWasCaptured(EventKeyNames eventKeysSet, string tasksPackageGuidField) // Main for Processing
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             Logs.Here().Debug("This BackServer fetched Task Package successfully. \n {@P}", new { Package = tasksPackageGuidField });
@@ -83,9 +83,6 @@ namespace BackgroundTasksQueue.Services
             // процессы тоже не здесь удаляем - перенести их отсюда
             //int cancelExistingProcesses = await CancelExistingProcesses(eventKeysSet, addProcessesCount, completionPercentage);
             // выйти из цикла можем только когда не останется задач в ключе кафе
-
-            // здесь всё сделали, выходим с блокировкой подписки на следующие пакеты задач
-            return false;
         }
 
         private async Task<bool> RegisterTasksPackageGuid(EventKeyNames eventKeysSet, string tasksPackageGuidField, int taskPackageCount)
