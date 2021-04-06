@@ -22,7 +22,8 @@ namespace ConstantData.Services
         public string GetEventKeyFrontGivesTask { get; }
         public string GetPrefixRequest { get; }
         public string GetPrefixPackage { get; }
-        public string GetPrefixPackageCompletedControl { get; }
+        public string GetPrefixPackageControl { get; }
+        public string GetPrefixPackageCompleted { get; }
         public string GetPrefixTask { get; }
         public string GetPrefixBackServer { get; }
         public string GetPrefixProcessAdd { get; }
@@ -57,8 +58,7 @@ namespace ConstantData.Services
             GetEventKeyBackServerMainTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerMainTimeDays").Value);
             GetEventKeyBackServerAuxiliaryTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerAuxiliaryTimeDays").Value);
             GetPercentsKeysExistingTimeInMinutes = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("PercentsKeysExistingTimeInMinutes").Value);
-
-
+            
             GetEventKeyFrom = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyFrom").Value;
             GetEventFieldFrom = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldFrom").Value;
             GetEventKeyBackReadiness = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyBackReadiness").Value;
@@ -66,7 +66,8 @@ namespace ConstantData.Services
 
             GetPrefixRequest = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixRequest").Value;
             GetPrefixPackage = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackage").Value;
-            GetPrefixPackageCompletedControl = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackageCompletedControl").Value;
+            GetPrefixPackageControl = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackageControl").Value;
+            GetPrefixPackageCompleted = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackageCompleted").Value;
             GetPrefixTask = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixTask").Value;
             GetPrefixBackServer = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixBackServer").Value;
 
@@ -118,7 +119,9 @@ namespace ConstantData.Services
 
         public string GetPrefixPackage { get; }
 
-        public string GetPrefixPackageCompletedControl { get; }
+        public string GetPrefixPackageControl { get; }
+
+        public string GetPrefixPackageCompleted { get; }
 
         public string GetPrefixTask { get; }
 

@@ -41,7 +41,8 @@ namespace ConstantData.Services
                 EventKeyFrontGivesTask = _constantService.GetEventKeyFrontGivesTask, // кафе выдачи задач
                 PrefixRequest = _constantService.GetPrefixRequest, // request:guid
                 PrefixPackage = _constantService.GetPrefixPackage, // package:guid
-                PrefixPackageCompletedControl = _constantService.GetPrefixPackageCompletedControl, // package:control
+                PrefixPackageControl = _constantService.GetPrefixPackageControl, // control:package:guid
+                PrefixPackageCompleted = _constantService.GetPrefixPackageCompleted, // completed:package:guid
                 PrefixTask = _constantService.GetPrefixTask, // task:guid
                 PrefixBackServer = _constantService.GetPrefixBackServer, // backserver:guid
                 BackServerGuid = _guid, // !!! this server guid - will be set in BackgroundTasksQueue

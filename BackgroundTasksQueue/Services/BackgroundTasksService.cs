@@ -102,8 +102,9 @@ namespace BackgroundTasksQueue.Services
         private async Task<bool> ActualTaskCompletion(EventKeyNames eventKeysSet, bool isTaskCompleted, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
-            string prefixPackageCompletedControl = eventKeysSet.PrefixPackageCompletedControl;
-            Logs.Here().Debug("in PrefixPackageCompletedControl fetched {0}.", prefixPackageCompletedControl);
+            string prefixPackageControl = eventKeysSet.PrefixPackageControl;
+            string prefixPackageCompleted = eventKeysSet.PrefixPackageCompleted;
+            Logs.Here().Debug("in PrefixPackageControl fetched {0}.", prefixPackageControl);
 
             // сюда попадаем только если isTaskCompleted true, поэтому if и передачу значения isTaskCompleted можно убрать
             if (isTaskCompleted)
@@ -125,7 +126,7 @@ namespace BackgroundTasksQueue.Services
                 // ещё можно при достижении нуля удалить поле пакета, а уже из этого делать выводы (это на потом)
                 Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T} \n", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
 
-                string prefixControlTasksPackageGuid = $"{eventKeysSet.PrefixPackageCompletedControl}:{tasksPackageGuidField}";
+                string prefixControlTasksPackageGuid = $"{prefixPackageControl}:{tasksPackageGuidField}";
                 int sequentialSingleTaskNumber = await _cache.GetHashedAsync<int>(prefixControlTasksPackageGuid, singleTaskGuid);
                 Logs.Here().Debug("Completed Task {0} on the control package key. \n {@S} \n {@K} \n", sequentialSingleTaskNumber, new{SingleTask = singleTaskGuid }, new{ControlKey = prefixControlTasksPackageGuid });
                 
@@ -145,6 +146,10 @@ namespace BackgroundTasksQueue.Services
                     // ключ исчез, значит задача была последняя и надо об этом сообщить
                     Logs.Here().Information("Completed Task {0} was the last.", sequentialSingleTaskNumber);
 
+                    // вот здесь об этом и сообщаем
+                    string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
+                    await _cache.SetHashedAsync(prefixCompletedTasksPackageGuid, tasksPackageGuidField, sequentialSingleTaskNumber, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
+                    Logs.Here().Information("Key was hashSet, Event was created. \n {@K} \n", new{KeyEvent = prefixCompletedTasksPackageGuid});
 
                     return true;
                 }
