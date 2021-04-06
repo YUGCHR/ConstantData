@@ -51,10 +51,10 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<OnKeysEventsSubscribeService>();
 
-        private bool _flagToBlockEventRun;
-        private bool _eventCompletedTaskWasHappening;
-        private bool _processingEventCompletedTaskIsLaunched;
-        private string _tasksPackageGuidField;
+        private bool _flagToBlockEventRun; 
+        //private bool _eventCompletedTaskWasHappening;
+        //private bool _processingEventCompletedTaskIsLaunched;
+        //private string _tasksPackageGuidField;
 
         public async Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun) // NOT USED
         {
@@ -62,7 +62,7 @@ namespace BackgroundTasksQueue.Services
 
             return eventGuidFieldRun;
         }
-
+        
         // подписываемся на ключ сообщения о появлении свободных задач
         public void SubscribeOnEventRun(EventKeyNames eventKeysSet)
         {
@@ -72,7 +72,7 @@ namespace BackgroundTasksQueue.Services
             // блокировка множественной подписки до специального разрешения повторной подписки
             _flagToBlockEventRun = true;
             // на старте вывecти состояние всех глобальных флагов
-            Logs.Here().Debug("SubscribeOnEventRun started with the following flags: => \n {@F1} \n {@F2} \n {@F3}", new { FlagToBlockEventRun = _flagToBlockEventRun }, new { EventCompletedTaskWasHappening = _eventCompletedTaskWasHappening }, new { ProcessingEventCompletedTaskIsLaunched = _processingEventCompletedTaskIsLaunched });
+            //Logs.Here().Debug("SubscribeOnEventRun started with the following flags: => \n {@F1} \n {@F2} \n {@F3}", new { FlagToBlockEventRun = _flagToBlockEventRun }, new { EventCompletedTaskWasHappening = _eventCompletedTaskWasHappening }, new { ProcessingEventCompletedTaskIsLaunched = _processingEventCompletedTaskIsLaunched });
 
             _keyEvents.Subscribe(eventKeyFrontGivesTask, async (string key, KeyEvent cmd) =>
             {
@@ -121,7 +121,7 @@ namespace BackgroundTasksQueue.Services
                 //SubscribeOnEventCheckPackageProgress(eventKeysSet, tasksPackageGuidField);
                 SubscribeOnEventPackageCompleted(eventKeysSet, tasksPackageGuidField);
                 //Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. \n {@K}", new { PackageKey = tasksPackageGuidField });
-                _tasksPackageGuidField = tasksPackageGuidField;
+                //_tasksPackageGuidField = tasksPackageGuidField;
                 _ = _processing.WhenTasksPackageWasCaptured(eventKeysSet, tasksPackageGuidField);
                 Logs.Here().Debug("WhenTasksPackageWasCaptured passed without awaiting.");
 
@@ -140,24 +140,6 @@ namespace BackgroundTasksQueue.Services
 
             return true;
         }
-
-        // вызвать из монитора или откуда-то из сервиса?
-        // точно не из монитора - там неизвестен гуид пакета
-        // можно из первого места, где получаем гуид пакета
-        // в мониторе подписываемся на ключ сервера и когда там появится номер пакета задач, подписываемся на него
-        // нет, все подписки здесь
-
-
-        // Subscribe - eventKeyFrontGivesTask
-        // FreshTaskPackageAppeared 
-        // _captures.AttemptToCaptureTasksPackage => if (tasksPackageGuidField != null)
-        // SubscribeOnEventPackageCompleted
-        // without awaiting called _processing.WhenTasksPackageWasCaptured
-        // if (tasksPackageGuidField == null)
-        // _flagToBlockEventRun = true;
-        // THE END
-        // 
-        // 
 
         private void SubscribeOnEventCheckPackageProgress(EventKeyNames eventKeysSet, string tasksPackageGuidField) // NOT USED
         {
@@ -211,23 +193,14 @@ namespace BackgroundTasksQueue.Services
             {
                 if (cmd == eventKeysSet.EventCmd)// && flagToBlockEventPackageCompleted)
                 {
-                    // защёлка _eventCompletedTaskWasHappening - если true, то событие было, пока были заняты
-                    // здесь надо применить очередь вместо переменной, но нужна конкурентная очередь
-                    //_eventCompletedTaskWasHappening = true;
-                    //Logs.Here().Debug("Event_Completed_Task was happening now - {@F}.", new { Flag = _eventCompletedTaskWasHappening });
-                    
-                    // проверка, запущен ли обработчик, если _processingEventCompletedTaskIsLaunched = true, то запущен
-                    //if (!_processingEventCompletedTaskIsLaunched)
-                    //{
-                        // ставим обработчик_запущен true и перезапускаем обработчик, без ожидания
-                        //_processingEventCompletedTaskIsLaunched = true;
-                        //Logs.Here().Debug("ProcessingEventCompletedTask will start now {@L}.", new { IsLaunched = _processingEventCompletedTaskIsLaunched });
 
-                        _ = ProcessingEventCompletedTask(eventKeysSet);//, tasksPackageGuidField);
-                        Logs.Here().Debug("passed ProcessingEventCompletedTask.");
+                    // параллельно заканчивается много пакетов и по каждому окончанию бегаем проверять новые пакеты, а они давно кончились
+                    // не очень понятно, каким образом пакеты выполняются параллельно - в этом надо разобраться
 
-                        // когда обработчик завершит работу, он сбросит этот флаг внутри себя
-                    //}
+
+
+                    _ = FreshTaskPackageAppeared(eventKeysSet);
+                    Logs.Here().Debug("SubscribeOnEventRun finished current package.");
                 }
             });
 
@@ -271,11 +244,11 @@ namespace BackgroundTasksQueue.Services
             //}
 
             // если все задачи кончились, 
-            _ = FreshTaskPackageAppeared(eventKeysSet);
+            //_ = FreshTaskPackageAppeared(eventKeysSet);
 
             // обработчик завершает работу, сбросить флаг для будущих поколений
             //_processingEventCompletedTaskIsLaunched = false;
-            Logs.Here().Debug("SubscribeOnEventRun finished current package with the following flags: => \n {@F1} \n {@F2} \n {@F3}", new { FlagToBlockEventRun = _flagToBlockEventRun }, new { EventCompletedTaskWasHappening = _eventCompletedTaskWasHappening }, new { ProcessingEventCompletedTaskIsLaunched = _processingEventCompletedTaskIsLaunched });
+            //Logs.Here().Debug("SubscribeOnEventRun finished current package with the following flags: => \n {@F1} \n {@F2} \n {@F3}", new { FlagToBlockEventRun = _flagToBlockEventRun }, new { EventCompletedTaskWasHappening = _eventCompletedTaskWasHappening }, new { ProcessingEventCompletedTaskIsLaunched = _processingEventCompletedTaskIsLaunched });
         }
 
         // по ключу сервера можно дополнительно контролировать окончание пакета, если удалять поле пакета после его окончания (но как?)
