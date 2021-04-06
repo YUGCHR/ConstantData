@@ -16,7 +16,7 @@ namespace BackgroundTasksQueue.Services
         //public Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun); // NOT USED
         public void SubscribeOnEventRun(EventKeyNames eventKeysSet);
 
-        public void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet); //, string tasksPackageGuidField);
+        //public void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet); //, string tasksPackageGuidField);
         //public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet); // NOT USED
         //public void SubscribeOnEventCheckPackageProgress(EventKeyNames eventKeysSet, string tasksPackageGuidField);
     }
@@ -119,7 +119,7 @@ namespace BackgroundTasksQueue.Services
                 // подписка на ключ пакета задач для контроля выполнения - задачи должны сюда (или в ключ с префиксом) отчитываться о ходе выполнения
                 // убрать подписку на tasksPackageGuidField, запрашивать состояние выполнения из внешнего запроса
                 //SubscribeOnEventCheckPackageProgress(eventKeysSet, tasksPackageGuidField);
-                //SubscribeOnEventPackageCompleted(eventKeysSet, tasksPackageGuidField);
+                SubscribeOnEventPackageCompleted(eventKeysSet, tasksPackageGuidField);
                 //Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. \n {@K}", new { PackageKey = tasksPackageGuidField });
                 _tasksPackageGuidField = tasksPackageGuidField;
                 _ = _processing.WhenTasksPackageWasCaptured(eventKeysSet, tasksPackageGuidField);
@@ -199,80 +199,82 @@ namespace BackgroundTasksQueue.Services
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        public void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet)//, string tasksPackageGuidField)
+        private void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet, string tasksPackageGuidField)
         {
             // подписка на окончание единичной задачи (для проверки, все ли задачи закончились)
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
+            string prefixPackageCompleted = eventKeysSet.PrefixPackageCompleted;
+            string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
             Logs.Here().Information("BackServer subscribed on EventKey Server Guid. \n {@E}", new { EventKey = backServerPrefixGuid });
 
-            _keyEvents.Subscribe(backServerPrefixGuid, (string key, KeyEvent cmd) => // async before action
+            _keyEvents.Subscribe(prefixCompletedTasksPackageGuid, (string key, KeyEvent cmd) => // async before action
             {
                 if (cmd == eventKeysSet.EventCmd)// && flagToBlockEventPackageCompleted)
                 {
                     // защёлка _eventCompletedTaskWasHappening - если true, то событие было, пока были заняты
                     // здесь надо применить очередь вместо переменной, но нужна конкурентная очередь
-                    _eventCompletedTaskWasHappening = true;
+                    //_eventCompletedTaskWasHappening = true;
                     //Logs.Here().Debug("Event_Completed_Task was happening now - {@F}.", new { Flag = _eventCompletedTaskWasHappening });
                     
                     // проверка, запущен ли обработчик, если _processingEventCompletedTaskIsLaunched = true, то запущен
-                    if (!_processingEventCompletedTaskIsLaunched)
-                    {
+                    //if (!_processingEventCompletedTaskIsLaunched)
+                    //{
                         // ставим обработчик_запущен true и перезапускаем обработчик, без ожидания
-                        _processingEventCompletedTaskIsLaunched = true;
+                        //_processingEventCompletedTaskIsLaunched = true;
                         //Logs.Here().Debug("ProcessingEventCompletedTask will start now {@L}.", new { IsLaunched = _processingEventCompletedTaskIsLaunched });
 
                         _ = ProcessingEventCompletedTask(eventKeysSet);//, tasksPackageGuidField);
                         Logs.Here().Debug("passed ProcessingEventCompletedTask.");
 
                         // когда обработчик завершит работу, он сбросит этот флаг внутри себя
-                    }
+                    //}
                 }
             });
 
-            string eventKeyCommand = $"Key = {backServerPrefixGuid}, Command = {eventKeysSet.EventCmd}";
+            string eventKeyCommand = $"Key = {prefixCompletedTasksPackageGuid}, Command = {eventKeysSet.EventCmd}";
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
         public async Task ProcessingEventCompletedTask(EventKeyNames eventKeysSet)//, string tasksPackageGuidField)
         {
-            bool unsolvedTasksStillLeft = false;
+            //bool unsolvedTasksStillLeft = false;
             // пока активно событие подписки на окончание задачи, проверяем общее состояние пакета
-            while (_eventCompletedTaskWasHappening)
-            {
+            //while (_eventCompletedTaskWasHappening)
+            //{
                 //Logs.Here().Debug("Processing Event_Completed_Task is launched.");
                 // признак, что ещё есть нерешённые задачи
 
                 // перед проверкой готовности задач сбрасываем защёлку подписки
-                _eventCompletedTaskWasHappening = false;
-                Logs.Here().Debug("Flag Event_Completed_Task was happening was reset.");
+                //_eventCompletedTaskWasHappening = false;
+                //Logs.Here().Debug("Flag Event_Completed_Task was happening was reset.");
                 // задержку попробовать поставить здесь
                 // await Task.Delay(TimeSpan.FromSeconds(0.001)); //add cancellationToken
                 // если до/во время проверки произойдёт новое событие, то сделаем ещё круг с повторной проверкой
                 // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
-                string tasksPackageGuidField = _tasksPackageGuidField;
-                int totalUnsolvedTasksLeft;
-                (unsolvedTasksStillLeft, totalUnsolvedTasksLeft) = await _control.CheckingPackageCompletion(eventKeysSet, tasksPackageGuidField);
+                //string tasksPackageGuidField = _tasksPackageGuidField;
+                //int totalUnsolvedTasksLeft;
+                //(unsolvedTasksStillLeft, totalUnsolvedTasksLeft) = await _control.CheckingPackageCompletion(eventKeysSet, tasksPackageGuidField);
                 // наверное лучше инвертировать название unsolvedTasksStillLeft и его состояние
-                Logs.Here().Debug("Flag Event_Completed_Task was happening now - {@F}.", new { Flag = _eventCompletedTaskWasHappening });
+                //Logs.Here().Debug("Flag Event_Completed_Task was happening now - {@F}.", new { Flag = _eventCompletedTaskWasHappening });
 
                 // totalUnsolvedTasksLeft получаем только для отладки
-                Logs.Here().Debug("CheckingPackageCompletion returned {@P}, {@L}.", new { Permit = unsolvedTasksStillLeft }, new { TasksLeft = totalUnsolvedTasksLeft });
+                //Logs.Here().Debug("CheckingPackageCompletion returned {@P}, {@L}.", new { Permit = unsolvedTasksStillLeft }, new { TasksLeft = totalUnsolvedTasksLeft });
                 // выход по окончанию всех задач можно перенести сюда
-            }
-            if (unsolvedTasksStillLeft)
-            {
-                // если задачи ещё есть, завершить обработчик
-                // обработчик завершает работу, сбросить флаг
-                _processingEventCompletedTaskIsLaunched = false;
-                Logs.Here().Debug("ProcessingEventCompletedTask finishes work {@P}, {@L}.", new { Permit = unsolvedTasksStillLeft }, new { IsLaunched = _processingEventCompletedTaskIsLaunched });
-                return;
-            }
+            //}
+            //if (unsolvedTasksStillLeft)
+            //{
+            //    // если задачи ещё есть, завершить обработчик
+            //    // обработчик завершает работу, сбросить флаг
+            //    _processingEventCompletedTaskIsLaunched = false;
+            //    Logs.Here().Debug("ProcessingEventCompletedTask finishes work {@P}, {@L}.", new { Permit = unsolvedTasksStillLeft }, new { IsLaunched = _processingEventCompletedTaskIsLaunched });
+            //    return;
+            //}
 
             // если все задачи кончились, 
             _ = FreshTaskPackageAppeared(eventKeysSet);
 
             // обработчик завершает работу, сбросить флаг для будущих поколений
-            _processingEventCompletedTaskIsLaunched = false;
+            //_processingEventCompletedTaskIsLaunched = false;
             Logs.Here().Debug("SubscribeOnEventRun finished current package with the following flags: => \n {@F1} \n {@F2} \n {@F3}", new { FlagToBlockEventRun = _flagToBlockEventRun }, new { EventCompletedTaskWasHappening = _eventCompletedTaskWasHappening }, new { ProcessingEventCompletedTaskIsLaunched = _processingEventCompletedTaskIsLaunched });
         }
 

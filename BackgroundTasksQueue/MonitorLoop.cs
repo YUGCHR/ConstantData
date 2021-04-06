@@ -129,8 +129,8 @@ namespace BackgroundTasksQueue
             await _cache.SetHashedAsync<string>(eventKeysSet.EventKeyBackReadiness, backServerPrefixGuid, backServerGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
             // восстановить время жизни ключа регистрации сервера перед новой охотой - где и как?
 
-            _subscribe.SubscribeOnEventPackageCompleted(eventKeysSet);//, tasksPackageGuidField);
-            Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed on backServerPrefixGuid. \n {@K}", new { ServerKey = backServerPrefixGuid });
+            //_subscribe.SubscribeOnEventPackageCompleted(eventKeysSet);//, tasksPackageGuidField);
+            //Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed on backServerPrefixGuid. \n {@K}", new { ServerKey = backServerPrefixGuid });
 
 
             // подписываемся на ключ сообщения о появлении свободных задач
