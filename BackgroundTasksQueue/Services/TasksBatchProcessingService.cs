@@ -88,9 +88,9 @@ namespace BackgroundTasksQueue.Services
         private async Task<bool> RegisterTasksPackageGuid(EventKeyNames eventKeysSet, string tasksPackageGuidField, int taskPackageCount)
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
-            string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
+            //string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             string eventKeyBacksTasksProceed = eventKeysSet.EventKeyBacksTasksProceed;
-
+            
             // следующие две регистрации пока непонятно, зачем нужны - доступ к состоянию пакета задач всё равно по ключу пакета
             // очень нужен - для контроля окончания выполнения задачи и пакета
 
@@ -136,9 +136,17 @@ namespace BackgroundTasksQueue.Services
         {
             IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField); // получили пакет заданий - id задачи и данные (int) для неё
             int taskPackageCount = taskPackage.Count;
+            int sequentialSingleTaskNumber = 0;
             foreach (var t in taskPackage)
             {
                 var (singleTaskGuid, taskDescription) = t;
+
+                // регистрируем задачи на ключе контроля выполнения пакета (prefixControlTasksPackageGuid)
+                string prefixControlTasksPackageGuid = $"{eventKeysSet.PrefixPackageCompletedControl}:{tasksPackageGuidField}";
+                await _cache.SetHashedAsync(prefixControlTasksPackageGuid, singleTaskGuid, sequentialSingleTaskNumber, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
+                Logs.Here().Debug("Single task {0} was registered on Completed Control Key. \n {@P} \n {@S}", sequentialSingleTaskNumber, new { PackageControl = prefixControlTasksPackageGuid }, new { SingleTask = singleTaskGuid });
+                sequentialSingleTaskNumber++;
+
                 // складываем задачи во внутреннюю очередь сервера
                 _task2Queue.StartWorkItem(eventKeysSet, tasksPackageGuidField, singleTaskGuid, taskDescription);
                 // создаём ключ для контроля выполнения задания из пакета - нет, создаём не тут и не такой (ключ)

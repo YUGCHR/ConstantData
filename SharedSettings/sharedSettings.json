@@ -24,7 +24,7 @@
       "eventKeyFrontGivesTask": "key-event-front-server-gives-task-package",
       "prefixRequest": "request",
       "prefixPackage": "package",
-      "prefixPackageCompletedControl": "package:control", // key for all tasks to delete their fields when is completed
+      "prefixPackageCompletedControl": "completed:control", // key for all tasks to delete their fields when is completed
       "prefixTask": "task",
       "prefixBackServer": "backserver",
       "prefixProcessAdd": "process:add",
