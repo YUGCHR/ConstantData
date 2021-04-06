@@ -210,6 +210,7 @@ namespace BackgroundTasksQueue.Services
                 if (cmd == eventKeysSet.EventCmd)// && flagToBlockEventPackageCompleted)
                 {
                     // защёлка _eventCompletedTaskWasHappening - если true, то событие было, пока были заняты
+                    // здесь надо применить очередь вместо переменной, но нужна конкурентная очередь
                     _eventCompletedTaskWasHappening = true;
                     //Logs.Here().Debug("Event_Completed_Task was happening now - {@F}.", new { Flag = _eventCompletedTaskWasHappening });
                     
