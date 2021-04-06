@@ -124,7 +124,32 @@ namespace BackgroundTasksQueue.Services
                 
                 // ещё можно при достижении нуля удалить поле пакета, а уже из этого делать выводы (это на потом)
                 Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T} \n", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
+
+                string prefixControlTasksPackageGuid = $"{eventKeysSet.PrefixPackageCompletedControl}:{tasksPackageGuidField}";
+                int sequentialSingleTaskNumber = await _cache.GetHashedAsync<int>(prefixControlTasksPackageGuid, singleTaskGuid);
+                Logs.Here().Debug("Completed Task {0} on the control package key. \n {@S} \n {@K} \n", sequentialSingleTaskNumber, new{SingleTask = singleTaskGuid }, new{ControlKey = prefixControlTasksPackageGuid });
                 
+                bool isDeleteSuccess = await _cache.RemoveHashedAsync(prefixControlTasksPackageGuid, singleTaskGuid);
+                Logs.Here().Debug("Attempt to delete field was {0}.", isDeleteSuccess);
+
+                if (isDeleteSuccess)
+                {
+                    bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(prefixControlTasksPackageGuid);
+                    Logs.Here().Debug("Check of control key existing was {0}.", isExistEventKeyFrontGivesTask);
+
+                    if (isExistEventKeyFrontGivesTask)
+                    {
+                        Logs.Here().Debug("Completed Task {0} was not the last.", sequentialSingleTaskNumber);
+                        return true;
+                    }
+                    // ключ исчез, значит задача была последняя и надо об этом сообщить
+                    Logs.Here().Information("Completed Task {0} was the last.", sequentialSingleTaskNumber);
+
+
+                    return true;
+                }
+
+                Logs.Here().Fatal("Something went wrong, it cannot be so");
                 return true;
             }
             else
