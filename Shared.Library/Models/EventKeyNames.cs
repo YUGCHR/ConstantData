@@ -18,6 +18,7 @@ namespace Shared.Library.Models
         public string EventKeyFrontGivesTask { get; set; }
         public string PrefixRequest { get; set; }
         public string PrefixPackage { get; set; }
+        public string PrefixPackageCompletedControl { get; set; }
         public string PrefixTask { get; set; }
         public string PrefixBackServer { get; set; }
         public string BackServerGuid { get; set; }

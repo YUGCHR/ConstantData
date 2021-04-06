@@ -13,7 +13,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface IBackgroundTasksService
     {
-        void StartWorkItem(string backServerPrefixGuid, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms);
+        void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms);
 
     }
 
@@ -36,7 +36,7 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<BackgroundTasksService>();
 
-        public void StartWorkItem(string backServerPrefixGuid, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription)
+        public void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription)
         {
             Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@T}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
             // Enqueue a background work item
@@ -46,15 +46,14 @@ namespace BackgroundTasksQueue.Services
                 bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, token);
                 // если задача завершилась полностью, удалить поле регистрации из ключа сервера
                 // пока (или совсем) не удаляем, а уменьшаем на единичку значение, пока не станет 0 - тогда выполнение пакета закончено
-                bool isTaskFinished = await ActualTaskCompletion(isTaskCompleted, backServerPrefixGuid, taskDescription, tasksPackageGuidField, singleTaskGuid, token);
-
+                bool isTaskFinished = await ActualTaskCompletion(eventKeysSet, isTaskCompleted, taskDescription, tasksPackageGuidField, singleTaskGuid, token);
             });
         }
 
         private async Task<bool> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
             int assignmentTerms = taskDescription.TaskDescription.CycleCount;
-            double taskDelayTimeSpanFromMilliSeconds = taskDescription.TaskDescription.TaskDelayTimeFromMilliSeconds / 1000D;
+            double taskDelayTimeSpanFromMilliseconds = taskDescription.TaskDescription.TaskDelayTimeFromMilliSeconds / 1000D;
             int delayLoop = 0;
             int loopRemain = assignmentTerms;
             //var guid = Guid.NewGuid().ToString();
@@ -68,7 +67,7 @@ namespace BackgroundTasksQueue.Services
             {
                 try
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(taskDelayTimeSpanFromMilliSeconds), cancellationToken);
+                    await Task.Delay(TimeSpan.FromSeconds(taskDelayTimeSpanFromMilliseconds), cancellationToken);
                 }
                 catch (OperationCanceledException)
                 {
@@ -100,8 +99,12 @@ namespace BackgroundTasksQueue.Services
             return isTaskCompleted;
         }
 
-        private async Task<bool> ActualTaskCompletion(bool isTaskCompleted, string backServerPrefixGuid, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
+        private async Task<bool> ActualTaskCompletion(EventKeyNames eventKeysSet, bool isTaskCompleted, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
+            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
+            string prefixPackageCompletedControl = eventKeysSet.PrefixPackageCompletedControl;
+            Logs.Here().Debug("in PrefixPackageCompletedControl fetched {0}.", prefixPackageCompletedControl);
+
             // сюда попадаем только если isTaskCompleted true, поэтому if и передачу значения isTaskCompleted можно убрать
             if (isTaskCompleted)
             {

@@ -22,6 +22,7 @@ namespace ConstantData.Services
         public string GetEventKeyFrontGivesTask { get; }
         public string GetPrefixRequest { get; }
         public string GetPrefixPackage { get; }
+        public string GetPrefixPackageCompletedControl { get; }
         public string GetPrefixTask { get; }
         public string GetPrefixBackServer { get; }
         public string GetPrefixProcessAdd { get; }
@@ -65,6 +66,7 @@ namespace ConstantData.Services
 
             GetPrefixRequest = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixRequest").Value;
             GetPrefixPackage = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackage").Value;
+            GetPrefixPackageCompletedControl = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackageCompletedControl").Value;
             GetPrefixTask = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixTask").Value;
             GetPrefixBackServer = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixBackServer").Value;
 
@@ -115,6 +117,8 @@ namespace ConstantData.Services
         public string GetPrefixRequest { get; }
 
         public string GetPrefixPackage { get; }
+
+        public string GetPrefixPackageCompletedControl { get; }
 
         public string GetPrefixTask { get; }
 

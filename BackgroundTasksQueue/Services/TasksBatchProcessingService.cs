@@ -55,7 +55,7 @@ namespace BackgroundTasksQueue.Services
             // tasksPakageGuidValue больше не нужно передавать, вместо нее tasksPackageGuidField
 
             Logs.Here().Verbose("TasksFromKeysToQueue called.");
-            int taskPackageCount = await TasksFromKeysToQueue(tasksPackageGuidField, backServerPrefixGuid);
+            int taskPackageCount = await TasksFromKeysToQueue(eventKeysSet, tasksPackageGuidField);
             Logs.Here().Verbose("TasksFromKeysToQueue finished with Task Count = {0}.", taskPackageCount);
 
             Logs.Here().Verbose("RegisterTasksPackageGuid called.");
@@ -132,7 +132,7 @@ namespace BackgroundTasksQueue.Services
             return toAddProcessesCount;
         }
 
-        private async Task<int> TasksFromKeysToQueue(string tasksPackageGuidField, string backServerPrefixGuid)
+        private async Task<int> TasksFromKeysToQueue(EventKeyNames eventKeysSet, string tasksPackageGuidField)
         {
             IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField); // получили пакет заданий - id задачи и данные (int) для неё
             int taskPackageCount = taskPackage.Count;
@@ -140,7 +140,7 @@ namespace BackgroundTasksQueue.Services
             {
                 var (singleTaskGuid, taskDescription) = t;
                 // складываем задачи во внутреннюю очередь сервера
-                _task2Queue.StartWorkItem(backServerPrefixGuid, tasksPackageGuidField, singleTaskGuid, taskDescription);
+                _task2Queue.StartWorkItem(eventKeysSet, tasksPackageGuidField, singleTaskGuid, taskDescription);
                 // создаём ключ для контроля выполнения задания из пакета - нет, создаём не тут и не такой (ключ)
                 //await _cache.SetHashedAsync(backServerPrefixGuid, singleTaskGuid, assignmentTerms); 
                 Logs.Here().Verbose("This BackServer sent Task to Queue. \n {@T}", new { Task = singleTaskGuid }, new { CyclesCount = taskDescription.TaskDescription.CycleCount });
