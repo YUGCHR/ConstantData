@@ -52,6 +52,8 @@ namespace BackgroundTasksQueue.Services
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<OnKeysEventsSubscribeService>();
 
         private bool _flagToBlockEventRun; 
+        private bool _flagToBlockEventCompleted; 
+        private int numOfCheckKeyFrontGivesTask; 
         //private bool _eventCompletedTaskWasHappening;
         //private bool _processingEventCompletedTaskIsLaunched;
         //private string _tasksPackageGuidField;
@@ -76,29 +78,64 @@ namespace BackgroundTasksQueue.Services
 
             _keyEvents.Subscribe(eventKeyFrontGivesTask, async (string key, KeyEvent cmd) =>
             {
+                // скажем, в подписке вызывается метод проверить наличие пакетов в кафе(CheckKeyFrontGivesTask), если пакеты есть, он возвращает true, и метод за ним (FreshTaskPackageAppeared) начинает захват пакета
+                // void Unsubscribe(string key);
+                // 
+                // 
                 if (cmd == eventKeysSet.EventCmd && _flagToBlockEventRun)
                 {
                     // подписка заблокирована
+                    // быструю блокировку оставить - когда ещё отпишемся, но можно сделать локальной?
+                    numOfCheckKeyFrontGivesTask = 0;
                     _flagToBlockEventRun = false;
-                    Logs.Here().Debug("FreshTaskPackageAppeared called, Event permit = {Flag} \n {@K} with {@C} was received. \n", _flagToBlockEventRun, new { Key = eventKeyFrontGivesTask }, new { Command = cmd });
+                    Logs.Here().Debug("CheckKeyFrontGivesTask will be called No:{0}, Event permit = {Flag} \n {@K} with {@C} was received. \n", numOfCheckKeyFrontGivesTask, _flagToBlockEventRun, new { Key = eventKeyFrontGivesTask }, new { Command = cmd });
                     // можно добавить счётчик событий для дебага
-                    // _flagToBlockEventRun вернется true, только если задачу добыть не удалось
-                    _ = FreshTaskPackageAppeared(eventKeysSet);
-                    Logs.Here().Debug("Subscribe on eventKeyFrontGivesTask permit = {Flag}.", _flagToBlockEventRun);
-
-                    // просто сделать _flagToBlockEventRun true ничего не даёт - оставшиеся в ключе задачи не вызовут подписку
-                    // если задача получена и пошла в работу, то вернётся false и на true ключ поменяют в другом месте (запутанно, но пока так)
-                    // и там сначала ещё раз проверить ключ кафе задач и если ещё остались задачи, вызвать FreshTaskPackageAppeared
+                    _ = CheckKeyFrontGivesTask(eventKeysSet);
                 }
-                // другая подписка (SubscribeOnEventPackageCompleted) восстановит true в _flagToBlockEventRun, чтобы возобновить подписку 
-                // или можно void Unsubscribe(string key), тогда без глобальной переменной
             });
 
             string eventKeyCommand = $"Key = {eventKeyFrontGivesTask}, Command = {eventKeysSet.EventCmd}";
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key
+        private async Task<bool> CheckKeyFrontGivesTask(EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key
+        {
+            numOfCheckKeyFrontGivesTask++;
+            Logs.Here().Debug("CheckKeyFrontGivesTask was called No:{0}.", numOfCheckKeyFrontGivesTask);
+
+            string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
+            // проверить существование ключа - если ключ есть, надо идти добывать пакет
+            Logs.Here().Debug("KeyFrontGivesTask will be checked now.");
+            bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(eventKeyFrontGivesTask);
+            Logs.Here().Debug("KeyFrontGivesTask {@E}.", new { isExisted = isExistEventKeyFrontGivesTask });
+
+            if (isExistEventKeyFrontGivesTask)
+            {
+                // отменить подписку глубже, когда получится захватить пакет?
+                _ = FreshTaskPackageAppeared(eventKeysSet);
+                Logs.Here().Debug("FreshTaskPackageAppeared was passed, Subscribe permit = {Flag}.", _flagToBlockEventRun);
+                
+                Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", numOfCheckKeyFrontGivesTask);
+                numOfCheckKeyFrontGivesTask--;
+
+                return false;
+            }
+
+            // всё_протухло - пакетов нет, восстановить подписку и ждать погоду
+            _flagToBlockEventRun = true;
+
+            Logs.Here().Information("This Server finished current work.\n {@S} \n Global {@PR} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, new { Permit = _flagToBlockEventRun });
+            Logs.Here().Warning("Next package could not be obtained - there are no more packages in cafe.");
+            string packageSeparator1 = new('Z', 80);
+            Logs.Here().Warning("This Server waits new Task Package. \n {@S} \n {1} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, packageSeparator1);
+            
+            Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", numOfCheckKeyFrontGivesTask);
+            numOfCheckKeyFrontGivesTask--;
+
+            return true;
+        }
+
+        private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet)
         {
             // вернуть все подписки сюда
             // метод состоит из трёх частей -
@@ -108,13 +145,14 @@ namespace BackgroundTasksQueue.Services
             // если всё удачно, возвращаемся сюда, оставив подписку заблокированной
 
             string tasksPackageGuidField = await _captures.AttemptToCaptureTasksPackage(eventKeysSet);
-            Logs.Here().Information("AttemptToCaptureTasksPackage captured the TaskPackage. \n {@T}.", new { TaskPackage = tasksPackageGuidField });
-            string packageSeparator0 = new('#', 90);
-            Logs.Here().Warning("AttemptToCaptureTasksPackage captured new TaskPackage. \n {0} \n", packageSeparator0);
 
             // если flagToBlockEventRun null, сразу возвращаемся с true для возобновления подписки
             if (tasksPackageGuidField != null)
             {
+                Logs.Here().Information("AttemptToCaptureTasksPackage captured the TaskPackage. \n {@T}.", new { TaskPackage = tasksPackageGuidField });
+                string packageSeparator0 = new('#', 90);
+                Logs.Here().Warning("AttemptToCaptureTasksPackage captured new TaskPackage. \n {0} \n", packageSeparator0);
+
                 // вызывать подписку на tasksPackageGuidField прямо здесь, а не городить лишние ключи
                 // подписка на ключ пакета задач для контроля выполнения - задачи должны сюда (или в ключ с префиксом) отчитываться о ходе выполнения
                 // убрать подписку на tasksPackageGuidField, запрашивать состояние выполнения из внешнего запроса
@@ -184,23 +222,24 @@ namespace BackgroundTasksQueue.Services
         private void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet, string tasksPackageGuidField)
         {
             // подписка на окончание единичной задачи (для проверки, все ли задачи закончились)
+            _flagToBlockEventCompleted = true;
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             string prefixPackageCompleted = eventKeysSet.PrefixPackageCompleted;
             string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
-            Logs.Here().Information("BackServer subscribed on EventKey Server Guid. \n {@E}", new { EventKey = backServerPrefixGuid });
+            Logs.Here().Information("BackServer subscribed on EventKey Server Guid. \n {@E}", new { EventKey = prefixCompletedTasksPackageGuid });
 
             _keyEvents.Subscribe(prefixCompletedTasksPackageGuid, (string key, KeyEvent cmd) => // async before action
             {
-                if (cmd == eventKeysSet.EventCmd)// && flagToBlockEventPackageCompleted)
+                if (cmd == eventKeysSet.EventCmd && _flagToBlockEventCompleted)
                 {
-
+                    _flagToBlockEventCompleted = false;
                     // параллельно заканчивается много пакетов и по каждому окончанию бегаем проверять новые пакеты, а они давно кончились
                     // не очень понятно, каким образом пакеты выполняются параллельно - в этом надо разобраться
 
-
-
-                    _ = FreshTaskPackageAppeared(eventKeysSet);
-                    Logs.Here().Debug("SubscribeOnEventRun finished current package.");
+                    // 
+                    Logs.Here().Debug("SubscribeOnEventPackageCompleted was called with event ---current_package_finished---.");
+                    _ = CheckKeyFrontGivesTask(eventKeysSet);
+                    Logs.Here().Debug("CheckKeyFrontGivesTask was called and passed.");
                 }
             });
 

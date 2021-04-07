@@ -38,7 +38,7 @@ namespace BackgroundTasksQueue.Services
 
         public void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription)
         {
-            Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@T}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
+            Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@S}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
             // Enqueue a background work item
             _taskQueue.QueueBackgroundWorkItem(async token =>
             {
@@ -58,7 +58,7 @@ namespace BackgroundTasksQueue.Services
             int loopRemain = assignmentTerms;
             //var guid = Guid.NewGuid().ToString();
 
-            Logs.Here().Debug("Queued Background Task is starting. \n {@T} \n {@C}", new { Task = singleTaskGuid }, new { StartConditions = assignmentTerms });
+            Logs.Here().Debug("Queued Background Task is starting with {0} cycles. \n {@P} \n {@S}", assignmentTerms, new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
 
             taskDescription.TaskState.IsTaskRunning = true;
             // заменить while на for в отдельном методе с выходом из цикла по условию и return
@@ -94,7 +94,7 @@ namespace BackgroundTasksQueue.Services
             // возвращаем true, если задача успешно завершилась
             // а если безуспешно, то вообще не возвращаемся (скорее всего)
             bool isTaskCompleted = delayLoop == assignmentTerms;
-            Logs.Here().Debug("Background Task is completed. \n {@T} \n {@C}, {@R}, {@I}", new { Task = singleTaskGuid }, new { CurrentState = delayLoop }, new { Remain = loopRemain }, new { TaskIsCompleted = isTaskCompleted });
+            Logs.Here().Debug("Background Task is completed. \n {@P} \n {@S} \n {@C}, {@R}, {@I}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid }, new { CurrentState = delayLoop }, new { Remain = loopRemain }, new { TaskIsCompleted = isTaskCompleted });
 
             return isTaskCompleted;
         }
@@ -124,32 +124,32 @@ namespace BackgroundTasksQueue.Services
                 await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, newValue); // TimeSpan.FromDays - in outside method
                 
                 // ещё можно при достижении нуля удалить поле пакета, а уже из этого делать выводы (это на потом)
-                Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T} \n", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
+                Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T}", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
 
                 string prefixControlTasksPackageGuid = $"{prefixPackageControl}:{tasksPackageGuidField}";
                 int sequentialSingleTaskNumber = await _cache.GetHashedAsync<int>(prefixControlTasksPackageGuid, singleTaskGuid);
-                Logs.Here().Debug("Completed Task {0} on the control package key. \n {@S} \n {@K} \n", sequentialSingleTaskNumber, new{SingleTask = singleTaskGuid }, new{ControlKey = prefixControlTasksPackageGuid });
+                Logs.Here().Debug("Completed Task {0} on the control package key. \n {@S} \n {@K}", sequentialSingleTaskNumber, new{SingleTask = singleTaskGuid }, new{ControlKey = prefixControlTasksPackageGuid });
                 
                 bool isDeleteSuccess = await _cache.RemoveHashedAsync(prefixControlTasksPackageGuid, singleTaskGuid);
-                Logs.Here().Debug("Attempt to delete field was {0}.", isDeleteSuccess);
+                Logs.Here().Debug("Attempt to delete field was {0}. \n {@P} \n {@S}", isDeleteSuccess, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
 
                 if (isDeleteSuccess)
                 {
                     bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(prefixControlTasksPackageGuid);
-                    Logs.Here().Debug("Check of control key existing was {0}.", isExistEventKeyFrontGivesTask);
+                    Logs.Here().Debug("Check of control key existing was {0}. \n {@P} \n {@S}", isExistEventKeyFrontGivesTask, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
 
                     if (isExistEventKeyFrontGivesTask)
                     {
-                        Logs.Here().Debug("Completed Task {0} was not the last.", sequentialSingleTaskNumber);
+                        Logs.Here().Debug("Completed Task {0} was not the last. \n {@P} \n {@S}", sequentialSingleTaskNumber, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
                         return true;
                     }
                     // ключ исчез, значит задача была последняя и надо об этом сообщить
-                    Logs.Here().Information("Completed Task {0} was the last.", sequentialSingleTaskNumber);
+                    Logs.Here().Information("Completed Task {0} was the last. \n {@P} \n {@S}", sequentialSingleTaskNumber, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
 
                     // вот здесь об этом и сообщаем
                     string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
                     await _cache.SetHashedAsync(prefixCompletedTasksPackageGuid, tasksPackageGuidField, sequentialSingleTaskNumber, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
-                    Logs.Here().Information("Key was hashSet, Event was created. \n {@K} \n", new{KeyEvent = prefixCompletedTasksPackageGuid});
+                    Logs.Here().Information("Key was hashSet, Event was created. \n {@K} \n {@S}", new{KeyEvent = prefixCompletedTasksPackageGuid}, new { SingleTask = singleTaskGuid });
 
                     return true;
                 }
