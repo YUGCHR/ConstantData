@@ -26,8 +26,11 @@ namespace Shared.Library.Models
         public string BackServerPrefixGuid { get; set; }
         public int RandomSeedFromGuid { get; set; } // NOT USED
         public string PrefixProcessAdd { get; set; }
+        public string ProcessAddPrefixGuid { get; set; }
         public string PrefixProcessCancel { get; set; }
+        public string ProcessCancelPrefixGuid { get; set; }
         public string PrefixProcessCount { get; set; }
+        public string ProcessCountPrefixGuid { get; set; }
         public string EventFieldFront { get; set; }
         public string EventKeyBacksTasksProceed { get; set; }        
         public double EventKeyFromTimeDays { get; set; }

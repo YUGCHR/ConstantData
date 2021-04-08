@@ -23,6 +23,7 @@ namespace BackgroundTasksQueue.Services
         private readonly IOnKeysEventsSubscribeService _subscribe;
         private readonly string _guid;
 
+        // заменить List на ключ с полями
         List<BackgroundProcessingTask> completingTasksProcesses = new List<BackgroundProcessingTask>();
 
         public QueuedHostedService(
@@ -60,9 +61,20 @@ namespace BackgroundTasksQueue.Services
 
         private async Task BackgroundProcessing(CancellationToken stoppingToken)
         {
+            // все проверки и ожидание внутри метода, без констант не вернётся
+            // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
             EventKeyNames eventKeysSet = await ConstantInitializer(stoppingToken);
 
             _ = RunSubscribe(eventKeysSet);
+
+            // тут нужны 3 метода
+            // создание процессов
+            // проверка количества процессов
+            // удаление процессов
+
+            // все названия ключей из префиксов перенести в инициализацию
+
+            // вся регулировка должна быть внутри класса, внешний метод сообщает только необходимое ему количество процессов
 
             //EventKeyNames eventKeysSet = await _data.FetchAllConstants(stoppingToken, 770);
             //string backServerGuid = _guid ?? throw new ArgumentNullException(nameof(_guid));
@@ -71,21 +83,25 @@ namespace BackgroundTasksQueue.Services
             //eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
 
             //string eventKey = "task:add";
-            string cancelKey = "task:del";
+            //string cancelKey = "task:del";
             int createdProcessesCount = 0;
-            string backServerGuid = $"{eventKeysSet.PrefixBackServer}:{_guid}"; // backserver:(this server guid)
-            Logs.Here().Information("Server Guid was fetched in QueuedHostedService. \n {@S}", new { ServerId = backServerGuid });
+            string backServerGuid = eventKeysSet.BackServerGuid;
+            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
+            //string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{_guid}"; // backserver:(this server guid)
+            Logs.Here().Information("Server Guid was fetched in QueuedHostedService. \n {@S}", new { ServerId = backServerPrefixGuid });
 
             // создать ключ для подписки из констант
-            string prefixProcessAdd = eventKeysSet.PrefixProcessAdd; // process:add
-            string eventKeyProcessAdd = $"{prefixProcessAdd}:{_guid}"; // process:add:(this server guid)
+            //string prefixProcessAdd = eventKeysSet.PrefixProcessAdd; // process:add
+            //string processAddPrefixGuid = $"{prefixProcessAdd}:{backServerGuid}"; // process:add:(this server guid)
+            string processAddPrefixGuid = eventKeysSet.ProcessAddPrefixGuid;
+            string processCancelPrefixGuid = eventKeysSet.ProcessCancelPrefixGuid;
             // поле-пустышка, но одинаковое с тем, что создаётся в основном методе - чтобы достать значение
             string eventFieldBack = eventKeysSet.EventFieldBack;
-            Logs.Here().Debug("Creation of the processes was subscribed on necessary count. \n {@K} / {@F}", new { Key = eventKeyProcessAdd }, new { Field = eventFieldBack });
+            Logs.Here().Debug("Creation of the processes was subscribed on necessary count. \n {@K} / {@F}", new { Key = processAddPrefixGuid }, new { Field = eventFieldBack });
             // подписка на ключ добавления бэкграунд процессов(поле без разницы), в значении можно было бы ставить количество необходимых процессов
             // типовая блокировка множественной подписки до специального разрешения повторной подписки
             bool flagToBlockEventAdd = true;
-            _keyEvents.Subscribe(eventKeyProcessAdd, async (string key, KeyEvent cmd) =>
+            _keyEvents.Subscribe(processAddPrefixGuid, async (string key, KeyEvent cmd) =>
             {
                 if (cmd == KeyEvent.HashSet && flagToBlockEventAdd)
                 {
@@ -96,8 +112,8 @@ namespace BackgroundTasksQueue.Services
                     // ещё лучше - достать нужное значение заранее и передать только его, тогда метод будет синхронный (наверное)
                     // не лучше
                     // лучше
-                    int requiredProcessesCount = await _cache.GetHashedAsync<int>(eventKeyProcessAdd, eventFieldBack);
-                    Logs.Here().Debug("requiredProcessesCount {0} was fetched, Subscribe permit = {1} \n {@K} with {@C} was received.", requiredProcessesCount, flagToBlockEventAdd, new { Key = eventKeyProcessAdd }, new { Command = cmd });
+                    int requiredProcessesCount = await _cache.GetHashedAsync<int>(processAddPrefixGuid, eventFieldBack);
+                    Logs.Here().Debug("requiredProcessesCount {0} was fetched, Subscribe permit = {1} \n {@K} with {@C} was received.", requiredProcessesCount, flagToBlockEventAdd, new { Key = processAddPrefixGuid }, new { Command = cmd });
 
                     if (requiredProcessesCount > 0)
                     {
@@ -113,15 +129,15 @@ namespace BackgroundTasksQueue.Services
                 }
             });
 
-            string eventKeyCommand = $"Key {eventKeyProcessAdd}, HashSet command";
+            string eventKeyCommand = $"Key {processAddPrefixGuid}, HashSet command";
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
 
 
-            _keyEvents.Subscribe(cancelKey, (string key, KeyEvent cmd) =>
+            _keyEvents.Subscribe(processCancelPrefixGuid, (string key, KeyEvent cmd) =>
             {
                 if (cmd == KeyEvent.HashSet)
                 {
-                    Logs.Here().Debug("Event cancelKey was happened, Subscribe permit = none \n {@K} with {@C} was received.", new { Key = cancelKey }, new { Command = cmd });
+                    Logs.Here().Debug("Event cancelKey was happened, Subscribe permit = none \n {@K} with {@C} was received.", new { Key = processCancelPrefixGuid }, new { Command = cmd });
                     
                     if (createdProcessesCount > 0)
                     {
@@ -219,6 +235,20 @@ namespace BackgroundTasksQueue.Services
             eventKeysSet.BackServerGuid = backServerGuid;
             string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
             eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
+
+            string prefixProcessAdd = eventKeysSet.PrefixProcessAdd; // process:add
+            string processAddPrefixGuid = $"{prefixProcessAdd}:{backServerGuid}"; // process:add:(this server guid)
+            eventKeysSet.ProcessAddPrefixGuid = processAddPrefixGuid;
+
+            string prefixProcessCancel = eventKeysSet.PrefixProcessCancel; // process:cancel
+            string processCancelPrefixGuid = $"{prefixProcessCancel}:{backServerGuid}"; // process:cancel:(this server guid)
+            eventKeysSet.ProcessCancelPrefixGuid = processCancelPrefixGuid;
+            
+            string prefixProcessCount = eventKeysSet.PrefixProcessCount; // process:count
+            string processCountPrefixGuid = $"{prefixProcessCount}:{backServerGuid}"; // process:count:(this server guid)
+            eventKeysSet.ProcessCountPrefixGuid = processCountPrefixGuid;
+
+
 
             Logs.Here().Information("Server Guid was fetched and stored into EventKeyNames. \n {@S}", new { ServerId = backServerPrefixGuid });
             return eventKeysSet;
