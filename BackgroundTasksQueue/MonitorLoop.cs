@@ -68,17 +68,10 @@ namespace BackgroundTasksQueue
             //string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
             // но используем другой способ - спросить (в extension), какой метод вызвал
 
-            EventKeyNames eventKeysSet = await _data.FetchAllConstants(_cancellationToken, 750);
+            EventKeyNames eventKeysSet = await ConstantInitializer();
+
+            _ = RunSubscribe(eventKeysSet);
             
-            if (eventKeysSet != null)
-            {
-                Logs.Here().Debug("EventKeyNames fetched constants in EventKeyNames - {@D}.", new { CycleDelay = eventKeysSet.TaskEmulatorDelayTimeInMilliseconds });
-                await RegisterAndSubscribe(eventKeysSet);
-            }
-            else
-            {
-                Logs.Here().Error("eventKeysSet CANNOT be Init.");
-            }
 
             // заменить на while(всегда) и проверять условие в теле - и вынести ожидание в отдельный метод - the same in Constants
             while (IsCancellationNotYet())
@@ -101,7 +94,39 @@ namespace BackgroundTasksQueue
             return !_cancellationToken.IsCancellationRequested; // add special key from Redis?
         }
 
-        private async Task RegisterAndSubscribe(EventKeyNames eventKeysSet)
+        private async Task<EventKeyNames> ConstantInitializer()
+        {
+            EventKeyNames eventKeysSet = await _data.FetchAllConstants(_cancellationToken, 750);
+
+            if (eventKeysSet != null)
+            {
+                Logs.Here().Debug("EventKeyNames fetched constants in EventKeyNames - {@D}.", new { CycleDelay = eventKeysSet.TaskEmulatorDelayTimeInMilliseconds });
+                //await RunSubscribe(eventKeysSet);
+            }
+            else
+            {
+                Logs.Here().Error("eventKeysSet CANNOT be Init.");
+                return null;
+            }
+
+            // наверное, нехорошо сохранять новые значения в константы, а как ещё?
+            string backServerGuid = _guid ?? throw new ArgumentNullException(nameof(_guid));
+            eventKeysSet.BackServerGuid = backServerGuid;
+            string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
+            eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
+
+            //Logs.Here().Information($"Server Guid was fetched and stored into EventKeyNames. \n {new String(' ', 12)} {new { ServerId = backServerPrefixGuid }} \n");
+            Logs.Here().Information("Server Guid was fetched and stored into EventKeyNames. \n {@S}", new { ServerId = backServerPrefixGuid });
+
+            // в значение можно положить время создания сервера
+            // проверить, что там за время на ключах, подумать, нужно ли разное время для разных ключей - скажем, кафе и регистрация серверов - день, пакет задач - час
+            // регистрируем поле guid сервера на ключе регистрации серверов, а в значение кладём чистый гуид, без префикса
+            
+            // восстановить время жизни ключа регистрации сервера перед новой охотой - где и как?
+            return eventKeysSet;
+        }
+
+        private async Task RunSubscribe(EventKeyNames eventKeysSet)
         {
             //string thisMethodName = System.Reflection.MethodBase.GetCurrentMethod()?.Name;// ?? UnknownMethod;
             // множественные контроллеры по каждому запросу (пользователей) создают очередь - каждый создаёт ключ, на который у back-servers подписка, в нём поле со своим номером, а в значении или имя ключа с заданием или само задание            
@@ -114,24 +139,11 @@ namespace BackgroundTasksQueue
             //string backServerGuid = $"{eventKeysSet.PrefixBackServer}:{_guid}"; // Guid.NewGuid()
             //EventId aaa = new EventId(222, "INIT");
 
-            // наверное, нехорошо сохранять новые значения в константы, а как ещё?
-            string backServerGuid = _guid ?? throw new ArgumentNullException(nameof(_guid));
-            eventKeysSet.BackServerGuid = backServerGuid;
-            string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
-            eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
-            
-            //Logs.Here().Information($"Server Guid was fetched and stored into EventKeyNames. \n {new String(' ', 12)} {new { ServerId = backServerPrefixGuid }} \n");
-            Logs.Here().Information("Server Guid was fetched and stored into EventKeyNames. \n {@S}", new { ServerId = backServerPrefixGuid });
-
-            // в значение можно положить время создания сервера
-            // проверить, что там за время на ключах, подумать, нужно ли разное время для разных ключей - скажем, кафе и регистрация серверов - день, пакет задач - час
-            // регистрируем поле guid сервера на ключе регистрации серверов, а в значение кладём чистый гуид, без префикса
-            await _cache.SetHashedAsync<string>(eventKeysSet.EventKeyBackReadiness, backServerPrefixGuid, backServerGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
-            // восстановить время жизни ключа регистрации сервера перед новой охотой - где и как?
 
             //_subscribe.SubscribeOnEventPackageCompleted(eventKeysSet);//, tasksPackageGuidField);
             //Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed on backServerPrefixGuid. \n {@K}", new { ServerKey = backServerPrefixGuid });
 
+            await _cache.SetHashedAsync<string>(eventKeysSet.EventKeyBackReadiness, eventKeysSet.BackServerPrefixGuid, eventKeysSet.BackServerGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
 
             // подписываемся на ключ сообщения о появлении свободных задач
             _subscribe.SubscribeOnEventRun(eventKeysSet);
