@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -26,8 +27,10 @@ namespace BackgroundTasksQueue
         {
             var host = CreateHostBuilder(args).Build();
 
-            var monitorLoop = host.Services.GetRequiredService<MonitorLoop>();
-            monitorLoop.StartMonitorLoop();
+            //var monitorLoop = host.Services.GetRequiredService<MonitorLoop>();
+            //monitorLoop.StartMonitorLoop();
+
+            host.WaitForShutdownAsync();
 
             host.Run();
             Log.Information("The global logger has been closed and flushed");
@@ -92,7 +95,7 @@ namespace BackgroundTasksQueue
                 {
                     string message = ex.Message;
                     //Console.WriteLine($"\n\n Redis server did not start: \n + {message} \n");
-                    Logs.Fatal("Redis server did not find: \n {@EM} \n\n", new{ ExceptionMessage = message});
+                    Logs.Fatal("Redis server did not find: \n {@EM} \n\n", new { ExceptionMessage = message });
                     throw;
                 }
                 services.AddSingleton<GenerateThisInstanceGuidService>();
@@ -122,7 +125,7 @@ namespace BackgroundTasksQueue
         // https://stackoverflow.com/questions/29470863/serilog-output-enrich-all-messages-with-methodname-from-which-log-entry-was-ca/46905798
 
         public static ILogger Here(this ILogger logger, [CallerMemberName] string memberName = "", [CallerLineNumber] int sourceLineNumber = 0)
-            //[CallerFilePath] string sourceFilePath = "",
+        //[CallerFilePath] string sourceFilePath = "",
         {
             return logger.ForContext("MemberName", memberName).ForContext("LineNumber", sourceLineNumber);
             //.ForContext("FilePath", sourceFilePath)
@@ -146,8 +149,8 @@ namespace BackgroundTasksQueue
     // BackServers
     // кубик всё время выбрасывает ноль - TasksPackageCaptureService.DiceRoll corrected
     // разделить подписку и обработку для завершения задач
-    // ----- вы сейчас находитесь здесь -----
     // всё вызывать из BackgroundTaskQueue, монитор оставить пустой, только с клавишей
+    // ----- вы сейчас находитесь здесь -----
     // процесс всё время создаётся один - нет, каждый раз ещё один
     // процесс при каждом вбросе создаётся новый или старые учитываются?
     // как учитывать занятые процессы и незанятые

@@ -20,6 +20,7 @@ namespace BackgroundTasksQueue.Services
         private readonly ISharedDataAccess _data;
         private readonly ICacheProviderAsync _cache;
         private readonly IKeyEventsProvider _keyEvents;
+        private readonly IOnKeysEventsSubscribeService _subscribe;
         private readonly string _guid;
 
         List<BackgroundProcessingTask> completingTasksProcesses = new List<BackgroundProcessingTask>();
@@ -30,13 +31,14 @@ namespace BackgroundTasksQueue.Services
             //ILogger<QueuedHostedService> logger,
             ISharedDataAccess data,
             ICacheProviderAsync cache,
-            IKeyEventsProvider keyEvents)
+            IKeyEventsProvider keyEvents, IOnKeysEventsSubscribeService subscribe)
         {
             TaskQueue = taskQueue;
             //_logger = logger;
             _data = data;
             _cache = cache;
             _keyEvents = keyEvents;
+            _subscribe = subscribe;
 
             _guid = thisGuid.ThisBackServerGuid();
         }
@@ -58,7 +60,11 @@ namespace BackgroundTasksQueue.Services
 
         private async Task BackgroundProcessing(CancellationToken stoppingToken)
         {
-            EventKeyNames eventKeysSet = await _data.FetchAllConstants(stoppingToken, 770);
+            EventKeyNames eventKeysSet = await ConstantInitializer(stoppingToken);
+
+            _ = RunSubscribe(eventKeysSet);
+
+            //EventKeyNames eventKeysSet = await _data.FetchAllConstants(stoppingToken, 770);
             //string backServerGuid = _guid ?? throw new ArgumentNullException(nameof(_guid));
             //eventKeysSet.BackServerGuid = backServerGuid;
             //string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
@@ -193,6 +199,37 @@ namespace BackgroundTasksQueue.Services
         {
             Logs.Here().Information("Queued Hosted Service is stopping.");
             await base.StopAsync(stoppingToken);
+        }
+
+        private async Task<EventKeyNames> ConstantInitializer(CancellationToken stoppingToken)
+        {
+            EventKeyNames eventKeysSet = await _data.FetchAllConstants(stoppingToken, 750);
+
+            if (eventKeysSet != null)
+            {
+                Logs.Here().Debug("EventKeyNames fetched constants in EventKeyNames - {@D}.", new { CycleDelay = eventKeysSet.TaskEmulatorDelayTimeInMilliseconds });
+            }
+            else
+            {
+                Logs.Here().Error("eventKeysSet CANNOT be Init.");
+                return null;
+            }
+            
+            string backServerGuid = _guid ?? throw new ArgumentNullException(nameof(_guid));
+            eventKeysSet.BackServerGuid = backServerGuid;
+            string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
+            eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
+
+            Logs.Here().Information("Server Guid was fetched and stored into EventKeyNames. \n {@S}", new { ServerId = backServerPrefixGuid });
+            return eventKeysSet;
+        }
+
+        private async Task RunSubscribe(EventKeyNames eventKeysSet)
+        {
+            await _cache.SetHashedAsync<string>(eventKeysSet.EventKeyBackReadiness, eventKeysSet.BackServerPrefixGuid, eventKeysSet.BackServerGuid, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
+
+            // подписываемся на ключ сообщения о появлении свободных задач
+            _subscribe.SubscribeOnEventRun(eventKeysSet);
         }
     }
 }
