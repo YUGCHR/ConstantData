@@ -100,10 +100,10 @@ namespace BackgroundTasksQueue
                 }
                 services.AddSingleton<GenerateThisInstanceGuidService>();
                 services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
-                //services.AddHostedService<QueuedHostedService>();
-                services.AddSingleton<IQueuedHostedService, QueuedHostedService>();
-                services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
+                services.AddHostedService<QueuedHostedService>();
+                //services.AddSingleton<IQueuedHostedService, QueuedHostedService>();
                 services.AddSingleton<MonitorLoop>();
+                services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>(); // IBackgroundTaskQueue
                 services.AddSingleton<IBackgroundTasksService, BackgroundTasksService>();
                 services.AddSingleton<IOnKeysEventsSubscribeService, OnKeysEventsSubscribeService>();
                 services.AddSingleton<ITasksPackageCaptureService, TasksPackageCaptureService>();

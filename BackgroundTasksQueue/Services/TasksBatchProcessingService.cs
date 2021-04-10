@@ -18,17 +18,20 @@ namespace BackgroundTasksQueue.Services
     public class TasksBatchProcessingService : ITasksBatchProcessingService
     {
         private readonly IBackgroundTasksService _task2Queue;
-        private readonly IQueuedHostedService _queued;
+        private readonly IBackgroundTaskQueue _taskQueue;
         private readonly ICacheProviderAsync _cache;
 
         public TasksBatchProcessingService(
             ICacheProviderAsync cache,
-            IBackgroundTasksService task2Queue, IQueuedHostedService queued)
+            IBackgroundTasksService task2Queue, 
+            IBackgroundTaskQueue taskQueue)
         {
             _task2Queue = task2Queue;
-            _queued = queued;
+            _taskQueue = taskQueue;
             _cache = cache;
         }
+
+        //public IBackgroundTaskQueue TaskQueue { get; }
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksBatchProcessingService>();
 
@@ -102,23 +105,28 @@ namespace BackgroundTasksQueue.Services
             // зная номер пакета, можно сразу получить количество задач в нём с ключа сервера
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             int taskPackageCount = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField);
+            Logs.Here().Information("taskPackageCount was fetched, Task Count = {0}.", taskPackageCount);
 
             // вычисляем нужное количество процессов для такого количества задач
             int neededProcessesCount = CalcNeededProcessesCountForPackage(eventKeysSet, taskPackageCount);
+            Logs.Here().Information("neededProcessesCount was calculated, Processes needed = {0}.", neededProcessesCount);
 
             // узнаем, сколько существует процессов сейчас (0 - только получить количество существующих процессов, без изменения)
             int actualProcessesCount = await CarrierProcessesManager(eventKeysSet, stoppingToken, 0);
+            Logs.Here().Information("actualProcessesCount was fetched, Processes exist = {0}.", actualProcessesCount);
 
             // или делать это в CarrierProcessesManager, подумать
 
             // узнаем, как надо изменить число процессов - увеличить/уменьшить/оставить
             int correctionProcessesCount = neededProcessesCount - actualProcessesCount;
+            Logs.Here().Information("correctionProcessesCount was calculated, correction needed = {0}.", correctionProcessesCount);
 
             // корректируем количество процессов
             int correctedProcessesCount = await CarrierProcessesManager(eventKeysSet, stoppingToken, correctionProcessesCount);
 
             // сравнить correctedProcessesCount с actualProcessesCountAfterCorrection - должны быть одинаковые
             int actualProcessesCountAfterCorrection = await CarrierProcessesManager(eventKeysSet, stoppingToken, 0);
+            Logs.Here().Information("actualProcessesCountAfterCorrection was created, actual processes = {0}.", actualProcessesCountAfterCorrection);
 
             Logs.Here().Debug("Process request was resolved, cacl. count = {0}, checked count = {1}.", correctedProcessesCount, actualProcessesCountAfterCorrection);
 
@@ -138,18 +146,21 @@ namespace BackgroundTasksQueue.Services
             switch (requiredProcessesCount)
             {
                 case < 0:
+                    Logs.Here().Debug("required processes count < 0, Count = {0}, needs to call CancelCarrierProcesses.", requiredProcessesCount);
                     // удалять просто так нельзя, надо сделать это до выгрузки задач в очередь
                     // сначала надо сообщить, что процессы готовы и тогда начнут загружать задачи
                     int requiredProcessesCountToCancel = Math.Abs(requiredProcessesCount);
-                    int canceledProcessesCount = await _queued.CancelCarrierProcesses(eventKeysSet, stoppingToken, requiredProcessesCountToCancel);
+                    int canceledProcessesCount = await _taskQueue.CancelCarrierProcesses(eventKeysSet, stoppingToken, requiredProcessesCountToCancel);
                     return canceledProcessesCount;
                 case 0:
+                    Logs.Here().Debug("required processes count = 0, Count = {0}, needs to call CarrierProcessesCount.", requiredProcessesCount);
                     // можно только сообщить количество процессов, без изменения количества
-                    int actualProcessesCount = await _queued.CarrierProcessesCount(eventKeysSet, stoppingToken, 0);
+                    int actualProcessesCount = await _taskQueue.CarrierProcessesCount(eventKeysSet, 0);
                     return actualProcessesCount;
                 case > 0:
+                    Logs.Here().Debug("required processes count > 0, Count = {0}, needs to call AddCarrierProcesses.", requiredProcessesCount);
                     // возвращает актуальное расчетное - не проверенное подсчётом полей - количество процессов
-                    int addedProcessesCount = await _queued.AddCarrierProcesses(eventKeysSet, stoppingToken, requiredProcessesCount);
+                    int addedProcessesCount = await _taskQueue.AddCarrierProcesses(eventKeysSet, stoppingToken, requiredProcessesCount);
                     return addedProcessesCount;
             }
         }
@@ -165,7 +176,7 @@ namespace BackgroundTasksQueue.Services
                 // 0 - автовыбор - создаём процессов по числу задач
                 case 0:
                     toAddProcessesCount = taskPackageCount;
-                    Logs.Here().Information("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
+                    Logs.Here().Debug("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
 
                     return toAddProcessesCount;
                 // больше нуля - основной вариант - делим количество задач на эту константу и если она больше максимума, берём константу максимума
@@ -179,13 +190,13 @@ namespace BackgroundTasksQueue.Services
                     }
                     if (toAddProcessesCount < 1)
                     { toAddProcessesCount = 1; }
-                    Logs.Here().Information("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
+                    Logs.Here().Debug("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
 
                     return toAddProcessesCount;
                 // меньше нуля - тайный вариант для настройки - количество процессов равно константе (с обратным знаком, естественно)
                 case < 0:
                     toAddProcessesCount = balanceOfTasksAndProcesses * -1;
-                    Logs.Here().Information("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
+                    Logs.Here().Debug("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
 
                     return toAddProcessesCount;
             }
@@ -225,10 +236,10 @@ namespace BackgroundTasksQueue.Services
             // дальше он сам справился, не маленький
             // не создаём
             // в смысле, уже не нужно
-            string eventKeyProcessAdd = eventKeysSet.ProcessAddPrefixGuid;
-            string eventFieldBack = eventKeysSet.EventFieldBack;
-            await _cache.SetHashedAsync(eventKeyProcessAdd, eventFieldBack, tasksPackageGuidField); // TimeSpan.FromDays - !!!
-            Logs.Here().Information("Key {0} about new package was created for processes solver. \n {@F} \n {@P}", eventKeyProcessAdd, new { Field = eventFieldBack }, new { Package = tasksPackageGuidField });
+            //string eventKeyProcessAdd = eventKeysSet.ProcessAddPrefixGuid;
+            //string eventFieldBack = eventKeysSet.EventFieldBack;
+            //await _cache.SetHashedAsync(eventKeyProcessAdd, eventFieldBack, tasksPackageGuidField); // TimeSpan.FromDays - !!!
+            //Logs.Here().Information("Key {0} about new package was created for processes solver. \n {@F} \n {@P}", eventKeyProcessAdd, new { Field = eventFieldBack }, new { Package = tasksPackageGuidField });
 
             return true;
         }
