@@ -14,7 +14,7 @@ namespace BackgroundTasksQueue.Services
     public interface IOnKeysEventsSubscribeService
     {
         //public Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun); // NOT USED
-        public void SubscribeOnEventRun(EventKeyNames eventKeysSet);
+        public void SubscribeOnEventRun(EventKeyNames eventKeysSet, CancellationToken stoppingToken);
 
         //public void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet); //, string tasksPackageGuidField);
         //public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet); // NOT USED
@@ -66,7 +66,7 @@ namespace BackgroundTasksQueue.Services
         }
         
         // подписываемся на ключ сообщения о появлении свободных задач
-        public void SubscribeOnEventRun(EventKeyNames eventKeysSet)
+        public void SubscribeOnEventRun(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
         {
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyFrontGivesTask });
@@ -90,7 +90,7 @@ namespace BackgroundTasksQueue.Services
                     _flagToBlockEventRun = false;
                     Logs.Here().Debug("CheckKeyFrontGivesTask will be called No:{0}, Event permit = {Flag} \n {@K} with {@C} was received. \n", numOfCheckKeyFrontGivesTask, _flagToBlockEventRun, new { Key = eventKeyFrontGivesTask }, new { Command = cmd });
                     // можно добавить счётчик событий для дебага
-                    _ = CheckKeyFrontGivesTask(eventKeysSet);
+                    _ = CheckKeyFrontGivesTask(eventKeysSet, stoppingToken);
                 }
             });
 
@@ -98,7 +98,7 @@ namespace BackgroundTasksQueue.Services
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        private async Task<bool> CheckKeyFrontGivesTask(EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key
+        private async Task<bool> CheckKeyFrontGivesTask(EventKeyNames eventKeysSet, CancellationToken stoppingToken) // Main of EventKeyFrontGivesTask key
         {
             numOfCheckKeyFrontGivesTask++;
             Logs.Here().Debug("CheckKeyFrontGivesTask was called No:{0}.", numOfCheckKeyFrontGivesTask);
@@ -112,7 +112,7 @@ namespace BackgroundTasksQueue.Services
             if (isExistEventKeyFrontGivesTask)
             {
                 // отменить подписку глубже, когда получится захватить пакет?
-                _ = FreshTaskPackageAppeared(eventKeysSet);
+                _ = FreshTaskPackageAppeared(eventKeysSet, stoppingToken);
                 Logs.Here().Debug("FreshTaskPackageAppeared was passed, Subscribe permit = {Flag}.", _flagToBlockEventRun);
                 
                 Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", numOfCheckKeyFrontGivesTask);
@@ -135,7 +135,7 @@ namespace BackgroundTasksQueue.Services
             return true;
         }
 
-        private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet)
+        private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
         {
             // вернуть все подписки сюда
             // метод состоит из трёх частей -
@@ -144,7 +144,7 @@ namespace BackgroundTasksQueue.Services
             // 3 начинаем обработку - регистрация, помещение задач в очередь и создание нужного количества процессов
             // если всё удачно, возвращаемся сюда, оставив подписку заблокированной
 
-            string tasksPackageGuidField = await _captures.AttemptToCaptureTasksPackage(eventKeysSet);
+            string tasksPackageGuidField = await _captures.AttemptToCaptureTasksPackage(eventKeysSet, stoppingToken);
 
             // если flagToBlockEventRun null, сразу возвращаемся с true для возобновления подписки
             if (tasksPackageGuidField != null)
@@ -157,10 +157,10 @@ namespace BackgroundTasksQueue.Services
                 // подписка на ключ пакета задач для контроля выполнения - задачи должны сюда (или в ключ с префиксом) отчитываться о ходе выполнения
                 // убрать подписку на tasksPackageGuidField, запрашивать состояние выполнения из внешнего запроса
                 //SubscribeOnEventCheckPackageProgress(eventKeysSet, tasksPackageGuidField);
-                SubscribeOnEventPackageCompleted(eventKeysSet, tasksPackageGuidField);
+                SubscribeOnEventPackageCompleted(eventKeysSet, tasksPackageGuidField, stoppingToken);
                 //Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. \n {@K}", new { PackageKey = tasksPackageGuidField });
                 //_tasksPackageGuidField = tasksPackageGuidField;
-                _ = _processing.WhenTasksPackageWasCaptured(eventKeysSet, tasksPackageGuidField);
+                _ = _processing.WhenTasksPackageWasCaptured(eventKeysSet, tasksPackageGuidField, stoppingToken);
                 Logs.Here().Debug("WhenTasksPackageWasCaptured passed without awaiting.");
 
                 // всегда возвращаем false - задачи отправлены в работу и подписку восстановит модуль контроля завершения пакета
@@ -219,7 +219,7 @@ namespace BackgroundTasksQueue.Services
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        private void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        private void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet, string tasksPackageGuidField, CancellationToken stoppingToken)
         {
             // подписка на окончание единичной задачи (для проверки, все ли задачи закончились)
             _flagToBlockEventCompleted = true;
@@ -238,7 +238,7 @@ namespace BackgroundTasksQueue.Services
 
                     // 
                     Logs.Here().Debug("SubscribeOnEventPackageCompleted was called with event ---current_package_finished---.");
-                    _ = CheckKeyFrontGivesTask(eventKeysSet);
+                    _ = CheckKeyFrontGivesTask(eventKeysSet, stoppingToken);
                     Logs.Here().Debug("CheckKeyFrontGivesTask was called and passed.");
                 }
             });

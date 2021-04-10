@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Logging;
@@ -11,7 +12,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksPackageCaptureService
     {
-        public Task<string> AttemptToCaptureTasksPackage(EventKeyNames eventKeysSet);
+        public Task<string> AttemptToCaptureTasksPackage(EventKeyNames eventKeysSet, CancellationToken stoppingToken);
     }
 
     public class TasksPackageCaptureService : ITasksPackageCaptureService
@@ -32,7 +33,7 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksPackageCaptureService>();
 
-        public async Task<string> AttemptToCaptureTasksPackage(EventKeyNames eventKeysSet) // Main for Capture
+        public async Task<string> AttemptToCaptureTasksPackage(EventKeyNames eventKeysSet, CancellationToken stoppingToken) // Main for Capture
         {
             string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;

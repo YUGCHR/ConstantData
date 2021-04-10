@@ -13,7 +13,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface IBackgroundTasksService
     {
-        void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms);
+        void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms, CancellationToken stoppingToken);
 
     }
 
@@ -36,17 +36,17 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<BackgroundTasksService>();
 
-        public void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription)
+        public void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription, CancellationToken stoppingToken)
         {
             Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@S}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
             // Enqueue a background work item
             _taskQueue.QueueBackgroundWorkItem(async token =>
             {
                 // Simulate loopCount 3-second tasks to complete for each enqueued work item
-                bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, token);
+                bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
                 // если задача завершилась полностью, удалить поле регистрации из ключа сервера
                 // пока (или совсем) не удаляем, а уменьшаем на единичку значение, пока не станет 0 - тогда выполнение пакета закончено
-                bool isTaskFinished = await ActualTaskCompletion(eventKeysSet, isTaskCompleted, taskDescription, tasksPackageGuidField, singleTaskGuid, token);
+                bool isTaskFinished = await ActualTaskCompletion(eventKeysSet, isTaskCompleted, taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
             });
         }
 
