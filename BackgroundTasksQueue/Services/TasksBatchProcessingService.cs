@@ -150,17 +150,17 @@ namespace BackgroundTasksQueue.Services
                     // удалять просто так нельзя, надо сделать это до выгрузки задач в очередь
                     // сначала надо сообщить, что процессы готовы и тогда начнут загружать задачи
                     int requiredProcessesCountToCancel = Math.Abs(requiredProcessesCount);
-                    int canceledProcessesCount = await _taskQueue.CancelCarrierProcesses(eventKeysSet, stoppingToken, requiredProcessesCountToCancel);
+                    int canceledProcessesCount = _taskQueue.CancelCarrierProcesses(eventKeysSet, stoppingToken, requiredProcessesCountToCancel);
                     return canceledProcessesCount;
                 case 0:
                     Logs.Here().Debug("required processes count = 0, Count = {0}, needs to call CarrierProcessesCount.", requiredProcessesCount);
                     // можно только сообщить количество процессов, без изменения количества
-                    int actualProcessesCount = await _taskQueue.CarrierProcessesCount(eventKeysSet, 0);
+                    int actualProcessesCount = _taskQueue.CarrierProcessesCount(eventKeysSet, 0);
                     return actualProcessesCount;
                 case > 0:
                     Logs.Here().Debug("required processes count > 0, Count = {0}, needs to call AddCarrierProcesses.", requiredProcessesCount);
                     // возвращает актуальное расчетное - не проверенное подсчётом полей - количество процессов
-                    int addedProcessesCount = await _taskQueue.AddCarrierProcesses(eventKeysSet, stoppingToken, requiredProcessesCount);
+                    int addedProcessesCount = _taskQueue.AddCarrierProcesses(eventKeysSet, stoppingToken, requiredProcessesCount);
                     return addedProcessesCount;
             }
         }

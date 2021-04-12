@@ -18,11 +18,11 @@ namespace BackgroundTasksQueue
 
         Task<Func<CancellationToken, Task>> DequeueAsync(CancellationToken cancellationToken);
 
-        public Task<int> AddCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd);
+        public int AddCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd);
 
-        public Task<int> CancelCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd);
+        public int CancelCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd);
 
-        public Task<int> CarrierProcessesCount(EventKeyNames eventKeysSet, int requiredProcessesCountToAdd);
+        public int CarrierProcessesCount(EventKeyNames eventKeysSet, int requiredProcessesCountToAdd);
     }
 
     public class BackgroundTaskQueue : IBackgroundTaskQueue
@@ -32,7 +32,7 @@ namespace BackgroundTasksQueue
         private ConcurrentQueue<Func<CancellationToken, Task>> _workItems = new ConcurrentQueue<Func<CancellationToken, Task>>();
         private SemaphoreSlim _signal = new SemaphoreSlim(0);
 
-        List<BackgroundProcessingTask> _completingTasksProcesses = new List<BackgroundProcessingTask>();
+        List<BackgroundProcessingTask> _existingCarrierProcesses = new List<BackgroundProcessingTask>();
 
         public BackgroundTaskQueue(
             ILogger<BackgroundTaskQueue> logger, 
@@ -67,18 +67,16 @@ namespace BackgroundTasksQueue
             return workItem;
         }
 
-        public async Task<int> AddCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd)
+        public int AddCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd)
         {
-            // здесь requiredProcessesCountToAdd заведомо больше нуля
-            string processCountPrefixGuid = eventKeysSet.ProcessCountPrefixGuid;
-            string processAddPrefixGuid = eventKeysSet.ProcessAddPrefixGuid;
-            string eventFieldBack = eventKeysSet.EventFieldBack;
-            int addedProcessesCount = 0;
+            // можно поставить блокировку одновременного вызова методов добавления/удаления
 
-            // тут надо проверить существование ключа и поля 
-            int totalProcessesCount = await _cache.GetHashedAsync<int>(processAddPrefixGuid, eventFieldBack);
+            // здесь requiredProcessesCountToAdd заведомо больше нуля
+            int addedProcessesCount = 0;
+            int totalProcessesCount = _existingCarrierProcesses.Count;
             Logs.Here().Debug("CarrierProcesses addition is started, required additional count = {0}, total count was {1}.", requiredProcessesCountToAdd, totalProcessesCount);
 
+            // поменять while на for
             while (addedProcessesCount < requiredProcessesCountToAdd && !stoppingToken.IsCancellationRequested)
             {
                 string guid = Guid.NewGuid().ToString();
@@ -97,42 +95,31 @@ namespace BackgroundTasksQueue
                     CancellationTaskToken = newCts
                 };
 
-                // записываем гуид в поле ключа всех процессов
-                await _cache.SetHashedAsync<BackgroundProcessingTask>(processCountPrefixGuid, guid, newlyAddedProcess, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
+                _existingCarrierProcesses.Add(newlyAddedProcess);
+
                 // новое значение общего количества процессов и номер для следующего
                 totalProcessesCount++;
                 // счётчик добавленных процессов для while
                 addedProcessesCount++;
-                // записываем обновлённое общее количество процессов в поле
-                await _cache.SetHashedAsync<int>(processAddPrefixGuid, eventFieldBack, totalProcessesCount, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
                 Logs.Here().Debug("New Task for Background Processes was added, total count became {0}.", totalProcessesCount);
             }
 
-            int checkedProcessesCount = await _cache.GetHashedAsync<int>(processAddPrefixGuid, eventFieldBack);
+            int checkedProcessesCount = _existingCarrierProcesses.Count;
             Logs.Here().Debug("New processes count was checked, count++ = {0}, total count = {1}.", totalProcessesCount, checkedProcessesCount);
 
             return checkedProcessesCount;
         }
 
-        public async Task<int> CancelCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToCancel)
+        public int CancelCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToCancel)
         {
-            // здесь requiredProcessesCountToCancel заведомо больше нуля
-            string processCountPrefixGuid = eventKeysSet.ProcessCountPrefixGuid;
-            string processAddPrefixGuid = eventKeysSet.ProcessAddPrefixGuid;
-            string eventFieldBack = eventKeysSet.EventFieldBack;
-            int removedProcessesCount = 0;
-
-            // тут надо проверить существование ключа и поля 
-            int totalProcessesCount = await _cache.GetHashedAsync<int>(processAddPrefixGuid, eventFieldBack);
+            int totalProcessesCount = _existingCarrierProcesses.Count;
             Logs.Here().Debug("CarrierProcesses removing is started, necessary excess count = {0}, total count was {1}.", requiredProcessesCountToCancel, totalProcessesCount);
 
             // всё же надо проверить, что удаляем меньше, чем существует
-
-            if (removedProcessesCount < totalProcessesCount)
+            if (requiredProcessesCountToCancel < totalProcessesCount)
             {
-                IDictionary<string, BackgroundProcessingTask> existedProcesses = await _cache.GetHashedAllAsync<BackgroundProcessingTask>(processCountPrefixGuid);
-                int existedProcessesCount = existedProcesses.Count;
-                Logs.Here().Debug("Dictionary with existing processes labels was fetched, count = {0}.", existedProcessesCount);
+                int existedProcessesCount = totalProcessesCount;
+                Logs.Here().Debug("_existingCarrierProcesses.Count with existing processes labels was fetched, count = {0}.", existedProcessesCount);
 
                 // не foreach и не while, а for - раз заранее известно точное количество проходов
                 for (int i = 0; i < requiredProcessesCountToCancel; i++)
@@ -141,24 +128,16 @@ namespace BackgroundTasksQueue
                     {
                         return 0;
                     }
-                    // и доступ к элементу по индексу
-                    // кстати, строковое значение тоже нужно - чтобы удалить поле процесса из ключа
-                    (string processToBeDecimatedGuidField, BackgroundProcessingTask processToBeDecimated) = existedProcesses.ElementAt(i);
-                    CancellationTokenSource cts = processToBeDecimated.CancellationTaskToken;
+                    CancellationTokenSource cts = _existingCarrierProcesses[i].CancellationTaskToken;
                     // сливаем процесс
                     cts.Cancel();
+
+                    _existingCarrierProcesses.RemoveAt(i);
                     totalProcessesCount--;
-                    bool isDeleteSuccess = await _cache.RemoveHashedAsync(processCountPrefixGuid, processToBeDecimatedGuidField);
-                    Logs.Here().Debug("Process liable to removing was deleted - {@D}, Cycle {0} from {1}, processes left {2}.", new { WasDecimated = isDeleteSuccess }, i, requiredProcessesCountToCancel, totalProcessesCount);
+                    Logs.Here().Debug("Process liable to removing was deleted, Cycle {0} from {1}, processes left {2}.", i, requiredProcessesCountToCancel, totalProcessesCount);
                 }
-
-                // записываем обновлённое общее количество процессов в поле
-                await _cache.SetHashedAsync<int>(processAddPrefixGuid, eventFieldBack, totalProcessesCount, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
                 Logs.Here().Debug("Some Background Processes was deleted, \n total count was {0}, deletion request was {1}, now count became {0}.", existedProcessesCount, requiredProcessesCountToCancel, totalProcessesCount);
-
-                // проверяем, сколько реально осталось ярлычков на ключе
-                IDictionary<string, BackgroundProcessingTask> leftProcesses = await _cache.GetHashedAllAsync<BackgroundProcessingTask>(processCountPrefixGuid);
-                int leftProcessesCount = leftProcesses.Count;
+                int leftProcessesCount = _existingCarrierProcesses.Count; 
                 Logs.Here().Debug("Actual Processes labels count is {0}.", leftProcessesCount);
 
                 return leftProcessesCount;
@@ -167,26 +146,12 @@ namespace BackgroundTasksQueue
             return 0;
         }
 
-        public async Task<int> CarrierProcessesCount(EventKeyNames eventKeysSet, int requiredProcessesCountToAdd)
+        public int CarrierProcessesCount(EventKeyNames eventKeysSet, int requiredProcessesCountToAdd)
         {
-            string processCountPrefixGuid = eventKeysSet.ProcessCountPrefixGuid;
-            string processAddPrefixGuid = eventKeysSet.ProcessAddPrefixGuid;
-            string eventFieldBack = eventKeysSet.EventFieldBack;
-
-            int totalProcessesCount = await _cache.GetHashedAsync<int>(processAddPrefixGuid, eventFieldBack);
+            int totalProcessesCount = _existingCarrierProcesses.Count;
             Logs.Here().Debug("CarrierProcesses total count is {0}.", totalProcessesCount);
-
-            // проверяем, сколько реально осталось ярлычков на ключе
-            IDictionary<string, BackgroundProcessingTask> existedProcesses = await _cache.GetHashedAllAsync<BackgroundProcessingTask>(processCountPrefixGuid);
-            int existedProcessesCount = existedProcesses.Count;
-            Logs.Here().Debug("Actual Processes labels (guids) count is {0}.", existedProcessesCount);
-
-            if (totalProcessesCount != existedProcessesCount)
-            {
-                Logs.Here().Error("Processes count failed, on-field value = {0}, labels-guid count = {1}.", totalProcessesCount, existedProcessesCount);
-            }
-
-            return existedProcessesCount;
+            
+            return totalProcessesCount;
         }
 
         private async Task ProcessingTaskMethod(CancellationToken token)
