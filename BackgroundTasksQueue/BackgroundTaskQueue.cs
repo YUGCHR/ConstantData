@@ -63,9 +63,18 @@ namespace BackgroundTasksQueue
         {
             await _signal.WaitAsync(cancellationToken);
             _workItems.TryDequeue(out var workItem);
-            Logs.Here().Verbose("Single Task was dequeued from Concurrent Queue.");
+            Logs.Here().Verbose("Single Task was dequeued from Queue.");
             return workItem;
         }
+
+        // тут нужны 3 метода - создание процессов, проверка количества процессов, удаление процессов
+        // вся регулировка должна быть внутри класса, внешний метод сообщает только необходимое ему количество процессов
+        // всё же процессы это поля в ключе и сделать полностью изолированными - желательно вынести в отдельный класс - нет
+        // или можно сообщать количество задач в пакете, а класс сам решит, сколько надо/можно пакетов - перенести метод подсчёта сюда
+        // отдельные методы добавления и убавления, подписки не надо
+        // главный метод, который считает и решает, ему приходит вызов от подписки с ключа сервера про задачу
+        // надо ли ждать, когда все задачи загрузятся? особого смысла нет
+        // можно добавить переключатель автоматически/вручную и ручную (+/-) регулировку количества процессов в настройках веб-интерфейса
 
         public int AddCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd)
         {

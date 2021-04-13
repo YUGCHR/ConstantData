@@ -101,8 +101,8 @@ namespace BackgroundTasksQueue
                 services.AddSingleton<GenerateThisInstanceGuidService>();
                 services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                 services.AddHostedService<QueuedHostedService>();
-                //services.AddSingleton<IQueuedHostedService, QueuedHostedService>();
-                services.AddSingleton<MonitorLoop>();
+                //services.AddSingleton<MonitorLoop>();
+                services.AddSingleton<ISettingConstants, SettingConstantsService>();
                 services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>(); // IBackgroundTaskQueue
                 services.AddSingleton<IBackgroundTasksService, BackgroundTasksService>();
                 services.AddSingleton<IOnKeysEventsSubscribeService, OnKeysEventsSubscribeService>();
@@ -154,8 +154,10 @@ namespace BackgroundTasksQueue
     // процесс всё время создаётся один - нет, каждый раз ещё один
     // процесс при каждом вбросе создаётся новый или старые учитываются?
     // как учитывать занятые процессы и незанятые - непонятно
-    // ----- вы сейчас находитесь здесь -----
     // хранить процессы в листе класса
+    // 
+    // ----- вы сейчас находитесь здесь -----
+    // 
     // можно дополнительно иногда проверять по таймеру завершение пакета
     // и ещё можно параллельно проверять загрузку процессов - если появились свободные процессы, пора идти искать новый пакет
     // неправильно обрабатывается условие в while в Monitor
@@ -165,6 +167,9 @@ namespace BackgroundTasksQueue
     // *1* словарь констант - пока отложить
     // *2* перезагрузка констант между пакетами
     // блокировать обе подписки одним флагом и потом обе проверять, но константы проверять первыми
+    // рассмотреть вариант обновления констант после каждого пакета
+    // но не забыть вариант простоя без пакетов
+    // можно добавить переключатель автоматически/вручную и ручную (+/-) регулировку количества процессов в настройках веб-интерфейса
     // *3* отслеживание упавших процессов
     // разделение функций - один модуль уточняет время проверки, а второй оббегает все задачи и проверяет состояние, сравнивая его с расчётным
     // по расчёту каждый тик - цикл опроса - должна заканчиваться одна задача
