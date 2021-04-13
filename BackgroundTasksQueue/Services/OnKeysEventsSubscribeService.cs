@@ -13,18 +13,12 @@ namespace BackgroundTasksQueue.Services
 {
     public interface IOnKeysEventsSubscribeService
     {
-        //public Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun); // NOT USED
-        public void SubscribeOnEventRun(EventKeyNames eventKeysSet, CancellationToken stoppingToken);
-
-        //public void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet); //, string tasksPackageGuidField);
-        //public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet); // NOT USED
-        //public void SubscribeOnEventCheckPackageProgress(EventKeyNames eventKeysSet, string tasksPackageGuidField);
+        public Task SubscribeOnEventRun(CancellationToken stoppingToken);
     }
 
     public class OnKeysEventsSubscribeService : IOnKeysEventsSubscribeService
     {
-        private readonly IBackgroundTasksService _task2Queue;
-        //private readonly ILogger<OnKeysEventsSubscribeService> _logger;
+        private readonly ISettingConstants _constants;
         private readonly ICacheProviderAsync _cache;
         private readonly IKeyEventsProvider _keyEvents;
         private readonly ITasksPackageCaptureService _captures;
@@ -32,16 +26,14 @@ namespace BackgroundTasksQueue.Services
         private readonly ITasksProcessingControlService _control;
 
         public OnKeysEventsSubscribeService(
-            //ILogger<OnKeysEventsSubscribeService> logger,
+            ISettingConstants constants,
             ICacheProviderAsync cache,
             IKeyEventsProvider keyEvents,
-            IBackgroundTasksService task2Queue,
             ITasksPackageCaptureService captures,
             ITasksBatchProcessingService processing,
             ITasksProcessingControlService control)
         {
-            _task2Queue = task2Queue;
-            //_logger = logger;
+            _constants = constants;
             _cache = cache;
             _keyEvents = keyEvents;
             _captures = captures;
@@ -66,8 +58,12 @@ namespace BackgroundTasksQueue.Services
         }
         
         // подписываемся на ключ сообщения о появлении свободных задач
-        public void SubscribeOnEventRun(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
+        public async Task SubscribeOnEventRun(CancellationToken stoppingToken)
         {
+            // все проверки и ожидание внутри метода, без констант не вернётся
+            // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
+            EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
+
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyFrontGivesTask });
 

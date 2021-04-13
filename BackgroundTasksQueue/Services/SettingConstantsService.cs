@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Configuration;
 using Shared.Library.Models;
 using Shared.Library.Services;
@@ -14,14 +15,17 @@ namespace BackgroundTasksQueue.Services
 
     public class SettingConstantsService : ISettingConstants
     {
+        private readonly ICacheProviderAsync _cache;
         private readonly ISharedDataAccess _data;
         private readonly string _guid;
 
         public SettingConstantsService(
             GenerateThisInstanceGuidService thisGuid,
-            ISharedDataAccess data)
+            ISharedDataAccess data, 
+            ICacheProviderAsync cache)
         {
             _data = data;
+            _cache = cache;
             _guid = thisGuid.ThisBackServerGuid();
         }
 
@@ -45,7 +49,12 @@ namespace BackgroundTasksQueue.Services
             eventKeysSet.BackServerGuid = backServerGuid;
             string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
             eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
+            string eventKeyBackReadiness = eventKeysSet.EventKeyBackReadiness;
+            double eventKeyBackReadinessTimeDays = eventKeysSet.EventKeyBackReadinessTimeDays;
 
+            // регистрируем сервер на общем ключе серверов
+            await _cache.SetHashedAsync<string>(eventKeyBackReadiness, backServerPrefixGuid, backServerGuid, TimeSpan.FromDays(eventKeyBackReadinessTimeDays));
+            
             string prefixProcessAdd = eventKeysSet.PrefixProcessAdd; // process:add
             string processAddPrefixGuid = $"{prefixProcessAdd}:{backServerGuid}"; // process:add:(this server guid)
             eventKeysSet.ProcessAddPrefixGuid = processAddPrefixGuid;
