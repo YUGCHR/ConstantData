@@ -30,8 +30,8 @@ namespace BackgroundTasksQueue.Services
 
         private async Task BackgroundProcessing(CancellationToken stoppingToken)
         {
-            // подписываемся на ключ сообщения о появлении свободных задач
-            await _subscribe.SubscribeOnEventRun(stoppingToken);
+            // подписываемся на ключ сообщения о необходимости обновления констант - также это точка входа всего
+            _ = _subscribe.SubscribeOnEventUpdatesConstant(stoppingToken);
         }
 
         public override async Task StopAsync(CancellationToken stoppingToken)

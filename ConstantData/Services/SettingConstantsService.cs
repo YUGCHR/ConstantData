@@ -10,6 +10,7 @@ namespace ConstantData.Services
         public int GetBalanceOfTasksAndProcesses { get; }
         public int GetMaxProcessesCountOnServer { get; }
         public int GetMinBackProcessesServersCount { get; }
+        public double GetEventKeyCommonKeyTimeDays { get; }
         public double GetEventKeyFromTimeDays { get; }
         public double GetEventKeyBackReadinessTimeDays { get; }
         public double GetEventKeyFrontGivesTaskTimeDays { get; }
@@ -20,6 +21,7 @@ namespace ConstantData.Services
         public string GetEventFieldFrom { get; }
         public string GetEventKeyBackReadiness { get; }
         public string GetEventKeyFrontGivesTask { get; }
+        public string GetEventKeyUpdateConstants { get; }
         public string GetPrefixRequest { get; }
         public string GetPrefixPackage { get; }
         public string GetPrefixPackageControl { get; }
@@ -43,7 +45,7 @@ namespace ConstantData.Services
         public SettingConstantsServiceService(IConfiguration configuration)
         {
             Configuration = configuration;
-
+            // "Constants":
             string recordActualityLevel = Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("RecordActualityLevel").Value;
             GetRecordActualityLevel = Convert.ToInt32(recordActualityLevel);
             GetTaskEmulatorDelayTimeInMilliseconds = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("TaskEmulatorDelayTimeInMilliseconds").Value);
@@ -51,18 +53,20 @@ namespace ConstantData.Services
             GetBalanceOfTasksAndProcesses = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("BalanceOfTasksAndProcesses").Value);
             GetMaxProcessesCountOnServer = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MaxProcessesCountOnServer").Value);
             GetMinBackProcessesServersCount = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MinBackProcessesServersCount").Value);
-
+            // "RedisKeysTimes":
+            GetEventKeyCommonKeyTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("commonKeyTimeDays").Value);
             GetEventKeyFromTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFromTimeDays").Value);
             GetEventKeyBackReadinessTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackReadinessTimeDays").Value);
             GetEventKeyFrontGivesTaskTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFrontGivesTaskTimeDays").Value);//eventKeyFrontGivesTaskTimeDays
             GetEventKeyBackServerMainTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerMainTimeDays").Value);
             GetEventKeyBackServerAuxiliaryTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerAuxiliaryTimeDays").Value);
             GetPercentsKeysExistingTimeInMinutes = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("PercentsKeysExistingTimeInMinutes").Value);
-            
+            // "RedisKeys":
             GetEventKeyFrom = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyFrom").Value;
             GetEventFieldFrom = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldFrom").Value;
             GetEventKeyBackReadiness = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyBackReadiness").Value;
             GetEventKeyFrontGivesTask = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyFrontGivesTask").Value;
+            GetEventKeyUpdateConstants = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyUpdateConstants").Value;
 
             GetPrefixRequest = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixRequest").Value;
             GetPrefixPackage = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackage").Value;
@@ -82,62 +86,35 @@ namespace ConstantData.Services
         }
 
         private IConfiguration Configuration { get; }
-
         public int GetRecordActualityLevel { get; }
-
         public int GetTaskEmulatorDelayTimeInMilliseconds { get; }
-
         public int GetRandomRangeExtended { get; }
-
         public int GetBalanceOfTasksAndProcesses { get; }
-
         public int GetMaxProcessesCountOnServer { get; }
-
         public int GetMinBackProcessesServersCount { get; }
-
+        public double GetEventKeyCommonKeyTimeDays { get; }
         public double GetEventKeyFromTimeDays { get; }
-
         public double GetEventKeyBackReadinessTimeDays { get; }
-
         public double GetEventKeyFrontGivesTaskTimeDays { get; }
-
         public double GetEventKeyBackServerMainTimeDays { get; }
-
         public double GetEventKeyBackServerAuxiliaryTimeDays { get; }
-
         public double GetPercentsKeysExistingTimeInMinutes { get; }
-
         public string GetEventKeyFrom { get; }
-
         public string GetEventFieldFrom { get; }
-
         public string GetEventKeyBackReadiness { get; }
-
         public string GetEventKeyFrontGivesTask { get; }
-
+        public string GetEventKeyUpdateConstants { get; }
         public string GetPrefixRequest { get; }
-
         public string GetPrefixPackage { get; }
-
         public string GetPrefixPackageControl { get; }
-
         public string GetPrefixPackageCompleted { get; }
-
         public string GetPrefixTask { get; }
-
         public string GetPrefixBackServer { get; }
-
         public string GetPrefixProcessAdd { get; }
-
         public string GetPrefixProcessCancel { get; }
-
         public string GetPrefixProcessCount { get; }
-
         public string GetEventFieldBack { get; }
-
         public string GetEventFieldFront { get; }
-
         public string GetEventKeyBacksTasksProceed { get; }
-
     }
 }

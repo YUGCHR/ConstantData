@@ -39,6 +39,7 @@ namespace ConstantData.Services
                 EventKeyBackReadiness = _constantService.GetEventKeyBackReadiness, // ключ регистрации серверов
                 EventFieldBack = _constantService.GetEventFieldBack,
                 EventKeyFrontGivesTask = _constantService.GetEventKeyFrontGivesTask, // кафе выдачи задач
+                EventKeyUpdateConstants = _constantService.GetEventKeyUpdateConstants, // constants updating key
                 PrefixRequest = _constantService.GetPrefixRequest, // request:guid
                 PrefixPackage = _constantService.GetPrefixPackage, // package:guid
                 PrefixPackageControl = _constantService.GetPrefixPackageControl, // control:package:guid
@@ -52,6 +53,7 @@ namespace ConstantData.Services
                 PrefixProcessCount = _constantService.GetPrefixProcessCount, // process:count
                 EventFieldFront = _constantService.GetEventFieldFront,
                 EventKeyBacksTasksProceed = _constantService.GetEventKeyBacksTasksProceed, //  ключ выполняемых/выполненных задач                
+                EventKeyCommonKeyTimeDays = _constantService.GetEventKeyCommonKeyTimeDays, // срок хранения ключа Common
                 EventKeyFromTimeDays = _constantService.GetEventKeyFromTimeDays, // срок хранения ключа eventKeyFrom
                 EventKeyBackReadinessTimeDays = _constantService.GetEventKeyBackReadinessTimeDays, // срок хранения 
                 EventKeyFrontGivesTaskTimeDays = _constantService.GetEventKeyFrontGivesTaskTimeDays, // срок хранения ключа 

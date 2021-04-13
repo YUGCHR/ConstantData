@@ -13,7 +13,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface IOnKeysEventsSubscribeService
     {
-        public Task SubscribeOnEventRun(CancellationToken stoppingToken);
+        public Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken);
     }
 
     public class OnKeysEventsSubscribeService : IOnKeysEventsSubscribeService
@@ -43,9 +43,11 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<OnKeysEventsSubscribeService>();
 
-        private bool _flagToBlockEventRun; 
-        private bool _flagToBlockEventCompleted; 
-        private int numOfCheckKeyFrontGivesTask; 
+        private bool _flagToBlockEventRun;
+        private bool _flagToBlockEventUpdate;
+        private bool _flagToBlockEventCompleted;
+        private int _callingNumOfCheckKeyFrontGivesTask;
+        
         //private bool _eventCompletedTaskWasHappening;
         //private bool _processingEventCompletedTaskIsLaunched;
         //private string _tasksPackageGuidField;
@@ -56,13 +58,64 @@ namespace BackgroundTasksQueue.Services
 
             return eventGuidFieldRun;
         }
-        
-        // подписываемся на ключ сообщения о появлении свободных задач
-        public async Task SubscribeOnEventRun(CancellationToken stoppingToken)
+
+
+        // подписываемся на ключ сообщения о необходимости обновления констант
+        // рассмотрим два варианта (вариант, что констант нет вообще, обрабатывается раньше)
+        // 1. обновление пришло в режиме ожидания сервера
+        // подписка на обновление вызвала обработчик (run) и он обновил константы внутри себя
+        // после этого восстановил подписку
+        // 2. обновление пришло во время обработки пакета
+        // тогда обработчик (р) при старте сначала проверит наличие новых констант
+        // тут пригодится версионирование констант
+        // 
+        // 
+        public async Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken)
         {
             // все проверки и ожидание внутри метода, без констант не вернётся
             // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
             EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
+            _callingNumOfCheckKeyFrontGivesTask = 0;
+            string eventKeyUpdateConstants = eventKeysSet.EventKeyUpdateConstants;
+            Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyUpdateConstants });
+
+            // подписываемся на ключ сообщения о появлении свободных задач
+            _ = SubscribeOnEventRun(eventKeysSet, stoppingToken);
+
+            // блокировка множественной подписки до специального разрешения повторной подписки - нужна своя блокировка, она будет чаще сниматься - после каждого пакета
+            _flagToBlockEventUpdate = true;
+            
+            _keyEvents.Subscribe(eventKeyUpdateConstants, async (string key, KeyEvent cmd) =>
+            {
+                if (cmd == eventKeysSet.EventCmd && _flagToBlockEventUpdate)
+                {
+                    // подписка заблокирована - её восстановит обработчик (run) после окончания пакета
+                    _flagToBlockEventRun = false;
+
+                    // заблокировать и вторую подписку (run) перед вызовом её обработчика - чтобы её не вызвал вдруг появившийся ключ кафе
+                    // её восстановит обработчик когда (если) не найдёт своего ключа - тогда он только обновит константы 
+                    _flagToBlockEventUpdate = false;
+                    Logs.Here().Debug("Event Key UpdateConstants called CheckKeyFrontGivesTask. \n {@K}", new { Key = eventKeyUpdateConstants });
+
+                    // тут можно передать оп параметр, который будет означать, что вызвали из-за констант
+                    // но лучше пусть сам разбирается, что делать
+                    _ = CheckKeyFrontGivesTask(stoppingToken);
+                }
+            });
+
+            string eventKeyCommand = $"Key = {eventKeyUpdateConstants}, Command = {eventKeysSet.EventCmd}";
+            Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
+        }
+
+
+
+
+        // подписываемся на ключ сообщения о появлении свободных задач
+        public async Task SubscribeOnEventRun(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
+        {
+            // все проверки и ожидание внутри метода, без констант не вернётся
+            // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
+            //EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
 
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyFrontGivesTask });
@@ -74,7 +127,7 @@ namespace BackgroundTasksQueue.Services
 
             _keyEvents.Subscribe(eventKeyFrontGivesTask, async (string key, KeyEvent cmd) =>
             {
-                // скажем, в подписке вызывается метод проверить наличие пакетов в кафе(CheckKeyFrontGivesTask), если пакеты есть, он возвращает true, и метод за ним (FreshTaskPackageAppeared) начинает захват пакета
+                // скажем, в подписке вызывается метод проверить наличие пакетов в кафе(CheckKeyFrontGivesTask), если пакеты есть, он возвращает true, и метод за ним (FreshTaskPackageHasAppeared) начинает захват пакета
                 // void Unsubscribe(string key);
                 // 
                 // 
@@ -82,11 +135,11 @@ namespace BackgroundTasksQueue.Services
                 {
                     // подписка заблокирована
                     // быструю блокировку оставить - когда ещё отпишемся, но можно сделать локальной?
-                    numOfCheckKeyFrontGivesTask = 0;
+                    
                     _flagToBlockEventRun = false;
-                    Logs.Here().Debug("CheckKeyFrontGivesTask will be called No:{0}, Event permit = {Flag} \n {@K} with {@C} was received. \n", numOfCheckKeyFrontGivesTask, _flagToBlockEventRun, new { Key = eventKeyFrontGivesTask }, new { Command = cmd });
+                    Logs.Here().Debug("CheckKeyFrontGivesTask will be called No:{0}, Event permit = {Flag} \n {@K} with {@C} was received. \n", _callingNumOfCheckKeyFrontGivesTask, _flagToBlockEventRun, new { Key = eventKeyFrontGivesTask }, new { Command = cmd });
                     // можно добавить счётчик событий для дебага
-                    _ = CheckKeyFrontGivesTask(eventKeysSet, stoppingToken);
+                    _ = CheckKeyFrontGivesTask(stoppingToken);
                 }
             });
 
@@ -94,10 +147,18 @@ namespace BackgroundTasksQueue.Services
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        private async Task<bool> CheckKeyFrontGivesTask(EventKeyNames eventKeysSet, CancellationToken stoppingToken) // Main of EventKeyFrontGivesTask key
+        private async Task<bool> CheckKeyFrontGivesTask(CancellationToken stoppingToken) // Main of EventKeyFrontGivesTask key
         {
-            numOfCheckKeyFrontGivesTask++;
-            Logs.Here().Debug("CheckKeyFrontGivesTask was called No:{0}.", numOfCheckKeyFrontGivesTask);
+            _callingNumOfCheckKeyFrontGivesTask++;
+            if (_callingNumOfCheckKeyFrontGivesTask > 1)
+            {
+                Logs.Here().Warning("CheckKeyFrontGivesTask was called more than once - Calling Count = {0}.", _callingNumOfCheckKeyFrontGivesTask);
+            }
+
+
+            // тут определить, надо ли обновить константы
+            EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken); //EventKeyNames
+
 
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             // проверить существование ключа - если ключ есть, надо идти добывать пакет
@@ -108,30 +169,30 @@ namespace BackgroundTasksQueue.Services
             if (isExistEventKeyFrontGivesTask)
             {
                 // отменить подписку глубже, когда получится захватить пакет?
-                _ = FreshTaskPackageAppeared(eventKeysSet, stoppingToken);
-                Logs.Here().Debug("FreshTaskPackageAppeared was passed, Subscribe permit = {Flag}.", _flagToBlockEventRun);
-                
-                Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", numOfCheckKeyFrontGivesTask);
-                numOfCheckKeyFrontGivesTask--;
+                _ = FreshTaskPackageHasAppeared(eventKeysSet, stoppingToken);
+                Logs.Here().Debug("FreshTaskPackageHasAppeared was passed, Subscribe permit = {Flag}.", _flagToBlockEventRun);
+
+                Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", _callingNumOfCheckKeyFrontGivesTask);
+                _callingNumOfCheckKeyFrontGivesTask--;
 
                 return false;
             }
 
-            // всё_протухло - пакетов нет, восстановить подписку и ждать погоду
+            // всё_протухло - пакетов нет, восстановить подписку (also Subscribe to Update) и ждать погоду
             _flagToBlockEventRun = true;
-
+            _flagToBlockEventUpdate = true;
             Logs.Here().Information("This Server finished current work.\n {@S} \n Global {@PR} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, new { Permit = _flagToBlockEventRun });
             Logs.Here().Warning("Next package could not be obtained - there are no more packages in cafe.");
             string packageSeparator1 = new('Z', 80);
             Logs.Here().Warning("This Server waits new Task Package. \n {@S} \n {1} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, packageSeparator1);
-            
-            Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", numOfCheckKeyFrontGivesTask);
-            numOfCheckKeyFrontGivesTask--;
+
+            Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", _callingNumOfCheckKeyFrontGivesTask);
+            _callingNumOfCheckKeyFrontGivesTask--;
 
             return true;
         }
 
-        private async Task<bool> FreshTaskPackageAppeared(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
+        private async Task<bool> FreshTaskPackageHasAppeared(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
         {
             // вернуть все подписки сюда
             // метод состоит из трёх частей -
@@ -234,7 +295,7 @@ namespace BackgroundTasksQueue.Services
 
                     // 
                     Logs.Here().Debug("SubscribeOnEventPackageCompleted was called with event ---current_package_finished---.");
-                    _ = CheckKeyFrontGivesTask(eventKeysSet, stoppingToken);
+                    _ = CheckKeyFrontGivesTask(stoppingToken);
                     Logs.Here().Debug("CheckKeyFrontGivesTask was called and passed.");
                 }
             });
@@ -249,25 +310,25 @@ namespace BackgroundTasksQueue.Services
             // пока активно событие подписки на окончание задачи, проверяем общее состояние пакета
             //while (_eventCompletedTaskWasHappening)
             //{
-                //Logs.Here().Debug("Processing Event_Completed_Task is launched.");
-                // признак, что ещё есть нерешённые задачи
+            //Logs.Here().Debug("Processing Event_Completed_Task is launched.");
+            // признак, что ещё есть нерешённые задачи
 
-                // перед проверкой готовности задач сбрасываем защёлку подписки
-                //_eventCompletedTaskWasHappening = false;
-                //Logs.Here().Debug("Flag Event_Completed_Task was happening was reset.");
-                // задержку попробовать поставить здесь
-                // await Task.Delay(TimeSpan.FromSeconds(0.001)); //add cancellationToken
-                // если до/во время проверки произойдёт новое событие, то сделаем ещё круг с повторной проверкой
-                // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
-                //string tasksPackageGuidField = _tasksPackageGuidField;
-                //int totalUnsolvedTasksLeft;
-                //(unsolvedTasksStillLeft, totalUnsolvedTasksLeft) = await _control.CheckingPackageCompletion(eventKeysSet, tasksPackageGuidField);
-                // наверное лучше инвертировать название unsolvedTasksStillLeft и его состояние
-                //Logs.Here().Debug("Flag Event_Completed_Task was happening now - {@F}.", new { Flag = _eventCompletedTaskWasHappening });
+            // перед проверкой готовности задач сбрасываем защёлку подписки
+            //_eventCompletedTaskWasHappening = false;
+            //Logs.Here().Debug("Flag Event_Completed_Task was happening was reset.");
+            // задержку попробовать поставить здесь
+            // await Task.Delay(TimeSpan.FromSeconds(0.001)); //add cancellationToken
+            // если до/во время проверки произойдёт новое событие, то сделаем ещё круг с повторной проверкой
+            // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
+            //string tasksPackageGuidField = _tasksPackageGuidField;
+            //int totalUnsolvedTasksLeft;
+            //(unsolvedTasksStillLeft, totalUnsolvedTasksLeft) = await _control.CheckingPackageCompletion(eventKeysSet, tasksPackageGuidField);
+            // наверное лучше инвертировать название unsolvedTasksStillLeft и его состояние
+            //Logs.Here().Debug("Flag Event_Completed_Task was happening now - {@F}.", new { Flag = _eventCompletedTaskWasHappening });
 
-                // totalUnsolvedTasksLeft получаем только для отладки
-                //Logs.Here().Debug("CheckingPackageCompletion returned {@P}, {@L}.", new { Permit = unsolvedTasksStillLeft }, new { TasksLeft = totalUnsolvedTasksLeft });
-                // выход по окончанию всех задач можно перенести сюда
+            // totalUnsolvedTasksLeft получаем только для отладки
+            //Logs.Here().Debug("CheckingPackageCompletion returned {@P}, {@L}.", new { Permit = unsolvedTasksStillLeft }, new { TasksLeft = totalUnsolvedTasksLeft });
+            // выход по окончанию всех задач можно перенести сюда
             //}
             //if (unsolvedTasksStillLeft)
             //{
@@ -279,7 +340,7 @@ namespace BackgroundTasksQueue.Services
             //}
 
             // если все задачи кончились, 
-            //_ = FreshTaskPackageAppeared(eventKeysSet);
+            //_ = FreshTaskPackageHasAppeared(eventKeysSet);
 
             // обработчик завершает работу, сбросить флаг для будущих поколений
             //_processingEventCompletedTaskIsLaunched = false;

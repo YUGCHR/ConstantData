@@ -16,6 +16,7 @@ namespace Shared.Library.Models
         public string EventKeyBackReadiness { get; set; }
         public string EventFieldBack { get; set; }
         public string EventKeyFrontGivesTask { get; set; }
+        public string EventKeyUpdateConstants { get; set; }
         public string PrefixRequest { get; set; }
         public string PrefixPackage { get; set; }
         public string PrefixPackageControl { get; set; }
@@ -33,6 +34,7 @@ namespace Shared.Library.Models
         public string ProcessCountPrefixGuid { get; set; }
         public string EventFieldFront { get; set; }
         public string EventKeyBacksTasksProceed { get; set; }        
+        public double EventKeyCommonKeyTimeDays { get; set; }
         public double EventKeyFromTimeDays { get; set; }
         public double EventKeyBackReadinessTimeDays { get; set; }
         public double EventKeyFrontGivesTaskTimeDays { get; set; }
