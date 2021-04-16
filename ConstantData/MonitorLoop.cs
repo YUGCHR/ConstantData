@@ -24,10 +24,12 @@ namespace ConstantData
 
         public MonitorLoop(
             ILogger<MonitorLoop> logger,
+            GenerateThisInstanceGuidService thisGuid,
             ISharedDataAccess data,
             ICacheManageService cache,
             ISettingConstantsService constantService,
-            IHostApplicationLifetime applicationLifetime, IInitConstantsService init)
+            IHostApplicationLifetime applicationLifetime, 
+            IInitConstantsService init)
         {
             _logger = logger;
             _data = data;
@@ -35,6 +37,7 @@ namespace ConstantData
             _init = init;
             _cache = cache;
             _cancellationToken = applicationLifetime.ApplicationStopping;
+            _guid = thisGuid.ThisBackServerGuid();
         }
 
         private const string CheckToken = "tt-tt-tt";
@@ -46,6 +49,23 @@ namespace ConstantData
             // Run a console user input loop in a background thread
             Task.Run(ConstantsMountingMonitor, _cancellationToken);
         }
+
+        //сервер констант имеет свой гуид и это ключ обновляемых констант
+        //его он пишет в поле для нового гуид-ключа для всех
+        //на этот ключ уже можно подписаться, он стабильный на всё время существования сервера
+        //если этот ключ исчезнет(сервер перезапустился), то надо перейти на базовый ключ и искать там
+        //на этом ключе будут сменяемые поля с константами - новое появилась, старое удалили
+        //тогда будет смысл в подписке
+        //в подписке всё равно мало смысла, даже если есть известие от подписки, надо проверять наличие гуид-ключа -
+        //может же сервер исчезнуть к этому времени, забрав с собой ключ
+        //можно ключ не удалять, даже нужно - если сервер упадёт неожиданно, то ключи всё равно останутся
+        //но ключ может и исчезнуть сам по себе, надо проверять
+        //наверное, подписка имеет смысл для мгновенной реакции или для длительного ожидания
+        //если сервер простаивает, то обновления констант ему всё равно не нужны
+        //если, конечно, не обновятся какие-то базовые ключи, но это допускать нельзя
+        //можно разделить набор на два - изменяемый и постоянный
+        //постоянные инициализовать через инит, а остальные добавлять по ходу - по ключам изменения
+        //поэтому сервер получит новые константы после захвата пакета
 
         public async Task ConstantsMountingMonitor()
         {

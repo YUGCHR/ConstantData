@@ -51,7 +51,7 @@ namespace ConstantData
                         Console.WriteLine($"\n\n Redis server did not start: \n + {message} \n");
                         throw;
                     }
-
+                    services.AddSingleton<GenerateThisInstanceGuidService>();
                     // убрать константы и создание класса констант в отдельный sln/container - со своим appsetting, который и станет общий для всех
                     services.AddSingleton<IInitConstantsService, InitConstantsService>();
                     services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
