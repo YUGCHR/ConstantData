@@ -31,9 +31,18 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<QueuedHostedService>();
 
+        // разделить инициализацию констант внутри на два метода - проверка базового ключа и получение констант с текущего ключа
+        // в первом проверить базовый ключ, если есть, взять из него текущий и сравнить его с предыдущим - если отличается, поставить признак необходимости обновления
+        // второй, если есть необходимость, получает свежие константы
+        // в универсальном обработчике вызываем инициализацию, а она сама разбирается с константами
+        // в сервере констант составить таблицу обращения к константам - в поле имя и в значении новое значение
+        // на ключ обновления констант подписка - в каком-то месте задержкой 1 сек, чтобы нельзя было слишком быстро менять
+        // потом обычный обработчик-диспетчер, запись новых констант и генерация нового ключа для потребителей
+        // оставить старые константы на поле legacy constants, а для ключа новых констант сделать новое поле
+
         public async Task<EventKeyNames> ConstantInitializer(CancellationToken stoppingToken)
         {
-            EventKeyNames eventKeysSet = await _data.FetchAllConstants(stoppingToken, 750);
+            EventKeyNames eventKeysSet = await _data.DeliveryOfUpdatedConstants(stoppingToken);
 
             if (eventKeysSet != null)
             {

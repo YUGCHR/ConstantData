@@ -47,7 +47,7 @@ namespace FrontServerEmulation
 
         public async Task Monitor() // _logger = 100
         {
-            EventKeyNames eventKeysSet = await _data.FetchAllConstants(_cancellationToken, 500);
+            EventKeyNames eventKeysSet = await _data.DeliveryOfUpdatedConstants(_cancellationToken);
             
 
             // на старте проверить наличие ключа с константами

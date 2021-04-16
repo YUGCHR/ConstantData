@@ -53,23 +53,32 @@ namespace ConstantData
 
             _logger.LogInformation(10351, "1 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSet.EventKeyFrontGivesTaskTimeDays);
 
-            (string startConstantKey, string startConstantField) = _data.FetchBaseConstants();
+            (string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField) = _data.FetchBaseConstants();
             _logger.LogInformation(10350, "ConstantData send constants {0} to SetStartConstants.", eventKeysSet, "constants");
 
-            await _cache.SetStartConstants(eventKeysSet, startConstantKey, startConstantField);
+            // записываем константы в стартовый ключ и старое поле (для совместимости)
+            await _cache.SetStartConstants(startConstantKey, constantsStartLegacyField, eventKeysSet);
+
+            // записываем в стартовый ключ и новое поле гуид-ключ обновляемых констант
+            string constantsStartGuidKey = Guid.NewGuid().ToString();
+            await _cache.SetConstantsStartGuidKey(startConstantKey, constantsStartGuidField, constantsStartGuidKey); //string startConstantKey, string startConstantField, string constantsStartGuidKey
+
+            // записываем константы в новый гуид-ключ и новое поле (надо какое-то всем известное поле)
+            // потом может быть будет поле-версия, а может будет меняться ключ
+            await _cache.SetStartConstants(startConstantKey, constantsStartGuidKey, eventKeysSet);
 
             // можно загрузить константы обратно и проверить
             // а можно подписаться на ключ и следить, чтобы никто не лез в константы
             //EventKeyNames eventKeysSetCheck = await _data.FetchAllConstants();
             //_logger.LogInformation(10362, "2 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSetCheck.EventKeyFrontGivesTaskTimeDays);
-            
+
             //_subscribe.SubscribeOnEventFrom(eventKeysSet);
 
             while (true)
             {
                 if (_cancellationToken.IsCancellationRequested)
                 {
-                    bool res = await _cache.DeleteKeyIfCancelled(startConstantKey, startConstantField);
+                    bool res = await _cache.DeleteKeyIfCancelled(startConstantKey);
                     _logger.LogInformation(310310, "_cancellationToken was received, key was removed = {KeyStroke}.", res);
                     return;
                 }

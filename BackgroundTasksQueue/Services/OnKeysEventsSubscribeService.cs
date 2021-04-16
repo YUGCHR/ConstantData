@@ -12,7 +12,8 @@ using Shared.Library.Models;
 namespace BackgroundTasksQueue.Services
 {
     public interface IOnKeysEventsSubscribeService
-    {
+    { 
+        public Task SubscribeOnEventRun(CancellationToken stoppingToken);
         public Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken);
     }
 
@@ -59,7 +60,6 @@ namespace BackgroundTasksQueue.Services
             return eventGuidFieldRun;
         }
 
-
         // подписываемся на ключ сообщения о необходимости обновления констант
         // рассмотрим два варианта (вариант, что констант нет вообще, обрабатывается раньше)
         // 1. обновление пришло в режиме ожидания сервера
@@ -68,19 +68,22 @@ namespace BackgroundTasksQueue.Services
         // 2. обновление пришло во время обработки пакета
         // тогда обработчик (р) при старте сначала проверит наличие новых констант
         // тут пригодится версионирование констант
-        // 
-        // 
+        // пока ограничимся сравнением - есть новее, чем сейчас пользуемся
+        // при обновлении констант изменится ключ гуид, где они хранятся и делать проверку - если ключ изменился от сохранённого, то надо достать из него новые константы
+
         public async Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken)
         {
             // все проверки и ожидание внутри метода, без констант не вернётся
             // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
+
             EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
             _callingNumOfCheckKeyFrontGivesTask = 0;
+            // подписка не на тот ключ!
             string eventKeyUpdateConstants = eventKeysSet.EventKeyUpdateConstants;
             Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyUpdateConstants });
 
             // подписываемся на ключ сообщения о появлении свободных задач
-            _ = SubscribeOnEventRun(eventKeysSet, stoppingToken);
+            //_ = SubscribeOnEventRun(eventKeysSet, stoppingToken);
 
             // блокировка множественной подписки до специального разрешения повторной подписки - нужна своя блокировка, она будет чаще сниматься - после каждого пакета
             _flagToBlockEventUpdate = true;
@@ -111,8 +114,10 @@ namespace BackgroundTasksQueue.Services
 
 
         // подписываемся на ключ сообщения о появлении свободных задач
-        public async Task SubscribeOnEventRun(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
+        public async Task SubscribeOnEventRun(CancellationToken stoppingToken)
         {
+            EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
+
             // все проверки и ожидание внутри метода, без констант не вернётся
             // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
             //EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
