@@ -14,7 +14,7 @@ namespace BackgroundTasksQueue.Services
     public interface IOnKeysEventsSubscribeService
     { 
         public Task SubscribeOnEventRun(CancellationToken stoppingToken);
-        public Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken);
+        //public Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken);
     }
 
     public class OnKeysEventsSubscribeService : IOnKeysEventsSubscribeService
@@ -71,51 +71,56 @@ namespace BackgroundTasksQueue.Services
         // пока ограничимся сравнением - есть новее, чем сейчас пользуемся
         // при обновлении констант изменится ключ гуид, где они хранятся и делать проверку - если ключ изменился от сохранённого, то надо достать из него новые константы
 
-        public async Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken)
-        {
-            // все проверки и ожидание внутри метода, без констант не вернётся
-            // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
+        //public async Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken)
+        //{
+        //    // все проверки и ожидание внутри метода, без констант не вернётся
+        //    // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
 
-            EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
-            _callingNumOfCheckKeyFrontGivesTask = 0;
-            // подписка не на тот ключ!
-            string eventKeyUpdateConstants = eventKeysSet.EventKeyUpdateConstants;
-            Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyUpdateConstants });
+        //    EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
+        //    _callingNumOfCheckKeyFrontGivesTask = 0;
+        //    // подписка не на тот ключ!
+        //    string eventKeyUpdateConstants = eventKeysSet.EventKeyUpdateConstants;
+        //    Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyUpdateConstants });
 
-            // подписываемся на ключ сообщения о появлении свободных задач
-            //_ = SubscribeOnEventRun(eventKeysSet, stoppingToken);
+        //    // подписываемся на ключ сообщения о появлении свободных задач
+        //    //_ = SubscribeOnEventRun(eventKeysSet, stoppingToken);
 
-            // блокировка множественной подписки до специального разрешения повторной подписки - нужна своя блокировка, она будет чаще сниматься - после каждого пакета
-            _flagToBlockEventUpdate = true;
+        //    // блокировка множественной подписки до специального разрешения повторной подписки - нужна своя блокировка, она будет чаще сниматься - после каждого пакета
+        //    _flagToBlockEventUpdate = true;
             
-            _keyEvents.Subscribe(eventKeyUpdateConstants, async (string key, KeyEvent cmd) =>
-            {
-                if (cmd == eventKeysSet.EventCmd && _flagToBlockEventUpdate)
-                {
-                    // подписка заблокирована - её восстановит обработчик (run) после окончания пакета
-                    _flagToBlockEventRun = false;
+        //    _keyEvents.Subscribe(eventKeyUpdateConstants, async (string key, KeyEvent cmd) =>
+        //    {
+        //        if (cmd == eventKeysSet.EventCmd && _flagToBlockEventUpdate)
+        //        {
+        //            // подписка заблокирована - её восстановит обработчик (run) после окончания пакета
+        //            _flagToBlockEventRun = false;
 
-                    // заблокировать и вторую подписку (run) перед вызовом её обработчика - чтобы её не вызвал вдруг появившийся ключ кафе
-                    // её восстановит обработчик когда (если) не найдёт своего ключа - тогда он только обновит константы 
-                    _flagToBlockEventUpdate = false;
-                    Logs.Here().Debug("Event Key UpdateConstants called CheckKeyFrontGivesTask. \n {@K}", new { Key = eventKeyUpdateConstants });
+        //            // заблокировать и вторую подписку (run) перед вызовом её обработчика - чтобы её не вызвал вдруг появившийся ключ кафе
+        //            // её восстановит обработчик когда (если) не найдёт своего ключа - тогда он только обновит константы 
+        //            _flagToBlockEventUpdate = false;
+        //            Logs.Here().Debug("Event Key UpdateConstants called CheckKeyFrontGivesTask. \n {@K}", new { Key = eventKeyUpdateConstants });
 
-                    // тут можно передать оп параметр, который будет означать, что вызвали из-за констант
-                    // но лучше пусть сам разбирается, что делать
-                    _ = CheckKeyFrontGivesTask(stoppingToken);
-                }
-            });
+        //            // тут можно передать оп параметр, который будет означать, что вызвали из-за констант
+        //            // но лучше пусть сам разбирается, что делать
+        //            _ = CheckKeyFrontGivesTask(stoppingToken);
+        //        }
+        //    });
 
-            string eventKeyCommand = $"Key = {eventKeyUpdateConstants}, Command = {eventKeysSet.EventCmd}";
-            Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
-        }
+        //    string eventKeyCommand = $"Key = {eventKeyUpdateConstants}, Command = {eventKeysSet.EventCmd}";
+        //    Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
+        //}
 
+        // можно при получении нового пакета на мгновение заглянуть в константы и посмотреть на флаг
+        // перед пакетом!
+        // по сработке подписки на ключ кафе, там другого места и нет
+        // в константах подписку на ключ сервера сделать в самом начале и сразу проверить наличие констант на этом ключе, если есть, поднять флаг не в самой подписке, а ещё в подписке на подписку
 
 
 
         // подписываемся на ключ сообщения о появлении свободных задач
         public async Task SubscribeOnEventRun(CancellationToken stoppingToken)
         {
+            // 
             EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
 
             // все проверки и ожидание внутри метода, без констант не вернётся
@@ -144,7 +149,7 @@ namespace BackgroundTasksQueue.Services
                     _flagToBlockEventRun = false;
                     Logs.Here().Debug("CheckKeyFrontGivesTask will be called No:{0}, Event permit = {Flag} \n {@K} with {@C} was received. \n", _callingNumOfCheckKeyFrontGivesTask, _flagToBlockEventRun, new { Key = eventKeyFrontGivesTask }, new { Command = cmd });
                     // можно добавить счётчик событий для дебага
-                    _ = CheckKeyFrontGivesTask(stoppingToken);
+                    _ = CheckKeyFrontGivesTask(stoppingToken, eventKeysSet);
                 }
             });
 
@@ -152,7 +157,7 @@ namespace BackgroundTasksQueue.Services
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        private async Task<bool> CheckKeyFrontGivesTask(CancellationToken stoppingToken) // Main of EventKeyFrontGivesTask key
+        private async Task<bool> CheckKeyFrontGivesTask(CancellationToken stoppingToken, EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key
         {
             _callingNumOfCheckKeyFrontGivesTask++;
             if (_callingNumOfCheckKeyFrontGivesTask > 1)
@@ -160,10 +165,14 @@ namespace BackgroundTasksQueue.Services
                 Logs.Here().Warning("CheckKeyFrontGivesTask was called more than once - Calling Count = {0}.", _callingNumOfCheckKeyFrontGivesTask);
             }
 
-
             // тут определить, надо ли обновить константы
-            EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken); //EventKeyNames
+            bool isExistUpdatedConstants = _constants.IsExistUpdatedConstants();
+            Logs.Here().Information("Is Exist Updated Constants = {0}.", isExistUpdatedConstants);
 
+            if (isExistUpdatedConstants)
+            {
+                eventKeysSet = await _constants.ConstantInitializer(stoppingToken); //EventKeyNames
+            }
 
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             // проверить существование ключа - если ключ есть, надо идти добывать пакет
@@ -297,10 +306,9 @@ namespace BackgroundTasksQueue.Services
                     _flagToBlockEventCompleted = false;
                     // параллельно заканчивается много пакетов и по каждому окончанию бегаем проверять новые пакеты, а они давно кончились
                     // не очень понятно, каким образом пакеты выполняются параллельно - в этом надо разобраться
-
-                    // 
+                    
                     Logs.Here().Debug("SubscribeOnEventPackageCompleted was called with event ---current_package_finished---.");
-                    _ = CheckKeyFrontGivesTask(stoppingToken);
+                    _ = CheckKeyFrontGivesTask(stoppingToken, eventKeysSet);
                     Logs.Here().Debug("CheckKeyFrontGivesTask was called and passed.");
                 }
             });

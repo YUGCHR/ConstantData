@@ -10,6 +10,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ISettingConstants
     {
+        public bool IsExistUpdatedConstants();
         public Task<EventKeyNames> ConstantInitializer(CancellationToken stoppingToken);
     }
 
@@ -40,10 +41,25 @@ namespace BackgroundTasksQueue.Services
         // потом обычный обработчик-диспетчер, запись новых констант и генерация нового ключа для потребителей
         // оставить старые константы на поле legacy constants, а для ключа новых констант сделать новое поле
 
+        public bool IsExistUpdatedConstants()
+        {
+            return _data.IsExistUpdatedConstants();
+        }
+
         public async Task<EventKeyNames> ConstantInitializer(CancellationToken stoppingToken)
         {
+            // сюда попадаем перед каждым пакетом, основные варианты
+            // 1. старт сервера, первоначальное получение констант
+            // 2. старт сервера, нет базового ключа констант
+            // 3. старт сервера, есть базовый ключ, но нет ключа обновления констант
+            // 4. новый пакет, нет обновления
+            // 5. новый пакет, есть обновление
+            // 6. новый пакет, пропал ключ обновления констант
+            // 7. новый пакет, пропал базовый ключ констант
+            
             EventKeyNames eventKeysSet = await _data.DeliveryOfUpdatedConstants(stoppingToken);
 
+            // здесь уже с константами
             if (eventKeysSet != null)
             {
                 Logs.Here().Debug("EventKeyNames fetched constants in EventKeyNames - {@D}.", new { CycleDelay = eventKeysSet.TaskEmulatorDelayTimeInMilliseconds });

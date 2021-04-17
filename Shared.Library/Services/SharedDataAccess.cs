@@ -13,6 +13,7 @@ namespace Shared.Library.Services
     {
         public (string, string, string) FetchBaseConstants([CallerMemberName] string currentMethodNameName = "");
         public Task<EventKeyNames> DeliveryOfUpdatedConstants(CancellationToken cancellationToken);
+        public bool IsExistUpdatedConstants();
     }
 
     public class SharedDataAccess : ISharedDataAccess
@@ -34,6 +35,7 @@ namespace Shared.Library.Services
         private const string ConstantsStartLegacyField = "all";
         private const string ConstantsStartGuidField = "constantsGuidField";
         private const KeyEvent SubscribedKeyEvent = KeyEvent.HashSet;
+
         private bool _constantsUpdateIsAppeared = false;
         private bool _wasSubscribedOnConstantsUpdate = false;
 
@@ -76,38 +78,52 @@ namespace Shared.Library.Services
             // если строка, использовать её как ключ (или поле?) и достать обновляемый набор
 
             // если ещё не подписаны (первый вызов) - подписаться
+            // можно получать информацию о первом вызове от вызывающего метода - пусть проверит наличие констант и скажет
+            // только накладные будут выше, наверное - зато без лишнего глобального флага
+
+            // ограничим использование глобальных констант
+            string startConstantKey = StartConstantKey;
+            string constantsStartLegacyField = ConstantsStartLegacyField;
+            string constantsStartGuidField = ConstantsStartGuidField;
+            KeyEvent eventToSubscribe = SubscribedKeyEvent;
+
+            // проверить, есть ли ключ вообще
+            bool isExistStartConstantKey = await _cache.KeyExistsAsync(startConstantKey);
+
             if (!_wasSubscribedOnConstantsUpdate)
             {
-                string keyToSubscribe = StartConstantKey;
-                KeyEvent eventToSubscribe = SubscribedKeyEvent;
-                SubscribeOnAllConstantsEvent(keyToSubscribe, eventToSubscribe);
+                SubscribeOnAllConstantsEvent(startConstantKey, eventToSubscribe, isExistStartConstantKey);
             }
 
-            EventKeyNames eventKeysSet = await FetchAllConstants(cancellationToken);
+            EventKeyNames eventKeysSet = await FetchAllConstants(cancellationToken, isExistStartConstantKey, startConstantKey, constantsStartLegacyField, constantsStartGuidField);
 
             return eventKeysSet;
         }
+
+        public bool IsExistUpdatedConstants()
+        {
+            return _constantsUpdateIsAppeared;
+        }
         
-        private async Task<EventKeyNames> FetchAllConstants(CancellationToken cancellationToken)
+        private async Task<EventKeyNames> FetchAllConstants(CancellationToken cancellationToken, bool isExistStartConstantKey, string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField)
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                // проверить, есть ли ключ вообще
-                bool isExistStartConstantKey = await _cache.KeyExistsAsync(StartConstantKey);
-
                 if (isExistStartConstantKey)
                 {
                     // если ключ есть, то есть ли поле обновляемых констант (и в нем поле гуид)
-                    string constantsGuidKey = await _cache.GetHashedAsync<string>(StartConstantKey, ConstantsStartGuidField);
+                    string constantsGuidKey = await _cache.GetHashedAsync<string>(startConstantKey, constantsStartGuidField);
 
                     if (constantsGuidKey == null)
                     {
                         // обновляемых констант нет в этой версии (или ещё нет), достаём старые и возвращаемся
-                        return await _cache.GetHashedAsync<EventKeyNames>(StartConstantKey, ConstantsStartLegacyField);
+                        return await _cache.GetHashedAsync<EventKeyNames>(startConstantKey, constantsStartLegacyField);
                     }
 
-                    // есть обновлённые константы, достаём их и возвращаемся
-                    return await _cache.GetHashedAsync<EventKeyNames>(StartConstantKey, constantsGuidKey);
+                    // есть обновлённые константы, достаём их, сбрасываем флаг наличия обновления и возвращаемся
+                    EventKeyNames eventKeyNames = await _cache.GetHashedAsync<EventKeyNames>(startConstantKey, constantsGuidKey);
+                    _constantsUpdateIsAppeared = false;
+                    return eventKeyNames;
                 }
 
                 double timeToWaitTheConstants = 1;
@@ -121,17 +137,23 @@ namespace Shared.Library.Services
                     // Prevent throwing if the Delay is cancelled
                 }
             }
-
+            // сюда можем попасть только при завершении сервера, константы уже никому не нужны
             return null;
         }
 
         // в этой подписке выставить флаг класса, что надо проверить обновление
-        private void SubscribeOnAllConstantsEvent(string keyToSubscribe, KeyEvent eventToSubscribe)
+        private void SubscribeOnAllConstantsEvent(string startConstantKey, KeyEvent eventToSubscribe, bool isExistStartConstantKey)
         {
             _wasSubscribedOnConstantsUpdate = true;
-            Logs.Here().Information("SharedDataAccess was subscribed on key {0}.", keyToSubscribe);
+            Logs.Here().Information("SharedDataAccess will be subscribed on key {0}.", startConstantKey);
 
-            _keyEvents.Subscribe(keyToSubscribe, (string key, KeyEvent cmd) =>
+            // в константах подписку на ключ сервера сделать в самом начале и сразу проверить наличие констант на этом ключе, если есть, поднять флаг не в самой подписке, а ещё в подписке на подписку
+            if (isExistStartConstantKey)
+            {
+                _constantsUpdateIsAppeared = true;
+            }
+
+            _keyEvents.Subscribe(startConstantKey, (string key, KeyEvent cmd) =>
             {
                 if (cmd == eventToSubscribe)
                 {
@@ -142,6 +164,7 @@ namespace Shared.Library.Services
                     Logs.Here().Debug("Constants Update is appeared = {0}.", _constantsUpdateIsAppeared);
                 }
             });
+            Logs.Here().Information("SharedDataAccess was subscribed on key {0}.", startConstantKey);
         }
     }
 
