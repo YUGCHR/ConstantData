@@ -112,16 +112,16 @@ namespace Shared.Library.Services
                 if (isExistStartConstantKey)
                 {
                     // если ключ есть, то есть ли поле обновляемых констант (и в нем поле гуид)
-                    string constantsGuidKey = await _cache.GetHashedAsync<string>(startConstantKey, constantsStartGuidField);
+                    string dataServerPrefixGuid = await _cache.GetHashedAsync<string>(startConstantKey, constantsStartGuidField);
 
-                    if (constantsGuidKey == null)
+                    if (dataServerPrefixGuid == null)
                     {
                         // обновляемых констант нет в этой версии (или ещё нет), достаём старые и возвращаемся
                         return await _cache.GetHashedAsync<EventKeyNames>(startConstantKey, constantsStartLegacyField);
                     }
 
                     // есть обновлённые константы, достаём их, сбрасываем флаг наличия обновления и возвращаемся
-                    EventKeyNames eventKeyNames = await _cache.GetHashedAsync<EventKeyNames>(startConstantKey, constantsGuidKey);
+                    EventKeyNames eventKeyNames = await _cache.GetHashedAsync<EventKeyNames>(dataServerPrefixGuid, constantsStartGuidField);
                     _constantsUpdateIsAppeared = false;
                     return eventKeyNames;
                 }

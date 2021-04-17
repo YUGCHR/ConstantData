@@ -55,6 +55,8 @@ namespace ConstantData
         {
             EventKeyNames eventKeysSet = _init.InitialiseEventKeyNames();
 
+            string dataServerPrefixGuid = $"constant:data:{_guid}";
+
             //_logger.LogInformation(10351, "1 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSet.EventKeyFrontGivesTaskTimeDays);
             Logs.Here().Information("ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSet.EventKeyFrontGivesTaskTimeDays);
 
@@ -62,13 +64,12 @@ namespace ConstantData
             //_logger.LogInformation(10350, "ConstantData send constants {0} to SetStartConstants.", eventKeysSet, "constants");
             Logs.Here().Information("ConstantData send constants {0} to SetStartConstants.");
 
+            eventKeysSet.ConstantsVersionBase = startConstantKey;
+            eventKeysSet.ConstantsVersionNumber = 0;
+
             // записываем константы в стартовый ключ и старое поле (для совместимости)
             await _cache.SetStartConstants(startConstantKey, constantsStartLegacyField, eventKeysSet);
-
-
-
-
-
+            
             //сервер констант имеет свой гуид и это ключ обновляемых констант
             //его он пишет в поле для нового гуид-ключа для всех
             //на этот ключ уже можно подписаться, он стабильный на всё время существования сервера
@@ -85,18 +86,17 @@ namespace ConstantData
             //можно разделить набор на два - изменяемый и постоянный
             //постоянные инициализовать через инит, а остальные добавлять по ходу - по ключам изменения
             //поэтому сервер получит новые константы после захвата пакета
-
-
             
-
-
             // записываем в стартовый ключ и новое поле гуид-ключ обновляемых констант
-            string constantsStartGuidKey = Guid.NewGuid().ToString();
-            await _cache.SetConstantsStartGuidKey(startConstantKey, constantsStartGuidField, constantsStartGuidKey); //string startConstantKey, string startConstantField, string constantsStartGuidKey
+            //string constantsStartGuidKey = Guid.NewGuid().ToString();
+            await _cache.SetConstantsStartGuidKey(startConstantKey, constantsStartGuidField, dataServerPrefixGuid); //string startConstantKey, string startConstantField, string constantsStartGuidKey
+
+            eventKeysSet.ConstantsVersionBase = dataServerPrefixGuid;
+            eventKeysSet.ConstantsVersionNumber++;
 
             // записываем константы в новый гуид-ключ и новое поле (надо какое-то всем известное поле)
             // потом может быть будет поле-версия, а может будет меняться ключ
-            await _cache.SetStartConstants(startConstantKey, constantsStartGuidKey, eventKeysSet);
+            await _cache.SetStartConstants(dataServerPrefixGuid, constantsStartGuidField, eventKeysSet);
 
             // можно загрузить константы обратно и проверить
             // а можно подписаться на ключ и следить, чтобы никто не лез в константы

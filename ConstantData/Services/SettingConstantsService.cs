@@ -45,6 +45,12 @@ namespace ConstantData.Services
         public SettingConstantsServiceService(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            // https://stackoverflow.com/questions/15329601/how-to-get-all-the-values-from-appsettings-key-which-starts-with-specific-name-a/15329673
+            //foreach (string key in ConfigurationManager.AppSettings)
+            // https://weblog.west-wind.com/posts/2017/dec/12/easy-configuration-binding-in-aspnet-core-revisited
+            // https://weblog.west-wind.com/posts/2016/may/23/strongly-typed-configuration-settings-in-aspnet-core
+
             // "Constants":
             string recordActualityLevel = Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("RecordActualityLevel").Value;
             GetRecordActualityLevel = Convert.ToInt32(recordActualityLevel);
@@ -82,7 +88,7 @@ namespace ConstantData.Services
             GetEventFieldBack = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldBack").Value;
             GetEventFieldFront = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldFront").Value;
             GetEventKeyBacksTasksProceed = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyBacksTasksProceed").Value;
-            
+
         }
 
         private IConfiguration Configuration { get; }

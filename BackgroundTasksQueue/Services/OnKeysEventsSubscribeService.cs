@@ -45,7 +45,7 @@ namespace BackgroundTasksQueue.Services
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<OnKeysEventsSubscribeService>();
 
         private bool _flagToBlockEventRun;
-        private bool _flagToBlockEventUpdate;
+        //private bool _flagToBlockEventUpdate;
         private bool _flagToBlockEventCompleted;
         private int _callingNumOfCheckKeyFrontGivesTask;
         
@@ -60,63 +60,11 @@ namespace BackgroundTasksQueue.Services
             return eventGuidFieldRun;
         }
 
-        // подписываемся на ключ сообщения о необходимости обновления констант
-        // рассмотрим два варианта (вариант, что констант нет вообще, обрабатывается раньше)
-        // 1. обновление пришло в режиме ожидания сервера
-        // подписка на обновление вызвала обработчик (run) и он обновил константы внутри себя
-        // после этого восстановил подписку
-        // 2. обновление пришло во время обработки пакета
-        // тогда обработчик (р) при старте сначала проверит наличие новых констант
-        // тут пригодится версионирование констант
-        // пока ограничимся сравнением - есть новее, чем сейчас пользуемся
-        // при обновлении констант изменится ключ гуид, где они хранятся и делать проверку - если ключ изменился от сохранённого, то надо достать из него новые константы
-
-        //public async Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken)
-        //{
-        //    // все проверки и ожидание внутри метода, без констант не вернётся
-        //    // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
-
-        //    EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
-        //    _callingNumOfCheckKeyFrontGivesTask = 0;
-        //    // подписка не на тот ключ!
-        //    string eventKeyUpdateConstants = eventKeysSet.EventKeyUpdateConstants;
-        //    Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyUpdateConstants });
-
-        //    // подписываемся на ключ сообщения о появлении свободных задач
-        //    //_ = SubscribeOnEventRun(eventKeysSet, stoppingToken);
-
-        //    // блокировка множественной подписки до специального разрешения повторной подписки - нужна своя блокировка, она будет чаще сниматься - после каждого пакета
-        //    _flagToBlockEventUpdate = true;
-            
-        //    _keyEvents.Subscribe(eventKeyUpdateConstants, async (string key, KeyEvent cmd) =>
-        //    {
-        //        if (cmd == eventKeysSet.EventCmd && _flagToBlockEventUpdate)
-        //        {
-        //            // подписка заблокирована - её восстановит обработчик (run) после окончания пакета
-        //            _flagToBlockEventRun = false;
-
-        //            // заблокировать и вторую подписку (run) перед вызовом её обработчика - чтобы её не вызвал вдруг появившийся ключ кафе
-        //            // её восстановит обработчик когда (если) не найдёт своего ключа - тогда он только обновит константы 
-        //            _flagToBlockEventUpdate = false;
-        //            Logs.Here().Debug("Event Key UpdateConstants called CheckKeyFrontGivesTask. \n {@K}", new { Key = eventKeyUpdateConstants });
-
-        //            // тут можно передать оп параметр, который будет означать, что вызвали из-за констант
-        //            // но лучше пусть сам разбирается, что делать
-        //            _ = CheckKeyFrontGivesTask(stoppingToken);
-        //        }
-        //    });
-
-        //    string eventKeyCommand = $"Key = {eventKeyUpdateConstants}, Command = {eventKeysSet.EventCmd}";
-        //    Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
-        //}
-
         // можно при получении нового пакета на мгновение заглянуть в константы и посмотреть на флаг
         // перед пакетом!
         // по сработке подписки на ключ кафе, там другого места и нет
         // в константах подписку на ключ сервера сделать в самом начале и сразу проверить наличие констант на этом ключе, если есть, поднять флаг не в самой подписке, а ещё в подписке на подписку
-
-
-
+        
         // подписываемся на ключ сообщения о появлении свободных задач
         public async Task SubscribeOnEventRun(CancellationToken stoppingToken)
         {
@@ -129,6 +77,7 @@ namespace BackgroundTasksQueue.Services
 
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
             Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyFrontGivesTask });
+            Logs.Here().Information("Constants version is {0}:{1}.", eventKeysSet.ConstantsVersionBase, eventKeysSet.ConstantsVersionNumber);
 
             // блокировка множественной подписки до специального разрешения повторной подписки
             _flagToBlockEventRun = true;
@@ -194,7 +143,7 @@ namespace BackgroundTasksQueue.Services
 
             // всё_протухло - пакетов нет, восстановить подписку (also Subscribe to Update) и ждать погоду
             _flagToBlockEventRun = true;
-            _flagToBlockEventUpdate = true;
+            //_flagToBlockEventUpdate = true;
             Logs.Here().Information("This Server finished current work.\n {@S} \n Global {@PR} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, new { Permit = _flagToBlockEventRun });
             Logs.Here().Warning("Next package could not be obtained - there are no more packages in cafe.");
             string packageSeparator1 = new('Z', 80);
