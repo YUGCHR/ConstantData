@@ -11,7 +11,6 @@ namespace BackgroundTasksQueue.Services
 {
     public class QueuedHostedService : BackgroundService
     {
-        
         private readonly IOnKeysEventsSubscribeService _subscribe;
 
         public QueuedHostedService(
@@ -30,7 +29,7 @@ namespace BackgroundTasksQueue.Services
 
         private async Task BackgroundProcessing(CancellationToken stoppingToken)
         {
-            // подписываемся на ключ сообщения о необходимости обновления констант - также это точка входа всего
+            // подписываемся на ключ кафе - также это точка входа всего
             await _subscribe.SubscribeOnEventRun(stoppingToken);
         }
 

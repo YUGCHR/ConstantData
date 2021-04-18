@@ -22,7 +22,7 @@
       "eventFieldFrom": "count",
       "eventKeyBackReadiness": "key-event-back-processes-servers-readiness-list",
       "eventKeyFrontGivesTask": "key-event-front-server-gives-task-package",
-      "eventKeyUpdateConstants": "key-event-constants-updating-is-necessary",
+      "eventKeyUpdateConstants": "update", //"key-event-constants-updating-is-necessary",
       "prefixRequest": "request",
       "prefixPackage": "package",
       "prefixPackageControl": "control", // key for all tasks to delete their fields when is completed

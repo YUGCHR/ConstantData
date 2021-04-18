@@ -19,6 +19,7 @@ namespace ConstantData
         private readonly ICacheManageService _cache;
         private readonly ISettingConstantsService _constantService;
         private readonly CancellationToken _cancellationToken;
+        private readonly IOnKeysEventsSubscribeService _subscribe;
         private readonly string _guid;
 
         public MonitorLoop(
@@ -27,11 +28,12 @@ namespace ConstantData
             ICacheManageService cache,
             ISettingConstantsService constantService,
             IHostApplicationLifetime applicationLifetime, 
-            IInitConstantsService init)
+            IInitConstantsService init, IOnKeysEventsSubscribeService subscribe)
         {
             _data = data;
             _constantService = constantService;
             _init = init;
+            _subscribe = subscribe;
             _cache = cache;
             _cancellationToken = applicationLifetime.ApplicationStopping;
             _guid = thisGuid.ThisBackServerGuid();
@@ -90,13 +92,17 @@ namespace ConstantData
             // записываем в стартовый ключ и новое поле гуид-ключ обновляемых констант
             //string constantsStartGuidKey = Guid.NewGuid().ToString();
             await _cache.SetConstantsStartGuidKey(startConstantKey, constantsStartGuidField, dataServerPrefixGuid); //string startConstantKey, string startConstantField, string constantsStartGuidKey
-
+            
             eventKeysSet.ConstantsVersionBase = dataServerPrefixGuid;
             eventKeysSet.ConstantsVersionNumber++;
 
             // записываем константы в новый гуид-ключ и новое поле (надо какое-то всем известное поле)
             // потом может быть будет поле-версия, а может будет меняться ключ
             await _cache.SetStartConstants(dataServerPrefixGuid, constantsStartGuidField, eventKeysSet);
+
+            // подписываемся на ключ сообщения о необходимости обновления констант
+            
+            _subscribe.SubscribeOnEventUpdate(eventKeysSet, constantsStartGuidField, _cancellationToken);
 
             // можно загрузить константы обратно и проверить
             // а можно подписаться на ключ и следить, чтобы никто не лез в константы

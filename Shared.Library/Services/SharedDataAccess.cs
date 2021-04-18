@@ -89,13 +89,8 @@ namespace Shared.Library.Services
 
             // проверить, есть ли ключ вообще
             bool isExistStartConstantKey = await _cache.KeyExistsAsync(startConstantKey);
-
-            if (!_wasSubscribedOnConstantsUpdate)
-            {
-                SubscribeOnAllConstantsEvent(startConstantKey, eventToSubscribe, isExistStartConstantKey);
-            }
-
-            EventKeyNames eventKeysSet = await FetchAllConstants(cancellationToken, isExistStartConstantKey, startConstantKey, constantsStartLegacyField, constantsStartGuidField);
+            
+            EventKeyNames eventKeysSet = await FetchAllConstants(cancellationToken, isExistStartConstantKey, startConstantKey, constantsStartLegacyField, constantsStartGuidField, eventToSubscribe);
 
             return eventKeysSet;
         }
@@ -105,7 +100,7 @@ namespace Shared.Library.Services
             return _constantsUpdateIsAppeared;
         }
         
-        private async Task<EventKeyNames> FetchAllConstants(CancellationToken cancellationToken, bool isExistStartConstantKey, string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField)
+        private async Task<EventKeyNames> FetchAllConstants(CancellationToken cancellationToken, bool isExistStartConstantKey, string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField, KeyEvent eventToSubscribe)
         {
             while (!cancellationToken.IsCancellationRequested)
             {
@@ -113,11 +108,16 @@ namespace Shared.Library.Services
                 {
                     // если ключ есть, то есть ли поле обновляемых констант (и в нем поле гуид)
                     string dataServerPrefixGuid = await _cache.GetHashedAsync<string>(startConstantKey, constantsStartGuidField);
-
+                    
                     if (dataServerPrefixGuid == null)
                     {
                         // обновляемых констант нет в этой версии (или ещё нет), достаём старые и возвращаемся
                         return await _cache.GetHashedAsync<EventKeyNames>(startConstantKey, constantsStartLegacyField);
+                    }
+
+                    if (!_wasSubscribedOnConstantsUpdate)
+                    {
+                        SubscribeOnAllConstantsEvent(dataServerPrefixGuid, eventToSubscribe);
                     }
 
                     // есть обновлённые константы, достаём их, сбрасываем флаг наличия обновления и возвращаемся
@@ -142,29 +142,29 @@ namespace Shared.Library.Services
         }
 
         // в этой подписке выставить флаг класса, что надо проверить обновление
-        private void SubscribeOnAllConstantsEvent(string startConstantKey, KeyEvent eventToSubscribe, bool isExistStartConstantKey)
+        private void SubscribeOnAllConstantsEvent(string keyGuid, KeyEvent eventToSubscribe)
         {
             _wasSubscribedOnConstantsUpdate = true;
-            Logs.Here().Information("SharedDataAccess will be subscribed on key {0}.", startConstantKey);
+            Logs.Here().Information("SharedDataAccess will be subscribed on keyGuid {0}.", keyGuid);
 
-            // в константах подписку на ключ сервера сделать в самом начале и сразу проверить наличие констант на этом ключе, если есть, поднять флаг не в самой подписке, а ещё в подписке на подписку
-            if (isExistStartConstantKey)
-            {
-                _constantsUpdateIsAppeared = true;
-            }
+            //// в константах подписку на ключ сервера сделать в самом начале и сразу проверить наличие констант на этом ключе, если есть, поднять флаг не в самой подписке, а ещё в подписке на подписку
+            //if (isExistStartConstantKey)
+            //{
+            //    _constantsUpdateIsAppeared = true;
+            //}
 
-            _keyEvents.Subscribe(startConstantKey, (string key, KeyEvent cmd) =>
+            _keyEvents.Subscribe(keyGuid, (string key, KeyEvent cmd) =>
             {
                 if (cmd == eventToSubscribe)
                 {
-                    Logs.Here().Debug("Key {Key} with command {Cmd} was received.", StartConstantKey, cmd);
+                    Logs.Here().Information("Key {Key} with command {Cmd} was received.", keyGuid, cmd);
 
                     _constantsUpdateIsAppeared = true;
 
-                    Logs.Here().Debug("Constants Update is appeared = {0}.", _constantsUpdateIsAppeared);
+                    Logs.Here().Information("Constants Update is appeared = {0}.", _constantsUpdateIsAppeared);
                 }
             });
-            Logs.Here().Information("SharedDataAccess was subscribed on key {0}.", startConstantKey);
+            Logs.Here().Information("SharedDataAccess was subscribed on keyGuid {0}.", keyGuid);
         }
     }
 

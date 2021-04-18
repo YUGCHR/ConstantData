@@ -14,23 +14,19 @@ namespace BackgroundTasksQueue.Services
     public interface IBackgroundTasksService
     {
         void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms, CancellationToken stoppingToken);
-
     }
 
     public class BackgroundTasksService : IBackgroundTasksService
     {
         private readonly IBackgroundTaskQueue _taskQueue;
-        //private readonly ILogger<BackgroundTasksService> _logger;
         private readonly ICacheProviderAsync _cache;
 
         public BackgroundTasksService(
             IBackgroundTaskQueue taskQueue,
-            //ILogger<BackgroundTasksService> logger,
             ICacheProviderAsync cache
         )
         {
             _taskQueue = taskQueue;
-            //_logger = logger;
             _cache = cache;
         }
 
@@ -56,7 +52,6 @@ namespace BackgroundTasksQueue.Services
             double taskDelayTimeSpanFromMilliseconds = taskDescription.TaskDescription.TaskDelayTimeFromMilliSeconds / 1000D;
             int delayLoop = 0;
             int loopRemain = assignmentTerms;
-            //var guid = Guid.NewGuid().ToString();
 
             Logs.Here().Debug("Queued Background Task is starting with {0} cycles. \n {@P} \n {@S}", assignmentTerms, new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
 

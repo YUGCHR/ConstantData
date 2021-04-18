@@ -32,9 +32,7 @@ namespace Shared.Library.Models
 
         // for FrontEmulator only
         public int MinBackProcessesServersCount { get; set; }
-        // NOT USED
-        public int RandomSeedFromGuid { get; set; }
-
+        
         // срок хранения ключа Common
         public double EventKeyCommonKeyTimeDays { get; set; }
         // срок хранения ключа eventKeyFrom
@@ -57,6 +55,9 @@ namespace Shared.Library.Models
         public string EventFieldFrom { get; init; }
         // операция для подписки
         public KeyEvent EventCmd { get; init; }
+
+        // 
+        public int RandomSeedFromGuid { get; set; }
 
         // ключ регистрации серверов
         public string EventKeyBackReadiness { get; init; }

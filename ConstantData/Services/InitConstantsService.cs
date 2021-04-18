@@ -61,7 +61,7 @@ namespace ConstantData.Services
                 EventFieldBack = _constantService.GetEventFieldBack,
                 // кафе выдачи задач
                 EventKeyFrontGivesTask = _constantService.GetEventKeyFrontGivesTask,
-                // UNUSED - constants updating key
+                // constants updating key
                 EventKeyUpdateConstants = _constantService.GetEventKeyUpdateConstants,
                 // Prefix - request:guid
                 PrefixRequest = _constantService.GetPrefixRequest,

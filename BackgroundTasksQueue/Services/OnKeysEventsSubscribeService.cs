@@ -121,6 +121,7 @@ namespace BackgroundTasksQueue.Services
             if (isExistUpdatedConstants)
             {
                 eventKeysSet = await _constants.ConstantInitializer(stoppingToken); //EventKeyNames
+                Logs.Here().Information("Updated Constant = {0}.", eventKeysSet.TaskEmulatorDelayTimeInMilliseconds);
             }
 
             string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;

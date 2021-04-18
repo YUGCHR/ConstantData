@@ -15,6 +15,7 @@ namespace ConstantData.Services
     {
         public Task SetStartConstants(string startConstantKey, string startConstantField, EventKeyNames eventKeysSet);
         public Task SetConstantsStartGuidKey(string startConstantKey, string startConstantField, string constantsStartGuidKey);
+        public Task<TV> FetchUpdatedConstant<TK, TV>(string key, TK field);
         public Task<bool> DeleteKeyIfCancelled(string startConstantKey);
     }
 
@@ -50,6 +51,11 @@ namespace ConstantData.Services
             await _cache.SetHashedAsync<string>(startConstantKey, startConstantField, constantsStartGuidKey, _startConstantKeyLifeTime);
 
             _logger.LogInformation(55050, "SetStartConstants set constants Guid key {0}.", constantsStartGuidKey);
+        }
+
+        public async Task<TV> FetchUpdatedConstant<TK, TV>(string key, TK field)
+        {
+            return await _cache.GetHashedAsync<TK, TV>(key, field);
         }
 
         public async Task<bool> DeleteKeyIfCancelled(string startConstantKey)
