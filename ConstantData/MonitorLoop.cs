@@ -15,6 +15,7 @@ namespace ConstantData
     public class MonitorLoop
     {
         private readonly IInitConstantsService _init;
+        private readonly IConstantsCollectionService _collection;
         private readonly ISharedDataAccess _data;
         private readonly ICacheManageService _cache;
         private readonly ISettingConstantsService _constantService;
@@ -28,12 +29,13 @@ namespace ConstantData
             ICacheManageService cache,
             ISettingConstantsService constantService,
             IHostApplicationLifetime applicationLifetime, 
-            IInitConstantsService init, IOnKeysEventsSubscribeService subscribe)
+            IInitConstantsService init, IOnKeysEventsSubscribeService subscribe, IConstantsCollectionService collection)
         {
             _data = data;
             _constantService = constantService;
             _init = init;
             _subscribe = subscribe;
+            _collection = collection;
             _cache = cache;
             _cancellationToken = applicationLifetime.ApplicationStopping;
             _guid = thisGuid.ThisBackServerGuid();
@@ -55,6 +57,9 @@ namespace ConstantData
 
         public async Task ConstantsMountingMonitor()
         {
+            DictionaryTest();
+
+
             EventKeyNames eventKeysSet = _init.InitialiseEventKeyNames();
 
             string dataServerPrefixGuid = $"constant:data:{_guid}";
@@ -111,6 +116,12 @@ namespace ConstantData
 
             //_subscribe.SubscribeOnEventFrom(eventKeysSet);
 
+
+
+            
+
+
+
             while (true)
             {
                 if (_cancellationToken.IsCancellationRequested)
@@ -132,6 +143,18 @@ namespace ConstantData
 
                 await Task.Delay(10, _cancellationToken);
             }
+        }
+
+        public void DictionaryTest()
+        {
+            Logs.Here().Information("Constants in Dictionary Test started.");
+            
+            foreach (var k in _collection.MailSettings)
+            {
+                (string key, string value) = k;
+                Logs.Here().Information("Show new constants in Dictionary - key = {0}, value = {1}.", key, value);
+            }
+            
         }
     }
 }
