@@ -17,7 +17,8 @@ namespace ConstantData.Services
     {
         public ConstantsCollectionService(IConfiguration configuration)
         {
-            
+            // https://stackoverflow.com/questions/42846296/how-to-load-appsetting-json-section-into-dictionary-in-net-core
+            // https://github.com/dotnet/extensions/issues/782
 
             MailSettings = configuration.GetSection("MailSettings").GetChildren()
                 .ToDictionary(x => x.Key, x => x.Value);

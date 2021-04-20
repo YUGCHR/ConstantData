@@ -1,0 +1,33 @@
+
+[18:42:57 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[18:42:58 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 51] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[18:42:58 INF (4) ConstantData.MonitorLoop.DictionaryTest - 150] 
+ Constants in Dictionary Test started. 
+ 
+[18:42:58 INF (4) ConstantData.MonitorLoop.DictionaryTest - 155] 
+ Show new constants in Dictionary - key = "From", value = "info@mydomain.com". 
+ 
+[18:42:58 INF (4) ConstantData.MonitorLoop.DictionaryTest - 155] 
+ Show new constants in Dictionary - key = "Port", value = "25". 
+ 
+[18:42:58 INF (4) ConstantData.MonitorLoop.DictionaryTest - 155] 
+ Show new constants in Dictionary - key = "Server", value = "http://mail.mydomain.com". 
+ 
+[18:42:58 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 68] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 1. 
+ 
+[18:42:58 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 72] 
+ ConstantData send constants {0} to SetStartConstants. 
+ 
+[18:42:58 INF (21) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: "update" } 
+ 
+[18:42:58 INF (21) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:c1873f60-235c-4c8d-81a7-db94aeea04ea":1. 
+ 

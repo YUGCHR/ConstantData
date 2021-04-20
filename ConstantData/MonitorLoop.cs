@@ -69,7 +69,7 @@ namespace ConstantData
 
             (string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField) = _data.FetchBaseConstants();
             //_logger.LogInformation(10350, "ConstantData send constants {0} to SetStartConstants.", eventKeysSet, "constants");
-            Logs.Here().Information("ConstantData send constants {0} to SetStartConstants.");
+            Logs.Here().Information("ConstantData send constants to SetStartConstants.");
 
             eventKeysSet.ConstantsVersionBase = startConstantKey;
             eventKeysSet.ConstantsVersionNumber = 0;

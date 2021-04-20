@@ -1,9 +1,4 @@
 {
-  "MailSettings":{
-    "Server": "http://mail.mydomain.com",      
-    "Port": "25",
-    "From": "info@mydomain.com"
-  },
   "SettingConstants": {
     "Constants": {
       "RecordActualityLevel": 6, // current model version of Db data structure
