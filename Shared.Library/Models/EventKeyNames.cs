@@ -32,7 +32,7 @@ namespace Shared.Library.Models
 
         // for FrontEmulator only
         public int MinBackProcessesServersCount { get; set; }
-        
+
         // срок хранения ключа Common
         public double EventKeyCommonKeyTimeDays { get; set; }
         // срок хранения ключа eventKeyFrom

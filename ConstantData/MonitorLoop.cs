@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using CachingFramework.Redis.Contracts;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Hosting;
@@ -28,7 +29,7 @@ namespace ConstantData
             ISharedDataAccess data,
             ICacheManageService cache,
             ISettingConstantsService constantService,
-            IHostApplicationLifetime applicationLifetime, 
+            IHostApplicationLifetime applicationLifetime,
             IInitConstantsService init, IOnKeysEventsSubscribeService subscribe, IConstantsCollectionService collection)
         {
             _data = data;
@@ -76,7 +77,7 @@ namespace ConstantData
 
             // записываем константы в стартовый ключ и старое поле (для совместимости)
             await _cache.SetStartConstants(startConstantKey, constantsStartLegacyField, eventKeysSet);
-            
+
             //сервер констант имеет свой гуид и это ключ обновляемых констант
             //его он пишет в поле для нового гуид-ключа для всех
             //на этот ключ уже можно подписаться, он стабильный на всё время существования сервера
@@ -93,11 +94,11 @@ namespace ConstantData
             //можно разделить набор на два - изменяемый и постоянный
             //постоянные инициализовать через инит, а остальные добавлять по ходу - по ключам изменения
             //поэтому сервер получит новые константы после захвата пакета
-            
+
             // записываем в стартовый ключ и новое поле гуид-ключ обновляемых констант
             //string constantsStartGuidKey = Guid.NewGuid().ToString();
             await _cache.SetConstantsStartGuidKey(startConstantKey, constantsStartGuidField, dataServerPrefixGuid); //string startConstantKey, string startConstantField, string constantsStartGuidKey
-            
+
             eventKeysSet.ConstantsVersionBase = dataServerPrefixGuid;
             eventKeysSet.ConstantsVersionNumber++;
 
@@ -106,7 +107,7 @@ namespace ConstantData
             await _cache.SetStartConstants(dataServerPrefixGuid, constantsStartGuidField, eventKeysSet);
 
             // подписываемся на ключ сообщения о необходимости обновления констант
-            
+
             _subscribe.SubscribeOnEventUpdate(eventKeysSet, constantsStartGuidField, _cancellationToken);
 
             // можно загрузить константы обратно и проверить
@@ -118,7 +119,7 @@ namespace ConstantData
 
 
 
-            
+
 
 
 
@@ -132,7 +133,7 @@ namespace ConstantData
 
                     return;
                 }
-                
+
                 var keyStroke = Console.ReadKey();
 
                 if (keyStroke.Key == ConsoleKey.W)
@@ -148,13 +149,22 @@ namespace ConstantData
         public void DictionaryTest()
         {
             Logs.Here().Information("Constants in Dictionary Test started.");
-            
-            foreach (var k in _collection.MailSettings)
+
+            //int taskEmulatorDelayTimeInMilliseconds = _collection.Constants["TaskEmulatorDelayTimeInMilliseconds"];
+
+            //foreach (var k in _collection.RedisKeysMain)
+            foreach (var k in ConstantsCollectionService.A)
             {
-                (string key, string value) = k;
-                Logs.Here().Information("Show new constants in Dictionary - key = {0}, value = {1}.", key, value);
+                Logs.Here().Information("A from RedisKeysMain = {0}.", k);
             }
             
+            foreach (var k in ConstantsCollectionService.B)
+            {
+                Logs.Here().Information("B from RedisKeysMain = {0}.", k);
+            }
+
+            
+
         }
     }
 }

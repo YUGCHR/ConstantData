@@ -1,0 +1,60 @@
+
+[21:23:13 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[21:23:14 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 52] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 151] 
+ Constants in Dictionary Test started. 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 158] 
+ A from RedisKeysMain = "BalanceOfTasksAndProcesses". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 158] 
+ A from RedisKeysMain = "MaxProcessesCountOnServer". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 158] 
+ A from RedisKeysMain = "MinBackProcessesServersCount". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 158] 
+ A from RedisKeysMain = "RandomRangeExtended". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 158] 
+ A from RedisKeysMain = "RecordActualityLevel". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 158] 
+ A from RedisKeysMain = "TaskEmulatorDelayTimeInMilliseconds". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ B from RedisKeysMain = "2". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ B from RedisKeysMain = "3". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ B from RedisKeysMain = "2". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ B from RedisKeysMain = "1000000". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ B from RedisKeysMain = "6". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ B from RedisKeysMain = "300". 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 69] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 1. 
+ 
+[21:23:14 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 73] 
+ ConstantData send constants to SetStartConstants. 
+ 
+[21:23:14 INF (5) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: "update" } 
+ 
+[21:23:14 INF (5) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:f7daf7c8-a5d2-487c-97b6-e4f5b345e59f":1. 
+ 

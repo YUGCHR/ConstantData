@@ -30,7 +30,8 @@ namespace Shared.Library.Services
         }
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<SharedDataAccess>();
-        
+
+        // эти константы должны быть объявлены локально (только в одном месте), чтобы быть одинаковыми во всех проектах
         private const string StartConstantKey = "constants";
         private const string ConstantsStartLegacyField = "all";
         private const string ConstantsStartGuidField = "constantsGuidField";
