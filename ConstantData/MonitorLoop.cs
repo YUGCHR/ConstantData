@@ -152,8 +152,6 @@ namespace ConstantData
         {
             Logs.Here().Information("Constants in Dictionary Test started.");
 
-            //int taskEmulatorDelayTimeInMilliseconds = _collection.Constants["TaskEmulatorDelayTimeInMilliseconds"];
-
             List<ConstantNameValue> aaa = _collection.SettingConstants.CNames;
             List<KeyNameTime> bbb = _collection.SettingConstants.KNames;
 

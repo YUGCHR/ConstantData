@@ -52,42 +52,42 @@ namespace ConstantData.Services
             // https://weblog.west-wind.com/posts/2016/may/23/strongly-typed-configuration-settings-in-aspnet-core
 
             // "Constants":
-            //string recordActualityLevel = Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("RecordActualityLevel").Value;
+            //string recordActualityLevel = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("Constants").GetSection("RecordActualityLevel").Value;
             //GetRecordActualityLevel = Convert.ToInt32(recordActualityLevel);
-            //GetTaskEmulatorDelayTimeInMilliseconds = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("TaskEmulatorDelayTimeInMilliseconds").Value);
-            //GetRandomRangeExtended = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("RandomRangeExtended").Value);
-            //GetBalanceOfTasksAndProcesses = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("BalanceOfTasksAndProcesses").Value);
-            //GetMaxProcessesCountOnServer = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MaxProcessesCountOnServer").Value);
-            //GetMinBackProcessesServersCount = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("Constants").GetSection("MinBackProcessesServersCount").Value);
+            //GetTaskEmulatorDelayTimeInMilliseconds = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("Constants").GetSection("TaskEmulatorDelayTimeInMilliseconds").Value);
+            //GetRandomRangeExtended = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("Constants").GetSection("RandomRangeExtended").Value);
+            //GetBalanceOfTasksAndProcesses = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("Constants").GetSection("BalanceOfTasksAndProcesses").Value);
+            //GetMaxProcessesCountOnServer = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("Constants").GetSection("MaxProcessesCountOnServer").Value);
+            //GetMinBackProcessesServersCount = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("Constants").GetSection("MinBackProcessesServersCount").Value);
             // "RedisKeysTimes":
-            GetEventKeyCommonKeyTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("commonKeyTimeDays").Value);
-            GetEventKeyFromTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFromTimeDays").Value);
-            GetEventKeyBackReadinessTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackReadinessTimeDays").Value);
-            GetEventKeyFrontGivesTaskTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFrontGivesTaskTimeDays").Value);//eventKeyFrontGivesTaskTimeDays
-            GetEventKeyBackServerMainTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerMainTimeDays").Value);
-            GetEventKeyBackServerAuxiliaryTimeDays = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerAuxiliaryTimeDays").Value);
-            GetPercentsKeysExistingTimeInMinutes = Convert.ToInt32(Configuration.GetSection("SettingConstants").GetSection("RedisKeysTimes").GetSection("PercentsKeysExistingTimeInMinutes").Value);
+            GetEventKeyCommonKeyTimeDays = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeysTimes").GetSection("commonKeyTimeDays").Value);
+            GetEventKeyFromTimeDays = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFromTimeDays").Value);
+            GetEventKeyBackReadinessTimeDays = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackReadinessTimeDays").Value);
+            GetEventKeyFrontGivesTaskTimeDays = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeysTimes").GetSection("eventKeyFrontGivesTaskTimeDays").Value);//eventKeyFrontGivesTaskTimeDays
+            GetEventKeyBackServerMainTimeDays = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerMainTimeDays").Value);
+            GetEventKeyBackServerAuxiliaryTimeDays = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeysTimes").GetSection("eventKeyBackServerAuxiliaryTimeDays").Value);
+            GetPercentsKeysExistingTimeInMinutes = Convert.ToInt32(Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeysTimes").GetSection("PercentsKeysExistingTimeInMinutes").Value);
             // "RedisKeys":
-            GetEventKeyFrom = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyFrom").Value;
-            GetEventFieldFrom = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldFrom").Value;
-            GetEventKeyBackReadiness = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyBackReadiness").Value;
-            GetEventKeyFrontGivesTask = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyFrontGivesTask").Value;
-            GetEventKeyUpdateConstants = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyUpdateConstants").Value;
+            GetEventKeyFrom = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("eventKeyFrom").Value;
+            GetEventFieldFrom = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("eventFieldFrom").Value;
+            GetEventKeyBackReadiness = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("eventKeyBackReadiness").Value;
+            GetEventKeyFrontGivesTask = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("eventKeyFrontGivesTask").Value;
+            GetEventKeyUpdateConstants = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("eventKeyUpdateConstants").Value;
 
-            GetPrefixRequest = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixRequest").Value;
-            GetPrefixPackage = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackage").Value;
-            GetPrefixPackageControl = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackageControl").Value;
-            GetPrefixPackageCompleted = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixPackageCompleted").Value;
-            GetPrefixTask = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixTask").Value;
-            GetPrefixBackServer = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixBackServer").Value;
+            GetPrefixRequest = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixRequest").Value;
+            GetPrefixPackage = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixPackage").Value;
+            GetPrefixPackageControl = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixPackageControl").Value;
+            GetPrefixPackageCompleted = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixPackageCompleted").Value;
+            GetPrefixTask = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixTask").Value;
+            GetPrefixBackServer = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixBackServer").Value;
 
-            GetPrefixProcessAdd = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixProcessAdd").Value;
-            GetPrefixProcessCancel = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixProcessCancel").Value;
-            GetPrefixProcessCount = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("prefixProcessCount").Value;
+            GetPrefixProcessAdd = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixProcessAdd").Value;
+            GetPrefixProcessCancel = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixProcessCancel").Value;
+            GetPrefixProcessCount = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("prefixProcessCount").Value;
 
-            GetEventFieldBack = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldBack").Value;
-            GetEventFieldFront = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventFieldFront").Value;
-            GetEventKeyBacksTasksProceed = Configuration.GetSection("SettingConstants").GetSection("RedisKeys").GetSection("eventKeyBacksTasksProceed").Value;
+            GetEventFieldBack = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("eventFieldBack").Value;
+            GetEventFieldFront = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("eventFieldFront").Value;
+            GetEventKeyBacksTasksProceed = Configuration.GetSection("SettingIsomorphicJsonConstants").GetSection("RedisKeys").GetSection("eventKeyBacksTasksProceed").Value;
 
         }
 

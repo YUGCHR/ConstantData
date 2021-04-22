@@ -3,7 +3,7 @@ using CachingFramework.Redis.Contracts;
 
 namespace Shared.Library.Models
 {
-    public class ConstantsLikeInJson
+    public class IsomorphicJsonConstantsStructure
     {
         public List<ConstantNameValue> CNames { get; set; }
         public List<KeyNameTime> KNames { get; set; }

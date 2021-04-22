@@ -1843,3 +1843,141 @@
 [21:19:34 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
  Constants version is "constant:data:2e0a5eb1-850d-4b29-94de-01cc01b24ffe":1. 
  
+[21:28:57 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[21:28:57 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[21:28:57 INF (4) ConstantData.MonitorLoop.DictionaryTest - 153] 
+ Constants in Dictionary Test started. 
+ 
+[21:30:02 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[21:30:02 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[21:30:02 INF (4) ConstantData.MonitorLoop.DictionaryTest - 153] 
+ Constants in Dictionary Test started. 
+ 
+[21:30:49 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[21:30:49 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 153] 
+ Constants in Dictionary Test started. 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ Key 0 = "RecordActualityLevel", time = "6" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ Key 1 = "TaskEmulatorDelayTimeInMilliseconds", time = "300" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ Key 2 = "RandomRangeExtended", time = "1000000" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ Key 3 = "BalanceOfTasksAndProcesses", time = "2" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ Key 4 = "MaxProcessesCountOnServer", time = "3" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 163] 
+ Key 5 = "MinBackProcessesServersCount", time = "2" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 169] 
+ Key 0 = "subscribeOnFrom", time = "1" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 169] 
+ Key 1 = "count", time = "300" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 169] 
+ Key 2 = "key-event-back-processes-servers-readiness-list", time = "1" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 169] 
+ Key 3 = "key-event-front-server-gives-task-package", time = "2" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 169] 
+ Key 4 = "update", time = "1" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.DictionaryTest - 169] 
+ Key 5 = "request", time = "1" 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 71] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0. 
+ 
+[21:30:50 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 75] 
+ ConstantData send constants to SetStartConstants. 
+ 
+[21:30:50 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: null } 
+ 
+[21:30:50 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:136a8471-5a71-4fde-bedf-ab49f814b86d":1. 
+ 
+[21:34:36 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[21:34:36 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 153] 
+ Constants in Dictionary Test started. 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 161] 
+ Key 0 = "RecordActualityLevel", time = "6" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 161] 
+ Key 1 = "TaskEmulatorDelayTimeInMilliseconds", time = "300" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 161] 
+ Key 2 = "RandomRangeExtended", time = "1000000" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 161] 
+ Key 3 = "BalanceOfTasksAndProcesses", time = "2" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 161] 
+ Key 4 = "MaxProcessesCountOnServer", time = "3" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 161] 
+ Key 5 = "MinBackProcessesServersCount", time = "2" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 167] 
+ Key 0 = "subscribeOnFrom", time = "1" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 167] 
+ Key 1 = "count", time = "300" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 167] 
+ Key 2 = "key-event-back-processes-servers-readiness-list", time = "1" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 167] 
+ Key 3 = "key-event-front-server-gives-task-package", time = "2" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 167] 
+ Key 4 = "update", time = "1" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.DictionaryTest - 167] 
+ Key 5 = "request", time = "1" 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 71] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0. 
+ 
+[21:34:36 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 75] 
+ ConstantData send constants to SetStartConstants. 
+ 
+[21:34:36 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: null } 
+ 
+[21:34:36 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:6c4dbcf9-a1eb-4b69-bc9d-05d29196aa58":1. 
+ 
