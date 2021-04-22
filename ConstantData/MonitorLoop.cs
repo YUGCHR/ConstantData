@@ -30,7 +30,9 @@ namespace ConstantData
             ICacheManageService cache,
             ISettingConstantsService constantService,
             IHostApplicationLifetime applicationLifetime,
-            IInitConstantsService init, IOnKeysEventsSubscribeService subscribe, IConstantsCollectionService collection)
+            IInitConstantsService init,
+            IOnKeysEventsSubscribeService subscribe,
+            IConstantsCollectionService collection)
         {
             _data = data;
             _constantService = constantService;
@@ -152,19 +154,20 @@ namespace ConstantData
 
             //int taskEmulatorDelayTimeInMilliseconds = _collection.Constants["TaskEmulatorDelayTimeInMilliseconds"];
 
-            //int count = ConstantSet.SetList.Count;
-            //for (int i = 0; i < count; i++)
-            //{
-            //    int count1 = ConstantSet.ConstantNames.Constants.Count;
-            //    for (int n = 0; n < count1; n++)
-            //    {
-            //        Logs.Here().Information("Key {0} = {1}, time = {2}", i, ConstantSet.ConstantNames.Constants[n].ConstantName, ConstantSet.ConstantNames.Constants[n].ConstantValue);
-            //    }
-            //}
+            List<ConstantNameValue> aaa = _collection.SettingConstants.CNames;
+            List<KeyNameTime> bbb = _collection.SettingConstants.KNames;
 
+            int count1a = aaa.Count;
+            for (int n = 0; n < count1a; n++)
+            {
+                Logs.Here().Information("Key {0} = {1}, time = {2}", n, aaa[n].ConstantName, aaa[n].ConstantValue);
+            }
 
-
-
+            int count1b = bbb.Count;
+            for (int n = 0; n < count1b; n++)
+            {
+                Logs.Here().Information("Key {0} = {1}, time = {2}", n, bbb[n].KeyName, bbb[n].LifeTime);
+            }
         }
     }
 }

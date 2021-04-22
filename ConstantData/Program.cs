@@ -39,34 +39,28 @@ namespace ConstantData
                     configuration
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
                         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
-
-                    IConfigurationRoot configurationRoot = configuration.Build();
-                    
-                    var jjj = new ConstantsLikeInJson();
-
-                    configurationRoot.GetSection("SettingConstants").Bind(jjj);
                 })
 
-            ////.UseContentRoot(Directory.GetCurrentDirectory())
-            ////.ConfigureAppConfiguration((hostContext, config) =>
-            ////{
-            ////    var env = hostContext.HostingEnvironment;
+            //.UseContentRoot(Directory.GetCurrentDirectory())
+            //.ConfigureAppConfiguration((hostContext, config) =>
+            //{
+            //    var env = hostContext.HostingEnvironment;
 
-            ////    // find the shared folder in the parent folder
-            ////    string[] paths = { env.ContentRootPath, "..", "SharedSettings" };
-            ////    string ownPaths = env.ContentRootPath;
-            ////    var sharedFolder = Path.Combine(paths);
-            ////    var ownFolder = Path.Combine(ownPaths);
+            //    // find the shared folder in the parent folder
+            //    string[] paths = { env.ContentRootPath, "..", "SharedSettings" };
+            //    string ownPaths = env.ContentRootPath;
+            //    var sharedFolder = Path.Combine(paths);
+            //    var ownFolder = Path.Combine(ownPaths);
 
-            ////    //load the SharedSettings first, so that appsettings.json overrwrites it
-            ////    // можно убрать shared setting и хранить все константы в локальном appsetting проекта константы
-            ////    config
-            ////        //.AddJsonFile(Path.Combine(sharedFolder, "sharedSettings.json"), optional: true)
-            ////        //.AddJsonFile(Path.Combine(ownFolder, "appsettings.json"), optional: true);
-            ////        .AddJsonFile("appsettings.json", optional: true)
-            ////        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-            ////    config.AddEnvironmentVariables();
-            ////})
+            //    //load the SharedSettings first, so that appsettings.json overrwrites it
+            //    // можно убрать shared setting и хранить все константы в локальном appsetting проекта константы
+            //    config
+            //        //.AddJsonFile(Path.Combine(sharedFolder, "sharedSettings.json"), optional: true)
+            //        //.AddJsonFile(Path.Combine(ownFolder, "appsettings.json"), optional: true);
+            //        .AddJsonFile("appsettings.json", optional: true)
+            //        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            //    config.AddEnvironmentVariables();
+            //})
             .ConfigureLogging((ctx, sLog) =>
             {
                 //var seriLog = new LoggerConfiguration()

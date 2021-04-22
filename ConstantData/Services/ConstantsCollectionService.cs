@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Shared.Library.Models;
 
 namespace ConstantData.Services
 {
@@ -16,7 +17,7 @@ namespace ConstantData.Services
         //public Dictionary<string, int> RedisKeysMain { get; }
         //public List<(string a, int b)> RedisKeysMain { get; }
         //public List<IConfigurationSection> RedisKeysMain { get; }
-        public List<(string A, string B)> List { get; set; }
+        public ConstantsLikeInJson SettingConstants { get; set; }
 
         //public Dictionary<string, int> RedisKeyPrefixes { get; }
         //public Dictionary<string, int> RedisFields { get; }
@@ -27,7 +28,11 @@ namespace ConstantData.Services
         public ConstantsCollectionService(IConfiguration configuration)
         {
             Configuration = configuration;
+            //IConfigurationRoot configurationRoot = configuration.Build();
 
+            SettingConstants = new ConstantsLikeInJson();
+
+            Configuration.GetSection("SettingConstants").Bind(SettingConstants);
             // https://stackoverflow.com/questions/42846296/how-to-load-appsetting-json-section-into-dictionary-in-net-core
             // https://github.com/dotnet/extensions/issues/782
             //var terminalSections = this.Configuration.GetSection("Terminals").GetChildren();
@@ -35,16 +40,16 @@ namespace ConstantData.Services
             //RedisKeysMain = configuration.GetSection("SettingConstants").GetSection("Constants").GetChildren().ToList();
             //A = RedisKeysMain.Select(x => x.Key).ToList();
             //B = RedisKeysMain.Select(x => x.Value).ToList();
+
+            //List<(string, string)> list = Configuration.GetSection("SettingConstants").GetSection("Constant").GetChildren().ToList().Select(x => (x.Key, x.Value)).ToList();
             
-            List<(string, string)> list = Configuration.GetSection("SettingConstants").GetSection("Constant").GetChildren().ToList().Select(x => (x.Key, x.Value)).ToList();
-            
-            int count = list.Count;
-            //ABL = list
-            //
-            for (int i = 0; i < count; i++)
-            {
-                Logs.Here().Information("List  = {0}.", list[i]);
-            }
+            //int count = list.Count;
+            ////ABL = list
+            ////
+            //for (int i = 0; i < count; i++)
+            //{
+            //    Logs.Here().Information("List  = {0}.", list[i]);
+            //}
 
 
             //configuration.GetSection("SettingConstants").Bind(List1);
@@ -64,11 +69,8 @@ namespace ConstantData.Services
 
         //public List<IConfigurationSection> RedisKeysMain { get; set; }
 
-        public static string A { get; set; }
 
-        public static string B { get; set; }
-
-        public List<(string A, string B)> List { get; set; }
+        public ConstantsLikeInJson SettingConstants { get; set; }
 
         //public static List<AB> ABL { get; set; }
 
