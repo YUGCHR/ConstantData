@@ -152,18 +152,18 @@ namespace ConstantData
 
             //int taskEmulatorDelayTimeInMilliseconds = _collection.Constants["TaskEmulatorDelayTimeInMilliseconds"];
 
-            //foreach (var k in _collection.RedisKeysMain)
-            foreach (var k in ConstantsCollectionService.A)
-            {
-                Logs.Here().Information("A from RedisKeysMain = {0}.", k);
-            }
-            
-            foreach (var k in ConstantsCollectionService.B)
-            {
-                Logs.Here().Information("B from RedisKeysMain = {0}.", k);
-            }
+            //int count = ConstantSet.SetList.Count;
+            //for (int i = 0; i < count; i++)
+            //{
+            //    int count1 = ConstantSet.ConstantNames.Constants.Count;
+            //    for (int n = 0; n < count1; n++)
+            //    {
+            //        Logs.Here().Information("Key {0} = {1}, time = {2}", i, ConstantSet.ConstantNames.Constants[n].ConstantName, ConstantSet.ConstantNames.Constants[n].ConstantValue);
+            //    }
+            //}
 
-            
+
+
 
         }
     }

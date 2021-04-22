@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -17,33 +18,55 @@ using Serilog.Core;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using Shared.Library.Services;
+using Shared.Library.Models;
 
 namespace ConstantData
 {
     public class Program
     {
+
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<Program>();
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)            
-            .UseContentRoot(Directory.GetCurrentDirectory())
-            .ConfigureAppConfiguration((hostContext, config) =>
-            {
-                var env = hostContext.HostingEnvironment;
+            Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, configuration) =>
+                { // https://docs.microsoft.com/en-us/dotnet/core/extensions/configuration-providers
 
-                // find the shared folder in the parent folder
-                string[] paths = { env.ContentRootPath, "..", "SharedSettings" };
-                var sharedFolder = Path.Combine(paths);
+                    configuration.Sources.Clear();
 
-                //load the SharedSettings first, so that appsettings.json overrwrites it
-                // можно убрать shared setting и хранить все константы в локальном appsetting проекта константы
-                config
-                    .AddJsonFile(Path.Combine(sharedFolder, "sharedSettings.json"), optional: true)
-                    .AddJsonFile("appsettings.json", optional: true)
-                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                    IHostEnvironment env = hostingContext.HostingEnvironment;
 
-                config.AddEnvironmentVariables();
-            })
+                    configuration
+                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
+
+                    IConfigurationRoot configurationRoot = configuration.Build();
+                    
+                    var jjj = new ConstantsLikeInJson();
+
+                    configurationRoot.GetSection("SettingConstants").Bind(jjj);
+                })
+
+            ////.UseContentRoot(Directory.GetCurrentDirectory())
+            ////.ConfigureAppConfiguration((hostContext, config) =>
+            ////{
+            ////    var env = hostContext.HostingEnvironment;
+
+            ////    // find the shared folder in the parent folder
+            ////    string[] paths = { env.ContentRootPath, "..", "SharedSettings" };
+            ////    string ownPaths = env.ContentRootPath;
+            ////    var sharedFolder = Path.Combine(paths);
+            ////    var ownFolder = Path.Combine(ownPaths);
+
+            ////    //load the SharedSettings first, so that appsettings.json overrwrites it
+            ////    // можно убрать shared setting и хранить все константы в локальном appsetting проекта константы
+            ////    config
+            ////        //.AddJsonFile(Path.Combine(sharedFolder, "sharedSettings.json"), optional: true)
+            ////        //.AddJsonFile(Path.Combine(ownFolder, "appsettings.json"), optional: true);
+            ////        .AddJsonFile("appsettings.json", optional: true)
+            ////        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            ////    config.AddEnvironmentVariables();
+            ////})
             .ConfigureLogging((ctx, sLog) =>
             {
                 //var seriLog = new LoggerConfiguration()
@@ -91,12 +114,13 @@ namespace ConstantData
                     services.AddSingleton<GenerateThisInstanceGuidService>();
                     // убрать константы и создание класса констант в отдельный sln/container - со своим appsetting, который и станет общий для всех
                     services.AddSingleton<IConstantsCollectionService, ConstantsCollectionService>();
+                    //services.AddSingleton<ConstantNames, constants>();
                     services.AddSingleton<IInitConstantsService, InitConstantsService>();
                     services.AddSingleton<IOnKeysEventsSubscribeService, OnKeysEventsSubscribeService>();
                     services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                     services.AddSingleton<ICacheManageService, CacheManageService>();
                     services.AddSingleton<ISettingConstantsService, SettingConstantsServiceService>();
-                    services.AddSingleton<MonitorLoop>();                    
+                    services.AddSingleton<MonitorLoop>();
                 });
 
         public static void Main(string[] args)
@@ -124,7 +148,7 @@ namespace ConstantData
         // https://stackoverflow.com/questions/29470863/serilog-output-enrich-all-messages-with-methodname-from-which-log-entry-was-ca/46905798
 
         public static ILogger Here(this ILogger logger, [CallerMemberName] string memberName = "", [CallerLineNumber] int sourceLineNumber = 0)
-            //[CallerFilePath] string sourceFilePath = "",
+        //[CallerFilePath] string sourceFilePath = "",
         {
             return logger.ForContext("MemberName", memberName).ForContext("LineNumber", sourceLineNumber);
             //.ForContext("FilePath", sourceFilePath)
