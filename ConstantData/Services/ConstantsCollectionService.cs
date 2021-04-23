@@ -13,7 +13,7 @@ namespace ConstantData.Services
 {
     public interface IConstantsCollectionService
     {
-        public IsomorphicJsonConstantsStructure SettingConstants { get; set; }        
+        public ConstantsSet SettingConstants { get; set; }        
     }
 
     public class ConstantsCollectionService : IConstantsCollectionService
@@ -22,7 +22,7 @@ namespace ConstantData.Services
         {
             Configuration = configuration;
 
-            SettingConstants = new IsomorphicJsonConstantsStructure();
+            SettingConstants = new ConstantsSet();
 
             Configuration.GetSection("SettingConstants").Bind(SettingConstants);
         }
@@ -31,6 +31,6 @@ namespace ConstantData.Services
 
         private IConfiguration Configuration { get; }
         
-        public IsomorphicJsonConstantsStructure SettingConstants { get; set; }
+        public ConstantsSet SettingConstants { get; set; }
     }
 }

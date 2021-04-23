@@ -10,32 +10,46 @@ namespace Shared.Library.Models
     public class ConstantsSet
     {
         // ConstantsList
-        public ConstantNameValue RecordActualityLevel { get; set; }
-        public ConstantNameValue TaskEmulatorDelayTimeInMilliseconds { get; set; }
-        public ConstantNameValue RandomRangeExtended { get; set; }
-        public ConstantNameValue BalanceOfTasksAndProcesses { get; set; }
-        public ConstantNameValue MaxProcessesCountOnServer { get; set; }
-        public ConstantNameValue MinBackProcessesServersCount { get; set; }
+        public ConstantType RecordActualityLevel { get; set; }
+        public ConstantType TaskEmulatorDelayTimeInMilliseconds { get; set; }
+        public ConstantType RandomRangeExtended { get; set; }
+        public ConstantType BalanceOfTasksAndProcesses { get; set; }
+        public ConstantType MaxProcessesCountOnServer { get; set; }
+        public ConstantType MinBackProcessesServersCount { get; set; }
 
         // KeysList
-        public KeyNameValueLifeTime EventKeyFrom { get; set; }
-        public KeyNameValueLifeTime EventKeyBackReadiness { get; set; }
-        public KeyNameValueLifeTime EventKeyFrontGivesTask { get; set; }
-        public KeyNameValueLifeTime EventKeyUpdateConstants { get; set; }
-        public KeyNameValueLifeTime EventKeyBacksTasksProceed { get; set; }
-        public KeyNameValueLifeTime PrefixRequest { get; set; }
-        public KeyNameValueLifeTime PrefixPackage { get; set; }
-        public KeyNameValueLifeTime PrefixPackageControl { get; set; }
-        public KeyNameValueLifeTime PrefixPackageCompleted { get; set; }
-        public KeyNameValueLifeTime PrefixTask { get; set; }
-        public KeyNameValueLifeTime PrefixBackServer { get; set; }
-        public KeyNameValueLifeTime PrefixProcessAdd { get; set; }
-        public KeyNameValueLifeTime PrefixProcessCancel { get; set; }
-        public KeyNameValueLifeTime PrefixProcessCount { get; set; }
-        public KeyNameValueLifeTime EventFieldFrom { get; set; }
-        public KeyNameValueLifeTime EventFieldBack { get; set; }
-        public KeyNameValueLifeTime EventFieldFront { get; set; }
+        public KeyType EventKeyFrom { get; set; }
+        public KeyType EventKeyBackReadiness { get; set; }
+        public KeyType EventKeyFrontGivesTask { get; set; }
+        public KeyType EventKeyUpdateConstants { get; set; }
+        public KeyType EventKeyBacksTasksProceed { get; set; }
+        public KeyType PrefixRequest { get; set; }
+        public KeyType PrefixPackage { get; set; }
+        public KeyType PrefixPackageControl { get; set; }
+        public KeyType PrefixPackageCompleted { get; set; }
+        public KeyType PrefixTask { get; set; }
+        public KeyType PrefixBackServer { get; set; }
+        public KeyType PrefixProcessAdd { get; set; }
+        public KeyType PrefixProcessCancel { get; set; }
+        public KeyType PrefixProcessCount { get; set; }
+        public KeyType EventFieldFrom { get; set; }
+        public KeyType EventFieldBack { get; set; }
+        public KeyType EventFieldFront { get; set; }
 
         // LaterAssigned
+    }
+
+    public class ConstantType
+    {
+        public string Description { get; set; }
+        public int Value { get; set; }
+        public double LifeTime { get; set; }
+    }
+
+    public class KeyType
+    {
+        public string Description { get; set; }
+        public string Value { get; set; }
+        public double LifeTime { get; set; }
     }
 }

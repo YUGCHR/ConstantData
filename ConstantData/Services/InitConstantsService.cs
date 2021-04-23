@@ -11,7 +11,6 @@ namespace ConstantData.Services
 {
     public interface IInitConstantsService
     {
-        public ConstantsSet InitialiseConstantsSet();
         public EventKeyNames InitialiseEventKeyNames();
         
     } 
@@ -32,49 +31,6 @@ namespace ConstantData.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<ConstantsCollectionService>();
         
-        public ConstantsSet InitialiseConstantsSet()
-        {
-            // в цикле перебирать все поля класса ConstantsSet
-            ConstantsSet constantsSet = new ConstantsSet();
-            PropertyInfo[] properties = typeof(ConstantsSet).GetProperties();
-            foreach (PropertyInfo property in properties)
-            {
-                string nameofProperty = property.Name;
-                Logs.Here().Information("Property of ConstantsSet - {0}", nameofProperty);
-
-                foreach (var e in _collection.SettingConstants.ConstantsList)
-                {
-                    string nameofPropertyName = e.PropertyName;
-                    if (nameofProperty == nameofPropertyName)
-                    {
-                        property.SetValue(constantsSet, e);
-                        var ttt = (ConstantNameValue)property.GetValue(constantsSet, null);
-                        
-                        Logs.Here().Information("property.GetValue = {0}}", ttt.Value);
-                        Logs.Here().Information("Property of ConstantsSet set {0}}", nameofProperty);
-                    }
-                }
-                
-            }
-
-            Logs.Here().Information("TaskEmulatorDelayTimeInMilliseconds = {0}}", constantsSet.TaskEmulatorDelayTimeInMilliseconds.Description);
-            Logs.Here().Information("TaskEmulatorDelayTimeInMilliseconds = {0}}", constantsSet.TaskEmulatorDelayTimeInMilliseconds.PropertyName);
-            Logs.Here().Information("TaskEmulatorDelayTimeInMilliseconds = {0}}", constantsSet.TaskEmulatorDelayTimeInMilliseconds.Value);
-            Logs.Here().Information("TaskEmulatorDelayTimeInMilliseconds = {0}}", constantsSet.TaskEmulatorDelayTimeInMilliseconds.LifeTime);
-            Logs.Here().Information("BalanceOfTasksAndProcesses = {0}}", constantsSet.BalanceOfTasksAndProcesses.Value);
-            Logs.Here().Information("MaxProcessesCountOnServer = {0}}", constantsSet.MaxProcessesCountOnServer.Value);
-            Logs.Here().Information("MinBackProcessesServersCount = {0}}", constantsSet.MinBackProcessesServersCount.Value);
-            Logs.Here().Information("RandomRangeExtended = {0}}", constantsSet.RandomRangeExtended.Value);
-            Logs.Here().Information("RecordActualityLevel = {0}}", constantsSet.RecordActualityLevel.Value);
-
-
-            // во втором цикле перебирать лист (оба листа?) из appsetting
-
-            // при составлении имени поля с именем в листе - присваивать
-
-            return new ConstantsSet();
-        }
-
         public EventKeyNames InitialiseEventKeyNames()
         {
             //string blank15 = _constantService.Blank15; // for testing
