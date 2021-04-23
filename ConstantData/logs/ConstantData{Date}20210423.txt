@@ -1,0 +1,139 @@
+
+[17:53:25 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[17:53:25 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 153] 
+ Constants in Dictionary Test started. 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 0, description - "current model version of Db data structure" 
+ property name = "RecordActualityLevel", 
+ value = "6" time = "-1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 1, description - "delay time to emulate upload of a real book - in seconds" 
+ property name = "TaskEmulatorDelayTimeInMilliseconds", 
+ value = "300" time = "-1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 2, description - "int diceRollRow = RandomProvider.Next(0, RandomRangeExtended)" 
+ property name = "RandomRangeExtended", 
+ value = "1000000" time = "-1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 3, description - "tasks number / processes ratio for the back-servers execution " 
+ property name = "BalanceOfTasksAndProcesses", 
+ value = "2" time = "-1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 4, description - "maximum processes number on back-servers (min = 1)" 
+ property name = "MaxProcessesCountOnServer", 
+ value = "3" time = "-1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 5, description - "minimum number of back-servers at the start of the front-server" 
+ property name = "MinBackProcessesServersCount", 
+ value = "2" time = "-1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 6, description - "key to fetch task package from controller/emulator" 
+ property name = "EventKeyFrom", 
+ value = "subscribeOnFrom" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 7, description - "key " 
+ property name = "EventKeyBackReadiness", 
+ value = "key-event-back-processes-servers-readiness-list" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 8, description - "key " 
+ property name = "EventKeyFrontGivesTask", 
+ value = "key-event-front-server-gives-task-package" time = "2" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 9, description - "key " 
+ property name = "EventKeyUpdateConstants", 
+ value = "update" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 10, description - "key " 
+ property name = "EventKeyBacksTasksProceed", 
+ value = "key-event-backs-servers-tasks-packages-proceed" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 11, description - "key " 
+ property name = "PrefixRequest", 
+ value = "request" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 12, description - "key " 
+ property name = "PrefixPackage", 
+ value = "package" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 13, description - "key " 
+ property name = "PrefixPackageControl", 
+ value = "control" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 14, description - "key " 
+ property name = "PrefixPackageCompleted", 
+ value = "completed" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 15, description - "key " 
+ property name = "PrefixTask", 
+ value = "task" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 16, description - "key " 
+ property name = "PrefixBackServer", 
+ value = "backserver" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 17, description - "key " 
+ property name = "PrefixProcessAdd", 
+ value = "process:add" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 18, description - "key " 
+ property name = "PrefixProcessCancel", 
+ value = "process:cancel" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 19, description - "key " 
+ property name = "PrefixProcessCount", 
+ value = "process:count" time = "1" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 20, description - "field " 
+ property name = "EventFieldFrom", 
+ value = "count" time = "0" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 21, description - "field " 
+ property name = "EventFieldBack", 
+ value = "ttt" time = "0" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.DictionaryTest - 160] 
+ Key No: 22, description - "field " 
+ property name = null, 
+ value = "ttt" time = "0" 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 71] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0. 
+ 
+[17:53:25 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 75] 
+ ConstantData send constants to SetStartConstants. 
+ 
+[17:53:25 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: null } 
+ 
+[17:53:25 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:065c73d2-e084-4952-bfbd-2ff16ec93ad8":1. 
+ 

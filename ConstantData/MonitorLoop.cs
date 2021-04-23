@@ -152,34 +152,14 @@ namespace ConstantData
         {
             Logs.Here().Information("Constants in Dictionary Test started.");
 
-            List<ConstantNameValue> aaa = _collection.SettingConstants.ConstantsNames;
-            List<KeyNameValueTime> bbb = _collection.SettingConstants.KeysNames;
-            List<PrefixKeyNameValueTime> ccc = _collection.SettingConstants.PrefixKeysNames;
-            List<FieldNameValueTime> ddd = _collection.SettingConstants.FieldsNames;
+            List<ConstantNameValue> aaa = _collection.SettingConstants.ConstantsList;
 
-            int count1a = aaa.Count;
-            for (int n = 0; n < count1a; n++)
+            int count1 = aaa.Count;
+            for (int n = 0; n < count1; n++)
             {
-                Logs.Here().Information("Key No:{0} Description - {1} \n name = {2}, time = {3}", n, aaa[n].ConstantDescription, aaa[n].ConstantName, aaa[n].ConstantValue);
+                Logs.Here().Information("Key No: {0}, description - {1}, \n property name = {2}, \n value = {3}, time = {4}.", n, aaa[n].Description, aaa[n].PropertyName, aaa[n].Value, aaa[n].LifeTime);
             }
 
-            int count1b = bbb.Count;
-            for (int n = 0; n < count1b; n++)
-            {
-                Logs.Here().Information("Key {0} = {1}, \n value = {2}, time = {3}", n, bbb[n].KeyName, bbb[n].KeyValue, bbb[n].LifeTime);
-            }
-            
-            int count1c = ccc.Count;
-            for (int n = 0; n < count1c; n++)
-            {
-                Logs.Here().Information("Key {0} = {1}, \n value = {2}, time = {3}", n, ccc[n].PrefixKeyName, ccc[n].PrefixKeyValue, ccc[n].LifeTime);
-            }
-            
-            int count1d = ddd.Count;
-            for (int n = 0; n < count1d; n++)
-            {
-                Logs.Here().Information("Key {0} = {1}, \n value = {2}, time = {3}", n, ddd[n].FieldName, ddd[n].FieldValue, ddd[n].LifeTime);
-            }
 
         }
     }
