@@ -153,11 +153,18 @@ namespace ConstantData
             Logs.Here().Information("Constants in Dictionary Test started.");
 
             List<ConstantNameValue> aaa = _collection.SettingConstants.ConstantsList;
+            List<KeyNameValueLifeTime> bbb = _collection.SettingConstants.KeysList;
 
             int count1 = aaa.Count;
             for (int n = 0; n < count1; n++)
             {
                 Logs.Here().Information("Key No: {0}, description - {1}, \n property name = {2}, \n value = {3}, time = {4}.", n, aaa[n].Description, aaa[n].PropertyName, aaa[n].Value, aaa[n].LifeTime);
+            }
+
+            int count2 = bbb.Count;
+            for (int n = 0; n < count2; n++)
+            {
+                Logs.Here().Information("Key No: {0}, description - {1}, \n property name = {2}, \n value = {3}, time = {4}.", n, bbb[n].Description, bbb[n].PropertyName, bbb[n].Value, bbb[n].LifeTime);
             }
 
 

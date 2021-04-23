@@ -19,6 +19,7 @@ namespace Shared.Library.Models
         // process:count:(this server guid) - will be set in BackgroundTasksQueue
         public string ProcessCountPrefixGuid { get; set; }
 
+
         // время задержки в секундах для эмулятора счета задачи
         public int TaskEmulatorDelayTimeInMilliseconds { get; set; }
 
