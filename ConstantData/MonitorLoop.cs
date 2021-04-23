@@ -62,6 +62,7 @@ namespace ConstantData
         {
             DictionaryTest();
 
+            ConstantsSet constantsSet = _init.InitialiseConstantsSet();
 
             EventKeyNames eventKeysSet = _init.InitialiseEventKeyNames();
 
