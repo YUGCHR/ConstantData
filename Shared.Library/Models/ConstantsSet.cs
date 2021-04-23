@@ -10,46 +10,46 @@ namespace Shared.Library.Models
     public class ConstantsSet
     {
         // ConstantsList
-        public ConstantType RecordActualityLevel { get; set; }
-        public ConstantType TaskEmulatorDelayTimeInMilliseconds { get; set; }
-        public ConstantType RandomRangeExtended { get; set; }
-        public ConstantType BalanceOfTasksAndProcesses { get; set; }
-        public ConstantType MaxProcessesCountOnServer { get; set; }
-        public ConstantType MinBackProcessesServersCount { get; set; }
+        public ConstantType RecordActualityLevel { get; init; }
+        public ConstantType TaskEmulatorDelayTimeInMilliseconds { get; init; }
+        public ConstantType RandomRangeExtended { get; init; }
+        public ConstantType BalanceOfTasksAndProcesses { get; init; }
+        public ConstantType MaxProcessesCountOnServer { get; init; }
+        public ConstantType MinBackProcessesServersCount { get; init; }
 
         // KeysList
-        public KeyType EventKeyFrom { get; set; }
-        public KeyType EventKeyBackReadiness { get; set; }
-        public KeyType EventKeyFrontGivesTask { get; set; }
-        public KeyType EventKeyUpdateConstants { get; set; }
-        public KeyType EventKeyBacksTasksProceed { get; set; }
-        public KeyType PrefixRequest { get; set; }
-        public KeyType PrefixPackage { get; set; }
-        public KeyType PrefixPackageControl { get; set; }
-        public KeyType PrefixPackageCompleted { get; set; }
-        public KeyType PrefixTask { get; set; }
-        public KeyType PrefixBackServer { get; set; }
-        public KeyType PrefixProcessAdd { get; set; }
-        public KeyType PrefixProcessCancel { get; set; }
-        public KeyType PrefixProcessCount { get; set; }
-        public KeyType EventFieldFrom { get; set; }
-        public KeyType EventFieldBack { get; set; }
-        public KeyType EventFieldFront { get; set; }
+        public KeyType EventKeyFrom { get; init; }
+        public KeyType EventKeyBackReadiness { get; init; }
+        public KeyType EventKeyFrontGivesTask { get; init; }
+        public KeyType EventKeyUpdateConstants { get; init; }
+        public KeyType EventKeyBacksTasksProceed { get; init; }
+        public KeyType PrefixRequest { get; init; }
+        public KeyType PrefixPackage { get; init; }
+        public KeyType PrefixPackageControl { get; init; }
+        public KeyType PrefixPackageCompleted { get; init; }
+        public KeyType PrefixTask { get; init; }
+        public KeyType PrefixBackServer { get; init; }
+        public KeyType PrefixProcessAdd { get; init; }
+        public KeyType PrefixProcessCancel { get; init; }
+        public KeyType PrefixProcessCount { get; init; }
+        public KeyType EventFieldFrom { get; init; }
+        public KeyType EventFieldBack { get; init; }
+        public KeyType EventFieldFront { get; init; }
 
         // LaterAssigned
     }
 
     public class ConstantType
     {
-        public string Description { get; set; }
-        public int Value { get; set; }
-        public double LifeTime { get; set; }
+        public string Description { get; init; }
+        public int Value { get; init; }
+        public double LifeTime { get; init; }
     }
 
     public class KeyType
     {
-        public string Description { get; set; }
-        public string Value { get; set; }
-        public double LifeTime { get; set; }
+        public string Description { get; init; }
+        public string Value { get; init; }
+        public double LifeTime { get; init; }
     }
 }

@@ -3887,3 +3887,35 @@
 [23:34:14 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
  Constants version is "constant:data:4d245f7d-1b5e-4788-ab77-043eb059af2d":1. 
  
+[23:40:54 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[23:40:55 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[23:40:55 INF (4) ConstantData.MonitorLoop.DictionaryTest - 154] 
+ Constants in Dictionary Test started. 
+ 
+[23:40:55 INF (4) ConstantData.MonitorLoop.DictionaryTest - 156] 
+ SettingConstants TaskEmulatorDelayTimeInMilliseconds = 300. 
+ 
+[23:40:55 INF (4) ConstantData.MonitorLoop.DictionaryTest - 157] 
+ SettingConstants EventKeyFrontGivesTask Value = "key-event-front-server-gives-task-package". 
+ 
+[23:40:55 INF (4) ConstantData.MonitorLoop.DictionaryTest - 158] 
+ SettingConstants EventKeyFrontGivesTask LifeTime = 0.999. 
+ 
+[23:40:55 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 72] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0. 
+ 
+[23:40:55 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 76] 
+ ConstantData send constants to SetStartConstants. 
+ 
+[23:40:55 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: null } 
+ 
+[23:40:55 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:ae5f0952-1c00-4f3a-8ffa-84627f3ff9af":1. 
+ 
