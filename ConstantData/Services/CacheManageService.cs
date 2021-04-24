@@ -13,7 +13,7 @@ namespace ConstantData.Services
 {
     public interface ICacheManageService
     {
-        public Task SetStartConstants(string startConstantKey, string startConstantField, EventKeyNames eventKeysSet);
+        public Task SetStartConstants(string startConstantKey, string startConstantField, ConstantsSet constantsSet);
         public Task SetConstantsStartGuidKey(string startConstantKey, string startConstantField, string constantsStartGuidKey);
         public Task<TV> FetchUpdatedConstant<TK, TV>(string key, TK field);
         public Task<bool> DeleteKeyIfCancelled(string startConstantKey);
@@ -37,12 +37,13 @@ namespace ConstantData.Services
 
         private readonly TimeSpan _startConstantKeyLifeTime = TimeSpan.FromDays(1);
 
-        public async Task SetStartConstants(string startConstantKey, string startConstantField, EventKeyNames eventKeysSet)
+        public async Task SetStartConstants(string startConstantKey, string startConstantField, ConstantsSet constantsSet)
         {
             // установить своё время для ключа, можно вместе с названием ключа
-            await _cache.SetHashedAsync<EventKeyNames>(startConstantKey, startConstantField, eventKeysSet, _startConstantKeyLifeTime);
+            var keyLifeTime = TimeSpan.FromDays(constantsSet.PrefixDataServer.LifeTime);
+            await _cache.SetHashedAsync<ConstantsSet>(startConstantKey, startConstantField, constantsSet, keyLifeTime);
 
-            _logger.LogInformation(55050, "SetStartConstants set constants (EventKeyFrom for example = {0}) in key {1}.", eventKeysSet.EventKeyFrom, "constants");
+            _logger.LogInformation(55050, "SetStartConstants set constants (EventKeyFrom for example = {0}) in key {1}.", constantsSet.EventKeyFrom.Value, startConstantKey);
         }
         
         public async Task SetConstantsStartGuidKey(string startConstantKey, string startConstantField, string constantsStartGuidKey)

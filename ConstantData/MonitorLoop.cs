@@ -64,22 +64,23 @@ namespace ConstantData
 
             ConstantsSet constantsSet = _collection.SettingConstants;
 
-            EventKeyNames eventKeysSet = _init.InitialiseEventKeyNames();
+            //EventKeyNames eventKeysSet = _init.InitialiseEventKeyNames();
 
-            string dataServerPrefixGuid = $"constant:data:{_guid}";
+            string dataServerPrefixGuid = $"{constantsSet.PrefixDataServer.Value}:{_guid}";
 
-            //_logger.LogInformation(10351, "1 ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSet.EventKeyFrontGivesTaskTimeDays);
-            Logs.Here().Information("ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", eventKeysSet.EventKeyFrontGivesTaskTimeDays);
+            Logs.Here().Information("ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", constantsSet.EventKeyFrontGivesTask.LifeTime);
 
             (string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField) = _data.FetchBaseConstants();
             //_logger.LogInformation(10350, "ConstantData send constants {0} to SetStartConstants.", eventKeysSet, "constants");
             Logs.Here().Information("ConstantData send constants to SetStartConstants.");
 
-            eventKeysSet.ConstantsVersionBase = startConstantKey;
-            eventKeysSet.ConstantsVersionNumber = 0;
+            constantsSet.ConstantsVersionBase.Value = startConstantKey;
+            constantsSet.ConstantsVersionBase.LifeTime = constantsSet.PrefixDataServer.LifeTime;
+
+            constantsSet.ConstantsVersionNumber.Value = 0;
 
             // записываем константы в стартовый ключ и старое поле (для совместимости)
-            await _cache.SetStartConstants(startConstantKey, constantsStartLegacyField, eventKeysSet);
+            await _cache.SetStartConstants(startConstantKey, constantsStartLegacyField, constantsSet);
 
             //сервер констант имеет свой гуид и это ключ обновляемых констант
             //его он пишет в поле для нового гуид-ключа для всех
@@ -102,16 +103,18 @@ namespace ConstantData
             //string constantsStartGuidKey = Guid.NewGuid().ToString();
             await _cache.SetConstantsStartGuidKey(startConstantKey, constantsStartGuidField, dataServerPrefixGuid); //string startConstantKey, string startConstantField, string constantsStartGuidKey
 
-            eventKeysSet.ConstantsVersionBase = dataServerPrefixGuid;
-            eventKeysSet.ConstantsVersionNumber++;
+            constantsSet.ConstantsVersionBase.Value = dataServerPrefixGuid;
+            constantsSet.ConstantsVersionNumber.Value++;
 
             // записываем константы в новый гуид-ключ и новое поле (надо какое-то всем известное поле)
             // потом может быть будет поле-версия, а может будет меняться ключ
-            await _cache.SetStartConstants(dataServerPrefixGuid, constantsStartGuidField, eventKeysSet);
+
+            // передавать переменную класса с временем жизни вместо строки
+            await _cache.SetStartConstants(dataServerPrefixGuid, constantsStartGuidField, constantsSet);
 
             // подписываемся на ключ сообщения о необходимости обновления констант
 
-            _subscribe.SubscribeOnEventUpdate(eventKeysSet, constantsStartGuidField, _cancellationToken);
+            _subscribe.SubscribeOnEventUpdate(constantsSet, constantsStartGuidField, _cancellationToken);
 
             // можно загрузить константы обратно и проверить
             // а можно подписаться на ключ и следить, чтобы никто не лез в константы
@@ -120,6 +123,8 @@ namespace ConstantData
 
             //_subscribe.SubscribeOnEventFrom(eventKeysSet);
 
+            Logs.Here().Information("SettingConstants ConstantsVersionBase = {0}.", constantsSet.ConstantsVersionBase.Value);
+            Logs.Here().Information("SettingConstants ConstantsVersionNumber = {0}.", constantsSet.ConstantsVersionNumber.Value);
 
 
 
