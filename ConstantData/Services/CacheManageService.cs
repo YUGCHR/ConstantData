@@ -28,7 +28,7 @@ namespace ConstantData.Services
             _cache = cache;
         }
 
-        private static Serilog.ILogger Logs => Serilog.Log.ForContext<ConstantsCollectionService>();
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<CacheManageService>();
 
         public async Task SetStartConstants(KeyType keyTime, string field, ConstantsSet constantsSet)
         {
@@ -42,11 +42,11 @@ namespace ConstantData.Services
             await _cache.SetHashedAsync<ConstantsSet>(keyTime.Value, field, constantsSet, SetLifeTimeFromKey(keyTime));
             Logs.Here().Information("SetStartConstants set constants (EventKeyFrom for example = {0}) in key {1}.", constantsSet.EventKeyFrom.Value, keyTime.Value);
         }
-        
+
         public async Task SetConstantsStartGuidKey(KeyType keyTime, string field, string constantsStartGuidKey)
         {
             await _cache.SetHashedAsync<string>(keyTime.Value, field, constantsStartGuidKey, SetLifeTimeFromKey(keyTime));
-            Logs.Here().Information("SetStartConstants set  Guid key {0}.", keyTime.Value);
+            Logs.Here().Information("SetStartConstants set {@G}.", new { GuidKey = keyTime.Value });
         }
 
         private TimeSpan SetLifeTimeFromKey(KeyType time)

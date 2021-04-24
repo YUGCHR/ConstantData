@@ -31,7 +31,7 @@ namespace ConstantData.Services
 
         private bool _flagToBlockEventUpdate;
 
-        // подписываемся на ключ сообщения о появлении свободных задач
+        // подписываемся на ключ сообщения о появлении обновления констант
         public void SubscribeOnEventUpdate(ConstantsSet constantsSet, string constantsStartGuidField, CancellationToken stoppingToken)
         {
             string eventKeyUpdateConstants = constantsSet.EventKeyUpdateConstants.Value;
@@ -46,7 +46,6 @@ namespace ConstantData.Services
                 if (cmd == constantsSet.EventCmd && _flagToBlockEventUpdate)
                 {
                     _flagToBlockEventUpdate = false;
-                    //Logs.Here().Debug("CheckKeyUpdateConstants will be called No:{0}, Event permit = {Flag} \n {@K} with {@C} was received. \n", _callingNumOfCheckKeyFrontGivesTask, _flagToBlockEventRun, new { Key = eventKeyFrontGivesTask }, new { Command = cmd });
                     _ = CheckKeyUpdateConstants(constantsSet, constantsStartGuidField, stoppingToken);
                 }
             });
@@ -54,27 +53,28 @@ namespace ConstantData.Services
 
         private async Task CheckKeyUpdateConstants(ConstantsSet constantsSet, string constantsStartGuidField, CancellationToken stoppingToken) // Main of EventKeyFrontGivesTask key
         {
+            // проверять, что константы может обновлять только админ
+
             string eventKeyUpdateConstants = constantsSet.EventKeyUpdateConstants.Value;
 
             int updatedConstant01 = await _cache.FetchUpdatedConstant<int, int>(eventKeyUpdateConstants, 1);
             constantsSet.TaskEmulatorDelayTimeInMilliseconds.Value = updatedConstant01;
             Logs.Here().Information("Constant update fetched and set = {0}.", updatedConstant01);
 
-            Logs.Here().Information("Updated constant set on key {0}, time {1}.", constantsSet.ConstantsVersionBase.Value, constantsSet.ConstantsVersionBase.LifeTime);
-
-            // обновлять версию констант при записи в ключ гуид - внутри SetStartConstants
+            // версия констант обновится внутри SetStartConstants
             await _cache.SetStartConstants(constantsSet.ConstantsVersionBase, constantsStartGuidField, constantsSet);
 
-            double timeToWaitTheConstants = 1;
+            // задержка, определяющая максимальную частоту обновления констант
+            double timeToWaitTheConstants = constantsSet.EventKeyUpdateConstants.LifeTime;
             try
             {
-                await Task.Delay(TimeSpan.FromSeconds(timeToWaitTheConstants), stoppingToken);
+                await Task.Delay(TimeSpan.FromMilliseconds(timeToWaitTheConstants), stoppingToken);
             }
             catch (OperationCanceledException)
             {
                 // Prevent throwing if the Delay is cancelled
             }
-
+            // перед завершением обработчика разрешаем события подписки на обновления
             _flagToBlockEventUpdate = true;
         }
     }

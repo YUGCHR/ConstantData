@@ -443,3 +443,244 @@
 [22:01:20 INF (26) ConstantData.Services.ConstantsCollectionService.SetStartConstants - 43] 
  SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:8bd57984-26a9-4cb6-ab96-c55fa62634b9". 
  
+[22:13:46 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[22:13:46 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[22:13:46 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 66] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0.999. 
+ 
+[22:13:47 INF (17) ConstantData.Services.ConstantsCollectionService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constants". 
+ 
+[22:13:47 INF (17) ConstantData.MonitorLoop.ConstantsMountingMonitor - 80] 
+ ConstantData sent constants to { Key: "constants" } / { Field: "all" }. 
+ 
+[22:13:47 INF (19) ConstantData.Services.ConstantsCollectionService.SetConstantsStartGuidKey - 49] 
+ SetStartConstants set  Guid key "constants". 
+ 
+[22:13:47 INF (19) ConstantData.Services.ConstantsCollectionService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 1. 
+ 
+[22:13:47 INF (4) ConstantData.Services.ConstantsCollectionService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:b0a2ca80-539d-4a66-9d50-257a5e38fd73". 
+ 
+[22:13:47 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 111] 
+ ConstantData sent constants to { Key: "constant:data:b0a2ca80-539d-4a66-9d50-257a5e38fd73" } / { Field: "constantsGuidField" }. 
+ 
+[22:13:47 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: "update" } 
+ 
+[22:13:47 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:b0a2ca80-539d-4a66-9d50-257a5e38fd73":1. 
+ 
+[22:13:47 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 115] 
+ SettingConstants ConstantsVersionBase = "constant:data:b0a2ca80-539d-4a66-9d50-257a5e38fd73", ConstantsVersionNumber = 1. 
+ 
+[22:16:43 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[22:16:44 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[22:16:44 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 66] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0.999. 
+ 
+[22:16:44 INF (4) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constants". 
+ 
+[22:16:44 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 80] 
+ ConstantData sent constants to { Key: "constants" } / { Field: "all" }. 
+ 
+[22:16:44 INF (17) ConstantData.Services.CacheManageService.SetConstantsStartGuidKey - 49] 
+ SetStartConstants set  Guid key "constants". 
+ 
+[22:16:44 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 1. 
+ 
+[22:16:44 INF (4) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:49d363f1-e73b-4ad1-8c6d-db992db0082d". 
+ 
+[22:16:44 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 111] 
+ ConstantData sent constants to { Key: "constant:data:49d363f1-e73b-4ad1-8c6d-db992db0082d" } / { Field: "constantsGuidField" }. 
+ 
+[22:16:44 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: "update" } 
+ 
+[22:16:44 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:49d363f1-e73b-4ad1-8c6d-db992db0082d":1. 
+ 
+[22:16:44 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 115] 
+ SettingConstants ConstantsVersionBase = "constant:data:49d363f1-e73b-4ad1-8c6d-db992db0082d", ConstantsVersionNumber = 1. 
+ 
+[22:18:39 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[22:18:39 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 54] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[22:18:39 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 66] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0.999. 
+ 
+[22:18:39 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constants". 
+ 
+[22:18:39 INF (19) ConstantData.MonitorLoop.ConstantsMountingMonitor - 80] 
+ ConstantData sent constants to { Key: "constants" } / { Field: "all" }. 
+ 
+[22:18:39 INF (17) ConstantData.Services.CacheManageService.SetConstantsStartGuidKey - 49] 
+ SetStartConstants set { GuidKey: "constants" }. 
+ 
+[22:18:39 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 1. 
+ 
+[22:18:39 INF (4) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:9ac705f9-7dcf-46b3-953c-300cbf1b9a8b". 
+ 
+[22:18:39 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 111] 
+ ConstantData sent constants to { Key: "constant:data:9ac705f9-7dcf-46b3-953c-300cbf1b9a8b" } / { Field: "constantsGuidField" }. 
+ 
+[22:18:39 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: "update" } 
+ 
+[22:18:39 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:9ac705f9-7dcf-46b3-953c-300cbf1b9a8b":1. 
+ 
+[22:18:39 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 115] 
+ SettingConstants ConstantsVersionBase = "constant:data:9ac705f9-7dcf-46b3-953c-300cbf1b9a8b", ConstantsVersionNumber = 1. 
+ 
+[22:19:24 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 61] 
+ Constant update fetched and set = 500. 
+ 
+[22:19:24 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 63] 
+ Updated constant set on key "constant:data:9ac705f9-7dcf-46b3-953c-300cbf1b9a8b", time 0.999. 
+ 
+[22:19:24 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 2. 
+ 
+[22:19:24 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:9ac705f9-7dcf-46b3-953c-300cbf1b9a8b". 
+ 
+[22:20:36 INF (25) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 61] 
+ Constant update fetched and set = 300. 
+ 
+[22:20:36 INF (25) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 63] 
+ Updated constant set on key "constant:data:9ac705f9-7dcf-46b3-953c-300cbf1b9a8b", time 0.999. 
+ 
+[22:20:36 INF (25) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 3. 
+ 
+[22:20:36 INF (25) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:9ac705f9-7dcf-46b3-953c-300cbf1b9a8b". 
+ 
+[22:25:10 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[22:25:10 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 40] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[22:25:10 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 48] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0.999. 
+ 
+[22:25:10 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constants". 
+ 
+[22:25:10 INF (19) ConstantData.MonitorLoop.ConstantsMountingMonitor - 61] 
+ ConstantData sent constants to { Key: "constants" } / { Field: "all" }. 
+ 
+[22:25:10 INF (19) ConstantData.Services.CacheManageService.SetConstantsStartGuidKey - 49] 
+ SetStartConstants set { GuidKey: "constants" }. 
+ 
+[22:25:10 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 1. 
+ 
+[22:25:10 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:7ac4cd42-c33b-447e-a9bd-4504f53e09e0". 
+ 
+[22:25:10 INF (19) ConstantData.MonitorLoop.ConstantsMountingMonitor - 91] 
+ ConstantData sent constants to { Key: "constant:data:7ac4cd42-c33b-447e-a9bd-4504f53e09e0" } / { Field: "constantsGuidField" }. 
+ 
+[22:25:10 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: "update" } 
+ 
+[22:25:10 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:7ac4cd42-c33b-447e-a9bd-4504f53e09e0":1. 
+ 
+[22:25:10 DBG (19) ConstantData.MonitorLoop.ConstantsMountingMonitor - 95] 
+ SettingConstants ConstantsVersionBase = "constant:data:7ac4cd42-c33b-447e-a9bd-4504f53e09e0", ConstantsVersionNumber = 1. 
+ 
+[23:20:06 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[23:20:06 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 40] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[23:20:06 DBG (19) ConstantData.MonitorLoop.ConstantsMountingMonitor - 48] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0.999. 
+ 
+[23:20:06 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constants". 
+ 
+[23:20:06 INF (19) ConstantData.MonitorLoop.ConstantsMountingMonitor - 60] 
+ ConstantData sent constants to { Key: "constants" } / { Field: "all" }. 
+ 
+[23:20:06 INF (19) ConstantData.Services.CacheManageService.SetConstantsStartGuidKey - 49] 
+ SetStartConstants set { GuidKey: "constants" }. 
+ 
+[23:20:06 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 1. 
+ 
+[23:20:06 INF (4) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:ebb761a8-7de8-43e6-a15c-491e46da4c8d". 
+ 
+[23:20:06 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 90] 
+ ConstantData sent constants to { Key: "constant:data:ebb761a8-7de8-43e6-a15c-491e46da4c8d" } / { Field: "constantsGuidField" }. 
+ 
+[23:20:06 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 39] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: "update" } 
+ 
+[23:20:06 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 40] 
+ Constants version is "constant:data:ebb761a8-7de8-43e6-a15c-491e46da4c8d":1. 
+ 
+[23:20:06 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 94] 
+ SettingConstants ConstantsVersionBase = "constant:data:ebb761a8-7de8-43e6-a15c-491e46da4c8d", ConstantsVersionNumber = 1. 
+ 
+[23:20:24 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 62] 
+ Constant update fetched and set = 300. 
+ 
+[23:20:24 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 2. 
+ 
+[23:20:24 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:ebb761a8-7de8-43e6-a15c-491e46da4c8d". 
+ 
+[23:20:25 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 62] 
+ Constant update fetched and set = 300. 
+ 
+[23:20:25 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 3. 
+ 
+[23:20:25 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:ebb761a8-7de8-43e6-a15c-491e46da4c8d". 
+ 
+[23:20:27 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 62] 
+ Constant update fetched and set = 300. 
+ 
+[23:20:27 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 39] 
+ ConstantsVersionNumber was incremented and become 4. 
+ 
+[23:20:27 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 43] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:ebb761a8-7de8-43e6-a15c-491e46da4c8d". 
+ 
