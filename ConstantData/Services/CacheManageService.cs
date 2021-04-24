@@ -13,45 +13,45 @@ namespace ConstantData.Services
 {
     public interface ICacheManageService
     {
-        public Task SetStartConstants(string startConstantKey, string startConstantField, ConstantsSet constantsSet);
-        public Task SetConstantsStartGuidKey(string startConstantKey, string startConstantField, string constantsStartGuidKey);
+        public Task SetStartConstants(KeyType startConstantKey, string startConstantField, ConstantsSet constantsSet);
+        public Task SetConstantsStartGuidKey(KeyType startConstantKey, string startConstantField, string constantsStartGuidKey);
         public Task<TV> FetchUpdatedConstant<TK, TV>(string key, TK field);
         public Task<bool> DeleteKeyIfCancelled(string startConstantKey);
     }
 
     public class CacheManageService : ICacheManageService
     {
-        private readonly ILogger<CacheManageService> _logger;
         private readonly ICacheProviderAsync _cache;
-        private readonly IKeyEventsProvider _keyEvents;
 
-        public CacheManageService(
-            ILogger<CacheManageService> logger,
-            ICacheProviderAsync cache,
-            IKeyEventsProvider keyEvents)
+        public CacheManageService(ICacheProviderAsync cache)
         {
-            _logger = logger;
             _cache = cache;
-            _keyEvents = keyEvents;
         }
 
-        private readonly TimeSpan _startConstantKeyLifeTime = TimeSpan.FromDays(1);
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<ConstantsCollectionService>();
 
-        public async Task SetStartConstants(string startConstantKey, string startConstantField, ConstantsSet constantsSet)
+        public async Task SetStartConstants(KeyType keyTime, string field, ConstantsSet constantsSet)
         {
-            // установить своё время для ключа, можно вместе с названием ключа
-            var keyLifeTime = TimeSpan.FromDays(constantsSet.PrefixDataServer.LifeTime);
-            await _cache.SetHashedAsync<ConstantsSet>(startConstantKey, startConstantField, constantsSet, keyLifeTime);
+            if (field == constantsSet.ConstantsVersionBaseField.Value)
+            {
+                // обновлять версию констант при записи в ключ гуид
+                constantsSet.ConstantsVersionNumber.Value++;
+                Logs.Here().Information("ConstantsVersionNumber was incremented and become {0}.", constantsSet.ConstantsVersionNumber.Value);
+            }
 
-            _logger.LogInformation(55050, "SetStartConstants set constants (EventKeyFrom for example = {0}) in key {1}.", constantsSet.EventKeyFrom.Value, startConstantKey);
+            await _cache.SetHashedAsync<ConstantsSet>(keyTime.Value, field, constantsSet, SetLifeTimeFromKey(keyTime));
+            Logs.Here().Information("SetStartConstants set constants (EventKeyFrom for example = {0}) in key {1}.", constantsSet.EventKeyFrom.Value, keyTime.Value);
         }
         
-        public async Task SetConstantsStartGuidKey(string startConstantKey, string startConstantField, string constantsStartGuidKey)
+        public async Task SetConstantsStartGuidKey(KeyType keyTime, string field, string constantsStartGuidKey)
         {
-            // установить своё время для ключа, можно вместе с названием ключа
-            await _cache.SetHashedAsync<string>(startConstantKey, startConstantField, constantsStartGuidKey, _startConstantKeyLifeTime);
+            await _cache.SetHashedAsync<string>(keyTime.Value, field, constantsStartGuidKey, SetLifeTimeFromKey(keyTime));
+            Logs.Here().Information("SetStartConstants set  Guid key {0}.", keyTime.Value);
+        }
 
-            _logger.LogInformation(55050, "SetStartConstants set constants Guid key {0}.", constantsStartGuidKey);
+        private TimeSpan SetLifeTimeFromKey(KeyType time)
+        {
+            return TimeSpan.FromDays(time.LifeTime);
         }
 
         public async Task<TV> FetchUpdatedConstant<TK, TV>(string key, TK field)

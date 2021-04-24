@@ -14,7 +14,11 @@ namespace Shared.Library.Models
         {
             EventCmd = KeyEvent.HashSet;
             ConstantsVersionBase = new KeyType();
-            ConstantsVersionNumber = new ConstantType();
+            ConstantsVersionBaseField = new KeyType();
+            ConstantsVersionNumber = new ConstantType
+            {
+                Value = 0
+            };
             BackServerGuid = new KeyType();
             BackServerPrefixGuid = new KeyType();
         }
@@ -51,6 +55,7 @@ namespace Shared.Library.Models
 
         public KeyEvent EventCmd { get; init; } 
         public KeyType ConstantsVersionBase { get; set; }
+        public KeyType ConstantsVersionBaseField { get; set; }
         public ConstantType ConstantsVersionNumber { get; set; }
         public KeyType BackServerGuid { get; set; }
         public KeyType BackServerPrefixGuid { get; set; }

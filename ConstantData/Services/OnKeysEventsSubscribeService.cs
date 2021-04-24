@@ -57,13 +57,13 @@ namespace ConstantData.Services
             string eventKeyUpdateConstants = constantsSet.EventKeyUpdateConstants.Value;
 
             int updatedConstant01 = await _cache.FetchUpdatedConstant<int, int>(eventKeyUpdateConstants, 1);
-            constantsSet.TaskEmulatorDelayTimeInMilliseconds.LifeTime = updatedConstant01;
+            constantsSet.TaskEmulatorDelayTimeInMilliseconds.Value = updatedConstant01;
             Logs.Here().Information("Constant update fetched and set = {0}.", updatedConstant01);
 
-            string startConstantKey = constantsSet.ConstantsVersionBase.Value;
-            Logs.Here().Information("Updated constant set on key {0}.", startConstantKey);
+            Logs.Here().Information("Updated constant set on key {0}, time {1}.", constantsSet.ConstantsVersionBase.Value, constantsSet.ConstantsVersionBase.LifeTime);
 
-            await _cache.SetStartConstants(startConstantKey, constantsStartGuidField, constantsSet);
+            // обновлять версию констант при записи в ключ гуид - внутри SetStartConstants
+            await _cache.SetStartConstants(constantsSet.ConstantsVersionBase, constantsStartGuidField, constantsSet);
 
             double timeToWaitTheConstants = 1;
             try

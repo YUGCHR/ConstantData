@@ -67,6 +67,7 @@ namespace ConstantData
             //EventKeyNames eventKeysSet = _init.InitialiseEventKeyNames();
 
             string dataServerPrefixGuid = $"{constantsSet.PrefixDataServer.Value}:{_guid}";
+            double baseLifeTime = constantsSet.PrefixDataServer.LifeTime;
 
             Logs.Here().Information("ConstantCheck EventKeyFrontGivesTaskTimeDays = {0}.", constantsSet.EventKeyFrontGivesTask.LifeTime);
 
@@ -75,12 +76,12 @@ namespace ConstantData
             Logs.Here().Information("ConstantData send constants to SetStartConstants.");
 
             constantsSet.ConstantsVersionBase.Value = startConstantKey;
-            constantsSet.ConstantsVersionBase.LifeTime = constantsSet.PrefixDataServer.LifeTime;
-
-            constantsSet.ConstantsVersionNumber.Value = 0;
+            constantsSet.ConstantsVersionBase.LifeTime = baseLifeTime;
+            constantsSet.ConstantsVersionBaseField.Value = constantsStartGuidField;
+            
 
             // записываем константы в стартовый ключ и старое поле (для совместимости)
-            await _cache.SetStartConstants(startConstantKey, constantsStartLegacyField, constantsSet);
+            await _cache.SetStartConstants(constantsSet.ConstantsVersionBase, constantsStartLegacyField, constantsSet);
 
             //сервер констант имеет свой гуид и это ключ обновляемых констант
             //его он пишет в поле для нового гуид-ключа для всех
@@ -101,16 +102,16 @@ namespace ConstantData
 
             // записываем в стартовый ключ и новое поле гуид-ключ обновляемых констант
             //string constantsStartGuidKey = Guid.NewGuid().ToString();
-            await _cache.SetConstantsStartGuidKey(startConstantKey, constantsStartGuidField, dataServerPrefixGuid); //string startConstantKey, string startConstantField, string constantsStartGuidKey
+            await _cache.SetConstantsStartGuidKey(constantsSet.ConstantsVersionBase, constantsStartGuidField, dataServerPrefixGuid); //string startConstantKey, string startConstantField, string constantsStartGuidKey
 
             constantsSet.ConstantsVersionBase.Value = dataServerPrefixGuid;
-            constantsSet.ConstantsVersionNumber.Value++;
-
+            //constantsSet.ConstantsVersionBase.LifeTime = baseLifeTime;
+            
             // записываем константы в новый гуид-ключ и новое поле (надо какое-то всем известное поле)
             // потом может быть будет поле-версия, а может будет меняться ключ
 
             // передавать переменную класса с временем жизни вместо строки
-            await _cache.SetStartConstants(dataServerPrefixGuid, constantsStartGuidField, constantsSet);
+            await _cache.SetStartConstants(constantsSet.ConstantsVersionBase, constantsStartGuidField, constantsSet);
 
             // подписываемся на ключ сообщения о необходимости обновления констант
 
