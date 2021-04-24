@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CachingFramework.Redis.Contracts;
 
 namespace Shared.Library.Models
 {
     // former EventKeyNames
     public class ConstantsSet
     {
+        public ConstantsSet()
+        {
+            EventCmd = KeyEvent.HashSet;
+        }
+
         // ConstantsList
         public ConstantType RecordActualityLevel { get; set; }
         public ConstantType TaskEmulatorDelayTimeInMilliseconds { get; set; }
@@ -28,6 +34,7 @@ namespace Shared.Library.Models
         public KeyType PrefixPackageControl { get; init; }
         public KeyType PrefixPackageCompleted { get; init; }
         public KeyType PrefixTask { get; init; }
+        public KeyType PrefixDataServer { get; init; }
         public KeyType PrefixBackServer { get; init; }
         public KeyType PrefixProcessAdd { get; init; }
         public KeyType PrefixProcessCancel { get; init; }
@@ -37,6 +44,12 @@ namespace Shared.Library.Models
         public KeyType EventFieldFront { get; init; }
 
         // LaterAssigned
+
+        public KeyEvent EventCmd { get; init; } 
+        public KeyType ConstantsVersionBase { get; set; }
+        public KeyType ConstantsVersionNumber { get; set; }
+        public KeyType BackServerGuid { get; set; }
+        public KeyType BackServerPrefixGuid { get; set; }
     }
 
     public class ConstantType

@@ -11,6 +11,7 @@ namespace ConstantData.Services
 {
     public interface IInitConstantsService
     {
+        public ConstantsSet InitialiseConstantsSet();
         public EventKeyNames InitialiseEventKeyNames();
         
     } 
@@ -30,7 +31,14 @@ namespace ConstantData.Services
         }
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<ConstantsCollectionService>();
-        
+
+        public ConstantsSet InitialiseConstantsSet()
+        {
+            ConstantsSet constantsSet = _collection.SettingConstants;
+
+            return constantsSet;
+        }
+
         public EventKeyNames InitialiseEventKeyNames()
         {
             //string blank15 = _constantService.Blank15; // for testing

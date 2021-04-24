@@ -62,7 +62,7 @@ namespace ConstantData
         {
             DictionaryTest();
 
-            //ConstantsSet constantsSet = _init.InitialiseConstantsSet();
+            ConstantsSet constantsSet = _collection.SettingConstants;
 
             EventKeyNames eventKeysSet = _init.InitialiseEventKeyNames();
 
@@ -156,6 +156,8 @@ namespace ConstantData
             Logs.Here().Information("SettingConstants TaskEmulatorDelayTimeInMilliseconds = {0}.", _collection.SettingConstants.TaskEmulatorDelayTimeInMilliseconds.Value);
             Logs.Here().Information("SettingConstants EventKeyFrontGivesTask Value = {0}.", _collection.SettingConstants.EventKeyFrontGivesTask.Value);
             Logs.Here().Information("SettingConstants EventKeyFrontGivesTask LifeTime = {0}.", _collection.SettingConstants.EventKeyFrontGivesTask.LifeTime);
+            Logs.Here().Information("SettingConstants PrefixDataServer Value = {0}.", _collection.SettingConstants.PrefixDataServer.Value);
+            Logs.Here().Information("SettingConstants EventCmd = {0}.", _collection.SettingConstants.EventCmd);
 
         }
     }
