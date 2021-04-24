@@ -10,12 +10,12 @@ namespace Shared.Library.Models
     public class ConstantsSet
     {
         // ConstantsList
-        public ConstantType RecordActualityLevel { get; init; }
-        public ConstantType TaskEmulatorDelayTimeInMilliseconds { get; init; }
-        public ConstantType RandomRangeExtended { get; init; }
-        public ConstantType BalanceOfTasksAndProcesses { get; init; }
-        public ConstantType MaxProcessesCountOnServer { get; init; }
-        public ConstantType MinBackProcessesServersCount { get; init; }
+        public ConstantType RecordActualityLevel { get; set; }
+        public ConstantType TaskEmulatorDelayTimeInMilliseconds { get; set; }
+        public ConstantType RandomRangeExtended { get; set; }
+        public ConstantType BalanceOfTasksAndProcesses { get; set; }
+        public ConstantType MaxProcessesCountOnServer { get; set; }
+        public ConstantType MinBackProcessesServersCount { get; set; }
 
         // KeysList
         public KeyType EventKeyFrom { get; init; }
@@ -41,15 +41,15 @@ namespace Shared.Library.Models
 
     public class ConstantType
     {
-        public string Description { get; init; }
-        public int Value { get; init; }
-        public double LifeTime { get; init; }
+        public string Description { get; set; }
+        public int Value { get; set; }
+        public double LifeTime { get; set; }
     }
 
     public class KeyType
     {
-        public string Description { get; init; }
-        public string Value { get; init; }
-        public double LifeTime { get; init; }
+        public string Description { get; set; }
+        public string Value { get; set; }
+        public double LifeTime { get; set; }
     }
 }

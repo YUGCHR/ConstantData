@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
 using Shared.Library.Models;
 
 namespace ConstantData.Services
@@ -20,16 +12,10 @@ namespace ConstantData.Services
     {
         public ConstantsCollectionService(IConfiguration configuration)
         {
-            Configuration = configuration;
-
             SettingConstants = new ConstantsSet();
 
-            Configuration.GetSection("SettingConstants").Bind(SettingConstants);
+            configuration.GetSection("SettingConstants").Bind(SettingConstants);
         }
-
-        private static Serilog.ILogger Logs => Serilog.Log.ForContext<ConstantsCollectionService>();
-
-        private IConfiguration Configuration { get; }
         
         public ConstantsSet SettingConstants { get; set; }
     }
