@@ -302,3 +302,99 @@
 [20:39:42 INF (25) ConstantData.Services.CacheManageService.SetStartConstants - 40] 
  SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:99ba49aa-5289-4727-9922-be684f071043". 
  
+[22:16:12 INF (1) ConstantData.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[22:16:13 INF (1) ConstantData.MonitorLoop.StartMonitorLoop - 40] 
+ ConstantsMountingMonitor Loop is starting. 
+ 
+[22:16:13 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 48] 
+ ConstantCheck EventKeyFrontGivesTaskTimeDays = 0.999. 
+ 
+[22:16:13 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 40] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constants". 
+ 
+[22:16:13 INF (19) ConstantData.MonitorLoop.ConstantsMountingMonitor - 60] 
+ ConstantData sent constants to { Key: "constants" } / { Field: "all" }. 
+ 
+[22:16:13 INF (17) ConstantData.Services.CacheManageService.SetConstantsStartGuidKey - 47] 
+ SetStartConstants set { GuidKey: "constants" } 
+ "constant:data:0d9f6bb0-a963-45b4-adc8-096c1654d0f1" --- "constant:data:0d9f6bb0-a963-45b4-adc8-096c1654d0f1". 
+ 
+[22:16:13 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 36] 
+ ConstantsVersionNumber was incremented and become 1. 
+ 
+[22:16:13 INF (4) ConstantData.Services.CacheManageService.SetStartConstants - 40] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:0d9f6bb0-a963-45b4-adc8-096c1654d0f1". 
+ 
+[22:16:13 INF (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 90] 
+ ConstantData sent constants to { Key: "constant:data:0d9f6bb0-a963-45b4-adc8-096c1654d0f1" } / { Field: "constantsGuidField" }. 
+ 
+[22:16:13 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 37] 
+ ConstantsData subscribed on EventKey. 
+ { EventKey: "update" } 
+ 
+[22:16:13 INF (4) ConstantData.Services.OnKeysEventsSubscribeService.SubscribeOnEventUpdate - 38] 
+ Constants version is "constant:data:0d9f6bb0-a963-45b4-adc8-096c1654d0f1":1. 
+ 
+[22:16:13 DBG (4) ConstantData.MonitorLoop.ConstantsMountingMonitor - 94] 
+ SettingConstants ConstantsVersionBase = "constant:data:0d9f6bb0-a963-45b4-adc8-096c1654d0f1", ConstantsVersionNumber = 1. 
+ 
+[22:17:10 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 57] 
+ CheckKeyUpdateConstants started with key "update". 
+ 
+[22:17:10 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 61] 
+ Fetched updated constants count = 5. 
+ 
+[22:17:10 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 111] 
+ Key = "BalanceOfTasksAndProcesses", BalanceOfTasksAndProcesses was updated with value = 3. 
+ 
+[22:17:10 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 103] 
+ Key = "TaskEmulatorDelayTimeInMilliseconds", TaskEmulatorDelayTimeInMilliseconds was updated with value = 700. 
+ 
+[22:17:10 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 99] 
+ Key = "RecordActualityLevel", RecordActualityLevel was updated with value = 7. 
+ 
+[22:17:10 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 119] 
+ Key = "MinBackProcessesServersCount", MinBackProcessesServersCount was updated with value = 4. 
+ 
+[22:17:10 INF (17) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 115] 
+ Key = "MaxProcessesCountOnServer", MaxProcessesCountOnServer was updated with value = 5. 
+ 
+[22:17:10 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 36] 
+ ConstantsVersionNumber was incremented and become 2. 
+ 
+[22:17:10 INF (17) ConstantData.Services.CacheManageService.SetStartConstants - 40] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:0d9f6bb0-a963-45b4-adc8-096c1654d0f1". 
+ 
+[22:17:59 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 57] 
+ CheckKeyUpdateConstants started with key "update". 
+ 
+[22:17:59 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.CheckKeyUpdateConstants - 61] 
+ Fetched updated constants count = 6. 
+ 
+[22:17:59 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 111] 
+ Key = "BalanceOfTasksAndProcesses", BalanceOfTasksAndProcesses was updated with value = 3. 
+ 
+[22:17:59 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 103] 
+ Key = "TaskEmulatorDelayTimeInMilliseconds", TaskEmulatorDelayTimeInMilliseconds was updated with value = 700. 
+ 
+[22:17:59 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 99] 
+ Key = "RecordActualityLevel", RecordActualityLevel was updated with value = 7. 
+ 
+[22:17:59 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 119] 
+ Key = "MinBackProcessesServersCount", MinBackProcessesServersCount was updated with value = 4. 
+ 
+[22:17:59 INF (19) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 115] 
+ Key = "MaxProcessesCountOnServer", MaxProcessesCountOnServer was updated with value = 5. 
+ 
+[22:17:59 ERR (19) ConstantData.Services.OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty - 127] 
+ Constant { Key: "MaxProcessesCountOnServe" } will be left unchanged 
+ 
+[22:17:59 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 36] 
+ ConstantsVersionNumber was incremented and become 3. 
+ 
+[22:17:59 INF (19) ConstantData.Services.CacheManageService.SetStartConstants - 40] 
+ SetStartConstants set constants (EventKeyFrom for example = "subscribeOnFrom") in key "constant:data:0d9f6bb0-a963-45b4-adc8-096c1654d0f1". 
+ 

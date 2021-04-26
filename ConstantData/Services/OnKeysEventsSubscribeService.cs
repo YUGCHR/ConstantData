@@ -65,9 +65,7 @@ namespace ConstantData.Services
             foreach (KeyValuePair<string, int> updatedConstant in updatedConstants)
             {
                 var (key, value) = updatedConstant;
-                constantsSet = UpdatedValueAssignsToProperty(constantsSet, key, value) ?? constantsSet;
-                // можно добавить сообщение, что модифицировать константу не удалось
-                // но можно внутри свича сообщить
+                constantsSet = UpdatedValueAssignsToProperty(constantsSet, key, value);// ?? constantsSet;
             }
 
             // версия констант обновится внутри SetStartConstants
@@ -87,8 +85,16 @@ namespace ConstantData.Services
             _flagToBlockEventUpdate = true;
         }
 
-        public ConstantsSet UpdatedValueAssignsToProperty(ConstantsSet constantsSet, string key, int value)
+        public static ConstantsSet UpdatedValueAssignsToProperty(ConstantsSet constantsSet, string key, int value)
         {
+            //constantsSet.GetType().GetProperty(key)?.SetValue(constantsSet, value);
+
+            //Logs.Here().Information("{0} was updated with value = {1}.", constantsSet.GetType().GetProperty(key)?.GetValue(constantsSet, null), value);
+
+            // можно проверять предыдущее значение и, если новое такое же, не обновлять
+            // но тогда надо проверять весь пакет и только если все не изменились, то не переписывать ключ
+            // может быть когда-нибудь потом
+
             switch (key)
             {
                 case "RecordActualityLevel":
@@ -116,8 +122,14 @@ namespace ConstantData.Services
                     Logs.Here().Information("Key = {0}, MinBackProcessesServersCount was updated with value = {1}.", key, value);
                     return constantsSet;
             }
+
+            // удалять поле, с которого считано обновление
+
             // можно добавить сообщение, что модифицировать константу не удалось
-            return null;
+            // ещё можно показать значения - бывшее и которое хотели обновить
+            Logs.Here().Error("Constant {@K} will be left unchanged", new{Key = key});
+
+            return constantsSet;
         }
     }
 }
