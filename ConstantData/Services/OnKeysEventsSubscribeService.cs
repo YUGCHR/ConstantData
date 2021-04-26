@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Reflection;
 using CachingFramework.Redis.Contracts;
 using CachingFramework.Redis.Contracts.Providers;
 using Shared.Library.Models;
@@ -87,47 +88,74 @@ namespace ConstantData.Services
 
         public static ConstantsSet UpdatedValueAssignsToProperty(ConstantsSet constantsSet, string key, int value)
         {
-            //constantsSet.GetType().GetProperty(key)?.SetValue(constantsSet, value);
+            Logs.Here().Information("constantsSet.{0} will be updated with value = {1}.", key, value);
 
-            //Logs.Here().Information("{0} was updated with value = {1}.", constantsSet.GetType().GetProperty(key)?.GetValue(constantsSet, null), value);
+            ConstantType classValue = new()
+            {
+                Value = value
+            };
+
+            var class1Type = typeof(ConstantsSet);
+            var classTypeProperty = class1Type.GetProperty(key);
+            if (classTypeProperty == null)
+            {
+                return constantsSet;
+            }
+            classTypeProperty.SetValue(constantsSet, classValue);
+
+            var ttt = classTypeProperty.GetValue(constantsSet);
+            var class2Type = typeof(ConstantType);
+            var classTypeTypeProperty = class2Type.GetProperty("Value");
+            var ttttt = classTypeProperty.GetValue(ttt);
+
+            Logs.Here().Information("ttt {0} will.", ttttt);
+
+            // работающий вариант с Convert.ChangeType
+            //PropertyInfo propertyInfo = constantsSet.GetType().GetProperty(key);
+            //propertyInfo.SetValue(constantsSet, Convert.ChangeType(classValue, propertyInfo.PropertyType), null);
+
+            //var newClassValue = propertyInfo.PropertyType.GetType();
+            //
+
+            Logs.Here().Information("TaskEmulatorDelayTimeInMilliseconds value now = {0}.", constantsSet.TaskEmulatorDelayTimeInMilliseconds.Value);
 
             // можно проверять предыдущее значение и, если новое такое же, не обновлять
             // но тогда надо проверять весь пакет и только если все не изменились, то не переписывать ключ
             // может быть когда-нибудь потом
 
-            switch (key)
-            {
-                case "RecordActualityLevel":
-                    constantsSet.RecordActualityLevel.Value = value;
-                    Logs.Here().Information("Key = {0}, RecordActualityLevel was updated with value = {1}.", key, value);
-                    return constantsSet;
-                case "TaskEmulatorDelayTimeInMilliseconds":
-                    constantsSet.TaskEmulatorDelayTimeInMilliseconds.Value = value;
-                    Logs.Here().Information("Key = {0}, TaskEmulatorDelayTimeInMilliseconds was updated with value = {1}.", key, value);
-                    return constantsSet;
-                case "RandomRangeExtended":
-                    constantsSet.RandomRangeExtended.Value = value;
-                    Logs.Here().Information("Key = {0}, RandomRangeExtended was updated with value = {1}.", key, value);
-                    return constantsSet;
-                case "BalanceOfTasksAndProcesses":
-                    constantsSet.BalanceOfTasksAndProcesses.Value = value;
-                    Logs.Here().Information("Key = {0}, BalanceOfTasksAndProcesses was updated with value = {1}.", key, value);
-                    return constantsSet;
-                case "MaxProcessesCountOnServer":
-                    constantsSet.MaxProcessesCountOnServer.Value = value;
-                    Logs.Here().Information("Key = {0}, MaxProcessesCountOnServer was updated with value = {1}.", key, value);
-                    return constantsSet;
-                case "MinBackProcessesServersCount":
-                    constantsSet.MinBackProcessesServersCount.Value = value; //Convert.ToInt32(value);
-                    Logs.Here().Information("Key = {0}, MinBackProcessesServersCount was updated with value = {1}.", key, value);
-                    return constantsSet;
-            }
+            //switch (key)
+            //{
+            //    case "RecordActualityLevel":
+            //        constantsSet.RecordActualityLevel.Value = value;
+            //        Logs.Here().Information("Key = {0}, RecordActualityLevel was updated with value = {1}.", key, value);
+            //        return constantsSet;
+            //    case "TaskEmulatorDelayTimeInMilliseconds":
+            //        constantsSet.TaskEmulatorDelayTimeInMilliseconds.Value = value;
+            //        Logs.Here().Information("Key = {0}, TaskEmulatorDelayTimeInMilliseconds was updated with value = {1}.", key, value);
+            //        return constantsSet;
+            //    case "RandomRangeExtended":
+            //        constantsSet.RandomRangeExtended.Value = value;
+            //        Logs.Here().Information("Key = {0}, RandomRangeExtended was updated with value = {1}.", key, value);
+            //        return constantsSet;
+            //    case "BalanceOfTasksAndProcesses":
+            //        constantsSet.BalanceOfTasksAndProcesses.Value = value;
+            //        Logs.Here().Information("Key = {0}, BalanceOfTasksAndProcesses was updated with value = {1}.", key, value);
+            //        return constantsSet;
+            //    case "MaxProcessesCountOnServer":
+            //        constantsSet.MaxProcessesCountOnServer.Value = value;
+            //        Logs.Here().Information("Key = {0}, MaxProcessesCountOnServer was updated with value = {1}.", key, value);
+            //        return constantsSet;
+            //    case "MinBackProcessesServersCount":
+            //        constantsSet.MinBackProcessesServersCount.Value = value; //Convert.ToInt32(value);
+            //        Logs.Here().Information("Key = {0}, MinBackProcessesServersCount was updated with value = {1}.", key, value);
+            //        return constantsSet;
+            //}
 
             // удалять поле, с которого считано обновление
 
             // можно добавить сообщение, что модифицировать константу не удалось
             // ещё можно показать значения - бывшее и которое хотели обновить
-            Logs.Here().Error("Constant {@K} will be left unchanged", new{Key = key});
+            //Logs.Here().Error("Constant {@K} will be left unchanged", new { Key = key });
 
             return constantsSet;
         }
