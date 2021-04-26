@@ -1,13 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Shared.Library.Models;
-using Shared.Library.Services;
 using CachingFramework.Redis.Contracts.Providers;
-using Microsoft.Extensions.Logging;
 
 namespace ConstantData.Services
 {
@@ -16,6 +12,7 @@ namespace ConstantData.Services
         public Task SetStartConstants(KeyType startConstantKey, string startConstantField, ConstantsSet constantsSet);
         public Task SetConstantsStartGuidKey(KeyType startConstantKey, string startConstantField, string constantsStartGuidKey);
         public Task<TV> FetchUpdatedConstant<TK, TV>(string key, TK field);
+        public Task<IDictionary<TK, TV>> FetchUpdatedConstants<TK, TV>(string key);
         public Task<bool> DeleteKeyIfCancelled(string startConstantKey);
     }
 
@@ -46,7 +43,9 @@ namespace ConstantData.Services
         public async Task SetConstantsStartGuidKey(KeyType keyTime, string field, string constantsStartGuidKey)
         {
             await _cache.SetHashedAsync<string>(keyTime.Value, field, constantsStartGuidKey, SetLifeTimeFromKey(keyTime));
-            Logs.Here().Information("SetStartConstants set {@G}.", new { GuidKey = keyTime.Value });
+            string test = await _cache.GetHashedAsync<string>(keyTime.Value, field);
+            Logs.Here().Information("SetStartConstants set {@G} \n {0} --- {1}.", new { GuidKey = keyTime.Value }, constantsStartGuidKey, test);
+            // можно читать и сравнивать - и возвращать true
         }
 
         private TimeSpan SetLifeTimeFromKey(KeyType time)
@@ -57,6 +56,21 @@ namespace ConstantData.Services
         public async Task<TV> FetchUpdatedConstant<TK, TV>(string key, TK field)
         {
             return await _cache.GetHashedAsync<TK, TV>(key, field);
+        }
+
+        public async Task<IDictionary<TK, TV>> FetchUpdatedConstants<TK, TV>(string key)
+        {
+            // Gets all the values from a hash, assuming all the values in the hash are of the same type <typeparamref name="TV" />.
+            // The keys of the dictionary are the field names of type <typeparamref name="TK" /> and the values are the objects of type <typeparamref name="TV" />.
+            // <typeparam name="TK">The field type</typeparam>
+            // <typeparam name="TV">The value type</typeparam>
+            
+            IDictionary<TK, TV> updatedConstants = await _cache.GetHashedAllAsync<TK, TV>(key);
+
+            //int updatedConstantsCount = updatedConstants.Count;
+            //Logs.Here().Information("Fetched updated constants count = {0}.", updatedConstantsCount);
+
+            return updatedConstants;
         }
 
         public async Task<bool> DeleteKeyIfCancelled(string startConstantKey)

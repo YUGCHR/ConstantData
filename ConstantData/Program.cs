@@ -1,12 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using CachingFramework.Redis;
 using CachingFramework.Redis.Contracts.Providers;
@@ -109,11 +104,11 @@ namespace ConstantData
                     // убрать константы и создание класса констант в отдельный sln/container - со своим appsetting, который и станет общий для всех
                     services.AddSingleton<IConstantsCollectionService, ConstantsCollectionService>();
                     //services.AddSingleton<ConstantNames, constants>();
-                    services.AddSingleton<IInitConstantsService, InitConstantsService>();
+                    //services.AddSingleton<IInitConstantsService, InitConstantsService>();
                     services.AddSingleton<IOnKeysEventsSubscribeService, OnKeysEventsSubscribeService>();
                     services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                     services.AddSingleton<ICacheManageService, CacheManageService>();
-                    services.AddSingleton<ISettingConstantsService, SettingConstantsServiceService>();
+                    //services.AddSingleton<ISettingConstantsService, SettingConstantsServiceService>();
                     services.AddSingleton<MonitorLoop>();
                 });
 

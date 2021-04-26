@@ -3,57 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
 namespace Shared.Library.Models
 {
     public class TaskDescriptionAndProgress
     {
-        [JsonProperty(PropertyName = "tasksCountInPackage")]
+        //[JsonProperty(PropertyName = "tasksCountInPackage")]
         public int TasksCountInPackage { get; set; }
 
-        [JsonProperty(PropertyName = "tasksPackageGuid")]
+        //[JsonProperty(PropertyName = "tasksPackageGuid")]
         public string TasksPackageGuid { get; set; }
 
-        [JsonProperty(PropertyName = "backServerPrefixGuid")]
+        //[JsonProperty(PropertyName = "backServerPrefixGuid")]
         public string BackServerPrefixGuid { get; set; }
 
-        [JsonProperty(PropertyName = "taskDescription")]
+        //[JsonProperty(PropertyName = "taskDescription")]
         public TaskComplicatedDescription TaskDescription { get; set; }
 
-        [JsonProperty(PropertyName = "taskState")]
+        //[JsonProperty(PropertyName = "taskState")]
         public TaskProgressState TaskState { get; set; }
 
         public class TaskComplicatedDescription
         {
-            [JsonProperty(PropertyName = "taskGuid")]
+            //[JsonProperty(PropertyName = "taskGuid")]
             public string TaskGuid { get; set; }
 
-            [JsonProperty(PropertyName = "cycleCount")]
+            //[JsonProperty(PropertyName = "cycleCount")]
             public int CycleCount { get; set; }
             
-            [JsonProperty(PropertyName = "taskDelayTimeFromSeconds")]
+            //[JsonProperty(PropertyName = "taskDelayTimeFromSeconds")]
             public int TaskDelayTimeFromMilliSeconds { get; set; }
         }
 
         public class TaskProgressState
         {
-            [JsonProperty(PropertyName = "isTaskRunning")]
+            //[JsonProperty(PropertyName = "isTaskRunning")]
             public bool IsTaskRunning { get; set; }
             
-            [JsonProperty(PropertyName = "isTaskRunning")]
+            //[JsonProperty(PropertyName = "isTaskRunning")]
             public int TaskCompletedOnPercent  { get; set; }
         }
 
         public class SingleTaskOverview
         {
-            [JsonProperty(PropertyName = "taskGuid")]
+            //[JsonProperty(PropertyName = "taskGuid")]
             public string TaskGuid { get; set; }
 
-            [JsonProperty(PropertyName = "taskDescription")]
+            //[JsonProperty(PropertyName = "taskDescription")]
             public TaskComplicatedDescription TaskDescription { get; set; }
 
-            [JsonProperty(PropertyName = "taskState")]
+            //[JsonProperty(PropertyName = "taskState")]
             public TaskProgressState TaskState { get; set; }
         }
     }
@@ -61,29 +61,29 @@ namespace Shared.Library.Models
     // заготовка для хранения всех задач пакета
     public class TaskPackageDescriptionAndProgress
     {
-        [JsonProperty(PropertyName = "tasksCountInPackage")]
+        //[JsonProperty(PropertyName = "tasksCountInPackage")]
         public int TasksCountInPackage { get; set; }
 
-        [JsonProperty(PropertyName = "tasksPackageGuid")]
+        //[JsonProperty(PropertyName = "tasksPackageGuid")]
         public string TasksPackageGuid { get; set; }
 
-        [JsonProperty(PropertyName = "backServerPrefixGuid")]
+        //[JsonProperty(PropertyName = "backServerPrefixGuid")]
         public string BackServerPrefixGuid { get; set; }
 
         // заготовка для хранения всех задач пакета
 
-        [JsonProperty(PropertyName = "singleTaskOverview")]
+        //[JsonProperty(PropertyName = "singleTaskOverview")]
         public Dictionary<string, SingleTaskOverview> SingleTasksOverview { get; set; }
 
         public class SingleTaskOverview
         {
-            [JsonProperty(PropertyName = "taskGuid")]
+            //[JsonProperty(PropertyName = "taskGuid")]
             public string TaskGuid { get; set; }
 
-            [JsonProperty(PropertyName = "taskDescription")]
+            //[JsonProperty(PropertyName = "taskDescription")]
             public TaskDescriptionAndProgress.TaskComplicatedDescription TaskDescription { get; set; }
 
-            [JsonProperty(PropertyName = "taskState")]
+            //[JsonProperty(PropertyName = "taskState")]
             public TaskDescriptionAndProgress.TaskProgressState TaskState { get; set; }
         }
     }
