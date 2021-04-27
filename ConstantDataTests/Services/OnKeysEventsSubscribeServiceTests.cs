@@ -1,4 +1,5 @@
-﻿using ConstantData.Services;
+﻿using System.Collections.Generic;
+using ConstantData.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared.Library.Models;
 
@@ -18,11 +19,23 @@ namespace ConstantDataTests.Services
                     Description = "Description",
                     Value = source,
                     LifeTime = 0.99
+                },
+                FinalPropertyToSet = new KeyType()
+                {
+                    Description = "ConstantsSet.ConstantType.Value",
+                    Value = "Value",
+                    LifeTime = 0.999
                 }
+        };
+            IDictionary<string, int> updatedConstants = new Dictionary<string, int>()
+            {
+                { "TaskEmulatorDelayTimeInMilliseconds", 500 }
+                //{ "RecordActualityLevel", 8 }
             };
-            string key = nameof(constantsSet.TaskEmulatorDelayTimeInMilliseconds);
+            //string key = nameof(constantsSet.TaskEmulatorDelayTimeInMilliseconds);
 
-            constantsSet = OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty(constantsSet, key, value);
+            bool setWasUpdated;
+            (setWasUpdated, constantsSet) = OnKeysEventsSubscribeService.UpdatedValueAssignsToProperty(constantsSet, updatedConstants);
 
             var result = constantsSet.TaskEmulatorDelayTimeInMilliseconds.Value;
 

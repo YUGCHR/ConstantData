@@ -47,6 +47,7 @@ namespace Shared.Library.Models
         public KeyType PrefixProcessAdd { get; init; }
         public KeyType PrefixProcessCancel { get; init; }
         public KeyType PrefixProcessCount { get; init; }
+        public KeyType FinalPropertyToSet { get; init; }
         public KeyType EventFieldFrom { get; init; }
         public KeyType EventFieldBack { get; init; }
         public KeyType EventFieldFront { get; init; }
