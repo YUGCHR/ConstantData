@@ -13,7 +13,7 @@ namespace ConstantDataTests.Services
         public void UpdatedValueAssignsToPropertyTest(int source, int value, int expected)
         {
             ConstantsSet constantsSet = new ConstantsSet()
-            {
+            {   
                 TaskEmulatorDelayTimeInMilliseconds = new ConstantType()
                 {
                     Description = "Description",

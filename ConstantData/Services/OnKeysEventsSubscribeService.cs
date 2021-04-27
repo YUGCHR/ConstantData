@@ -126,9 +126,9 @@ namespace ConstantData.Services
                     // ещё можно показать значения - бывшее и которое хотели обновить
                     Logs.Here().Warning("Constant {@K} will be left unchanged", new { Key = key });
                 }
-
                 // тут надо удалять поле, с которого считано обновление
-
+                // или не удалять по одному, а на выходе всегда удалять ключ целиком - в любом случае
+                // тогда юнит-тест останется живой
             }
             return (setWasUpdated, constantsSet);
         }
@@ -140,9 +140,9 @@ namespace ConstantData.Services
             return constantValue;
         }
 
-        private static object FetchValueOfProperty(object rrr, string propertyName)
+        private static object FetchValueOfProperty(object classInstance, string propertyName)
         {
-            return rrr.GetType().GetProperty(propertyName)?.GetValue(rrr);
+            return classInstance?.GetType().GetProperty(propertyName)?.GetValue(classInstance);
         }
     }
 }
