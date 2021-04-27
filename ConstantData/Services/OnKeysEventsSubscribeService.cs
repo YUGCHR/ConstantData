@@ -86,15 +86,15 @@ namespace ConstantData.Services
             _flagToBlockEventUpdate = true;
         }
         
-        public static (bool, ConstantsSet) UpdatedValueAssignsToProperty(ConstantsSet constantsSet, IDictionary<string, int> updatedConstants)//(ConstantsSet constantsSet, string key, int value)
+        public static (bool, ConstantsSet) UpdatedValueAssignsToProperty(ConstantsSet constantsSet, IDictionary<string, int> updatedConstants)
         {
             bool setWasUpdated = false;
             string finalPropertyToSet = constantsSet.FinalPropertyToSet.Value;
-
+            // foreach перенесли внутрь метода, чтобы лишний раз не переписывать набор, если обновление имеет такое же значение
+            // возможно, что со страницы всегда будет приезжать весь набор полей только с одним/несколькими изменёнными
             foreach (KeyValuePair<string, int> updatedConstant in updatedConstants)
             {
                 var (key, value) = updatedConstant;
-                //constantsSet = UpdatedValueAssignsToProperty(constantsSet, key, value); // ?? constantsSet;
                 
                 int existsConstant = FetchValueOfPropertyOfProperty(constantsSet, finalPropertyToSet, key);
                 // можно проверять предыдущее значение и, если новое такое же, не обновлять
@@ -104,8 +104,8 @@ namespace ConstantData.Services
                 {
                     // но запись в ключ всё равно произойдёт, как это устранить?
                     //return constantsSet;
-                    
-                    object constantType = constantsSet.GetType().GetProperty(key)?.GetValue(constantsSet);
+
+                    object constantType = FetchValueOfProperty(constantsSet, key);
 
                     if (constantType == null)
                     {
@@ -114,6 +114,7 @@ namespace ConstantData.Services
                     }
 
                     constantType.GetType().GetProperty(finalPropertyToSet)?.SetValue(constantType, value);
+
                     int constantWasUpdated = FetchValueOfPropertyOfProperty(constantsSet, finalPropertyToSet, key);
                     if (constantWasUpdated == value)
                     {
@@ -122,7 +123,7 @@ namespace ConstantData.Services
                 }
                 else
                 {
-                    // если не обновится ни одно поле, в setWasUpdated останется false
+                    // если не обновится ни одно поле, в setWasUpdated останется false и основной ключ не обновится
                     // ещё можно показать значения - бывшее и которое хотели обновить
                     Logs.Here().Warning("Constant {@K} will be left unchanged", new { Key = key });
                 }
