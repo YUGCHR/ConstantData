@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundTasksQueue", "Bac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Library", "Shared.Library\Shared.Library.csproj", "{9171742E-F880-41E0-B7E5-DB1985333D1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstantDataTests", "ConstantDataTests\ConstantDataTests.csproj", "{FEFA8363-A816-4EC6-BB5B-4E64E70A69CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{9171742E-F880-41E0-B7E5-DB1985333D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9171742E-F880-41E0-B7E5-DB1985333D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9171742E-F880-41E0-B7E5-DB1985333D1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEFA8363-A816-4EC6-BB5B-4E64E70A69CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEFA8363-A816-4EC6-BB5B-4E64E70A69CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEFA8363-A816-4EC6-BB5B-4E64E70A69CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEFA8363-A816-4EC6-BB5B-4E64E70A69CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

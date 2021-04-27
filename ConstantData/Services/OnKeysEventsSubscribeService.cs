@@ -86,32 +86,37 @@ namespace ConstantData.Services
             _flagToBlockEventUpdate = true;
         }
 
-        private static object RRR(object rrr, string propertyName)
+        private static object FetchValueOfProperty(object rrr, string propertyName)
         {
-            return rrr.GetType().GetProperty(propertyName).GetValue(rrr, null);
+            return rrr.GetType().GetProperty(propertyName)?.GetValue(rrr);
         }
 
         public static ConstantsSet UpdatedValueAssignsToProperty(ConstantsSet constantsSet, string key, int value)
         {
             Logs.Here().Information("constantsSet.{0} will be updated with value = {1}.", key, value);
 
-            ConstantType classValue = new()
-            {
-                Value = value
-            };
+            //ConstantType classValue = new()
+            //{
+            //    Value = value
+            //};
 
-            var class1Type = typeof(ConstantsSet);
-            var classTypeProperty = class1Type.GetProperty(key);
-            if (classTypeProperty == null)
-            {
-                return constantsSet;
-            }
-            classTypeProperty.SetValue(constantsSet, classValue);
+            object second = constantsSet.GetType().GetProperty(key)?.GetValue(constantsSet);
+            second?.GetType().GetProperty("Value")?.SetValue(second, value);
+
+            //var class1Type = typeof(ConstantsSet);
+            //var classTypeProperty = class1Type.GetProperty(key);
+            //if (classTypeProperty == null)
+            //{
+            //    return constantsSet;
+            //}
+            //classTypeProperty.SetValue(constantsSet, classValue);
+
+            //typeof(ConstantsSet).GetProperty(key)?.SetValue(constantsSet, classValue);
 
             //var t = constantsSet.GetType();
             //var tt = t.GetProperty(key);
             //object? ttt = constantsSet.GetType().GetProperty(key, typeof(ConstantType))?.GetValue(constantsSet, null);
-            //var ttt = RRR(constantsSet, key);
+            //var ttt = FetchValueOfProperty(constantsSet, key);
             //if (ttt is ConstantType lll)
             //{
             //    Logs.Here().Information("Value: {value}", lll.Value);
@@ -120,7 +125,7 @@ namespace ConstantData.Services
             //var r = ttt.GetType();
             //var rr = r.GetProperty("Value");
             //var rrr = ttt.GetType().GetProperty("Value").GetValue(ttt, null);
-            var rrr = RRR(RRR(constantsSet, key), "Value");
+            var rrr = FetchValueOfProperty(FetchValueOfProperty(constantsSet, key), "Value");
 
             // car.GetType().GetProperty(propertyName).GetValue(car, null);
 
