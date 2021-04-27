@@ -103,12 +103,22 @@ namespace ConstantData.Services
             }
             classTypeProperty.SetValue(constantsSet, classValue);
 
-            var ttt = classTypeProperty.GetValue(constantsSet);
-            var class2Type = typeof(ConstantType);
-            var classTypeTypeProperty = class2Type.GetProperty("Value");
-            var ttttt = classTypeProperty.GetValue(ttt);
+            //var t = constantsSet.GetType();
+            //var tt = t.GetProperty(key);
+            object? ttt = constantsSet.GetType().GetProperty(key, typeof(ConstantType))?.GetValue(constantsSet, null);
 
-            Logs.Here().Information("ttt {0} will.", ttttt);
+            if (ttt is ConstantType lll)
+            {
+                Logs.Here().Information("Value: {value}", lll.Value);
+            }
+
+            //var r = ttt.GetType();
+            //var rr = r.GetProperty("Value");
+            var rrr = ttt.GetType().GetProperty("Value").GetValue(ttt, null);
+
+            // car.GetType().GetProperty(propertyName).GetValue(car, null);
+
+            Logs.Here().Information("ttt {0} will.", rrr.ToString());
 
             // работающий вариант с Convert.ChangeType
             //PropertyInfo propertyInfo = constantsSet.GetType().GetProperty(key);
