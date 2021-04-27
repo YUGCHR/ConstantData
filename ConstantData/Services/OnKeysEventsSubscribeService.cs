@@ -86,6 +86,11 @@ namespace ConstantData.Services
             _flagToBlockEventUpdate = true;
         }
 
+        private static object RRR(object rrr, string propertyName)
+        {
+            return rrr.GetType().GetProperty(propertyName).GetValue(rrr, null);
+        }
+
         public static ConstantsSet UpdatedValueAssignsToProperty(ConstantsSet constantsSet, string key, int value)
         {
             Logs.Here().Information("constantsSet.{0} will be updated with value = {1}.", key, value);
@@ -105,16 +110,17 @@ namespace ConstantData.Services
 
             //var t = constantsSet.GetType();
             //var tt = t.GetProperty(key);
-            object? ttt = constantsSet.GetType().GetProperty(key, typeof(ConstantType))?.GetValue(constantsSet, null);
-
-            if (ttt is ConstantType lll)
-            {
-                Logs.Here().Information("Value: {value}", lll.Value);
-            }
+            //object? ttt = constantsSet.GetType().GetProperty(key, typeof(ConstantType))?.GetValue(constantsSet, null);
+            //var ttt = RRR(constantsSet, key);
+            //if (ttt is ConstantType lll)
+            //{
+            //    Logs.Here().Information("Value: {value}", lll.Value);
+            //}
 
             //var r = ttt.GetType();
             //var rr = r.GetProperty("Value");
-            var rrr = ttt.GetType().GetProperty("Value").GetValue(ttt, null);
+            //var rrr = ttt.GetType().GetProperty("Value").GetValue(ttt, null);
+            var rrr = RRR(RRR(constantsSet, key), "Value");
 
             // car.GetType().GetProperty(propertyName).GetValue(car, null);
 
