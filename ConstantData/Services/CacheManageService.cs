@@ -64,13 +64,15 @@ namespace ConstantData.Services
             // The keys of the dictionary are the field names of type <typeparamref name="TK" /> and the values are the objects of type <typeparamref name="TV" />.
             // <typeparam name="TK">The field type</typeparam>
             // <typeparam name="TV">The value type</typeparam>
-            
+
             IDictionary<TK, TV> updatedConstants = await _cache.GetHashedAllAsync<TK, TV>(key);
-
-            //int updatedConstantsCount = updatedConstants.Count;
-            //Logs.Here().Information("Fetched updated constants count = {0}.", updatedConstantsCount);
-
-            return updatedConstants;
+            bool result = await _cache.RemoveAsync(key);
+            if (result)
+            {
+                return updatedConstants;
+            }
+            Logs.Here().Error("{@K} removing was failed.", new { Key = key });
+            return null;
         }
 
         public async Task<bool> DeleteKeyIfCancelled(string startConstantKey)
