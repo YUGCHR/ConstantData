@@ -63,11 +63,7 @@ namespace ConstantData.Services
 
             // выбирать все поля, присваивать по таблице, при присваивании поле удалять
             // все обновляемые константы должны быть одного типа или разные типы на разных ключах
-            //foreach (KeyValuePair<string, int> updatedConstant in updatedConstants)
-            //{
-            //    var (key, value) = updatedConstant;
-            //    constantsSet = UpdatedValueAssignsToProperty(constantsSet, key, value);// ?? constantsSet;
-            //}
+            
             bool setWasUpdated;
             (setWasUpdated, constantsSet) = UpdatedValueAssignsToProperty(constantsSet, updatedConstants);
             if (setWasUpdated)
@@ -92,6 +88,7 @@ namespace ConstantData.Services
         
         public static (bool, ConstantsSet) UpdatedValueAssignsToProperty(ConstantsSet constantsSet, IDictionary<string, int> updatedConstants)//(ConstantsSet constantsSet, string key, int value)
         {
+            bool setWasUpdated = false;
             string finalPropertyToSet = constantsSet.FinalPropertyToSet.Value;
 
             foreach (KeyValuePair<string, int> updatedConstant in updatedConstants)
@@ -118,17 +115,22 @@ namespace ConstantData.Services
 
                     constantType.GetType().GetProperty(finalPropertyToSet)?.SetValue(constantType, value);
                     int constantWasUpdated = FetchValueOfPropertyOfProperty(constantsSet, finalPropertyToSet, key);
+                    if (constantWasUpdated == value)
+                    {
+                        setWasUpdated = true;
+                    }
                 }
                 else
                 {
-                    // можно добавить сообщение, что модифицировать константу не удалось
+                    // если не обновится ни одно поле, в setWasUpdated останется false
                     // ещё можно показать значения - бывшее и которое хотели обновить
-                    Logs.Here().Error("Constant {@K} will be left unchanged", new { Key = key });
+                    Logs.Here().Warning("Constant {@K} will be left unchanged", new { Key = key });
                 }
-                // удалять поле, с которого считано обновление
+
+                // тут надо удалять поле, с которого считано обновление
 
             }
-            return (true, constantsSet);
+            return (setWasUpdated, constantsSet);
         }
 
         private static int FetchValueOfPropertyOfProperty(ConstantsSet constantsSet, string finalPropertyToSet, string key)
