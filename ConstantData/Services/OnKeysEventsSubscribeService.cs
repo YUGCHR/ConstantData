@@ -57,7 +57,7 @@ namespace ConstantData.Services
             string eventKeyUpdateConstants = constantsSet.EventKeyUpdateConstants.Value;
             Logs.Here().Debug("CheckKeyUpdateConstants started with key {0}.", eventKeyUpdateConstants);
 
-            IDictionary<string, int> updatedConstants = await _cache.FetchUpdatedConstants<string, int>(eventKeyUpdateConstants); ;
+            IDictionary<string, int> updatedConstants = await _cache.FetchUpdatedConstantsAndDeleteKey<string, int>(eventKeyUpdateConstants); ;
             int updatedConstantsCount = updatedConstants.Count;
             Logs.Here().Debug("Fetched updated constants count = {0}.", updatedConstantsCount);
 

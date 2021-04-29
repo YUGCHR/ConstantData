@@ -13,7 +13,7 @@ namespace ConstantData.Services
         public ConstantsCollectionService(IConfiguration configuration)
         {
             SettingConstants = new ConstantsSet();
-
+            // структура appsettings и класса ConstantsSet должны совпадать
             configuration.GetSection("SettingConstants").Bind(SettingConstants);
         }
         

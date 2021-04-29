@@ -12,10 +12,12 @@ namespace ConstantDataTests.Services
         [DataRow(new int[] { 6, 300, 1000000, 2, 3, 2 }, new string[] { "RecordActualityLevel", "TaskEmulatorDelayTimeInMilliseconds", "RandomRangeExtended", "BalanceOfTasksAndProcesses", "MaxProcessesCountOnServer", "MinBackProcessesServersCount" }, new int[] { 6, 300, 1000000, 2, 3, 2 })]
         [DataRow(new int[] { 6, 300, 1000000, 2, 3, 2 }, new string[] { "RecordActualityLevel", "TaskEmulatorDelayTimeInMilliseconds", "RandomRangeExtended", "BalanceOfTasksAndProcesses", "MaxProcessesCountOnServer", "MinBackProcessesServersCount" }, new int[] { 8, 500, 1000001, 3, 5, 3 })]
         [DataRow(new int[] { 6, 300, 1000000, 2, 3, 2 }, new string[] { "RecordActualityLevel", "TaskEmulatorDelayTimeInMilliseconds", "RandomRangeExtended", "BalanceOfTasksAndProcesses", "MaxProcessesCountOnServer", "MinBackProcessesServersCount" }, new int[] { 6, 100, 1000000, 5, 3, 7 })]
-        [DataRow(new int[] { 6, 300, 1000000, 2, 3, 2 }, new string[] { "RecordActualityLevel", "TaskEmulatorDelayTimeInMilliseconds", "RandomRangeExtended", "BalanceOfTasksAndProcesses", "MaxProcessesCountOnServer", "MinBackProcessesServersCount" }, new int[] { 7, 300, 1000005, 2, 3, 2 })]
+        // до появления ошибочного имени обновление констант происходит
+        [DataRow(new int[] { 6, 300, 1000000, 2, 3, 2 }, new string[] { "RecordActualityLevel", "TaskEmulatorDelayTimeInilliseconds", "RandomRangeExtended", "BalanceOfTasksAndProcesses", "MaxProcessesCountOnServer", "MinBackProcessesServersCount" }, new int[] { 7, 300, 1000000, 2, 3, 2 })]
 
         public void UpdatedValueAssignsToPropertyTest(int[] source, string[] updateKey, int[] updateValue)
         {
+            // сделать вариант неполного заполнения словаря - 1-2 значения
             IDictionary<string, int> updatedConstants = new Dictionary<string, int>()
             {
                 {updateKey[0], updateValue[0]},
