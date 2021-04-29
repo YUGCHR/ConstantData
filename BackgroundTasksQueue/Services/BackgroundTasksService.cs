@@ -106,7 +106,6 @@ namespace BackgroundTasksQueue.Services
             {
                 // отдельные задачи ни в каком ключе, кроме ключа пакета, пока (или совсем) не регистрируем
                 //bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid); //HashExistsAsync
-                //_logger.LogInformation("Queued Background Task {Guid} is complete on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
                 // тут записать в описание, что задача закончилась
 
                 taskDescription.TaskState.IsTaskRunning = false;

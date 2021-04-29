@@ -1,163 +1,286 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CachingFramework.Redis.Contracts.Providers;
-using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
 
 namespace BackgroundTasksQueue.Services
 {
-    public interface IBackgroundTasksService
+    public interface ITasksBatchProcessingService
     {
-        void StartWorkItem(ConstantsSet constantsSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms, CancellationToken stoppingToken);
+        public Task WhenTasksPackageWasCaptured(ConstantsSet constantsSet, string tasksPackageGuidField, CancellationToken stoppingToken);
     }
 
-    public class BackgroundTasksService : IBackgroundTasksService
+    public class TasksBatchProcessingService : ITasksBatchProcessingService
     {
+        private readonly IBackgroundTasksService _task2Queue;
         private readonly IBackgroundTaskQueue _taskQueue;
         private readonly ICacheProviderAsync _cache;
 
-        public BackgroundTasksService(
-            IBackgroundTaskQueue taskQueue,
-            ICacheProviderAsync cache
-        )
+        public TasksBatchProcessingService(
+            ICacheProviderAsync cache,
+            IBackgroundTasksService task2Queue, 
+            IBackgroundTaskQueue taskQueue)
         {
+            _task2Queue = task2Queue;
             _taskQueue = taskQueue;
             _cache = cache;
         }
 
-        private static Serilog.ILogger Logs => Serilog.Log.ForContext<BackgroundTasksService>();
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksBatchProcessingService>();
 
-        public void StartWorkItem(ConstantsSet constantsSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription, CancellationToken stoppingToken)
-        {
-            Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@S}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
-            // Enqueue a background work item
-            _taskQueue.QueueBackgroundWorkItem(async token =>
-            {
-                // Simulate loopCount 3-second tasks to complete for each enqueued work item
-                bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
-                // если задача завершилась полностью, удалить поле регистрации из ключа сервера
-                // пока (или совсем) не удаляем, а уменьшаем на единичку значение, пока не станет 0 - тогда выполнение пакета закончено
-                bool isTaskFinished = await ActualTaskCompletion(constantsSet, isTaskCompleted, taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
-            });
-        }
-
-        private async Task<bool> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
-        {
-            int assignmentTerms = taskDescription.TaskDescription.CycleCount;
-            double taskDelayTimeSpanFromMilliseconds = taskDescription.TaskDescription.TaskDelayTimeFromMilliSeconds / 1000D;
-            int delayLoop = 0;
-            int loopRemain = assignmentTerms;
-
-            Logs.Here().Debug("Queued Background Task is starting with {0} cycles. \n {@P} \n {@S}", assignmentTerms, new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
-
-            taskDescription.TaskState.IsTaskRunning = true;
-            // заменить while на for в отдельном методе с выходом из цикла по условию и return
-            // потом можно попробовать рекурсию
-            while (!cancellationToken.IsCancellationRequested && delayLoop < assignmentTerms)
-            {
-                try
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(taskDelayTimeSpanFromMilliseconds), cancellationToken);
-                }
-                catch (OperationCanceledException)
-                {
-                    // Prevent throwing if the Delay is cancelled
-                }
-                // здесь записать в ключ ??? и поле ??? номер текущего цикла и всего циклов, а также время и так далее (потом)
-                // рассмотреть два варианта - ключ - сервер, поле - пакет, а в значении указать номер конкретной задачи и прочее в модели
-                // второй вариант - ключ - пакет, поле - задача, а в значении сразу проценты (int)
-                // ключ - сервер не имеет большого смысла, пакет и так не потеряется, а искать его будут именно по номеру пакета, поэтому пока второй вариант
-                loopRemain--;
-
-                double completionDouble = delayLoop * 100D / assignmentTerms;
-                int completionTaskPercentage = (int)completionDouble;
-                taskDescription.TaskState.TaskCompletedOnPercent = completionTaskPercentage;
-
-                Logs.Here().Verbose("completionDouble {0}% = delayLoop {1} / assignmentTerms {2}, IsTaskRunning = {3}", completionDouble, delayLoop, assignmentTerms, taskDescription.TaskState.IsTaskRunning);
-
-                // обновляем отчёт о прогрессе выполнения задания
-                await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - !!!
-
-                delayLoop++;
-                Logs.Here().Verbose("Task {0} is running. Loop = {1} / Remaining = {2} - {3}%", singleTaskGuid, delayLoop, loopRemain, completionTaskPercentage);
-            }
-            // возвращаем true, если задача успешно завершилась
-            // а если безуспешно, то вообще не возвращаемся (скорее всего)
-            bool isTaskCompleted = delayLoop == assignmentTerms;
-            Logs.Here().Debug("Background Task is completed. \n {@P} \n {@S} \n {@C}, {@R}, {@I}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid }, new { CurrentState = delayLoop }, new { Remain = loopRemain }, new { TaskIsCompleted = isTaskCompleted });
-
-            return isTaskCompleted;
-        }
-
-        private async Task<bool> ActualTaskCompletion(ConstantsSet constantsSet, bool isTaskCompleted, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
+        public async Task WhenTasksPackageWasCaptured(ConstantsSet constantsSet, string tasksPackageGuidField, CancellationToken stoppingToken) // Main for Processing
         {
             string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
-            string prefixPackageControl = constantsSet.PrefixPackageControl.Value;
-            string prefixPackageCompleted = constantsSet.PrefixPackageCompleted.Value;
-            Logs.Here().Debug("in PrefixPackageControl fetched {0}.", prefixPackageControl);
+            Logs.Here().Debug("This BackServer fetched Task Package successfully. \n {@P}", new { Package = tasksPackageGuidField });
 
-            // сюда попадаем только если isTaskCompleted true, поэтому if и передачу значения isTaskCompleted можно убрать
-            if (isTaskCompleted)
+            // регистрируем полученный пакет задач на ключе выполняемых/выполненных задач и на ключе сервера
+            // ключ выполняемых задач надо переделать - в значении класть модель, в которой указан номер сервера и состояние задачи
+            // скажем, List of TaskDescriptionAndProgress и в нём дополнительное поле номера сервера и состояния всего пакета
+
+            // перенесли RegisterTasksPackageGuid после TasksFromKeysToQueue, чтобы получить taskPackageCount для регистрации 
+
+            // тут подписаться (SubscribeOnEventCheck) на ключ пакета задач для контроля выполнения, но будет много событий
+            // каждая задача будет записывать в этот ключ своё состояние каждый цикл - надо ли так делать?
+
+            // и по завершению выполнения задач хорошо бы удалить процессы
+            // нужен внутрисерверный ключ (константа), где каждый из сервисов (каждого) сервера может узнать номер сервера, на котором запущен - чтобы правильно подписаться на событие
+            // сервера одинаковые и жёлуди у них тоже одинаковые, разница только в номере, который сервер генерирует при своём старте
+            // вот этот номер нужен сервисам, чтобы подписаться на события своего сервера, а не соседнего                    
+
+            // складываем задачи во внутреннюю очередь сервера
+            // tasksPakageGuidValue больше не нужно передавать, вместо нее tasksPackageGuidField
+
+            Logs.Here().Verbose("RegisterTasksPackageGuid called.");
+            await RegisterTasksPackageGuid(constantsSet, tasksPackageGuidField, stoppingToken);
+            Logs.Here().Verbose("RegisterTasksPackageGuid finished.");
+
+            // здесь ждать команды от резолвера процессов о готовности
+            // или удалять все процессы после пакета
+            // или удалять до минимума и всегда только добавлять
+
+            // не надо сообщать резолверу ключ пакета через подписку -
+            // надо его просто вызвать, дать ему ключ и ждать ответа от него -
+            // тогда процессы уже будут готовы
+
+            int actualProcessesCountAfterCorrection = await CarrierProcessesSolver(tasksPackageGuidField, constantsSet, stoppingToken);
+
+            Logs.Here().Verbose("TasksFromKeysToQueue called.");
+            int taskPackageCount = await TasksFromKeysToQueue(constantsSet, tasksPackageGuidField, stoppingToken);
+            Logs.Here().Verbose("TasksFromKeysToQueue finished with Task Count = {0}.", taskPackageCount);
+
+            // здесь подходящее место, чтобы определить количество процессов, выполняющих задачи из пакета - в зависимости от количества задач, но не более максимума из константы
+            // PrefixProcessAdd - префикс ключа (+ backServerGuid) управления добавлением процессов
+            // PrefixProcessCancel - префикс ключа (+ backServerGuid) управления удалением процессов
+            // в значение положить требуемое количество процессов
+            // имя поля должно быть общим для считывания значения
+            // PrefixProcessCount - 
+            // не забыть обнулить (или удалить) ключ после считывания и добавления процессов - можно и не удалять, всё равно, пока его не перепишут, он больше никого не интересует
+            // можно в качестве поля использовать гуид пакета задач, но, наверное, это лишние сложности, всё равно процессы общие
+            
+            // тут ждать, пока не будут посчитаны всё задачи пакета
+            // теперь не будем ждать, вернём false и пусть ждут другую подписку, которая поменяет на true
+            //int completionPercentage = 1; // await CheckingAllTasksCompletion(tasksPackageGuidField);
+            
+            // тут удалить все процессы (потом)
+            // процессы тоже не здесь удаляем - перенести их отсюда
+            //int cancelExistingProcesses = await CancelExistingProcesses(eventKeysSet, addProcessesCount, completionPercentage);
+            // выйти из цикла можем только когда не останется задач в ключе кафе
+        }
+
+        // решатель подписан на ключ сервера и узнаёт о появлении нового пакета задач при его регистрации
+        // после сработки подписки надо её сразу (заблокировать?) отпустить, оставив себе только гуид пакета
+        // сходить в пакет и узнать, сколько там задач, исходя из этого, решить, сколько на пакет нужно процессов
+        // проверить, сколько процессов существует сейчас, посчитать, как изменить и отдать команду менеджеру с количеством
+        // проверить результат, вернуть актуальное количество процессов после корректировки
+        private async Task<int> CarrierProcessesSolver(string tasksPackageGuidField, ConstantsSet constantsSet, CancellationToken stoppingToken)
+        {
+            // зная номер пакета, можно сразу получить количество задач в нём с ключа сервера
+            string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
+            int taskPackageCount = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField);
+            Logs.Here().Information("taskPackageCount was fetched, Task Count = {0}.", taskPackageCount);
+
+            // вычисляем нужное количество процессов для такого количества задач
+            int neededProcessesCount = CalcNeededProcessesCountForPackage(constantsSet, taskPackageCount);
+            Logs.Here().Information("neededProcessesCount was calculated, Processes needed = {0}.", neededProcessesCount);
+
+            // узнаем, сколько существует процессов сейчас (0 - только получить количество существующих процессов, без изменения)
+            int actualProcessesCount = await CarrierProcessesManager(constantsSet, stoppingToken, 0);
+            Logs.Here().Information("actualProcessesCount was fetched, Processes exist = {0}.", actualProcessesCount);
+
+            // или делать это в CarrierProcessesManager, подумать
+
+            // узнаем, как надо изменить число процессов - увеличить/уменьшить/оставить
+            int correctionProcessesCount = neededProcessesCount - actualProcessesCount;
+            Logs.Here().Information("correctionProcessesCount was calculated, correction needed = {0}.", correctionProcessesCount);
+
+            // корректируем количество процессов
+            int correctedProcessesCount = await CarrierProcessesManager(constantsSet, stoppingToken, correctionProcessesCount);
+
+            // сравнить correctedProcessesCount с actualProcessesCountAfterCorrection - должны быть одинаковые
+            int actualProcessesCountAfterCorrection = await CarrierProcessesManager(constantsSet, stoppingToken, 0);
+            Logs.Here().Information("actualProcessesCountAfterCorrection was created, actual processes = {0}.", actualProcessesCountAfterCorrection);
+
+            Logs.Here().Debug("Process request was resolved, cacl. count = {0}, checked count = {1}.", correctedProcessesCount, actualProcessesCountAfterCorrection);
+
+            // если неодинаковые, вывести ошибку
+
+            // здесь создать ключ, который даст команду грузить задачи в очередь - уже не надо
+
+            return actualProcessesCountAfterCorrection;
+        }
+
+        // менеджер получает требуемое количество добавить/убавить/сообщить
+        // решением, сколько нужно всего процессов, занимаются выше
+        // возвращает результат действия - количество добавленных, убранных или посчитанных
+        private async Task<int> CarrierProcessesManager(ConstantsSet constantsSet, CancellationToken stoppingToken, int requiredProcessesCount)
+        {
+            //int actualProcessesCount = 0;
+            switch (requiredProcessesCount)
             {
-                // отдельные задачи ни в каком ключе, кроме ключа пакета, пока (или совсем) не регистрируем
-                //bool isDeletedSuccess = await _cache.RemoveHashedAsync(backServerPrefixGuid, singleTaskGuid); //HashExistsAsync
-                //_logger.LogInformation("Queued Background Task {Guid} is complete on Server No. {ServerNum} / isDeleteSuccess = {3}.", singleTaskGuid, backServerPrefixGuid, isDeletedSuccess);
-                // тут записать в описание, что задача закончилась
+                case < 0:
+                    Logs.Here().Debug("required processes count < 0, Count = {0}, needs to call CancelCarrierProcesses.", requiredProcessesCount);
+                    // удалять просто так нельзя, надо сделать это до выгрузки задач в очередь
+                    // сначала надо сообщить, что процессы готовы и тогда начнут загружать задачи
+                    int requiredProcessesCountToCancel = Math.Abs(requiredProcessesCount);
+                    int canceledProcessesCount = _taskQueue.CancelCarrierProcesses(constantsSet, stoppingToken, requiredProcessesCountToCancel);
+                    return canceledProcessesCount;
+                case 0:
+                    Logs.Here().Debug("required processes count = 0, Count = {0}, needs to call CarrierProcessesCount.", requiredProcessesCount);
+                    // можно только сообщить количество процессов, без изменения количества
+                    int actualProcessesCount = _taskQueue.CarrierProcessesCount(constantsSet, 0);
+                    return actualProcessesCount;
+                case > 0:
+                    Logs.Here().Debug("required processes count > 0, Count = {0}, needs to call AddCarrierProcesses.", requiredProcessesCount);
+                    // возвращает актуальное расчетное - не проверенное подсчётом полей - количество процессов
+                    int addedProcessesCount = _taskQueue.AddCarrierProcesses(constantsSet, stoppingToken, requiredProcessesCount);
+                    return addedProcessesCount;
+            }
+        }
 
-                taskDescription.TaskState.IsTaskRunning = false;
+        private int CalcNeededProcessesCountForPackage(ConstantsSet constantsSet, int taskPackageCount)
+        {
+            int balanceOfTasksAndProcesses = constantsSet.BalanceOfTasksAndProcesses.Value;
+            int maxProcessesCountOnServer = constantsSet.MaxProcessesCountOnServer.Value;
+            int toAddProcessesCount;
 
-                await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - in outside method
+            switch (balanceOfTasksAndProcesses)
+            {
+                // 0 - автовыбор - создаём процессов по числу задач
+                case 0:
+                    toAddProcessesCount = taskPackageCount;
+                    Logs.Here().Debug("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
 
-                // тут уменьшить на единичку значение ключа сервера и прочее пакета задач
-                int oldValue = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField);
-                int newValue = oldValue - 1;
-                await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, newValue); // TimeSpan.FromDays - in outside method
-                
-                // ещё можно при достижении нуля удалить поле пакета, а уже из этого делать выводы (это на потом)
-                Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T}", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
-
-                string prefixControlTasksPackageGuid = $"{prefixPackageControl}:{tasksPackageGuidField}";
-                int sequentialSingleTaskNumber = await _cache.GetHashedAsync<int>(prefixControlTasksPackageGuid, singleTaskGuid);
-                Logs.Here().Debug("Completed Task {0} on the control package key. \n {@S} \n {@K}", sequentialSingleTaskNumber, new{SingleTask = singleTaskGuid }, new{ControlKey = prefixControlTasksPackageGuid });
-                
-                bool isDeleteSuccess = await _cache.RemoveHashedAsync(prefixControlTasksPackageGuid, singleTaskGuid);
-                Logs.Here().Debug("Attempt to delete field was {0}. \n {@P} \n {@S}", isDeleteSuccess, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
-
-                if (isDeleteSuccess)
-                {
-                    bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(prefixControlTasksPackageGuid);
-                    Logs.Here().Debug("Check of control key existing was {0}. \n {@P} \n {@S}", isExistEventKeyFrontGivesTask, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
-
-                    if (isExistEventKeyFrontGivesTask)
+                    return toAddProcessesCount;
+                // больше нуля - основной вариант - делим количество задач на эту константу и если она больше максимума, берём константу максимума
+                case > 0:
+                    int multiplier = 10000; // from constants
+                    toAddProcessesCount = (taskPackageCount * multiplier / balanceOfTasksAndProcesses) / multiplier;
+                    // если константа максимума неправильная - 0 или отрицательная, игнорируем ее
+                    if (toAddProcessesCount > maxProcessesCountOnServer && maxProcessesCountOnServer > 0)
                     {
-                        Logs.Here().Debug("Completed Task {0} was not the last. \n {@P} \n {@S}", sequentialSingleTaskNumber, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
-                        return true;
+                        toAddProcessesCount = maxProcessesCountOnServer;
                     }
-                    // ключ исчез, значит задача была последняя и надо об этом сообщить
-                    Logs.Here().Information("Completed Task {0} was the last. \n {@P} \n {@S}", sequentialSingleTaskNumber, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
+                    if (toAddProcessesCount < 1)
+                    { toAddProcessesCount = 1; }
+                    Logs.Here().Debug("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
 
-                    // вот здесь об этом и сообщаем
-                    string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
-                    await _cache.SetHashedAsync(prefixCompletedTasksPackageGuid, tasksPackageGuidField, sequentialSingleTaskNumber, TimeSpan.FromDays(constantsSet.PrefixBackServer.LifeTime));
-                    Logs.Here().Information("Key was hashSet, Event was created. \n {@K} \n {@S}", new{KeyEvent = prefixCompletedTasksPackageGuid}, new { SingleTask = singleTaskGuid });
+                    return toAddProcessesCount;
+                // меньше нуля - тайный вариант для настройки - количество процессов равно константе (с обратным знаком, естественно)
+                case < 0:
+                    toAddProcessesCount = balanceOfTasksAndProcesses * -1;
+                    Logs.Here().Debug("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
 
-                    return true;
-                }
-
-                Logs.Here().Fatal("Something went wrong, it cannot be so");
-                return true;
+                    return toAddProcessesCount;
             }
-            else
+        }
+
+        private async Task<bool> RegisterTasksPackageGuid(ConstantsSet constantsSet, string tasksPackageGuidField, CancellationToken stoppingToken)
+        {
+            IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField); // получили пакет заданий - id задачи и данные (int) для неё
+            int taskPackageCount = taskPackage.Count;
+
+            string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
+            //string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
+            string eventKeyBacksTasksProceed = constantsSet.EventKeyBacksTasksProceed.Value;
+            
+            // следующие две регистрации пока непонятно, зачем нужны - доступ к состоянию пакета задач всё равно по ключу пакета
+            // очень нужен - для контроля окончания выполнения задачи и пакета
+
+            // регистрируем полученную задачу на ключе выполняемых/выполненных задач
+            // поле - исходный ключ пакета (известный контроллеру, по нему он найдёт сервер, выполняющий его задание)
+            // пока что поле задачи в кафе и ключ самой задачи совпадают, поэтому контроллер может напрямую читать состояние пакета задач по известному ему ключу
+            // ключ выполняемых задач надо переделать - в значении класть модель, в которой указан номер сервера и состояние задачи
+            // скажем, List of TaskDescriptionAndProgress и в нём дополнительное поле номера сервера и состояния всего пакета
+
+            await _cache.SetHashedAsync(eventKeyBacksTasksProceed, tasksPackageGuidField, backServerPrefixGuid, TimeSpan.FromDays(constantsSet.PrefixBackServer.LifeTime)); // lifetime!
+            Logs.Here().Debug("Tasks package was registered. \n {@P} \n {@E}", new{Package = tasksPackageGuidField }, new{ EventKey = eventKeyBacksTasksProceed });
+
+            // регистрируем исходный ключ и ключ пакета задач на ключе сервера - чтобы не разорвать цепочку
+            // цепочка уже не актуальна, можно этот ключ использовать для контроля состояния пакета задач
+            // для этого в дальнейшем в значение можно класть общее состояние всех задач пакета в процентах
+            // или не потом, а сейчас класть 0 - тип значения менять нельзя
+            // сейчас в значение кладём количество задач в пакете, а про мере выполнения вычитаем по единичке, чтобы как ноль - пакет выполнен
+            int packageStateInit = taskPackageCount;
+            await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, packageStateInit, TimeSpan.FromDays(constantsSet.PrefixBackServer.LifeTime)); // lifetime!
+            Logs.Here().Verbose("This BackServer registered task package and RegisterTasksPackageGuid returned true.");
+
+            // создаём ключ add для сообщения решателю процессов о новом пакете и сообщаем ключ пакета
+            // дальше он сам справился, не маленький
+            // не создаём
+            // в смысле, уже не нужно
+            //string eventKeyProcessAdd = eventKeysSet.ProcessAddPrefixGuid;
+            //string eventFieldBack = eventKeysSet.EventFieldBack;
+            //await _cache.SetHashedAsync(eventKeyProcessAdd, eventFieldBack, tasksPackageGuidField); // TimeSpan.FromDays - !!!
+            //Logs.Here().Information("Key {0} about new package was created for processes solver. \n {@F} \n {@P}", eventKeyProcessAdd, new { Field = eventFieldBack }, new { Package = tasksPackageGuidField });
+
+            return true;
+        }
+        
+        private async Task<int> TasksFromKeysToQueue(ConstantsSet constantsSet, string tasksPackageGuidField, CancellationToken stoppingToken)
+        {
+            IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField); // получили пакет заданий - id задачи и данные (int) для неё
+            int taskPackageCount = taskPackage.Count;
+            int sequentialSingleTaskNumber = 0;
+            foreach (var t in taskPackage)
             {
-                Logs.Here().Verbose("Task {0} is not completed", singleTaskGuid);
+                if (stoppingToken.IsCancellationRequested)
+                {
+                    return 0;
+                }
+                var (singleTaskGuid, taskDescription) = t;
 
-                // тут тоже что-то записать
-                return false;
+                // регистрируем задачи на ключе контроля выполнения пакета (prefixControlTasksPackageGuid)
+                string prefixControlTasksPackageGuid = $"{constantsSet.PrefixPackageControl.Value}:{tasksPackageGuidField}";
+                await _cache.SetHashedAsync(prefixControlTasksPackageGuid, singleTaskGuid, sequentialSingleTaskNumber, TimeSpan.FromDays(constantsSet.PrefixBackServer.LifeTime));
+                Logs.Here().Debug("Single task {0} was registered on Completed Control Key. \n {@P} \n {@S}", sequentialSingleTaskNumber, new { PackageControl = prefixControlTasksPackageGuid }, new { SingleTask = singleTaskGuid });
+                sequentialSingleTaskNumber++;
+
+                // складываем задачи во внутреннюю очередь сервера
+                _task2Queue.StartWorkItem(constantsSet, tasksPackageGuidField, singleTaskGuid, taskDescription, stoppingToken);
+                // создаём ключ для контроля выполнения задания из пакета - нет, создаём не тут и не такой (ключ)
+                //await _cache.SetHashedAsync(backServerPrefixGuid, singleTaskGuid, assignmentTerms); 
+                Logs.Here().Verbose("This BackServer sent Task to Queue. \n {@T}", new { Task = singleTaskGuid }, new { CyclesCount = taskDescription.TaskDescription.CycleCount });
             }
+            Logs.Here().Verbose("This BackServer sent total {0} tasks to Queue.", taskPackageCount);
+            return taskPackageCount;
+        }
+
+        private async Task<int> CancelExistingProcesses(ConstantsSet constantsSet, int toCancelProcessesCount, int completionPercentage)
+        {
+            string backServerGuid = constantsSet.BackServerGuid.Value;
+            string prefixProcessCancel = constantsSet.PrefixProcessCancel.Value;
+            string eventFieldBack = constantsSet.EventFieldBack.Value;
+            string eventKeyProcessCancel = $"{prefixProcessCancel}:{backServerGuid}"; // process:cancel:(this server guid)
+
+            int cancelExistingProcesses = 0;
+
+            // создаём ключ удаления процессов и в значении нужное количество процессов
+            await _cache.SetHashedAsync(eventKeyProcessCancel, eventFieldBack, toCancelProcessesCount); // TimeSpan.FromDays - !!!
+            Logs.Here().Information("This BackServer ask to CANCEL {0} processes. \n {@K} / {@F}", toCancelProcessesCount, new { Key = eventKeyProcessCancel }, new { Field = eventFieldBack });
+
+            return cancelExistingProcesses;
         }
     }
 }

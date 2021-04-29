@@ -14,7 +14,6 @@ namespace BackgroundTasksQueue.Services
     public interface IOnKeysEventsSubscribeService
     { 
         public Task SubscribeOnEventRun(CancellationToken stoppingToken);
-        //public Task SubscribeOnEventUpdatesConstant(CancellationToken stoppingToken);
     }
 
     public class OnKeysEventsSubscribeService : IOnKeysEventsSubscribeService
