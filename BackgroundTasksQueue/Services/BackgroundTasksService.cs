@@ -13,7 +13,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface IBackgroundTasksService
     {
-        void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms, CancellationToken stoppingToken);
+        void StartWorkItem(ConstantsSet constantsSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms, CancellationToken stoppingToken);
     }
 
     public class BackgroundTasksService : IBackgroundTasksService
@@ -32,7 +32,7 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<BackgroundTasksService>();
 
-        public void StartWorkItem(EventKeyNames eventKeysSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription, CancellationToken stoppingToken)
+        public void StartWorkItem(ConstantsSet constantsSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription, CancellationToken stoppingToken)
         {
             Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@S}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
             // Enqueue a background work item
@@ -42,7 +42,7 @@ namespace BackgroundTasksQueue.Services
                 bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
                 // если задача завершилась полностью, удалить поле регистрации из ключа сервера
                 // пока (или совсем) не удаляем, а уменьшаем на единичку значение, пока не станет 0 - тогда выполнение пакета закончено
-                bool isTaskFinished = await ActualTaskCompletion(eventKeysSet, isTaskCompleted, taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
+                bool isTaskFinished = await ActualTaskCompletion(constantsSet, isTaskCompleted, taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
             });
         }
 
@@ -94,11 +94,11 @@ namespace BackgroundTasksQueue.Services
             return isTaskCompleted;
         }
 
-        private async Task<bool> ActualTaskCompletion(EventKeyNames eventKeysSet, bool isTaskCompleted, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
+        private async Task<bool> ActualTaskCompletion(ConstantsSet constantsSet, bool isTaskCompleted, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
         {
-            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
-            string prefixPackageControl = eventKeysSet.PrefixPackageControl;
-            string prefixPackageCompleted = eventKeysSet.PrefixPackageCompleted;
+            string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
+            string prefixPackageControl = constantsSet.PrefixPackageControl.Value;
+            string prefixPackageCompleted = constantsSet.PrefixPackageCompleted.Value;
             Logs.Here().Debug("in PrefixPackageControl fetched {0}.", prefixPackageControl);
 
             // сюда попадаем только если isTaskCompleted true, поэтому if и передачу значения isTaskCompleted можно убрать
@@ -143,7 +143,7 @@ namespace BackgroundTasksQueue.Services
 
                     // вот здесь об этом и сообщаем
                     string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
-                    await _cache.SetHashedAsync(prefixCompletedTasksPackageGuid, tasksPackageGuidField, sequentialSingleTaskNumber, TimeSpan.FromDays(eventKeysSet.EventKeyBackServerAuxiliaryTimeDays)); // lifetime!
+                    await _cache.SetHashedAsync(prefixCompletedTasksPackageGuid, tasksPackageGuidField, sequentialSingleTaskNumber, TimeSpan.FromDays(constantsSet.PrefixBackServer.LifeTime));
                     Logs.Here().Information("Key was hashSet, Event was created. \n {@K} \n {@S}", new{KeyEvent = prefixCompletedTasksPackageGuid}, new { SingleTask = singleTaskGuid });
 
                     return true;

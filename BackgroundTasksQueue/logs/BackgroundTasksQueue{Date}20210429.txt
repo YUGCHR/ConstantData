@@ -1,0 +1,111 @@
+
+[18:31:33 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[18:31:37 FTL (1) BackgroundTasksQueue.Program. - ] 
+ Redis server did not find: 
+ { ExceptionMessage: "It was not possible to connect to the redis server(s). UnableToConnect on localhost:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 4s ago, v: 2.2.4.27433" } 
+
+ 
+ 
+[19:20:52 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[19:20:52 INF (1) BackgroundTasksQueue.Services.QueuedHostedService.ExecuteAsync - 26] 
+ Queued Hosted Service is running. BackgroundProcessing will be called now. 
+ 
+[19:20:52 INF (4) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 149] 
+ SharedDataAccess will be subscribed on keyGuid "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504". 
+ 
+[19:20:52 INF (4) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 168] 
+ SharedDataAccess was subscribed on keyGuid "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504". 
+ 
+[19:20:52 DBG (4) BackgroundTasksQueue.Services.QueuedHostedService.ConstantInitializer - 65] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: -1 }. 
+ 
+[19:22:49 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[19:22:49 INF (1) BackgroundTasksQueue.Services.QueuedHostedService.ExecuteAsync - 26] 
+ Queued Hosted Service is running. BackgroundProcessing will be called now. 
+ 
+[19:22:49 INF (17) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 149] 
+ SharedDataAccess will be subscribed on keyGuid "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504". 
+ 
+[19:22:49 INF (17) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 168] 
+ SharedDataAccess was subscribed on keyGuid "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504". 
+ 
+[19:22:49 DBG (17) BackgroundTasksQueue.Services.QueuedHostedService.ConstantInitializer - 65] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: -1 }. 
+ 
+[19:26:00 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[19:26:00 INF (1) BackgroundTasksQueue.Services.QueuedHostedService.ExecuteAsync - 26] 
+ Queued Hosted Service is running. BackgroundProcessing will be called now. 
+ 
+[19:26:00 INF (4) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 149] 
+ SharedDataAccess will be subscribed on keyGuid "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504". 
+ 
+[19:26:00 INF (4) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 168] 
+ SharedDataAccess was subscribed on keyGuid "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504". 
+ 
+[19:26:00 DBG (4) BackgroundTasksQueue.Services.QueuedHostedService.ConstantInitializer - 65] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: -1 }. 
+ 
+[19:26:07 INF (17) BackgroundTasksQueue.Services.QueuedHostedService.ConstantInitializer - 100] 
+ Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:num:c309f4f2-df51-4d39-a241-471ae695efbd" } 
+ 
+[19:26:07 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 79] 
+ BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+[19:26:07 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] 
+ Constants version is "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504":1. 
+ 
+[19:26:07 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 106] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+[19:38:54 INF (1) BackgroundTasksQueue.Program. - ] 
+ The global logger Serilog has been configured.
+ 
+ 
+[19:38:54 INF (1) BackgroundTasksQueue.Services.QueuedHostedService.ExecuteAsync - 26] 
+ Queued Hosted Service is running. BackgroundProcessing will be called now. 
+ 
+[19:38:55 INF (4) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 149] 
+ SharedDataAccess will be subscribed on keyGuid "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504". 
+ 
+[19:38:55 INF (4) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 168] 
+ SharedDataAccess was subscribed on keyGuid "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504". 
+ 
+[19:38:55 DBG (4) BackgroundTasksQueue.Services.QueuedHostedService.ConstantInitializer - 65] 
+ EventKeyNames fetched constants in EventKeyNames - { CycleDelay: -1 }. 
+ 
+[19:38:55 INF (17) BackgroundTasksQueue.Services.QueuedHostedService.ConstantInitializer - 100] 
+ Server Guid was fetched and stored into EventKeyNames. 
+ { ServerId: "backserver:num:05c7ce3c-ff8e-44d7-9f1e-266b9a61669b" } 
+ 
+[19:38:55 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 79] 
+ BackServer subscribed on EventKey. 
+ { EventKey: "key-event-front-server-gives-task-package" } 
+ 
+[19:38:55 INF (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 80] 
+ Constants version is "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504":1. 
+ 
+[19:38:55 DBG (17) BackgroundTasksQueue.Services.OnKeysEventsSubscribeService.SubscribeOnEventRun - 106] 
+ You subscribed on EventSet. 
+ { EventSet: "Key = key-event-front-server-gives-task-package, Command = HashSet" } 
+ 
+[19:39:36 INF (17) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 161] 
+ Key "constant:data:4697378b-9b5f-4526-92e5-9994b11bc504" with command HashSet was received. 
+ 
+[19:39:36 INF (17) Shared.Library.Services.SharedDataAccess.SubscribeOnAllConstantsEvent - 165] 
+ Constants Update is appeared = True. 
+ 

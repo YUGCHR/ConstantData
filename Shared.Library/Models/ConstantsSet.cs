@@ -21,6 +21,9 @@ namespace Shared.Library.Models
             };
             BackServerGuid = new KeyType();
             BackServerPrefixGuid = new KeyType();
+            ProcessAddPrefixGuid = new KeyType();
+            ProcessCancelPrefixGuid = new KeyType();
+            ProcessCountPrefixGuid = new KeyType();
         }
 
         // ConstantsList
@@ -60,6 +63,9 @@ namespace Shared.Library.Models
         public ConstantType ConstantsVersionNumber { get; set; }
         public KeyType BackServerGuid { get; set; }
         public KeyType BackServerPrefixGuid { get; set; }
+        public KeyType ProcessAddPrefixGuid { get; set; }
+        public KeyType ProcessCancelPrefixGuid { get; set; }
+        public KeyType ProcessCountPrefixGuid { get; set; }
     }
 
     public class ConstantType

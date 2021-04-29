@@ -11,7 +11,7 @@ namespace BackgroundTasksQueue.Services
     public interface ISettingConstants
     {
         public bool IsExistUpdatedConstants();
-        public Task<EventKeyNames> ConstantInitializer(CancellationToken stoppingToken);
+        public Task<ConstantsSet> ConstantInitializer(CancellationToken stoppingToken);
     }
 
     public class SettingConstantsService : ISettingConstants
@@ -46,7 +46,7 @@ namespace BackgroundTasksQueue.Services
             return _data.IsExistUpdatedConstants();
         }
 
-        public async Task<EventKeyNames> ConstantInitializer(CancellationToken stoppingToken)
+        public async Task<ConstantsSet> ConstantInitializer(CancellationToken stoppingToken)
         {
             // сюда попадаем перед каждым пакетом, основные варианты
             // 1. старт сервера, первоначальное получение констант
@@ -56,41 +56,41 @@ namespace BackgroundTasksQueue.Services
             // 5. новый пакет, есть обновление
             // 6. новый пакет, пропал ключ обновления констант
             // 7. новый пакет, пропал базовый ключ констант
-            
-            EventKeyNames eventKeysSet = await _data.DeliveryOfUpdatedConstants(stoppingToken);
+
+            ConstantsSet constantsSet = await _data.DeliveryOfUpdatedConstants(stoppingToken);
 
             // здесь уже с константами
-            if (eventKeysSet != null)
+            if (constantsSet != null)
             {
-                Logs.Here().Debug("EventKeyNames fetched constants in EventKeyNames - {@D}.", new { CycleDelay = eventKeysSet.TaskEmulatorDelayTimeInMilliseconds });
+                Logs.Here().Debug("EventKeyNames fetched constants in EventKeyNames - {@D}.", new { CycleDelay = constantsSet.TaskEmulatorDelayTimeInMilliseconds.LifeTime });
             }
             else
             {
                 Logs.Here().Error("eventKeysSet CANNOT be Init.");
                 return null;
             }
-
+            // передать время ключа во все созданные константы backServer из префикса PrefixBackServer
             string backServerGuid = _guid ?? throw new ArgumentNullException(nameof(_guid));
-            eventKeysSet.BackServerGuid = backServerGuid;
-            string backServerPrefixGuid = $"{eventKeysSet.PrefixBackServer}:{backServerGuid}";
-            eventKeysSet.BackServerPrefixGuid = backServerPrefixGuid;
-            string eventKeyBackReadiness = eventKeysSet.EventKeyBackReadiness;
-            double eventKeyBackReadinessTimeDays = eventKeysSet.EventKeyBackReadinessTimeDays;
+            constantsSet.BackServerGuid.Value = backServerGuid;
+            string backServerPrefixGuid = $"{constantsSet.PrefixBackServer.Value}:{backServerGuid}";
+            constantsSet.BackServerPrefixGuid.Value = backServerPrefixGuid;
+            string eventKeyBackReadiness = constantsSet.EventKeyBackReadiness.Value;
+            double eventKeyBackReadinessTimeDays = constantsSet.EventKeyBackReadiness.LifeTime;
 
             // регистрируем сервер на общем ключе серверов
             await _cache.SetHashedAsync<string>(eventKeyBackReadiness, backServerPrefixGuid, backServerGuid, TimeSpan.FromDays(eventKeyBackReadinessTimeDays));
             
-            string prefixProcessAdd = eventKeysSet.PrefixProcessAdd; // process:add
+            string prefixProcessAdd = constantsSet.PrefixProcessAdd.Value; // process:add
             string processAddPrefixGuid = $"{prefixProcessAdd}:{backServerGuid}"; // process:add:(this server guid)
-            eventKeysSet.ProcessAddPrefixGuid = processAddPrefixGuid;
+            constantsSet.ProcessAddPrefixGuid.Value = processAddPrefixGuid;
 
-            string prefixProcessCancel = eventKeysSet.PrefixProcessCancel; // process:cancel
+            string prefixProcessCancel = constantsSet.PrefixProcessCancel.Value; // process:cancel
             string processCancelPrefixGuid = $"{prefixProcessCancel}:{backServerGuid}"; // process:cancel:(this server guid)
-            eventKeysSet.ProcessCancelPrefixGuid = processCancelPrefixGuid;
+            constantsSet.ProcessCancelPrefixGuid.Value = processCancelPrefixGuid;
 
-            string prefixProcessCount = eventKeysSet.PrefixProcessCount; // process:count
+            string prefixProcessCount = constantsSet.PrefixProcessCount.Value; // process:count
             string processCountPrefixGuid = $"{prefixProcessCount}:{backServerGuid}"; // process:count:(this server guid)
-            eventKeysSet.ProcessCountPrefixGuid = processCountPrefixGuid;
+            constantsSet.ProcessCountPrefixGuid.Value = processCountPrefixGuid;
 
             //string processAddPrefixGuid = eventKeysSet.ProcessAddPrefixGuid;
             //string eventFieldBack = eventKeysSet.EventFieldBack;
@@ -98,7 +98,7 @@ namespace BackgroundTasksQueue.Services
             //await _cache.SetHashedAsync<int>(processAddPrefixGuid, eventFieldBack, 0, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
 
             Logs.Here().Information("Server Guid was fetched and stored into EventKeyNames. \n {@S}", new { ServerId = backServerPrefixGuid });
-            return eventKeysSet;
+            return constantsSet;
         }
 
     }

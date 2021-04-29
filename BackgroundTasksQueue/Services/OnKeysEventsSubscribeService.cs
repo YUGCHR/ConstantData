@@ -69,15 +69,15 @@ namespace BackgroundTasksQueue.Services
         public async Task SubscribeOnEventRun(CancellationToken stoppingToken)
         {
             // 
-            EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
+            ConstantsSet constantsSet = await _constants.ConstantInitializer(stoppingToken);
 
             // все проверки и ожидание внутри метода, без констант не вернётся
             // но можно проверять на null, если как-то null, то что-то сделать (shutdown)
             //EventKeyNames eventKeysSet = await _constants.ConstantInitializer(stoppingToken);
 
-            string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
+            string eventKeyFrontGivesTask = constantsSet.EventKeyFrontGivesTask.Value;
             Logs.Here().Information("BackServer subscribed on EventKey. \n {@E}", new { EventKey = eventKeyFrontGivesTask });
-            Logs.Here().Information("Constants version is {0}:{1}.", eventKeysSet.ConstantsVersionBase, eventKeysSet.ConstantsVersionNumber);
+            Logs.Here().Information("Constants version is {0}:{1}.", constantsSet.ConstantsVersionBase.Value, constantsSet.ConstantsVersionNumber.Value);
 
             // блокировка множественной подписки до специального разрешения повторной подписки
             _flagToBlockEventRun = true;
@@ -90,7 +90,7 @@ namespace BackgroundTasksQueue.Services
                 // void Unsubscribe(string key);
                 // 
                 // 
-                if (cmd == eventKeysSet.EventCmd && _flagToBlockEventRun)
+                if (cmd == constantsSet.EventCmd && _flagToBlockEventRun)
                 {
                     // подписка заблокирована
                     // быструю блокировку оставить - когда ещё отпишемся, но можно сделать локальной?
@@ -98,15 +98,15 @@ namespace BackgroundTasksQueue.Services
                     _flagToBlockEventRun = false;
                     Logs.Here().Debug("CheckKeyFrontGivesTask will be called No:{0}, Event permit = {Flag} \n {@K} with {@C} was received. \n", _callingNumOfCheckKeyFrontGivesTask, _flagToBlockEventRun, new { Key = eventKeyFrontGivesTask }, new { Command = cmd });
                     // можно добавить счётчик событий для дебага
-                    _ = CheckKeyFrontGivesTask(stoppingToken, eventKeysSet);
+                    _ = CheckKeyFrontGivesTask(stoppingToken, constantsSet);
                 }
             });
 
-            string eventKeyCommand = $"Key = {eventKeyFrontGivesTask}, Command = {eventKeysSet.EventCmd}";
+            string eventKeyCommand = $"Key = {eventKeyFrontGivesTask}, Command = {constantsSet.EventCmd}";
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        private async Task<bool> CheckKeyFrontGivesTask(CancellationToken stoppingToken, EventKeyNames eventKeysSet) // Main of EventKeyFrontGivesTask key
+        private async Task<bool> CheckKeyFrontGivesTask(CancellationToken stoppingToken, ConstantsSet constantsSet) // Main of EventKeyFrontGivesTask key
         {
             _callingNumOfCheckKeyFrontGivesTask++;
             if (_callingNumOfCheckKeyFrontGivesTask > 1)
@@ -120,11 +120,11 @@ namespace BackgroundTasksQueue.Services
 
             if (isExistUpdatedConstants)
             {
-                eventKeysSet = await _constants.ConstantInitializer(stoppingToken); //EventKeyNames
-                Logs.Here().Information("Updated Constant = {0}.", eventKeysSet.TaskEmulatorDelayTimeInMilliseconds);
+                constantsSet = await _constants.ConstantInitializer(stoppingToken); //EventKeyNames
+                Logs.Here().Information("Updated Constant = {0}.", constantsSet.TaskEmulatorDelayTimeInMilliseconds.Value);
             }
 
-            string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
+            string eventKeyFrontGivesTask = constantsSet.EventKeyFrontGivesTask.Value;
             // проверить существование ключа - если ключ есть, надо идти добывать пакет
             Logs.Here().Debug("KeyFrontGivesTask will be checked now.");
             bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(eventKeyFrontGivesTask);
@@ -133,7 +133,7 @@ namespace BackgroundTasksQueue.Services
             if (isExistEventKeyFrontGivesTask)
             {
                 // отменить подписку глубже, когда получится захватить пакет?
-                _ = FreshTaskPackageHasAppeared(eventKeysSet, stoppingToken);
+                _ = FreshTaskPackageHasAppeared(constantsSet, stoppingToken);
                 Logs.Here().Debug("FreshTaskPackageHasAppeared was passed, Subscribe permit = {Flag}.", _flagToBlockEventRun);
 
                 Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", _callingNumOfCheckKeyFrontGivesTask);
@@ -145,10 +145,10 @@ namespace BackgroundTasksQueue.Services
             // всё_протухло - пакетов нет, восстановить подписку (also Subscribe to Update) и ждать погоду
             _flagToBlockEventRun = true;
             //_flagToBlockEventUpdate = true;
-            Logs.Here().Information("This Server finished current work.\n {@S} \n Global {@PR} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, new { Permit = _flagToBlockEventRun });
+            Logs.Here().Information("This Server finished current work.\n {@S} \n Global {@PR} \n", new { Server = constantsSet.BackServerPrefixGuid.Value }, new { Permit = _flagToBlockEventRun });
             Logs.Here().Warning("Next package could not be obtained - there are no more packages in cafe.");
             string packageSeparator1 = new('Z', 80);
-            Logs.Here().Warning("This Server waits new Task Package. \n {@S} \n {1} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, packageSeparator1);
+            Logs.Here().Warning("This Server waits new Task Package. \n {@S} \n {1} \n", new { Server = constantsSet.BackServerPrefixGuid.Value }, packageSeparator1);
 
             Logs.Here().Debug("CheckKeyFrontGivesTask finished No:{0}.", _callingNumOfCheckKeyFrontGivesTask);
             _callingNumOfCheckKeyFrontGivesTask--;
@@ -156,7 +156,7 @@ namespace BackgroundTasksQueue.Services
             return true;
         }
 
-        private async Task<bool> FreshTaskPackageHasAppeared(EventKeyNames eventKeysSet, CancellationToken stoppingToken)
+        private async Task<bool> FreshTaskPackageHasAppeared(ConstantsSet constantsSet, CancellationToken stoppingToken)
         {
             // вернуть все подписки сюда
             // метод состоит из трёх частей -
@@ -165,7 +165,7 @@ namespace BackgroundTasksQueue.Services
             // 3 начинаем обработку - регистрация, помещение задач в очередь и создание нужного количества процессов
             // если всё удачно, возвращаемся сюда, оставив подписку заблокированной
 
-            string tasksPackageGuidField = await _captures.AttemptToCaptureTasksPackage(eventKeysSet, stoppingToken);
+            string tasksPackageGuidField = await _captures.AttemptToCaptureTasksPackage(constantsSet, stoppingToken);
 
             // если flagToBlockEventRun null, сразу возвращаемся с true для возобновления подписки
             if (tasksPackageGuidField != null)
@@ -178,10 +178,10 @@ namespace BackgroundTasksQueue.Services
                 // подписка на ключ пакета задач для контроля выполнения - задачи должны сюда (или в ключ с префиксом) отчитываться о ходе выполнения
                 // убрать подписку на tasksPackageGuidField, запрашивать состояние выполнения из внешнего запроса
                 //SubscribeOnEventCheckPackageProgress(eventKeysSet, tasksPackageGuidField);
-                SubscribeOnEventPackageCompleted(eventKeysSet, tasksPackageGuidField, stoppingToken);
+                SubscribeOnEventPackageCompleted(constantsSet, tasksPackageGuidField, stoppingToken);
                 //Logs.Here().Debug("SubscribeOnEventPackageCompleted subscribed, WhenTasksPackageWasCaptured called. \n {@K}", new { PackageKey = tasksPackageGuidField });
                 //_tasksPackageGuidField = tasksPackageGuidField;
-                _ = _processing.WhenTasksPackageWasCaptured(eventKeysSet, tasksPackageGuidField, stoppingToken);
+                _ = _processing.WhenTasksPackageWasCaptured(constantsSet, tasksPackageGuidField, stoppingToken);
                 Logs.Here().Debug("WhenTasksPackageWasCaptured passed without awaiting.");
 
                 // всегда возвращаем false - задачи отправлены в работу и подписку восстановит модуль контроля завершения пакета
@@ -192,15 +192,15 @@ namespace BackgroundTasksQueue.Services
             // возвращаем true, потому что задачу добыть не удалось, пакетов больше нет и надо ждать следующего вброса
             _flagToBlockEventRun = true;
 
-            Logs.Here().Information("This Server finished current work.\n {@S} \n Global {@PR} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, new { Permit = _flagToBlockEventRun });
+            Logs.Here().Information("This Server finished current work.\n {@S} \n Global {@PR} \n", new { Server = constantsSet.BackServerPrefixGuid.Value }, new { Permit = _flagToBlockEventRun });
             Logs.Here().Warning("Next package could not be obtained - there are no more packages in cafe.");
             string packageSeparator1 = new('-', 80);
-            Logs.Here().Warning("This Server waits new Task Package. \n {@S} \n {1} \n", new { Server = eventKeysSet.BackServerPrefixGuid }, packageSeparator1);
+            Logs.Here().Warning("This Server waits new Task Package. \n {@S} \n {1} \n", new { Server = constantsSet.BackServerPrefixGuid.Value }, packageSeparator1);
 
             return true;
         }
 
-        private void SubscribeOnEventCheckPackageProgress(EventKeyNames eventKeysSet, string tasksPackageGuidField) // NOT USED
+        private void SubscribeOnEventCheckPackageProgress(ConstantsSet constantsSet, string tasksPackageGuidField) // NOT USED
         {
             Logs.Here().Information("BackServer subscribed on {@E}.", new { EventKey = tasksPackageGuidField });
 
@@ -211,7 +211,7 @@ namespace BackgroundTasksQueue.Services
 
             _keyEvents.Subscribe(tasksPackageGuidField, async (string key, KeyEvent cmd) =>
             {
-                if (cmd == eventKeysSet.EventCmd && flagToBlockEventCheckPackageProgress)
+                if (cmd == constantsSet.EventCmd && flagToBlockEventCheckPackageProgress)
                 {
                     flagToBlockEventCheckPackageProgress = false;
                     Logs.Here().Debug("CheckingAllTasksCompletion called - Key {Key} with command {Cmd} was received, Event permit = {Flag}.", tasksPackageGuidField, cmd, flagToBlockEventCheckPackageProgress);
@@ -221,7 +221,7 @@ namespace BackgroundTasksQueue.Services
                     // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
                     // возвращаем состояние выполнения - ещё выполняется или уже окончено
                     // если выполняется, то true и им же возобновляем эту подписку
-                    bool allTasksCompleted = await _control.CheckingAllTasksCompletion(eventKeysSet, tasksPackageGuidField);
+                    bool allTasksCompleted = await _control.CheckingAllTasksCompletion(constantsSet, tasksPackageGuidField);
                     Logs.Here().Debug("CheckingAllTasksCompletion returned Event permit = {Flag}.", flagToBlockEventCheckPackageProgress);
 
 
@@ -236,38 +236,38 @@ namespace BackgroundTasksQueue.Services
                 }
             });
 
-            string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {eventKeysSet.EventCmd}";
+            string eventKeyCommand = $"Key = {tasksPackageGuidField}, Command = {constantsSet.EventCmd}";
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        private void SubscribeOnEventPackageCompleted(EventKeyNames eventKeysSet, string tasksPackageGuidField, CancellationToken stoppingToken)
+        private void SubscribeOnEventPackageCompleted(ConstantsSet constantsSet, string tasksPackageGuidField, CancellationToken stoppingToken)
         {
             // подписка на окончание единичной задачи (для проверки, все ли задачи закончились)
             _flagToBlockEventCompleted = true;
-            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
-            string prefixPackageCompleted = eventKeysSet.PrefixPackageCompleted;
+            string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
+            string prefixPackageCompleted = constantsSet.PrefixPackageCompleted.Value;
             string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
             Logs.Here().Information("BackServer subscribed on EventKey Server Guid. \n {@E}", new { EventKey = prefixCompletedTasksPackageGuid });
 
             _keyEvents.Subscribe(prefixCompletedTasksPackageGuid, (string key, KeyEvent cmd) => // async before action
             {
-                if (cmd == eventKeysSet.EventCmd && _flagToBlockEventCompleted)
+                if (cmd == constantsSet.EventCmd && _flagToBlockEventCompleted)
                 {
                     _flagToBlockEventCompleted = false;
                     // параллельно заканчивается много пакетов и по каждому окончанию бегаем проверять новые пакеты, а они давно кончились
                     // не очень понятно, каким образом пакеты выполняются параллельно - в этом надо разобраться
                     
                     Logs.Here().Debug("SubscribeOnEventPackageCompleted was called with event ---current_package_finished---.");
-                    _ = CheckKeyFrontGivesTask(stoppingToken, eventKeysSet);
+                    _ = CheckKeyFrontGivesTask(stoppingToken, constantsSet);
                     Logs.Here().Debug("CheckKeyFrontGivesTask was called and passed.");
                 }
             });
 
-            string eventKeyCommand = $"Key = {prefixCompletedTasksPackageGuid}, Command = {eventKeysSet.EventCmd}";
+            string eventKeyCommand = $"Key = {prefixCompletedTasksPackageGuid}, Command = {constantsSet.EventCmd}";
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 
-        public async Task ProcessingEventCompletedTask(EventKeyNames eventKeysSet)//, string tasksPackageGuidField)
+        public async Task ProcessingEventCompletedTask(ConstantsSet constantsSet)//, string tasksPackageGuidField)
         {
             //bool unsolvedTasksStillLeft = false;
             // пока активно событие подписки на окончание задачи, проверяем общее состояние пакета
@@ -311,9 +311,9 @@ namespace BackgroundTasksQueue.Services
         }
 
         // по ключу сервера можно дополнительно контролировать окончание пакета, если удалять поле пакета после его окончания (но как?)
-        public void SubscribeOnEventServerGuid(EventKeyNames eventKeysSet) // NOT USED
+        public void SubscribeOnEventServerGuid(ConstantsSet constantsSet) // NOT USED
         {
-            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
+            string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
             Logs.Here().Information("BackServer subscribed on {@E}.", new { EventKey = backServerPrefixGuid });
 
 
@@ -323,7 +323,7 @@ namespace BackgroundTasksQueue.Services
 
             _keyEvents.Subscribe(backServerPrefixGuid, async (string key, KeyEvent cmd) =>
             {
-                if (cmd == eventKeysSet.EventCmd) // && flagToBlockEventCheck)
+                if (cmd == constantsSet.EventCmd) // && flagToBlockEventCheck)
                 {
                     // временная защёлка, чтобы подписка выполнялась один раз - нет
                     //flagToBlockEventCheck = false;
@@ -349,7 +349,7 @@ namespace BackgroundTasksQueue.Services
                 }
             });
 
-            string eventKeyCommand = $"Key = {backServerPrefixGuid}, Command = {eventKeysSet.EventCmd}";
+            string eventKeyCommand = $"Key = {backServerPrefixGuid}, Command = {constantsSet.EventCmd}";
             Logs.Here().Debug("You subscribed on EventSet. \n {@ES}", new { EventSet = eventKeyCommand });
         }
 

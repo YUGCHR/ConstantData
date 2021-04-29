@@ -18,11 +18,11 @@ namespace BackgroundTasksQueue
 
         Task<Func<CancellationToken, Task>> DequeueAsync(CancellationToken cancellationToken);
 
-        public int AddCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd);
+        public int AddCarrierProcesses(ConstantsSet constantsSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd);
 
-        public int CancelCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd);
+        public int CancelCarrierProcesses(ConstantsSet constantsSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd);
 
-        public int CarrierProcessesCount(EventKeyNames eventKeysSet, int requiredProcessesCountToAdd);
+        public int CarrierProcessesCount(ConstantsSet constantsSet, int requiredProcessesCountToAdd);
     }
 
     public class BackgroundTaskQueue : IBackgroundTaskQueue
@@ -76,7 +76,7 @@ namespace BackgroundTasksQueue
         // надо ли ждать, когда все задачи загрузятся? особого смысла нет
         // можно добавить переключатель автоматически/вручную и ручную (+/-) регулировку количества процессов в настройках веб-интерфейса
 
-        public int AddCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd)
+        public int AddCarrierProcesses(ConstantsSet constantsSet, CancellationToken stoppingToken, int requiredProcessesCountToAdd)
         {
             // можно поставить блокировку одновременного вызова методов добавления/удаления
 
@@ -119,7 +119,7 @@ namespace BackgroundTasksQueue
             return checkedProcessesCount;
         }
 
-        public int CancelCarrierProcesses(EventKeyNames eventKeysSet, CancellationToken stoppingToken, int requiredProcessesCountToCancel)
+        public int CancelCarrierProcesses(ConstantsSet constantsSet, CancellationToken stoppingToken, int requiredProcessesCountToCancel)
         {
             int totalProcessesCount = _existingCarrierProcesses.Count;
             Logs.Here().Debug("CarrierProcesses removing is started, necessary excess count = {0}, total count was {1}.", requiredProcessesCountToCancel, totalProcessesCount);
@@ -155,7 +155,7 @@ namespace BackgroundTasksQueue
             return 0;
         }
 
-        public int CarrierProcessesCount(EventKeyNames eventKeysSet, int requiredProcessesCountToAdd)
+        public int CarrierProcessesCount(ConstantsSet constantsSet, int requiredProcessesCountToAdd)
         {
             int totalProcessesCount = _existingCarrierProcesses.Count;
             Logs.Here().Debug("CarrierProcesses total count is {0}.", totalProcessesCount);

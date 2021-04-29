@@ -12,7 +12,7 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksPackageCaptureService
     {
-        public Task<string> AttemptToCaptureTasksPackage(EventKeyNames eventKeysSet, CancellationToken stoppingToken);
+        public Task<string> AttemptToCaptureTasksPackage(ConstantsSet constantsSet, CancellationToken stoppingToken);
     }
 
     public class TasksPackageCaptureService : ITasksPackageCaptureService
@@ -33,11 +33,11 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksPackageCaptureService>();
 
-        public async Task<string> AttemptToCaptureTasksPackage(EventKeyNames eventKeysSet, CancellationToken stoppingToken) // Main for Capture
+        public async Task<string> AttemptToCaptureTasksPackage(ConstantsSet constantsSet, CancellationToken stoppingToken) // Main for Capture
         {
-            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
-            string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
-            string eventKeyBacksTasksProceed = eventKeysSet.EventKeyBacksTasksProceed;
+            string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
+            string eventKeyFrontGivesTask = constantsSet.EventKeyFrontGivesTask.Value;
+            string eventKeyBacksTasksProceed = constantsSet.EventKeyBacksTasksProceed.Value;
             Logs.Here().Debug("BackServer started AttemptToCaptureTasksPackage.");
 
             // начало главного цикла сразу после срабатывания подписки, условие - пока существует ключ распределения задач
@@ -83,7 +83,7 @@ namespace BackgroundTasksQueue.Services
                 } 
 
                 // выбираем случайное поле пакета задач - скорее всего, первая попытка будет только с одним полем, остальные не успеют положить и будет драка, но на второй попытке уже разойдутся по разным полям
-                (string tasksPackageGuidField, string tasksPackageGuidValue) = tasksList.ElementAt(DiceRoll(eventKeysSet, tasksListCount));
+                (string tasksPackageGuidField, string tasksPackageGuidValue) = tasksList.ElementAt(DiceRoll(constantsSet, tasksListCount));
 
                 // проверяем захват задачи - пробуем удалить выбранное поле ключа                
                 // в дальнейшем можно вместо Remove использовать RedLock
@@ -115,7 +115,7 @@ namespace BackgroundTasksQueue.Services
             return null; // задача не досталась
         }
 
-        private static int DiceRoll(EventKeyNames eventKeysSet, int tasksListCount)
+        private static int DiceRoll(ConstantsSet constantsSet, int tasksListCount)
         {
             // базовое значение кубика - если вдруг одна задача
             int diceRoll = (tasksListCount - 1);
@@ -124,7 +124,7 @@ namespace BackgroundTasksQueue.Services
             // если осталась одна задача, кубик бросать не надо
             if (tasksListCount > 1)
             {
-                int diceRollRow = RandomProvider.Next(0, eventKeysSet.RandomRangeExtended);
+                int diceRollRow = RandomProvider.Next(0, constantsSet.RandomRangeExtended.Value);
                 Logs.Here().Debug("DiceRollRow rolled {@F}.", new { RowValue = diceRollRow });
                 diceRoll = diceRollRow % (tasksListCount - 1);
             }

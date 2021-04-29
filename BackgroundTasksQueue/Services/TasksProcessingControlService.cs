@@ -11,8 +11,8 @@ namespace BackgroundTasksQueue.Services
 {
     public interface ITasksProcessingControlService
     {
-        public Task<(bool, int)> CheckingPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
-        public Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField);
+        public Task<(bool, int)> CheckingPackageCompletion(ConstantsSet constantsSet, string tasksPackageGuidField);
+        public Task<bool> CheckingAllTasksCompletion(ConstantsSet constantsSet, string tasksPackageGuidField);
     }
 
     public class TasksProcessingControlService : ITasksProcessingControlService
@@ -33,17 +33,17 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksProcessingControlService>();
         // Verbose
-        public async Task<(bool, int)> CheckingPackageCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        public async Task<(bool, int)> CheckingPackageCompletion(ConstantsSet constantsSet, string tasksPackageGuidField)
         {
             // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
             // если пакет в работе, вернуть true, если пакет закончен - false
-            string backServerPrefixGuid = eventKeysSet.BackServerPrefixGuid;
+            string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
             int totalUnsolvedTasksLeft = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField); // forsake
 
             return (totalUnsolvedTasksLeft > 0, totalUnsolvedTasksLeft);
         }
 
-        public async Task<bool> CheckingAllTasksCompletion(EventKeyNames eventKeysSet, string tasksPackageGuidField)
+        public async Task<bool> CheckingAllTasksCompletion(ConstantsSet constantsSet, string tasksPackageGuidField)
         {
             // проверяем текущее состояние пакета задач, если ещё выполняется, возобновляем подписку на ключ пакета
             // если выполнение окончено, подписку возобновляем или нет? но тогда восстанавливаем ключ подписки на вброс пакетов задач
