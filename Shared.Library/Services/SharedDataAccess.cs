@@ -1,115 +1,183 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using CachingFramework.Redis.Contracts;
 using CachingFramework.Redis.Contracts.Providers;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using Shared.Library.Models;
 
 namespace Shared.Library.Services
 {
     public interface ISharedDataAccess
     {
-        public (string, string) FetchBaseConstants([CallerMemberName] string currentMethodNameName = "");
-        public Task<EventKeyNames> FetchAllConstants(CancellationToken cancellationToken, int loggerIndexBase);
+        public (string, string, string) FetchBaseConstants([CallerMemberName] string currentMethodNameName = "");
+        public Task<ConstantsSet> DeliveryOfUpdatedConstants(CancellationToken cancellationToken);
+        public bool IsExistUpdatedConstants();
     }
 
     public class SharedDataAccess : ISharedDataAccess
     {
-
-        private readonly ILogger<SharedDataAccess> _logger;
         private readonly ICacheProviderAsync _cache;
         private readonly IKeyEventsProvider _keyEvents;
 
         public SharedDataAccess(
-            ILogger<SharedDataAccess> logger,
             ICacheProviderAsync cache,
             IKeyEventsProvider keyEvents)
         {
-            _logger = logger;
             _cache = cache;
             _keyEvents = keyEvents;
         }
 
-        private const string StartConstantKey = "constants";
-        private const string StartConstantField = "all";
-        private const KeyEvent SubscribedKeyEvent = KeyEvent.HashSet;
-        private bool _allConstantsAppeared = false;
+        private static Serilog.ILogger Logs => Serilog.Log.ForContext<SharedDataAccess>();
 
-        public (string, string) FetchBaseConstants([CallerMemberName] string currentMethodNameName = "") // May be will cause problem with Docker
+        // эти константы должны быть объявлены локально (только в одном месте), чтобы быть одинаковыми во всех проектах
+        private const string StartConstantKey = "constants";
+        private const string ConstantsStartLegacyField = "all";
+        private const string ConstantsStartGuidField = "constantsGuidField";
+        private const KeyEvent SubscribedKeyEvent = KeyEvent.HashSet;
+
+        private bool _constantsUpdateIsAppeared = false;
+        private bool _wasSubscribedOnConstantsUpdate = false;
+
+        // метод только для сервера констант - чтобы он узнал базовые ключ и поле, куда класть текущий ключ констант
+        public (string, string, string) FetchBaseConstants([CallerMemberName] string currentMethodNameName = "") // May be will cause problem with Docker
         {
             // if problem with Docker can use token
-            if (currentMethodNameName == "ConstantsMountingMonitor") return (StartConstantKey, StartConstantField);
-            _logger.LogError(710070, "FetchBaseConstants was called by wrong method - {0}.", currentMethodNameName);
-            return (null, null);
-        }
-
-        public async Task<EventKeyNames> FetchAllConstants(CancellationToken cancellationToken, int loggerIndexBase)
-        {
-            // проверить, есть ли ключ
-            bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(StartConstantKey);
-
-            if (isExistEventKeyFrontGivesTask)
+            const string actualMethodNameWhichCanCallThis = "ConstantsMountingMonitor";
+            if (currentMethodNameName != actualMethodNameWhichCanCallThis)
             {
-                return await _cache.GetHashedAsync<EventKeyNames>(StartConstantKey, StartConstantField);
+                //_logger.LogError(710070, "FetchBaseConstants was called by wrong method - {0}.", currentMethodNameName);
+                Logs.Here().Error("FetchBaseConstants was called by wrong method {@M}.", new { Method = currentMethodNameName });
+                return (null, null, null);
             }
-
-            int thisIndex = loggerIndexBase * 1000 + 100;
-            _logger.LogInformation(thisIndex, "eventKeysSet was NOT Init.");
-            // и что делать, если нет - подписаться?
-            SubscribeOnAllConstantsEvent(loggerIndexBase);
-            // обратиться туда же и ждать появления констант
-            thisIndex = loggerIndexBase * 1000 + 300;
-            _logger.LogInformation(thisIndex, "SharedDataAccess cannot find constants and will wait them!");
-
-            return await FetchAllConstantsWhenAppeared(cancellationToken, loggerIndexBase);
+            return (StartConstantKey, ConstantsStartLegacyField, ConstantsStartGuidField);
         }
 
-        private void SubscribeOnAllConstantsEvent(int loggerIndexBase)
-        {
-            // можно предусмотреть повторный вызов подписки
-            int thisIndex = loggerIndexBase * 1000 + 200;
-            _logger.LogInformation(thisIndex, "SharedDataAccess subscribed on key {0}.", StartConstantKey);
+        // этот код - первое, что выполняется на старте - отсюда должны вернуться с константами
 
-            _keyEvents.Subscribe(StartConstantKey, (string key, KeyEvent cmd) =>
+        // если констант нет, подписаться и ждать, если подписка здесь, то это общий код
+        // можно вернуться без констант, но с ключом для подписки и подписаться в классе подписок - чтобы всё было в одном месте
+        // кроме того, это позволит использовать один и тот же универсальный обработчик для всех подписок
+        // наверное, разрывать процесс получения констант нехорошо - придётся у всех потребителей повторять подписку в своих классах
+        // поэтому подписку оставляем здесь
+        // тут должно быть законченное решение не только первоначального получения констант, но и их обновления
+        // в подписке ниже поднимем флаг, что надо проверить обновление
+        // и когда (если) приложение заглянет сюда проверить константы, запустить получение обновлённого ключа
+        // по флагу ничего не проверять, только брать ключ и из него константы
+        // сбросить флаг в начале проверки - в цикле while(этот флаг) и если за время проверки подписка опять сработает, то взять константы ещё раз
+        
+        // стартовый метод (местный main)
+        public async Task<ConstantsSet> DeliveryOfUpdatedConstants(CancellationToken cancellationToken)
+        {
+            // проверить наличие базового ключа, проверить наличие поля обновлений, можно в одном методе
+            // можно в первом проверить - если ключ есть, вернуть - старое поле, если нет нового и новое поле, если оно есть
+            // если ключа нет вообще - null
+            // следующий шаг - подписаться на ключ в любом варианте или можно подписаться в первую очередь
+            // если ключ есть - достать значение поля - это будет или набор или строка
+            // если набор - вернуть его и отменить подписку (значит, работает старый вариант констант)
+            // если строка, использовать её как ключ (или поле?) и достать обновляемый набор
+
+            // если ещё не подписаны (первый вызов) - подписаться
+            // можно получать информацию о первом вызове от вызывающего метода - пусть проверит наличие констант и скажет
+            // только накладные будут выше, наверное - зато без лишнего глобального флага
+
+            // ограничим использование глобальных констант
+            string startConstantKey = StartConstantKey;
+            string constantsStartLegacyField = ConstantsStartLegacyField;
+            string constantsStartGuidField = ConstantsStartGuidField;
+            KeyEvent eventToSubscribe = SubscribedKeyEvent;
+
+            // проверить, есть ли ключ вообще
+            bool isExistStartConstantKey = await _cache.KeyExistsAsync(startConstantKey);
+
+            ConstantsSet constantsSet = await FetchAllConstants(cancellationToken, isExistStartConstantKey, startConstantKey, constantsStartLegacyField, constantsStartGuidField, eventToSubscribe);
+
+            return constantsSet;
+        }
+
+        public bool IsExistUpdatedConstants()
+        {
+            return _constantsUpdateIsAppeared;
+        }
+        
+        private async Task<ConstantsSet> FetchAllConstants(CancellationToken cancellationToken, bool isExistStartConstantKey, string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField, KeyEvent eventToSubscribe)
+        {
+            while (!cancellationToken.IsCancellationRequested)
             {
-                if (cmd == SubscribedKeyEvent)
+                if (isExistStartConstantKey)
                 {
-                    // при появлении ключа срабатывает подписка и делаем глобальное поле тру
-                    thisIndex = loggerIndexBase * 1000 + 210;
-                    _logger.LogInformation(thisIndex, "\n --- Key {Key} with command {Cmd} was received.", StartConstantKey, cmd);
-                    //((AutoResetEvent)stateInfo).Set();
-                    _allConstantsAppeared = true;
-                    thisIndex = loggerIndexBase * 1000 + 220;
-                    _logger.LogInformation(thisIndex, "All Constants appeared = {0}.", _allConstantsAppeared);
+                    // если ключ есть, то есть ли поле обновляемых констант (и в нем поле гуид)
+                    string dataServerPrefixGuid = await _cache.GetHashedAsync<string>(startConstantKey, constantsStartGuidField);
+                    
+                    if (dataServerPrefixGuid == null)
+                    {
+                        // обновляемых констант нет в этой версии (или ещё нет), достаём старые и возвращаемся
+                        return await _cache.GetHashedAsync<ConstantsSet>(startConstantKey, constantsStartLegacyField);
+                    }
+
+                    if (!_wasSubscribedOnConstantsUpdate)
+                    {
+                        SubscribeOnAllConstantsEvent(dataServerPrefixGuid, eventToSubscribe);
+                    }
+
+                    // есть обновлённые константы, достаём их, сбрасываем флаг наличия обновления и возвращаемся
+                    ConstantsSet constantsSet = await _cache.GetHashedAsync<ConstantsSet>(dataServerPrefixGuid, constantsStartGuidField);
+                    _constantsUpdateIsAppeared = false;
+                    return constantsSet;
+                }
+
+                double timeToWaitTheConstants = 1;
+                Logs.Here().Warning("SharedDataAccess cannot find constants and still waits them {0} sec more.", timeToWaitTheConstants);
+                try
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(timeToWaitTheConstants), cancellationToken);
+                }
+                catch (OperationCanceledException)
+                {
+                    // Prevent throwing if the Delay is cancelled
+                }
+            }
+            // сюда можем попасть только при завершении сервера, константы уже никому не нужны
+            return null;
+        }
+
+        // в этой подписке выставить флаг класса, что надо проверить обновление
+        private void SubscribeOnAllConstantsEvent(string keyGuid, KeyEvent eventToSubscribe)
+        {
+            _wasSubscribedOnConstantsUpdate = true;
+            Logs.Here().Information("SharedDataAccess will be subscribed on keyGuid {0}.", keyGuid);
+
+            //// в константах подписку на ключ сервера сделать в самом начале и сразу проверить наличие констант на этом ключе, если есть, поднять флаг не в самой подписке, а ещё в подписке на подписку
+            //if (isExistStartConstantKey)
+            //{
+            //    _constantsUpdateIsAppeared = true;
+            //}
+
+            _keyEvents.Subscribe(keyGuid, (string key, KeyEvent cmd) =>
+            {
+                if (cmd == eventToSubscribe)
+                {
+                    Logs.Here().Information("Key {Key} with command {Cmd} was received.", keyGuid, cmd);
+
+                    _constantsUpdateIsAppeared = true;
+
+                    Logs.Here().Information("Constants Update is appeared = {0}.", _constantsUpdateIsAppeared);
                 }
             });
-
-            string eventKeyCommand = $"Key = {StartConstantKey}, Command = {SubscribedKeyEvent}";
-            thisIndex = loggerIndexBase * 1000 + 230;
-            _logger.LogInformation(thisIndex, "You subscribed on event - {EventKey}.", eventKeyCommand);
+            Logs.Here().Information("SharedDataAccess was subscribed on keyGuid {0}.", keyGuid);
         }
+    }
 
-        private async Task<EventKeyNames> FetchAllConstantsWhenAppeared(CancellationToken cancellationToken, int loggerIndexBase)
+    public static class LoggerExtensions
+    {
+        // https://stackoverflow.com/questions/29470863/serilog-output-enrich-all-messages-with-methodname-from-which-log-entry-was-ca/46905798
+
+        public static ILogger Here(this ILogger logger, [CallerMemberName] string memberName = "", [CallerLineNumber] int sourceLineNumber = 0)
+        //[CallerFilePath] string sourceFilePath = "",
         {
-            //static AutoResetEvent autoEvent = new AutoResetEvent(false);
-            //autoEvent.WaitOne();
-            // когда поле станет тру, значит ключ появился и можно идти за константами
-            int count = 0;
-            while (!cancellationToken.IsCancellationRequested && !_allConstantsAppeared)
-            {
-                // wait when _allConstantsAppeared become true
-                await Task.Delay(10, cancellationToken);
-                count++;
-                if (count > 1000)
-                {
-                    int thisIndex = loggerIndexBase * 1000 + 300;
-                    _logger.LogInformation(thisIndex, "SharedDataAccess still waits the constants! - {0} sec.", count/100);
-                    count = 0;
-                }
-            }
-            // замыкается кольцо - то ли это, что ожидалось?
-            return await FetchAllConstants(cancellationToken, loggerIndexBase);
+            return logger.ForContext("MemberName", memberName).ForContext("LineNumber", sourceLineNumber);
+            //.ForContext("FilePath", sourceFilePath)
         }
     }
 }

@@ -10,7 +10,7 @@ namespace FrontServerEmulation.Services
     public interface IOnKeysEventsSubscribeService
     {
         public Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun, TimeSpan ttl);
-        public void SubscribeOnEventFrom(EventKeyNames eventKeysSet);        
+        public void SubscribeOnEventFrom(ConstantsSet constantsSet);        
     }
 
     public class OnKeysEventsSubscribeService : IOnKeysEventsSubscribeService
@@ -43,11 +43,11 @@ namespace FrontServerEmulation.Services
             return eventGuidFieldRun;
         }
 
-        public void SubscribeOnEventFrom(EventKeyNames eventKeysSet) // _logger = 201
+        public void SubscribeOnEventFrom(ConstantsSet constantsSet) // _logger = 201
         {
             // ждёт команды с консоли с количеством генерируемых пакетов            
-            string eventKey = eventKeysSet.EventKeyFrom;
-            KeyEvent eventCmd = eventKeysSet.EventCmd;
+            string eventKey = constantsSet.EventKeyFrom.Value;
+            KeyEvent eventCmd = constantsSet.EventCmd;
 
             _keyEvents.Subscribe(eventKey, async (string key, KeyEvent cmd) =>
             {
@@ -55,7 +55,7 @@ namespace FrontServerEmulation.Services
                 {
                     // по получению начинает цикл создания пакетов с задачами
                     _logger.LogInformation("Key {Key} with command {Cmd} was received.", eventKey, cmd);
-                    int tasksPackagesCount = await _front.FrontServerEmulationMain(eventKeysSet);
+                    int tasksPackagesCount = await _front.FrontServerEmulationMain(constantsSet);
                     _logger.LogInformation("Tasks Packages created in count = {0}.", tasksPackagesCount);
 
                 }

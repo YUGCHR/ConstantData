@@ -2,15 +2,17 @@
   "SettingConstants": {
     "Constants": {
       "RecordActualityLevel": 6, // current model version of Db data structure
-      "TaskDelayTimeInSeconds": 1, // delay time to emulate upload of a real book - in seconds
-      "BalanceOfTasksAndProcesses": 5, // соотношение количества задач и процессов для их выполнения на back-processes-servers (количества задач разделить на это число и сделать столько процессов)
+      "TaskEmulatorDelayTimeInMilliseconds": 300, // delay time to emulate upload of a real book - in seconds
+      "RandomRangeExtended": 1000000, // int diceRollRow = RandomProvider.Next(0, RandomRangeExtended);
+      "BalanceOfTasksAndProcesses": 2, // соотношение количества задач и процессов для их выполнения на back-processes-servers (количества задач разделить на это число и сделать столько процессов)
       "MaxProcessesCountOnServer": 3, // максимальное количество процессов на back-processes-servers (минимальное - 1)
       "MinBackProcessesServersCount": 2 // минимальное количество бэк-серверов при проверке на старте фронта
     },
     "RedisKeysTimes": {
+      "commonKeyTimeDays": 1,
       "eventKeyFromTimeDays": 1,
       "eventKeyBackReadinessTimeDays": 1,
-      "eventKeyFrontGivesTaskTimeDays": 3,
+      "eventKeyFrontGivesTaskTimeDays": 1,
       "eventKeyBackServerMainTimeDays": 1,
       "eventKeyBackServerAuxiliaryTimeDays": 1,
       "PercentsKeysExistingTimeInMinutes": 5
@@ -20,8 +22,11 @@
       "eventFieldFrom": "count",
       "eventKeyBackReadiness": "key-event-back-processes-servers-readiness-list",
       "eventKeyFrontGivesTask": "key-event-front-server-gives-task-package",
+      "eventKeyUpdateConstants": "update", //"key-event-constants-updating-is-necessary",
       "prefixRequest": "request",
       "prefixPackage": "package",
+      "prefixPackageControl": "control", // key for all tasks to delete their fields when is completed
+      "prefixPackageCompleted": "completed", // key to send event all_tasks_were_completed
       "prefixTask": "task",
       "prefixBackServer": "backserver",
       "prefixProcessAdd": "process:add",
