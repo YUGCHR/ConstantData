@@ -6,6 +6,7 @@ using System.Reflection;
 using CachingFramework.Redis.Contracts;
 using CachingFramework.Redis.Contracts.Providers;
 using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace ConstantData.Services
 {

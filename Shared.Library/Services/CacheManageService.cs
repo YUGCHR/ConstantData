@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Shared.Library.Models;
 using CachingFramework.Redis.Contracts.Providers;
+using Shared.Library.Models;
 
-namespace ConstantData.Services
+namespace Shared.Library.Services
 {
     public interface ICacheManageService
     {

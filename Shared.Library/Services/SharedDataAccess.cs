@@ -100,7 +100,11 @@ namespace Shared.Library.Services
         {
             return _constantsUpdateIsAppeared;
         }
-        
+
+
+        // не умеет проверять появился ли ключ, потому что проверка осталась выше
+
+
         private async Task<ConstantsSet> FetchAllConstants(CancellationToken cancellationToken, bool isExistStartConstantKey, string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField, KeyEvent eventToSubscribe)
         {
             while (!cancellationToken.IsCancellationRequested)
