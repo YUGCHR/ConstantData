@@ -47,7 +47,7 @@ namespace FrontServerEmulation
 
         public async Task Monitor() // _logger = 100
         {
-            EventKeyNames eventKeysSet = await _data.DeliveryOfUpdatedConstants(_cancellationToken);
+            ConstantsSet constantsSet = await _data.DeliveryOfUpdatedConstants(_cancellationToken);
             
 
             // на старте проверить наличие ключа с константами
@@ -67,7 +67,7 @@ namespace FrontServerEmulation
             // ещё менять флаг разрешения задач
             // это уже функции будущего диспетчера
 
-            IDictionary<string, string> tasksList = await _cache.GetHashedAllAsync<string>(eventKeysSet.EventKeyBackReadiness);
+            IDictionary<string, string> tasksList = await _cache.GetHashedAllAsync<string>(constantsSet.EventKeyBackReadiness.Value);
             int tasksListCount = tasksList.Count;
             if (tasksListCount < serverCount)
             {
@@ -103,7 +103,7 @@ namespace FrontServerEmulation
 
             
             // тут необходимо очистить ключ EventKeyFrontGivesTask, может быть временно, для отладки
-            string eventKeyFrontGivesTask = eventKeysSet.EventKeyFrontGivesTask;
+            string eventKeyFrontGivesTask = constantsSet.EventKeyFrontGivesTask.Value;
             _logger.LogInformation(1005, "Key eventKeyFrontGivesTask = {0} fetched from constants", eventKeyFrontGivesTask);
 
             // можно не проверять наличие ключа, а сразу пробовать удалить, там внутри есть своя проверка
@@ -142,7 +142,7 @@ namespace FrontServerEmulation
             // собственно, это пока всё (потом можно добавить случайную задержку между генерацией отдельных пакетов)
 
 
-            _subscribe.SubscribeOnEventFrom(eventKeysSet);
+            _subscribe.SubscribeOnEventFrom(constantsSet);
 
             while (IsCancellationNotYet())
             {

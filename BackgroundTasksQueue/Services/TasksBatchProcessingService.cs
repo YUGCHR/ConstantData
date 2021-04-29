@@ -258,7 +258,7 @@ namespace BackgroundTasksQueue.Services
                 var (singleTaskGuid, taskDescription) = t;
 
                 // регистрируем задачи на ключе контроля выполнения пакета (prefixControlTasksPackageGuid)
-                string prefixControlTasksPackageGuid = $"{constantsSet.PrefixPackageControl}:{tasksPackageGuidField}";
+                string prefixControlTasksPackageGuid = $"{constantsSet.PrefixPackageControl.Value}:{tasksPackageGuidField}";
                 await _cache.SetHashedAsync(prefixControlTasksPackageGuid, singleTaskGuid, sequentialSingleTaskNumber, TimeSpan.FromDays(constantsSet.PrefixBackServer.LifeTime));
                 Logs.Here().Debug("Single task {0} was registered on Completed Control Key. \n {@P} \n {@S}", sequentialSingleTaskNumber, new { PackageControl = prefixControlTasksPackageGuid }, new { SingleTask = singleTaskGuid });
                 sequentialSingleTaskNumber++;
