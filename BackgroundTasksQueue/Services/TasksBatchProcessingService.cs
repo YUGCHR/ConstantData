@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CachingFramework.Redis.Contracts.Providers;
-using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
 
 namespace BackgroundTasksQueue.Services
@@ -30,8 +27,6 @@ namespace BackgroundTasksQueue.Services
             _taskQueue = taskQueue;
             _cache = cache;
         }
-
-        //public IBackgroundTaskQueue TaskQueue { get; }
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<TasksBatchProcessingService>();
 
@@ -70,7 +65,6 @@ namespace BackgroundTasksQueue.Services
             // тогда процессы уже будут готовы
 
             int actualProcessesCountAfterCorrection = await CarrierProcessesSolver(tasksPackageGuidField, constantsSet, stoppingToken);
-
 
             Logs.Here().Verbose("TasksFromKeysToQueue called.");
             int taskPackageCount = await TasksFromKeysToQueue(constantsSet, tasksPackageGuidField, stoppingToken);

@@ -92,8 +92,6 @@ namespace BackgroundTasksQueue.Services
             string processCountPrefixGuid = $"{prefixProcessCount}:{backServerGuid}"; // process:count:(this server guid)
             constantsSet.ProcessCountPrefixGuid.Value = processCountPrefixGuid;
 
-            //string processAddPrefixGuid = eventKeysSet.ProcessAddPrefixGuid;
-            //string eventFieldBack = eventKeysSet.EventFieldBack;
             // инициализовать поле общего количества процессов при подписке - можно перенести в инициализацию, set "CurrentProcessesCount" in constants
             //await _cache.SetHashedAsync<int>(processAddPrefixGuid, eventFieldBack, 0, TimeSpan.FromDays(eventKeysSet.EventKeyBackReadinessTimeDays));
 
