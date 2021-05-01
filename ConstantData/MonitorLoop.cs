@@ -59,6 +59,7 @@ namespace ConstantData
             await _cache.SetStartConstants(constantsSet.ConstantsVersionBase, constantsStartLegacyField, constantsSet);
             Logs.Here().Information("ConstantData sent constants to {@K} / {@F}.", new { Key = constantsSet.ConstantsVersionBase.Value }, new { Field = constantsStartLegacyField });
 
+
             // сервер констант имеет свой гуид и это ключ обновляемых констант
             // его он пишет в поле для нового гуид-ключа для всех
             // на этот ключ уже можно подписаться, он стабильный на всё время существования сервера
@@ -75,6 +76,15 @@ namespace ConstantData
             // можно разделить набор на два - изменяемый и постоянный
             // постоянные инициализовать через инит, а остальные добавлять по ходу - по ключам изменения
             // поэтому сервер получит новые константы после захвата пакета
+
+
+            // проверяем наличие старого ключа гуид-констант и если он есть, удаляем его
+            string oldGuidConstants = await _cache.FetchHashedAsync<string>(constantsSet.ConstantsVersionBase.Value, constantsStartGuidField);
+            if (oldGuidConstants != null)
+            {
+                bool oldGuidConstantsWasDeleted = await _cache.DelKeyAsync(oldGuidConstants);
+                Logs.Here().Information("Old Constants {0} was deleted - {1}.", oldGuidConstants, oldGuidConstantsWasDeleted);
+            }
 
             // записываем в стартовый ключ и новое поле гуид-ключ обновляемых констант
             await _cache.SetConstantsStartGuidKey(constantsSet.ConstantsVersionBase, constantsStartGuidField, dataServerPrefixGuid);

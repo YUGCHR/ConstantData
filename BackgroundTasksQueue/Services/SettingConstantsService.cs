@@ -11,6 +11,7 @@ namespace BackgroundTasksQueue.Services
     public interface ISettingConstants
     {
         public bool IsExistUpdatedConstants();
+        public void SubscribeOnBaseConstantEvent();
         public Task<ConstantsSet> ConstantInitializer(CancellationToken stoppingToken);
     }
 
@@ -44,6 +45,11 @@ namespace BackgroundTasksQueue.Services
         public bool IsExistUpdatedConstants()
         {
             return _data.IsExistUpdatedConstants();
+        }
+
+        public void SubscribeOnBaseConstantEvent()
+        {
+            _data.SubscribeOnBaseConstantEvent();
         }
 
         public async Task<ConstantsSet> ConstantInitializer(CancellationToken stoppingToken)

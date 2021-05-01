@@ -8,6 +8,7 @@ using CachingFramework.Redis.Contracts;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace BackgroundTasksQueue.Services
 {
@@ -19,7 +20,7 @@ namespace BackgroundTasksQueue.Services
     public class OnKeysEventsSubscribeService : IOnKeysEventsSubscribeService
     {
         private readonly ISettingConstants _constants;
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
         private readonly IKeyEventsProvider _keyEvents;
         private readonly ITasksPackageCaptureService _captures;
         private readonly ITasksBatchProcessingService _processing;
@@ -27,7 +28,7 @@ namespace BackgroundTasksQueue.Services
 
         public OnKeysEventsSubscribeService(
             ISettingConstants constants,
-            ICacheProviderAsync cache,
+            ICacheManageService cache,
             IKeyEventsProvider keyEvents,
             ITasksPackageCaptureService captures,
             ITasksBatchProcessingService processing,
@@ -44,29 +45,14 @@ namespace BackgroundTasksQueue.Services
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<OnKeysEventsSubscribeService>();
 
         private bool _flagToBlockEventRun;
-        //private bool _flagToBlockEventUpdate;
         private bool _flagToBlockEventCompleted;
         private int _callingNumOfCheckKeyFrontGivesTask;
-        
-        //private bool _eventCompletedTaskWasHappening;
-        //private bool _processingEventCompletedTaskIsLaunched;
-        //private string _tasksPackageGuidField;
-
-        public async Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun) // NOT USED
-        {
-            string eventGuidFieldRun = await _cache.GetHashedAsync<string>(eventKeyRun, eventFieldRun); //получить guid поле для "task:run"
-
-            return eventGuidFieldRun;
-        }
-
-        // можно при получении нового пакета на мгновение заглянуть в константы и посмотреть на флаг
-        // перед пакетом!
-        // по сработке подписки на ключ кафе, там другого места и нет
-        // в константах подписку на ключ сервера сделать в самом начале и сразу проверить наличие констант на этом ключе, если есть, поднять флаг не в самой подписке, а ещё в подписке на подписку
         
         // подписываемся на ключ сообщения о появлении свободных задач
         public async Task SubscribeOnEventRun(CancellationToken stoppingToken)
         {
+            // подписаться в самом начале кода и при смене гуид дата-сервера будет заново выполняться подписка на этот гуид
+            _constants.SubscribeOnBaseConstantEvent();
             // 
             ConstantsSet constantsSet = await _constants.ConstantInitializer(stoppingToken);
 
@@ -83,7 +69,7 @@ namespace BackgroundTasksQueue.Services
             // на старте вывecти состояние всех глобальных флагов
             //Logs.Here().Debug("SubscribeOnEventRun started with the following flags: => \n {@F1} \n {@F2} \n {@F3}", new { FlagToBlockEventRun = _flagToBlockEventRun }, new { EventCompletedTaskWasHappening = _eventCompletedTaskWasHappening }, new { ProcessingEventCompletedTaskIsLaunched = _processingEventCompletedTaskIsLaunched });
 
-            _keyEvents.Subscribe(eventKeyFrontGivesTask, async (string key, KeyEvent cmd) =>
+            _keyEvents.Subscribe(eventKeyFrontGivesTask, (string key, KeyEvent cmd) =>
             {
                 // скажем, в подписке вызывается метод проверить наличие пакетов в кафе(CheckKeyFrontGivesTask), если пакеты есть, он возвращает true, и метод за ним (FreshTaskPackageHasAppeared) начинает захват пакета
                 // void Unsubscribe(string key);
@@ -126,7 +112,7 @@ namespace BackgroundTasksQueue.Services
             string eventKeyFrontGivesTask = constantsSet.EventKeyFrontGivesTask.Value;
             // проверить существование ключа - если ключ есть, надо идти добывать пакет
             Logs.Here().Debug("KeyFrontGivesTask will be checked now.");
-            bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(eventKeyFrontGivesTask);
+            bool isExistEventKeyFrontGivesTask = await _cache.IsKeyExist(eventKeyFrontGivesTask);
             Logs.Here().Debug("KeyFrontGivesTask {@E}.", new { isExisted = isExistEventKeyFrontGivesTask });
 
             if (isExistEventKeyFrontGivesTask)

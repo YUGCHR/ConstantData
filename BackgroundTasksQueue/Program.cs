@@ -104,6 +104,7 @@ namespace BackgroundTasksQueue
                     throw;
                 }
                 services.AddSingleton<GenerateThisInstanceGuidService>();
+                services.AddSingleton<ICacheManageService, CacheManageService>();
                 services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                 services.AddHostedService<QueuedHostedService>();
                 services.AddSingleton<ISettingConstants, SettingConstantsService>();

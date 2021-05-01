@@ -13,6 +13,7 @@ namespace Shared.Library.Services
     {
         public (string, string, string) FetchBaseConstants([CallerMemberName] string currentMethodNameName = "");
         public Task<ConstantsSet> DeliveryOfUpdatedConstants(CancellationToken cancellationToken);
+        public void SubscribeOnBaseConstantEvent();
         public bool IsExistUpdatedConstants();
     }
 
@@ -101,7 +102,7 @@ namespace Shared.Library.Services
 
                     if (!_wasSubscribedOnConstantsUpdate)
                     {
-                        SubscribeOnAllConstantsEvent(dataServerPrefixGuid, SubscribedKeyEvent);
+                        SubscribeOnGuidConstantsEvent(dataServerPrefixGuid, SubscribedKeyEvent);
                     }
 
                     // есть обновлённые константы, достаём их, сбрасываем флаг наличия обновления и возвращаемся
@@ -131,7 +132,7 @@ namespace Shared.Library.Services
         }
         
         // в этой подписке выставить флаг класса, что надо проверить обновление
-        private void SubscribeOnAllConstantsEvent(string keyGuid, KeyEvent eventToSubscribe)
+        private void SubscribeOnGuidConstantsEvent(string keyGuid, KeyEvent eventToSubscribe)
         {
             _wasSubscribedOnConstantsUpdate = true;
             Logs.Here().Information("SharedDataAccess will be subscribed on keyGuid {0}.", keyGuid);
@@ -154,6 +155,29 @@ namespace Shared.Library.Services
                 }
             });
             Logs.Here().Information("SharedDataAccess was subscribed on keyGuid {0}.", keyGuid);
+        }
+
+        // подписаться в самом начале кода и при смене гуид дата-сервера будет заново выполняться подписка на этот гуид
+        public void SubscribeOnBaseConstantEvent()
+        {
+            Logs.Here().Information("SharedDataAccess will be subscribed on keyGuid {0}.", StartConstantKey);
+            
+            _keyEvents.Subscribe(StartConstantKey, (string key, KeyEvent cmd) =>
+            {
+                if (cmd == SubscribedKeyEvent)
+                {
+                    Logs.Here().Information("Key {Key} with command {Cmd} was received.", StartConstantKey, cmd);
+
+                    // сбрасываем флаг, что подписка уже была произведена и при обновлении заново подпишется на (новый) гуид-ключ
+                    _wasSubscribedOnConstantsUpdate = false;
+                    // ставим флаг, что было обновление констант и надо проверить гуид-ключ
+                    // тогда подписка на старый гуид-ключ сменится на новый
+                    _constantsUpdateIsAppeared = true;
+
+                    Logs.Here().Information("Was Subscribed On Constants Update = {0}, Constants Update is appeared = {1}.", _wasSubscribedOnConstantsUpdate, _constantsUpdateIsAppeared);
+                }
+            });
+            Logs.Here().Information("SharedDataAccess was subscribed on keyGuid {0}.", StartConstantKey);
         }
     }
 
