@@ -101,13 +101,12 @@ namespace ConstantData
                         throw;
                     }
                     services.AddSingleton<GenerateThisInstanceGuidService>();
-                    // убрать константы и создание класса констант в отдельный sln/container - со своим appsetting, который и станет общий для всех
+                    services.AddSingleton<ICacheManageService, CacheManageService>();
+                    services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                     services.AddSingleton<IConstantsCollectionService, ConstantsCollectionService>();
+                    services.AddSingleton<IOnKeysEventsSubscribeService, OnKeysEventsSubscribeService>();
                     //services.AddSingleton<ConstantNames, constants>();
                     //services.AddSingleton<IInitConstantsService, InitConstantsService>();
-                    services.AddSingleton<IOnKeysEventsSubscribeService, OnKeysEventsSubscribeService>();
-                    services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
-                    services.AddSingleton<ICacheManageService, CacheManageService>();
                     //services.AddSingleton<ISettingConstantsService, SettingConstantsServiceService>();
                     services.AddSingleton<MonitorLoop>();
                 });

@@ -18,11 +18,12 @@ namespace Shared.Library.Services
 
     public class SharedDataAccess : ISharedDataAccess
     {
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
+        //private readonly ICacheProviderAsync _cache;
         private readonly IKeyEventsProvider _keyEvents;
 
         public SharedDataAccess(
-            ICacheProviderAsync cache,
+            ICacheManageService cache,
             IKeyEventsProvider keyEvents)
         {
             _cache = cache;
@@ -66,7 +67,7 @@ namespace Shared.Library.Services
         // и когда (если) приложение заглянет сюда проверить константы, запустить получение обновлённого ключа
         // по флагу ничего не проверять, только брать ключ и из него константы
         // сбросить флаг в начале проверки - в цикле while(этот флаг) и если за время проверки подписка опять сработает, то взять константы ещё раз
-        
+
         // стартовый метод (местный main)
         public async Task<ConstantsSet> DeliveryOfUpdatedConstants(CancellationToken cancellationToken)
         {
@@ -82,51 +83,29 @@ namespace Shared.Library.Services
             // можно получать информацию о первом вызове от вызывающего метода - пусть проверит наличие констант и скажет
             // только накладные будут выше, наверное - зато без лишнего глобального флага
 
-            // ограничим использование глобальных констант
-            string startConstantKey = StartConstantKey;
-            string constantsStartLegacyField = ConstantsStartLegacyField;
-            string constantsStartGuidField = ConstantsStartGuidField;
-            KeyEvent eventToSubscribe = SubscribedKeyEvent;
-
-            // проверить, есть ли ключ вообще
-            bool isExistStartConstantKey = await _cache.KeyExistsAsync(startConstantKey);
-
-            ConstantsSet constantsSet = await FetchAllConstants(cancellationToken, isExistStartConstantKey, startConstantKey, constantsStartLegacyField, constantsStartGuidField, eventToSubscribe);
-
-            return constantsSet;
-        }
-
-        public bool IsExistUpdatedConstants()
-        {
-            return _constantsUpdateIsAppeared;
-        }
-
-
-        // не умеет проверять появился ли ключ, потому что проверка осталась выше
-
-
-        private async Task<ConstantsSet> FetchAllConstants(CancellationToken cancellationToken, bool isExistStartConstantKey, string startConstantKey, string constantsStartLegacyField, string constantsStartGuidField, KeyEvent eventToSubscribe)
-        {
             while (!cancellationToken.IsCancellationRequested)
             {
+                // проверить, есть ли ключ вообще
+                bool isExistStartConstantKey = await _cache.IsKeyExist(StartConstantKey);
+
                 if (isExistStartConstantKey)
                 {
                     // если ключ есть, то есть ли поле обновляемых констант (и в нем поле гуид)
-                    string dataServerPrefixGuid = await _cache.GetHashedAsync<string>(startConstantKey, constantsStartGuidField);
-                    
+                    string dataServerPrefixGuid = await _cache.FetchHashedAsync<string>(StartConstantKey, ConstantsStartGuidField);
+
                     if (dataServerPrefixGuid == null)
                     {
                         // обновляемых констант нет в этой версии (или ещё нет), достаём старые и возвращаемся
-                        return await _cache.GetHashedAsync<ConstantsSet>(startConstantKey, constantsStartLegacyField);
+                        return await _cache.FetchHashedAsync<ConstantsSet>(StartConstantKey, ConstantsStartLegacyField);
                     }
 
                     if (!_wasSubscribedOnConstantsUpdate)
                     {
-                        SubscribeOnAllConstantsEvent(dataServerPrefixGuid, eventToSubscribe);
+                        SubscribeOnAllConstantsEvent(dataServerPrefixGuid, SubscribedKeyEvent);
                     }
 
                     // есть обновлённые константы, достаём их, сбрасываем флаг наличия обновления и возвращаемся
-                    ConstantsSet constantsSet = await _cache.GetHashedAsync<ConstantsSet>(dataServerPrefixGuid, constantsStartGuidField);
+                    ConstantsSet constantsSet = await _cache.FetchHashedAsync<ConstantsSet>(dataServerPrefixGuid, ConstantsStartGuidField);
                     _constantsUpdateIsAppeared = false;
                     return constantsSet;
                 }
@@ -146,6 +125,11 @@ namespace Shared.Library.Services
             return null;
         }
 
+        public bool IsExistUpdatedConstants()
+        {
+            return _constantsUpdateIsAppeared;
+        }
+        
         // в этой подписке выставить флаг класса, что надо проверить обновление
         private void SubscribeOnAllConstantsEvent(string keyGuid, KeyEvent eventToSubscribe)
         {

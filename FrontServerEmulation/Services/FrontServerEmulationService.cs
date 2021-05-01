@@ -4,31 +4,32 @@ using System.Threading.Tasks;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace FrontServerEmulation.Services
 {
     public interface IFrontServerEmulationService
     {
-        public Task FrontServerEmulationCreateGuidField(string eventKeyRun, string eventFieldRun, TimeSpan ttl);
+        public Task FrontServerEmulationCreateGuidField(string eventKeyRun, string eventFieldRun, double ttl);
         public Task<int> FrontServerEmulationMain(ConstantsSet constantsSet); // все ключи положить в константы
     }
 
     public class FrontServerEmulationService : IFrontServerEmulationService
     {
         private readonly ILogger<FrontServerEmulationService> _logger;
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
 
-        public FrontServerEmulationService(ILogger<FrontServerEmulationService> logger, ICacheProviderAsync cache)
+        public FrontServerEmulationService(ILogger<FrontServerEmulationService> logger, ICacheManageService cache)
         {
             _logger = logger;
             _cache = cache;
         }
 
-        public async Task FrontServerEmulationCreateGuidField(string eventKeyRun, string eventFieldRun, TimeSpan ttl) // not used
+        public async Task FrontServerEmulationCreateGuidField(string eventKeyRun, string eventFieldRun, double ttl) // not used
         {
             string eventGuidFieldRun = Guid.NewGuid().ToString(); // 
 
-            await _cache.SetHashedAsync<string>(eventKeyRun, eventFieldRun, eventGuidFieldRun, ttl); // создаём ключ ("task:run"), на который подписана очередь и в значении передаём имя ключа, содержащего пакет задач
+            await _cache.WriteHashedAsync<string>(eventKeyRun, eventFieldRun, eventGuidFieldRun, ttl); // создаём ключ ("task:run"), на который подписана очередь и в значении передаём имя ключа, содержащего пакет задач
 
             _logger.LogInformation("Guid Field {0} for key {1} was created and set.", eventGuidFieldRun, eventKeyRun);
         }
@@ -72,7 +73,7 @@ namespace FrontServerEmulation.Services
         private async Task<int> FrontServerFetchConditions(string eventKeyFrom, string eventFieldFrom)
         {
             //получить число пакетов задач (по этому ключу метод вызвали)
-            int tasksCount = await _cache.GetHashedAsync<int>(eventKeyFrom, eventFieldFrom);
+            int tasksCount = await _cache.FetchHashedAsync<int>(eventKeyFrom, eventFieldFrom);
 
             _logger.LogInformation(30020, "TaskCount = {TasksCount} from key {Key} was fetched.", tasksCount, eventKeyFrom);
 
@@ -147,7 +148,7 @@ namespace FrontServerEmulation.Services
                 // записываем пакет задач в ключ пакета задач
                 // потом здесь записывать в значение класс с условием и ходом выполнения задач
                 // или условия и выполнение это разные ключи (префиксы)?
-                await _cache.SetHashedAsync(taskPackageGuid, guid, cycleCount, TimeSpan.FromDays(constantsSet.EventKeyFrom.LifeTime));
+                await _cache.WriteHashedAsync(taskPackageGuid, guid, cycleCount, constantsSet.EventKeyFrom.LifeTime);
                 inPackageTaskCount++;
                 _logger.LogInformation(30050, "TaskPackage No. {0}, with Task No. {1} with {2} cycles was set.", taskPackageGuid, guid, cycleCount);
             }
@@ -155,7 +156,7 @@ namespace FrontServerEmulation.Services
             // только после того, как создан ключ с пакетом задач, можно положить этот ключ в подписной ключ eventKeyFrontGivesTask
             // записываем ключ пакета задач в ключ eventKeyFrontGivesTask, а в поле и в значение - ключ пакета задач
 
-            await _cache.SetHashedAsync(constantsSet.EventKeyFrontGivesTask.Value, taskPackageGuid, taskPackageGuid, TimeSpan.FromDays(constantsSet.EventKeyFrontGivesTask.LifeTime));
+            await _cache.WriteHashedAsync(constantsSet.EventKeyFrontGivesTask.Value, taskPackageGuid, taskPackageGuid, constantsSet.EventKeyFrontGivesTask.LifeTime);
             // сервера подписаны на ключ eventKeyFrontGivesTask и пойдут забирать задачи, на этом тут всё
             return inPackageTaskCount;
         }

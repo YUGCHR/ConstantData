@@ -16,7 +16,7 @@ namespace FrontServerEmulation
     {
         private readonly ILogger<MonitorLoop> _logger;
         private readonly ISharedDataAccess _data;
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
         private readonly CancellationToken _cancellationToken;
         private readonly IOnKeysEventsSubscribeService _subscribe;
         private readonly string _guid;
@@ -25,7 +25,7 @@ namespace FrontServerEmulation
             GenerateThisBackServerGuid thisGuid,
             ILogger<MonitorLoop> logger,
             ISharedDataAccess data,
-            ICacheProviderAsync cache,
+            ICacheManageService cache,
             IHostApplicationLifetime applicationLifetime,
             IOnKeysEventsSubscribeService subscribe)
         {
@@ -67,7 +67,7 @@ namespace FrontServerEmulation
             // ещё менять флаг разрешения задач
             // это уже функции будущего диспетчера
 
-            IDictionary<string, string> tasksList = await _cache.GetHashedAllAsync<string>(constantsSet.EventKeyBackReadiness.Value);
+            IDictionary<string, string> tasksList = await _cache.FetchHashedAllAsync<string>(constantsSet.EventKeyBackReadiness.Value);
             int tasksListCount = tasksList.Count;
             if (tasksListCount < serverCount)
             {
@@ -107,10 +107,10 @@ namespace FrontServerEmulation
             _logger.LogInformation(1005, "Key eventKeyFrontGivesTask = {0} fetched from constants", eventKeyFrontGivesTask);
 
             // можно не проверять наличие ключа, а сразу пробовать удалить, там внутри есть своя проверка
-            bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(eventKeyFrontGivesTask);
+            bool isExistEventKeyFrontGivesTask = await _cache.IsKeyExist(eventKeyFrontGivesTask);
             if (isExistEventKeyFrontGivesTask)
             {
-                bool isDeleteSuccess = await _cache.RemoveAsync(eventKeyFrontGivesTask);
+                bool isDeleteSuccess = await _cache.DelKeyAsync(eventKeyFrontGivesTask);
                 _logger.LogInformation(1009, "FrontServerEmulation reported - isDeleteSuccess of the key {0} is {1}.", eventKeyFrontGivesTask, isDeleteSuccess);
 
             }

@@ -53,6 +53,7 @@ namespace FrontServerEmulation
 
                     services.AddSingleton<GenerateThisBackServerGuid>();
                     // убрать константы и создание класса констант в отдельный sln/container - со своим appsetting, который и станет общий для всех
+                    services.AddSingleton<ICacheManageService, CacheManageService>();
                     services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                     //services.AddHostedService<QueuedHostedService>();
                     //services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();

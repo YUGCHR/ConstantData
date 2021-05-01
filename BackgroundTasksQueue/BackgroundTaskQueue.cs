@@ -9,6 +9,7 @@ using BackgroundTasksQueue.Models;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace BackgroundTasksQueue
 {
@@ -28,15 +29,15 @@ namespace BackgroundTasksQueue
     public class BackgroundTaskQueue : IBackgroundTaskQueue
     {
         private readonly ILogger<BackgroundTaskQueue> _logger;
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
         private ConcurrentQueue<Func<CancellationToken, Task>> _workItems = new ConcurrentQueue<Func<CancellationToken, Task>>();
         private SemaphoreSlim _signal = new SemaphoreSlim(0);
 
         List<BackgroundProcessingTask> _existingCarrierProcesses = new List<BackgroundProcessingTask>();
 
         public BackgroundTaskQueue(
-            ILogger<BackgroundTaskQueue> logger, 
-            ICacheProviderAsync cache)
+            ILogger<BackgroundTaskQueue> logger,
+            ICacheManageService cache)
         {
             _logger = logger;
             _cache = cache;

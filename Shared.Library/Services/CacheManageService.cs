@@ -13,6 +13,12 @@ namespace Shared.Library.Services
         public Task<TV> FetchUpdatedConstant<TK, TV>(string key, TK field);
         public Task<IDictionary<TK, TV>> FetchUpdatedConstantsAndDeleteKey<TK, TV>(string key);
         public Task<bool> DeleteKeyIfCancelled(string startConstantKey);
+        public Task<bool> IsKeyExist(string key);
+        public Task<bool> DelKeyAsync(string key);
+        public Task<bool> DelFieldAsync(string key, string field);
+        public Task<T> FetchHashedAsync<T>(string key, string field);
+        public Task WriteHashedAsync<T>(string key, string field, T value, double ttl);
+        public Task<IDictionary<string, T>> FetchHashedAllAsync<T>(string key);
     }
 
     public class CacheManageService : ICacheManageService
@@ -76,6 +82,36 @@ namespace Shared.Library.Services
         public async Task<bool> DeleteKeyIfCancelled(string startConstantKey)
         {
             return await _cache.RemoveAsync(startConstantKey);
+        }
+
+        public async Task<bool> IsKeyExist(string key)
+        {
+            return await _cache.KeyExistsAsync(key);
+        }
+
+        public async Task<bool> DelKeyAsync(string key)
+        {
+            return await _cache.RemoveAsync(key);
+        }
+        
+        public async Task<bool> DelFieldAsync(string key, string field)
+        {
+            return await _cache.RemoveHashedAsync(key, field);
+        }
+
+        public async Task<T> FetchHashedAsync<T>(string key, string field)
+        {
+            return await _cache.GetHashedAsync<T>(key, field);
+        }
+       
+        public async Task WriteHashedAsync<T>(string key, string field, T value, double ttl)
+        {
+            await _cache.SetHashedAsync<T>(key, field, value, TimeSpan.FromDays(ttl));
+        }
+
+        public async Task<IDictionary<string, T>> FetchHashedAllAsync<T>(string key)
+        {
+            return await _cache.GetHashedAllAsync<T>(key);
         }
     }
 }

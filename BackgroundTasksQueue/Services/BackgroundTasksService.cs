@@ -8,22 +8,23 @@ using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace BackgroundTasksQueue.Services
 {
     public interface IBackgroundTasksService
     {
-        void StartWorkItem(ConstantsSet constantsSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms, CancellationToken stoppingToken);
+        void StartWorkItem(ConstantsSet constantsSet, string tasksPackageGuidField, double tasksPackageTtl, string singleTaskGuid, TaskDescriptionAndProgress assignmentTerms, CancellationToken stoppingToken);
     }
 
     public class BackgroundTasksService : IBackgroundTasksService
     {
         private readonly IBackgroundTaskQueue _taskQueue;
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
 
         public BackgroundTasksService(
             IBackgroundTaskQueue taskQueue,
-            ICacheProviderAsync cache
+            ICacheManageService cache
         )
         {
             _taskQueue = taskQueue;
@@ -32,21 +33,21 @@ namespace BackgroundTasksQueue.Services
 
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<BackgroundTasksService>();
 
-        public void StartWorkItem(ConstantsSet constantsSet, string tasksPackageGuidField, string singleTaskGuid, TaskDescriptionAndProgress taskDescription, CancellationToken stoppingToken)
+        public void StartWorkItem(ConstantsSet constantsSet, string tasksPackageGuidField, double tasksPackageTtl, string singleTaskGuid, TaskDescriptionAndProgress taskDescription, CancellationToken stoppingToken)
         {
             Logs.Here().Debug("Single Task processing was started. \n {@P} \n {@S}", new { Package = tasksPackageGuidField }, new { Task = singleTaskGuid });
             // Enqueue a background work item
             _taskQueue.QueueBackgroundWorkItem(async token =>
             {
                 // Simulate loopCount 3-second tasks to complete for each enqueued work item
-                bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
+                bool isTaskCompleted = await ActualTaskSolution(taskDescription, tasksPackageGuidField, tasksPackageTtl, singleTaskGuid, stoppingToken);
                 // если задача завершилась полностью, удалить поле регистрации из ключа сервера
                 // пока (или совсем) не удаляем, а уменьшаем на единичку значение, пока не станет 0 - тогда выполнение пакета закончено
-                bool isTaskFinished = await ActualTaskCompletion(constantsSet, isTaskCompleted, taskDescription, tasksPackageGuidField, singleTaskGuid, stoppingToken);
+                bool isTaskFinished = await ActualTaskCompletion(constantsSet, isTaskCompleted, taskDescription, tasksPackageGuidField, tasksPackageTtl, singleTaskGuid, stoppingToken);
             });
         }
 
-        private async Task<bool> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
+        private async Task<bool> ActualTaskSolution(TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, double tasksPackageTtl, string singleTaskGuid, CancellationToken cancellationToken)
         {
             int assignmentTerms = taskDescription.TaskDescription.CycleCount;
             double taskDelayTimeSpanFromMilliseconds = taskDescription.TaskDescription.TaskDelayTimeFromMilliSeconds / 1000D;
@@ -81,7 +82,7 @@ namespace BackgroundTasksQueue.Services
                 Logs.Here().Verbose("completionDouble {0}% = delayLoop {1} / assignmentTerms {2}, IsTaskRunning = {3}", completionDouble, delayLoop, assignmentTerms, taskDescription.TaskState.IsTaskRunning);
 
                 // обновляем отчёт о прогрессе выполнения задания
-                await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - !!!
+                await _cache.WriteHashedAsync<TaskDescriptionAndProgress>(tasksPackageGuidField, singleTaskGuid, taskDescription, tasksPackageTtl);
 
                 delayLoop++;
                 Logs.Here().Verbose("Task {0} is running. Loop = {1} / Remaining = {2} - {3}%", singleTaskGuid, delayLoop, loopRemain, completionTaskPercentage);
@@ -94,7 +95,7 @@ namespace BackgroundTasksQueue.Services
             return isTaskCompleted;
         }
 
-        private async Task<bool> ActualTaskCompletion(ConstantsSet constantsSet, bool isTaskCompleted, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, string singleTaskGuid, CancellationToken cancellationToken)
+        private async Task<bool> ActualTaskCompletion(ConstantsSet constantsSet, bool isTaskCompleted, TaskDescriptionAndProgress taskDescription, string tasksPackageGuidField, double tasksPackageTtl, string singleTaskGuid, CancellationToken cancellationToken)
         {
             string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
             string prefixPackageControl = constantsSet.PrefixPackageControl.Value;
@@ -110,26 +111,26 @@ namespace BackgroundTasksQueue.Services
 
                 taskDescription.TaskState.IsTaskRunning = false;
 
-                await _cache.SetHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription); // TimeSpan.FromDays - in outside method
+                await _cache.WriteHashedAsync(tasksPackageGuidField, singleTaskGuid, taskDescription, tasksPackageTtl);
 
                 // тут уменьшить на единичку значение ключа сервера и прочее пакета задач
-                int oldValue = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField);
+                int oldValue = await _cache.FetchHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField);
                 int newValue = oldValue - 1;
-                await _cache.SetHashedAsync(backServerPrefixGuid, tasksPackageGuidField, newValue); // TimeSpan.FromDays - in outside method
+                await _cache.WriteHashedAsync(backServerPrefixGuid, tasksPackageGuidField, newValue, constantsSet.BackServerPrefixGuid.LifeTime);
                 
                 // ещё можно при достижении нуля удалить поле пакета, а уже из этого делать выводы (это на потом)
                 Logs.Here().Debug("One Task in the Package is completed, was = {0}, is = {1}. \n {@P} \n {@T}", oldValue, newValue, new{Package = tasksPackageGuidField}, new{Task = singleTaskGuid });
 
                 string prefixControlTasksPackageGuid = $"{prefixPackageControl}:{tasksPackageGuidField}";
-                int sequentialSingleTaskNumber = await _cache.GetHashedAsync<int>(prefixControlTasksPackageGuid, singleTaskGuid);
+                int sequentialSingleTaskNumber = await _cache.FetchHashedAsync<int>(prefixControlTasksPackageGuid, singleTaskGuid);
                 Logs.Here().Debug("Completed Task {0} on the control package key. \n {@S} \n {@K}", sequentialSingleTaskNumber, new{SingleTask = singleTaskGuid }, new{ControlKey = prefixControlTasksPackageGuid });
                 
-                bool isDeleteSuccess = await _cache.RemoveHashedAsync(prefixControlTasksPackageGuid, singleTaskGuid);
+                bool isDeleteSuccess = await _cache.DelFieldAsync(prefixControlTasksPackageGuid, singleTaskGuid);
                 Logs.Here().Debug("Attempt to delete field was {0}. \n {@P} \n {@S}", isDeleteSuccess, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
 
                 if (isDeleteSuccess)
                 {
-                    bool isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(prefixControlTasksPackageGuid);
+                    bool isExistEventKeyFrontGivesTask = await _cache.IsKeyExist(prefixControlTasksPackageGuid);
                     Logs.Here().Debug("Check of control key existing was {0}. \n {@P} \n {@S}", isExistEventKeyFrontGivesTask, new { Package = tasksPackageGuidField }, new { SingleTask = singleTaskGuid });
 
                     if (isExistEventKeyFrontGivesTask)
@@ -142,7 +143,7 @@ namespace BackgroundTasksQueue.Services
 
                     // вот здесь об этом и сообщаем
                     string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
-                    await _cache.SetHashedAsync(prefixCompletedTasksPackageGuid, tasksPackageGuidField, sequentialSingleTaskNumber, TimeSpan.FromDays(constantsSet.PrefixBackServer.LifeTime));
+                    await _cache.WriteHashedAsync(prefixCompletedTasksPackageGuid, tasksPackageGuidField, sequentialSingleTaskNumber, constantsSet.PrefixBackServer.LifeTime);
                     Logs.Here().Information("Key was hashSet, Event was created. \n {@K} \n {@S}", new{KeyEvent = prefixCompletedTasksPackageGuid}, new { SingleTask = singleTaskGuid });
 
                     return true;

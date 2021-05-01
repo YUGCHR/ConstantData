@@ -4,12 +4,13 @@ using CachingFramework.Redis.Contracts;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace FrontServerEmulation.Services
 {
     public interface IOnKeysEventsSubscribeService
     {
-        public Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun, TimeSpan ttl);
+        public Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun, double ttl);
         public void SubscribeOnEventFrom(ConstantsSet constantsSet);        
     }
 
@@ -17,13 +18,13 @@ namespace FrontServerEmulation.Services
     {
         
         private readonly ILogger<OnKeysEventsSubscribeService> _logger;
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
         private readonly IKeyEventsProvider _keyEvents;
         private readonly IFrontServerEmulationService _front;
 
         public OnKeysEventsSubscribeService(
             ILogger<OnKeysEventsSubscribeService> logger,
-            ICacheProviderAsync cache,
+            ICacheManageService cache,
             IKeyEventsProvider keyEvents,
             IFrontServerEmulationService front
             )
@@ -34,11 +35,11 @@ namespace FrontServerEmulation.Services
             _front = front;
         }
 
-        public async Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun, TimeSpan ttl) // not used
+        public async Task<string> FetchGuidFieldTaskRun(string eventKeyRun, string eventFieldRun, double ttl) // not used
         {
             await _front.FrontServerEmulationCreateGuidField(eventKeyRun, eventFieldRun, ttl); // создаём эмулятором сервера guid поле для ключа "task:run" (и сразу же его читаем)
 
-            string eventGuidFieldRun = await _cache.GetHashedAsync<string>(eventKeyRun, eventFieldRun); //получить guid поле для "task:run"
+            string eventGuidFieldRun = await _cache.FetchHashedAsync<string>(eventKeyRun, eventFieldRun); //получить guid поле для "task:run"
 
             return eventGuidFieldRun;
         }
