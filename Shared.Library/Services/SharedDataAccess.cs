@@ -34,10 +34,15 @@ namespace Shared.Library.Services
         private static Serilog.ILogger Logs => Serilog.Log.ForContext<SharedDataAccess>();
 
         // эти константы должны быть объявлены локально (только в одном месте), чтобы быть одинаковыми во всех проектах
+        // они нужны до появления набора констант, поэтому объявлены здесь для всех серверов
         private const string StartConstantKey = "constants";
-        private const string ConstantsStartLegacyField = "all";
+        // константы на этом поле нужны для совместимости со старым кодом (хотя его уже наверное не осталось)
+        private const string ConstantsStartLegacyField = "constantsBase";
+        // рабочий набор констант на поле с номером дата-сервера, поле со старым номером удаляется при рестарте дата-сервера
         private const string ConstantsStartGuidField = "constantsGuidField";
         private const KeyEvent SubscribedKeyEvent = KeyEvent.HashSet;
+        //SharedDataAccess cannot find constants and still waits them {TimeToWaitTheConstants} sec more
+        private const double TimeToWaitTheConstants = 10;
 
         private bool _constantsUpdateIsAppeared = false;
         private bool _wasSubscribedOnConstantsUpdate = false;
@@ -111,11 +116,11 @@ namespace Shared.Library.Services
                     return constantsSet;
                 }
 
-                double timeToWaitTheConstants = 1;
-                Logs.Here().Warning("SharedDataAccess cannot find constants and still waits them {0} sec more.", timeToWaitTheConstants);
+                
+                Logs.Here().Warning("SharedDataAccess cannot find constants and still waits them {0} sec more.", TimeToWaitTheConstants);
                 try
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(timeToWaitTheConstants), cancellationToken);
+                    await Task.Delay(TimeSpan.FromSeconds(TimeToWaitTheConstants), cancellationToken);
                 }
                 catch (OperationCanceledException)
                 {
