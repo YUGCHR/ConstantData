@@ -99,21 +99,21 @@ namespace BackgroundTasksQueue.Services
             // зная номер пакета, можно сразу получить количество задач в нём с ключа сервера
             string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
             int taskPackageCount = await _cache.FetchHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField);
-            Logs.Here().Information("taskPackageCount was fetched, Task Count = {0}.", taskPackageCount);
+            Logs.Here().Debug("taskPackageCount was fetched, Task Count = {0}.", taskPackageCount);
 
             // вычисляем нужное количество процессов для такого количества задач
             int neededProcessesCount = CalcNeededProcessesCountForPackage(constantsSet, taskPackageCount);
-            Logs.Here().Information("neededProcessesCount was calculated, Processes needed = {0}.", neededProcessesCount);
+            Logs.Here().Debug("neededProcessesCount was calculated, Processes needed = {0}.", neededProcessesCount);
 
             // узнаем, сколько существует процессов сейчас (0 - только получить количество существующих процессов, без изменения)
             int actualProcessesCount = await CarrierProcessesManager(constantsSet, stoppingToken, 0);
-            Logs.Here().Information("actualProcessesCount was fetched, Processes exist = {0}.", actualProcessesCount);
+            Logs.Here().Debug("actualProcessesCount was fetched, Processes exist = {0}.", actualProcessesCount);
 
             // или делать это в CarrierProcessesManager, подумать
 
             // узнаем, как надо изменить число процессов - увеличить/уменьшить/оставить
             int correctionProcessesCount = neededProcessesCount - actualProcessesCount;
-            Logs.Here().Information("correctionProcessesCount was calculated, correction needed = {0}.", correctionProcessesCount);
+            Logs.Here().Debug("correctionProcessesCount was calculated, correction needed = {0}.", correctionProcessesCount);
 
             // корректируем количество процессов
             int correctedProcessesCount = await CarrierProcessesManager(constantsSet, stoppingToken, correctionProcessesCount);
@@ -189,7 +189,7 @@ namespace BackgroundTasksQueue.Services
                     return toAddProcessesCount;
                 // меньше нуля - тайный вариант для настройки - количество процессов равно константе (с обратным знаком, естественно)
                 case < 0:
-                    toAddProcessesCount = balanceOfTasksAndProcesses * -1;
+                    toAddProcessesCount = Math.Abs(balanceOfTasksAndProcesses);
                     Logs.Here().Debug("CalcNeededProcessesCountForPackage - balance = {0}, Task Count = {1}, needed processes count = {2}.", balanceOfTasksAndProcesses, taskPackageCount, toAddProcessesCount);
 
                     return toAddProcessesCount;

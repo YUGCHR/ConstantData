@@ -144,7 +144,7 @@ namespace BackgroundTasksQueue.Services
                     // вот здесь об этом и сообщаем
                     string prefixCompletedTasksPackageGuid = $"{prefixPackageCompleted}:{tasksPackageGuidField}";
                     await _cache.WriteHashedAsync(prefixCompletedTasksPackageGuid, tasksPackageGuidField, sequentialSingleTaskNumber, constantsSet.PrefixBackServer.LifeTime);
-                    Logs.Here().Information("Key was hashSet, Event was created. \n {@K} \n {@S}", new{KeyEvent = prefixCompletedTasksPackageGuid}, new { SingleTask = singleTaskGuid });
+                    Logs.Here().Debug("Key was hashSet, Event was created. \n {@K} \n {@S}", new{KeyEvent = prefixCompletedTasksPackageGuid}, new { SingleTask = singleTaskGuid });
 
                     return true;
                 }
