@@ -17,14 +17,14 @@ namespace BackgroundTasksQueue.Services
 
     public class SettingConstantsService : ISettingConstants
     {
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
         private readonly ISharedDataAccess _data;
         private readonly string _guid;
 
         public SettingConstantsService(
             GenerateThisInstanceGuidService thisGuid,
-            ISharedDataAccess data, 
-            ICacheProviderAsync cache)
+            ISharedDataAccess data,
+            ICacheManageService cache)
         {
             _data = data;
             _cache = cache;
@@ -80,11 +80,9 @@ namespace BackgroundTasksQueue.Services
             constantsSet.BackServerGuid.Value = backServerGuid;
             string backServerPrefixGuid = $"{constantsSet.PrefixBackServer.Value}:{backServerGuid}";
             constantsSet.BackServerPrefixGuid.Value = backServerPrefixGuid;
-            string eventKeyBackReadiness = constantsSet.EventKeyBackReadiness.Value;
-            double eventKeyBackReadinessTimeDays = constantsSet.EventKeyBackReadiness.LifeTime;
 
             // регистрируем сервер на общем ключе серверов
-            await _cache.SetHashedAsync<string>(eventKeyBackReadiness, backServerPrefixGuid, backServerGuid, TimeSpan.FromDays(eventKeyBackReadinessTimeDays));
+            await _cache.WriteHashedAsync<string>(constantsSet.EventKeyBackReadiness.Value, backServerPrefixGuid, backServerGuid, constantsSet.EventKeyBackReadiness.LifeTime);
             
             string prefixProcessAdd = constantsSet.PrefixProcessAdd.Value; // process:add
             string processAddPrefixGuid = $"{prefixProcessAdd}:{backServerGuid}"; // process:add:(this server guid)

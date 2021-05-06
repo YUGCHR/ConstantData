@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace BackgroundTasksQueue.Services
 {
@@ -19,11 +20,11 @@ namespace BackgroundTasksQueue.Services
     {
         private readonly IBackgroundTasksService _task2Queue;
         private readonly ILogger<TasksPackageCaptureService> _logger;
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
 
         public TasksPackageCaptureService(
             ILogger<TasksPackageCaptureService> logger,
-            ICacheProviderAsync cache,
+            ICacheManageService cache,
             IBackgroundTasksService task2Queue)
         {
             _task2Queue = task2Queue;
@@ -57,7 +58,7 @@ namespace BackgroundTasksQueue.Services
             {
                 // проверить существование ключа, может, все задачи давно разобрали и ключ исчез
                 Logs.Here().Debug("KeyExistsAsync will call now.");
-                isExistEventKeyFrontGivesTask = await _cache.KeyExistsAsync(eventKeyFrontGivesTask);
+                isExistEventKeyFrontGivesTask = await _cache.IsKeyExist(eventKeyFrontGivesTask);
                 Logs.Here().Debug("KeyFrontGivesTask {@E}.", new { isExisted = isExistEventKeyFrontGivesTask });
 
                 if (!isExistEventKeyFrontGivesTask)
@@ -69,7 +70,7 @@ namespace BackgroundTasksQueue.Services
 
                 // после сообщения подписки об обновлении ключа, достаём список свободных задач
                 // список получается неполный! - оказывается, потому, что фронт не успеваем залить остальные поля, когда бэк с первым полем уже здесь
-                IDictionary<string, string> tasksList = await _cache.GetHashedAllAsync<string>(eventKeyFrontGivesTask);
+                IDictionary<string, string> tasksList = await _cache.FetchHashedAllAsync<string>(eventKeyFrontGivesTask);
                 int tasksListCount = tasksList.Count;
                 Logs.Here().Debug("TasksList fetched - {@T}.", new { TaskCount = tasksListCount });
 
@@ -87,7 +88,7 @@ namespace BackgroundTasksQueue.Services
 
                 // проверяем захват задачи - пробуем удалить выбранное поле ключа                
                 // в дальнейшем можно вместо Remove использовать RedLock
-                bool isDeleteSuccess = await _cache.RemoveHashedAsync(eventKeyFrontGivesTask, tasksPackageGuidField);
+                bool isDeleteSuccess = await _cache.DelFieldAsync(eventKeyFrontGivesTask, tasksPackageGuidField);
                 Logs.Here().Debug("BackServer reported - {@D}.", new { TasksPackageFieldWasDeletedSuccessfully = isDeleteSuccess });
 
                 if (isDeleteSuccess)

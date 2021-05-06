@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CachingFramework.Redis.Contracts.Providers;
 using Microsoft.Extensions.Logging;
 using Shared.Library.Models;
+using Shared.Library.Services;
 
 namespace BackgroundTasksQueue.Services
 {
@@ -19,11 +20,11 @@ namespace BackgroundTasksQueue.Services
     {
         private readonly IBackgroundTasksService _task2Queue;
         private readonly ILogger<TasksProcessingControlService> _logger;
-        private readonly ICacheProviderAsync _cache;
+        private readonly ICacheManageService _cache;
 
         public TasksProcessingControlService(
             ILogger<TasksProcessingControlService> logger,
-            ICacheProviderAsync cache,
+            ICacheManageService cache,
             IBackgroundTasksService task2Queue)
         {
             _task2Queue = task2Queue;
@@ -38,7 +39,7 @@ namespace BackgroundTasksQueue.Services
             // проверить значение в ключе сервера - если больше нуля, значит, ещё не закончено
             // если пакет в работе, вернуть true, если пакет закончен - false
             string backServerPrefixGuid = constantsSet.BackServerPrefixGuid.Value;
-            int totalUnsolvedTasksLeft = await _cache.GetHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField); // forsake
+            int totalUnsolvedTasksLeft = await _cache.FetchHashedAsync<int>(backServerPrefixGuid, tasksPackageGuidField); // forsake
 
             return (totalUnsolvedTasksLeft > 0, totalUnsolvedTasksLeft);
         }
@@ -53,7 +54,7 @@ namespace BackgroundTasksQueue.Services
             // достаём из каждого поля ключа значение (проценты) и вычисляем общий процент выполнения
             double taskPackageState = 0;
             bool allTasksCompleted = true;
-            IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.GetHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField);
+            IDictionary<string, TaskDescriptionAndProgress> taskPackage = await _cache.FetchHashedAllAsync<TaskDescriptionAndProgress>(tasksPackageGuidField);
             int taskPackageCount = taskPackage.Count;
             Logs.Here().Debug("TasksList fetched - {@C}.", new { Count = taskPackageCount });
 

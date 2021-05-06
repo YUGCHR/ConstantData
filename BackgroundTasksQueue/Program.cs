@@ -93,7 +93,7 @@ namespace BackgroundTasksQueue
                 {
                     ConnectionMultiplexer muxer = ConnectionMultiplexer.Connect("localhost");
                     services.AddSingleton<ICacheProviderAsync>(new RedisContext(muxer).Cache);
-                    services.AddSingleton<IPubSubProvider>(new RedisContext(muxer).PubSub);
+                    //services.AddSingleton<IPubSubProvider>(new RedisContext(muxer).PubSub);
                     services.AddSingleton<IKeyEventsProvider>(new RedisContext(muxer).KeyEvents);
                 }
                 catch (Exception ex)
@@ -108,7 +108,7 @@ namespace BackgroundTasksQueue
                 services.AddSingleton<ISharedDataAccess, SharedDataAccess>();
                 services.AddHostedService<QueuedHostedService>();
                 services.AddSingleton<ISettingConstants, SettingConstantsService>();
-                services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>(); // IBackgroundTaskQueue
+                services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>(); 
                 services.AddSingleton<IBackgroundTasksService, BackgroundTasksService>();
                 services.AddSingleton<IOnKeysEventsSubscribeService, OnKeysEventsSubscribeService>();
                 services.AddSingleton<ITasksPackageCaptureService, TasksPackageCaptureService>();
@@ -175,6 +175,7 @@ namespace BackgroundTasksQueue
     // блокировать обе подписки одним флагом и потом обе проверять, но константы проверять первыми
     // рассмотреть вариант обновления констант после каждого пакета
     // но не забыть вариант простоя без пакетов
+    // ----- вы сейчас находитесь здесь -----
     // можно добавить переключатель автоматически/вручную и ручную (+/-) регулировку количества процессов в настройках веб-интерфейса
     // *3* отслеживание упавших процессов
     // разделение функций - один модуль уточняет время проверки, а второй оббегает все задачи и проверяет состояние, сравнивая его с расчётным
